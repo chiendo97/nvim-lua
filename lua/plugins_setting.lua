@@ -1,7 +1,6 @@
-require('nvim_compe')
-require('nvim_lspconfig')
-require('nvim_tree')
-require('lspfzf')
+require('plugins/nvim_compe')
+require('plugins/nvim_tree')
+require('plugins/lspfzf')
 
 local g = vim.g
 local o = vim.o

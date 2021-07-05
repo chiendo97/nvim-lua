@@ -171,3 +171,8 @@ if has("autocmd")
 endif
 " }}}
 ]], false)
+
+require('plugins')
+require('plugins_setting')
+require('keymaps')
+require('lsp')

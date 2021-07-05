@@ -29,7 +29,7 @@ add("~/.local/share/nvim/site/pack/paqs/opt/*")
 add("~/.local/share/nvim/site/pack/paqs/start/*")
 
 require('lspconfig').sumneko_lua.setup {
-    on_attach = require('nvim_lspconfig/attach').on_attach,
+    on_attach = require('lsp/attach').on_attach,
     cmd = {sumneko_binary, "-E", sumneko_root_path .. "/main.lua"},
     settings = {
         Lua = {

@@ -3,7 +3,6 @@ local exec = vim.api.nvim_exec -- execute Vimscript
 local g = vim.g -- global variables
 local o = vim.o -- global options
 local b = vim.bo -- buffer-scoped options
-local w = vim.wo -- windows-scoped options
 local opt = vim.opt -- to set options
 
 opt.syntax = 'on'
@@ -172,7 +171,7 @@ endif
 " }}}
 ]], false)
 
-require('plugins')
-require('plugins_setting')
-require('keymaps')
 require('lsp')
+require('plugin')
+require('plugins')
+require('keymaps')

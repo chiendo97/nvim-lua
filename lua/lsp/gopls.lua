@@ -1,5 +1,4 @@
 local nvim_lsp = require('lspconfig')
-local util = require "lspconfig/util"
 
 nvim_lsp.gopls.setup {
     on_attach = function(client, bufnr)

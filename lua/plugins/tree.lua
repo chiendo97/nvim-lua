@@ -1,11 +1,4 @@
-require('plugins/nvim_compe')
-require('plugins/nvim_tree')
-require('plugins/lspfzf')
-
 local g = vim.g
-local o = vim.o
-local exec = vim.api.nvim_exec
-local api = vim.api
 
 g.nvim_tree_side = 'left' -- left by default
 g.nvim_tree_width = 30 -- 30 by default
@@ -31,52 +24,3 @@ g.nvim_tree_lsp_diagnostics = 0 -- 0 by default, will show lsp diagnostics in th
 g.nvim_tree_disable_window_picker = 0 -- 0 by default, will disable the window picker.
 g.nvim_tree_special_files = {'README.md', 'Makefile', 'MAKEFILE'} -- List of filenames that gets highlighted with NvimTreeSpecialFile
 g.nvim_tree_show_icons = {git = 0, folders = 1, files = 1}
-
-g.git_messenger_no_default_mappings = true
-
-g.vimwiki_list = {path = '~/vimwiki/', syntax = 'markdown', ext = '.md'}
-
-g.NERDCreateDefaultMappings = 0
-g.NERDSpaceDelims = 1
-g.NERDDefaultAlign = 'left'
-
-g.gitgutter_map_keys = 0
-g.gitgutter_preview_win_floating = 0
-
-g.gitgutter_sign_added = '▌'
-g.gitgutter_sign_modified = '▌'
-g.gitgutter_sign_removed = '▁'
-g.gitgutter_sign_removed_first_line = '▌'
-g.gitgutter_sign_modified_removed = '▌'
-g.gitgutter_realtime = 1
-
-exec([[
-highlight GitGutterDelete guifg=#F97CA9
-highlight GitGutterAdd    guifg=#BEE275
-highlight GitGutterChange guifg=#96E1EF
-]], false)
-
-g.winresizer_start_key = '<C-T>'
-
-g.mkdp_auto_start = 0
-g.mkdp_echo_preview_url = 1
-
-function _G.Float()
-    local width = vim.fn.float2nr(o.columns * 0.8)
-    local height = vim.fn.float2nr(o.lines * 0.6)
-    local opts = {relative = 'editor', row = (o.lines - height) / 2, col = (o.columns - width) / 2, width = width, height = height}
-
-    api.nvim_open_win(api.nvim_create_buf(false, true), true, opts)
-end
-
-g.fzf_layout = {window = 'lua Float()'}
-
-g.user_emmet_leader_key = '<c-z>'
-
-g.go_gopls_enabled = 0
-g.go_doc_keywordprg_enabled = 0
-g.go_def_mapping_enabled = 0
-g.go_code_completion_enabled = 0
-g.go_doc_keywordprg_enabled = 0
-g.go_echo_go_info = 0
-g.go_fmt_command = "goimports"

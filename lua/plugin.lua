@@ -45,8 +45,6 @@ paq 'eddyekofo94/gruvbox-flat.nvim'
 -- paq 'simeji/winresizer'
 
 -- 'find file with name"
--- paq '/usr/local/opt/fzf'
--- paq 'junegunn/fzf.vim'
 paq 'junegunn/fzf'
 paq 'junegunn/fzf.vim'
 paq {'ojroques/nvim-lspfuzzy'}
@@ -57,6 +55,7 @@ paq 'ap/vim-css-color'
 
 -- 'comment
 paq 'scrooloose/nerdcommenter'
+paq 'b3nj5m1n/kommentary'
 
 paq {'fatih/vim-go', branch = "v1.25"}
 

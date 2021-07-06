@@ -27,3 +27,8 @@ local map = vim.api.nvim_set_keymap
 
 map("i", "<C-Space>", "compe#complete()", {noremap = true, silent = true, expr = true})
 map("i", "<CR>", "compe#confirm('<CR>')", {noremap = true, silent = true, expr = true})
+
+map('i', '<Tab>', [[vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab>']], {expr = true})
+map('s', '<Tab>', [[vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab>']], {expr = true})
+map('i', '<S-Tab>', [[vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>']], {expr = true})
+map('s', '<S-Tab>', [[vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>']], {expr = true})

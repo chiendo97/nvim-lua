@@ -2,13 +2,6 @@ local exec = vim.api.nvim_exec -- execute Vimscript
 
 exec([[
 if has("autocmd")
-
-  " Disable newline with comment
-  augroup newline
-    autocmd!
-    autocmd BufEnter * set fo-=c fo-=r fo-=o
-  augroup END
-
   " Auto disable syntax with large file
   augroup syntaxoff
     autocmd!

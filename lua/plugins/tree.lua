@@ -1,4 +1,5 @@
 local g = vim.g
+local map = vim.api.nvim_set_keymap
 
 g.nvim_tree_side = 'left' -- left by default
 g.nvim_tree_width = 30 -- 30 by default
@@ -24,3 +25,5 @@ g.nvim_tree_lsp_diagnostics = 0 -- 0 by default, will show lsp diagnostics in th
 g.nvim_tree_disable_window_picker = 0 -- 0 by default, will disable the window picker.
 g.nvim_tree_special_files = {'README.md', 'Makefile', 'MAKEFILE'} -- List of filenames that gets highlighted with NvimTreeSpecialFile
 g.nvim_tree_show_icons = {git = 0, folders = 1, files = 1}
+
+map('n', '<leader>c', ':<C-U>NvimTreeToggle<CR>', {noremap = true})

@@ -68,9 +68,6 @@ map('n', 'ghs', '<Plug>(GitGutterStageHunk)', {})
 map('n', 'ghu', '<Plug>(GitGutterUndoHunk)', {})
 map('n', 'ghp', '<Plug>(GitGutterPreviewHunk)', {})
 
---[[ map('n', '<C-_>', '<plug>NERDCommenterToggle', {})
-map('v', '<C-_>', '<plug>NERDCommenterToggle', {}) ]]
-
 map('n', '<leader>g', ':GFiles<cr>', {})
 map('n', '<leader>f', ':Files<cr>', {})
 map('n', '<leader>r', ':Rg ', {})

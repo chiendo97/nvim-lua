@@ -42,7 +42,7 @@ paq 'christoomey/vim-tmux-navigator'
 paq 'eddyekofo94/gruvbox-flat.nvim'
 
 -- 'resize vim windows with ctrl + T
--- paq 'simeji/winresizer'
+paq 'simeji/winresizer'
 
 -- 'find file with name"
 paq 'junegunn/fzf'
@@ -54,9 +54,10 @@ paq 'mattn/emmet-vim'
 paq 'ap/vim-css-color'
 
 -- 'comment
-paq 'scrooloose/nerdcommenter'
 paq 'b3nj5m1n/kommentary'
 
 paq {'fatih/vim-go', branch = "v1.25"}
 
 paq {'buoto/gotests-vim'}
+
+paq {'kevinhwang91/nvim-bqf'}

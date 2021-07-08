@@ -19,10 +19,23 @@ function M.on_attach(_, bufnr)
     buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
     buf_set_keymap('n', 'gy', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
     buf_set_keymap('n', '<space>en', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
-    buf_set_keymap('n', '<space>o', '<cmd>lua vim.lsp.buf.formatting_sync(nil, 5000)<CR>', opts)
-    buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
-    buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
+    buf_set_keymap('n', '<space>o',
+                   '<cmd>lua vim.lsp.buf.formatting_sync(nil, 5000)<CR>', opts)
+    buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>',
+                   opts)
+    buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>',
+                   opts)
     buf_set_keymap('n', 'gs', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
+
+    require'lsp_signature'.on_attach({
+        floating_window = false,
+        hint_enable = true,
+        hint_prefix = '',
+        hint_scheme = 'String',
+        use_lspsaga = false,
+        hi_parameter = 'Search',
+        extra_trigger_chars = {'(', ','}
+    })
 end
 
 M.capabilities = vim.lsp.protocol.make_client_capabilities()

@@ -32,7 +32,7 @@ map('v', [[//]], [[y/\V<C-R>=escape(@",'/\')<CR><CR>]], {noremap = true})
 
 function _G.RgCurrentWord()
     local wordUnderCursor = vim.fn.expand('<cword>')
-    exec('Rg ' .. wordUnderCursor, false)
+    exec('FzfRg ' .. wordUnderCursor, false)
 end
 
 map('n', '<leader>R', ':lua RgCurrentWord()<CR>',
@@ -48,7 +48,7 @@ function _G.RgCurrentSelected()
     lines[1] = string.sub(lines[1], column_start)
     local currentSelected = table.concat(lines, '\n')
     dump(currentSelected)
-    exec('Rg ' .. currentSelected, false)
+    exec('FzfRg ' .. currentSelected, false)
 end
 
 map('v', '<leader>R', ':lua RgCurrentSelected()<CR>', {})

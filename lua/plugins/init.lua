@@ -14,3 +14,6 @@ require('plugins/winresizer')
 require('plugins/kommentary')
 
 map('x', 'ga', '<Plug>(EasyAlign)', {})
+
+require'colorizer'.setup()
+require('bqf').setup({func_map = {openc = '<esc>'}})

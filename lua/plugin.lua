@@ -51,7 +51,7 @@ paq {'ojroques/nvim-lspfuzzy'}
 
 -- 'Syntax and languages
 paq 'mattn/emmet-vim'
-paq 'ap/vim-css-color'
+paq 'norcalli/nvim-colorizer.lua'
 
 -- 'comment
 paq 'b3nj5m1n/kommentary'
@@ -61,3 +61,5 @@ paq {'fatih/vim-go', branch = "v1.25"}
 paq {'buoto/gotests-vim'}
 
 paq {'kevinhwang91/nvim-bqf'}
+
+paq {'ray-x/lsp_signature.nvim'}

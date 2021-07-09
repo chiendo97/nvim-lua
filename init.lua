@@ -123,5 +123,5 @@ require('keymaps')
 require('autocmd')
 
 require('lsp')
-require('plugin')
+require('my-packer')
 require('plugins')

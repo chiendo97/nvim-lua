@@ -25,8 +25,8 @@ add("$VIMRUNTIME")
 add("~/.config/nvim")
 
 -- add plugins
-add("~/.local/share/nvim/site/pack/paqs/opt/*")
-add("~/.local/share/nvim/site/pack/paqs/start/*")
+-- add("~/.local/share/nvim/site/pack/packer/opt/*")
+add("~/.local/share/nvim/site/pack/packer/start/*")
 
 require('lspconfig').sumneko_lua.setup {
     on_attach = require('lsp/attach').on_attach,

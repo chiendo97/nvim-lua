@@ -21,9 +21,11 @@ function M.on_attach(_, bufnr)
     buf_set_keymap('n', '<space>en', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
     buf_set_keymap('n', '<space>o',
                    '<cmd>lua vim.lsp.buf.formatting_sync(nil, 5000)<CR>', opts)
-    buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>',
+    buf_set_keymap('n', '[d',
+                   '<cmd>lua vim.lsp.diagnostic.goto_prev({ wrap = false })<CR>',
                    opts)
-    buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>',
+    buf_set_keymap('n', ']d',
+                   '<cmd>lua vim.lsp.diagnostic.goto_next({ wrap = false })<CR>',
                    opts)
     buf_set_keymap('n', 'gs', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
 

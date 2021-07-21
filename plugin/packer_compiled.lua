@@ -73,14 +73,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/chien.le/.local/share/nvim/site/pack/packer/start/emmet-vim"
   },
-  fzf = {
-    loaded = true,
-    path = "/Users/chien.le/.local/share/nvim/site/pack/packer/start/fzf"
-  },
-  ["fzf.vim"] = {
-    loaded = true,
-    path = "/Users/chien.le/.local/share/nvim/site/pack/packer/start/fzf.vim"
-  },
   ["git-messenger.vim"] = {
     loaded = true,
     path = "/Users/chien.le/.local/share/nvim/site/pack/packer/start/git-messenger.vim"
@@ -121,10 +113,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/chien.le/.local/share/nvim/site/pack/packer/start/nvim-lspconfig"
   },
-  ["nvim-lspfuzzy"] = {
-    loaded = true,
-    path = "/Users/chien.le/.local/share/nvim/site/pack/packer/start/nvim-lspfuzzy"
-  },
   ["nvim-tree.lua"] = {
     loaded = true,
     path = "/Users/chien.le/.local/share/nvim/site/pack/packer/start/nvim-tree.lua"
@@ -141,9 +129,21 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/chien.le/.local/share/nvim/site/pack/packer/start/packer.nvim"
   },
+  ["plenary.nvim"] = {
+    loaded = true,
+    path = "/Users/chien.le/.local/share/nvim/site/pack/packer/start/plenary.nvim"
+  },
+  ["popup.nvim"] = {
+    loaded = true,
+    path = "/Users/chien.le/.local/share/nvim/site/pack/packer/start/popup.nvim"
+  },
   ["targets.vim"] = {
     loaded = true,
     path = "/Users/chien.le/.local/share/nvim/site/pack/packer/start/targets.vim"
+  },
+  ["telescope.nvim"] = {
+    loaded = true,
+    path = "/Users/chien.le/.local/share/nvim/site/pack/packer/start/telescope.nvim"
   },
   ["vim-easy-align"] = {
     loaded = true,

@@ -1,7 +1,4 @@
 local map = vim.api.nvim_set_keymap
-local exec = vim.api.nvim_exec
-local fn = vim.fn
-local o = vim.o
 
 vim.g.mapleader = ' ' -- 'vim.g' sets global variables
 
@@ -29,29 +26,6 @@ map('v', '<C-C>', '<esc><C-C>', {silent = true})
 map('n', '*', [[:let @/ = '\<'.expand('<cword>').'\>' | set hlsearch <CR>]],
     {silent = true})
 map('v', [[//]], [[y/\V<C-R>=escape(@",'/\')<CR><CR>]], {noremap = true})
-
-function _G.RgCurrentWord()
-    local wordUnderCursor = vim.fn.expand('<cword>')
-    exec('FzfRg ' .. wordUnderCursor, false)
-end
-
-map('n', '<leader>R', ':lua RgCurrentWord()<CR>',
-    {noremap = true, silent = true})
-
-function _G.RgCurrentSelected()
-    local _, line_start, column_start, _ = unpack(vim.fn.getpos('\'<'))
-    local _, line_end, column_end, _ = unpack(vim.fn.getpos('\'>'))
-    local lines = fn.getline(line_start, line_end)
-    if #lines == 0 then return end
-    lines[#lines] = string.sub(lines[#lines], 0, column_end -
-                                   (o.selection == 'inclusive' and 0 or 1))
-    lines[1] = string.sub(lines[1], column_start)
-    local currentSelected = table.concat(lines, '\n')
-    dump(currentSelected)
-    exec('FzfRg ' .. currentSelected, false)
-end
-
-map('v', '<leader>R', ':lua RgCurrentSelected()<CR>', {})
 
 map('n', 'gt', ':tabedit<CR>', {noremap = true, silent = true})
 map('n', 'g1', '1gt', {noremap = true, silent = true})

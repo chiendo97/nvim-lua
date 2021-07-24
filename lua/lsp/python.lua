@@ -1,6 +1,5 @@
 local nvim_lsp = require('lspconfig')
-local util = require('lspconfig/util')
-
+local util = nvim_lsp.util
 local path = util.path
 
 local function get_python_path(workspace)

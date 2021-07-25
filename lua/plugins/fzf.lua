@@ -4,7 +4,9 @@ local fn = vim.fn
 
 require('telescope').setup {
     defaults = {
-        mappings = {i = {['<esc>'] = require('telescope.actions').close}}
+        mappings = {i = {['<esc>'] = require('telescope.actions').close}},
+        file_sorter = require'telescope.sorters'.get_fzy_sorter,
+        generic_sorter = require'telescope.sorters'.get_fzy_sorter
     }
 }
 

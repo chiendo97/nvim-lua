@@ -21,5 +21,5 @@ local stl = {
     ' %l:%c',
     ' %p%% '
 }
-o.statusline = table.concat(stl)
 
+o.statusline = table.concat(stl)

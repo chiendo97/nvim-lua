@@ -73,7 +73,6 @@ o.showmatch = true -- highlight matching [{()}]
 o.inccommand = 'nosplit' -- show search and replace in real time
 o.autoread = true -- reread a file if it's changed outside of vim
 o.wrapscan = true -- begin search from top of the file when nothng is found
-o.cpoptions = vim.o.cpoptions .. 'x' -- stay at seach item when <esc>
 
 opt.backspace = 'indent,eol,start'
 opt.wrap = false

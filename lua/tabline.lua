@@ -1,6 +1,6 @@
 local o = vim.o -- global options
 
-function _G.Tabline()
+function _G.MyTabline()
     local s = ''
     for tab = 1, vim.fn.tabpagenr('$') do
         local winnr = vim.fn.tabpagewinnr(tab)
@@ -24,4 +24,4 @@ function _G.Tabline()
     return s
 end
 
-o.tabline = '%!v:lua.Tabline()'
+o.tabline = '%!v:lua.MyTabline()'

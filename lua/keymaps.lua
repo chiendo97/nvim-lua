@@ -1,5 +1,9 @@
 local map = vim.api.nvim_set_keymap
 
+vim.cmd([[command! -nargs=* GoAddTag lua require("go.tags").add(<f-args>)]])
+vim.cmd([[command! -nargs=* GoRmTag lua require("go.tags").rm(<f-args>)]])
+vim.cmd([[command!          GoClearTag lua require("go.tags").clear()]])
+
 vim.g.mapleader = ' ' -- 'vim.g' sets global variables
 
 -- backspace to switch recent file
@@ -54,11 +58,9 @@ map('v', 'y', '"*y', {noremap = true})
 map('n', 'yy', '"*yy', {noremap = true})
 
 -- copy current relative path /Users/chien.le/.config/nvim/lua/keymaps.lua:56
-map('n', '<leader>yp', ':let @* = expand("%")<CR>',
-    {noremap = true})
+map('n', '<leader>yp', ':let @* = expand("%")<CR>', {noremap = true})
 -- copy current absolute path /Users/chien.le/.config/nvim/lua/keymaps.lua:59
-map('n', '<leader>yP', ':let @* = expand("%:p")<CR>',
-    {noremap = true})
+map('n', '<leader>yP', ':let @* = expand("%:p")<CR>', {noremap = true})
 
 -- open/source config files
 map('n', '<Leader>ev', ':<C-u>e $MYVIMRC<CR>', {noremap = true})

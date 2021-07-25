@@ -1,6 +1,6 @@
 local prettier = {
-    formatCommand = 'prettier --stdin --stdin-filepath ${INPUT}',
-    formatStdin = true
+    formatCommand = 'prettierd "${INPUT}"',
+    formatStdin = true,
 }
 
 local eslint_d = {
@@ -27,31 +27,27 @@ local python_black = {formatCommand = 'black --quiet -', formatStdin = true}
 local python_isort = {formatCommand = 'isort --quiet -', formatStdin = true}
 
 local go_goimports = {formatCommand = 'goimports', formatStdin = true}
-local go_ci = {lintCommand = 'golangci-lint run'}
+-- local go_ci = {lintCommand = 'golangci-lint run'}
+local go_ci = {lintCommand = ''}
+
+local json_jq = {formatCommand = 'jq .'}
+
+local format_config = {
+    python = {python_black, python_flake8, python_isort},
+    lua = {lua_format},
+    typescript = {prettier, eslint_d},
+    javascript = {prettier, eslint_d},
+    typescriptreact = {prettier, eslint_d},
+    javascriptreact = {prettier, eslint_d},
+    json = {json_jq},
+    go = {go_goimports, go_ci}
+}
 
 require'lspconfig'.efm.setup {
     init_options = {documentFormatting = true},
-    filetypes = {
-        'go',
-        'python',
-        'py',
-        'javascript',
-        'typescript',
-        'typescriptreact',
-        'javascriptreact',
-        'lua'
-    },
-    settings = {
-        rootMarkers = {'.git/'},
-        languages = {
-            python = {python_black, python_flake8, python_isort},
-            lua = {lua_format},
-            typescript = {prettier, eslint_d},
-            javascript = {prettier, eslint_d},
-            typescriptreact = {prettier, eslint_d},
-            javascriptreact = {prettier, eslint_d},
-            go = {go_goimports, go_ci}
-        }
-    }
+    root_dir = require('lspconfig').util.root_pattern({'.git/', '.'}),
+    filetypes = vim.tbl_keys(format_config),
+    on_attach = require('lsp.attach').on_attach,
+    settings = {languages = format_config}
 }
 

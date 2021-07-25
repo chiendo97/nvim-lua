@@ -51,6 +51,10 @@ return require('packer').startup(function(use)
             require('plugins.treesitter')
         end
     }
+    use {
+        'nvim-treesitter/nvim-treesitter-textobjects',
+        after = {'nvim-treesitter'}
+    }
 
     -- align text ga=
     -- use 'junegunn/vim-easy-align'

@@ -1,6 +1,6 @@
 local prettier = {
-    formatCommand = 'prettierd "${INPUT}"',
-    formatStdin = true,
+    formatCommand = 'prettierd --stdin-filepath ${INPUT}',
+    formatStdin = true
 }
 
 local eslint_d = {
@@ -28,9 +28,8 @@ local python_isort = {formatCommand = 'isort --quiet -', formatStdin = true}
 
 local go_goimports = {formatCommand = 'goimports', formatStdin = true}
 -- local go_ci = {lintCommand = 'golangci-lint run'}
-local go_ci = {lintCommand = ''}
 
-local json_jq = {formatCommand = 'jq .'}
+local json_jq = {formatCommand = 'jq .', formatStdin = true}
 
 local format_config = {
     python = {python_black, python_flake8, python_isort},
@@ -40,14 +39,13 @@ local format_config = {
     typescriptreact = {prettier, eslint_d},
     javascriptreact = {prettier, eslint_d},
     json = {json_jq},
-    go = {go_goimports, go_ci}
+    go = {go_goimports}
 }
 
 require'lspconfig'.efm.setup {
     init_options = {documentFormatting = true},
     root_dir = require('lspconfig').util.root_pattern({'.git/', '.'}),
     filetypes = vim.tbl_keys(format_config),
-    on_attach = require('lsp.attach').on_attach,
     settings = {languages = format_config}
 }
 

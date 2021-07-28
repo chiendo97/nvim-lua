@@ -131,7 +131,7 @@ return require('packer').startup(function(use)
     use {
         'kevinhwang91/nvim-bqf',
         config = function()
-            require('bqf').setup({func_map = {openc = '<esc>'}})
+            require('bqf').setup()
         end
     }
 

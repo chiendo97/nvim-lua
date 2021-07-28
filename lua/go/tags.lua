@@ -1,5 +1,48 @@
 local M = {}
 
+M.debug = function(start_line, end_line, count, ...)
+    dump(start_line)
+    dump(end_line)
+    dump(count)
+    print('debug')
+    local args = ...
+    dump(args)
+end
+
+M.add = function(start_line, end_line, count, args)
+    local cmd_tag = '-add-tags'
+    local cmd_option = '-add-options'
+    local tags, options = M.get_tags_options(args)
+    local cmds = M.make_cmds(cmd_tag, cmd_option, tags, options)
+
+    if count < 0 then
+        local byte_offset = M.get_current_byte_offset()
+        M.modify(nil, nil, byte_offset, cmds)
+    else
+        M.modify(start_line, end_line, nil, cmds)
+    end
+end
+
+M.rm = function(start_line, end_line, count, args)
+    local cmd_tag = '-remove-tags'
+    local cmd_option = '-remove-options'
+    local tags, options = M.get_tags_options(args)
+    local cmds = M.make_cmds(cmd_tag, cmd_option, tags, options)
+
+    if count < 0 then
+        local byte_offset = M.get_current_byte_offset()
+        M.modify(nil, nil, byte_offset, cmds)
+    else
+        M.modify(start_line, end_line, nil, cmds)
+    end
+end
+
+M.clear = function()
+    local cmd = {'-clear-tags'}
+    local byte_offset = M.get_current_byte_offset()
+    M.modify(nil, nil, byte_offset, cmd)
+end
+
 M.make_cmds = function(cmd_tag, cmd_option, tags, options)
     local cmds = {}
     if #tags == 0 then table.insert(tags, 'json') end
@@ -15,36 +58,6 @@ M.make_cmds = function(cmd_tag, cmd_option, tags, options)
     return cmds
 end
 
-M.add = function(...)
-    local cmd_tag = '-add-tags'
-    local cmd_option = '-add-options'
-    local tags, options = M.getTagsAndOptions(...)
-    local cmds = M.make_cmds(cmd_tag, cmd_option, tags, options)
-    M.modify(unpack(cmds))
-end
-
-M.rm = function(...)
-    local cmd_tag = '-remove-tags'
-    local cmd_option = '-remove-options'
-    local tags, options = M.getTagsAndOptions(...)
-    local cmds = M.make_cmds(cmd_tag, cmd_option, tags, options)
-    M.modify(unpack(cmds))
-end
-
-M.clear = function()
-    local cmd = {'-clear-tags'}
-    M.modify(unpack(cmd))
-end
-
-M.get_current_struct_name = function()
-    local row, col = unpack(vim.api.nvim_win_get_cursor(0))
-    local ns = require('go.ts.go').get_struct_node_at_pos(row, col)
-    if ns == nil or ns == {} then return '' end
-    local struct_name = ns.name
-
-    return struct_name
-end
-
 M.get_current_filename = function()
     local fname = vim.fn.expand('%')
     return fname
@@ -58,22 +71,25 @@ M.split = function(s, delimiter)
     return unpack(result);
 end
 
-M.modify = function(...)
+M.get_current_byte_offset = function()
+    local fn = vim.fn
+    local byte_offset = fn.line2byte(fn.line('.')) + fn.col('.') - 1
+    return byte_offset
+end
+
+M.modify = function(start_line, end_line, byte_offset, arg)
     local fname = M.get_current_filename()
-    local struct_name = M.get_current_struct_name()
 
-    local cmds = {
-        'gomodifytags',
-        '-w',
-        '-format',
-        'json',
-        '-file',
-        fname,
-        '-struct',
-        struct_name
-    }
+    local cmds = {'gomodifytags', '-w', '-format', 'json', '-file', fname}
 
-    local arg = {...}
+    if byte_offset then
+        table.insert(cmds, '-offset')
+        table.insert(cmds, byte_offset)
+    else
+        table.insert(cmds, '-line')
+        table.insert(cmds, start_line .. ',' .. end_line)
+    end
+
     for _, v in ipairs(arg) do table.insert(cmds, v) end
 
     -- print(vim.inspect(table.concat(cmds, ' ')))
@@ -94,16 +110,22 @@ M.modify = function(...)
     })
 end
 
-M.getTagsAndOptions = function(...)
+M.get_tags_options = function(args)
     local tags = {}
     local options = {}
 
-    local args = {...}
     for _, arg in ipairs(args) do
-        local tag, option = M.split(arg, ',')
+        if arg ~= nil then
+            arg = arg:gsub('"', '')
+            local tag, option = M.split(arg, ',')
 
-        if tag then table.insert(tags, tag) end
-        if option then table.insert(options, tag .. '=' .. option) end
+            if tag and tag ~= '' then
+                table.insert(tags, tag)
+                if option then
+                    table.insert(options, tag .. '=' .. option)
+                end
+            end
+        end
     end
 
     return tags, options

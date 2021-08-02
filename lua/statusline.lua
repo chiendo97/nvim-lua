@@ -1,6 +1,6 @@
 local o = vim.o -- global options
 
-local function Dirname()
+local function dirname()
     if vim.fn.getcwd() == '/' then
         return 'ROOT'
     elseif vim.fn.getcwd() == '$HOME' then
@@ -11,7 +11,7 @@ local function Dirname()
 end
 
 local stl = {
-    Dirname(),
+    dirname(),
     ' ',
     '|',
     ' %<%f%m%r%h%w',

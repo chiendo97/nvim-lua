@@ -94,6 +94,11 @@ M.modify = function(start_line, end_line, byte_offset, arg)
 
     -- print(vim.inspect(table.concat(cmds, ' ')))
     vim.fn.jobstart(cmds, {
+        on_stderr = function(_, data, _)
+            data = M.handle_job_data(data)
+            if not data then return end
+            print('ERROR', vim.inspect(data))
+        end,
         on_stdout = function(_, data, _)
             data = M.handle_job_data(data)
             if not data then return end
@@ -105,7 +110,7 @@ M.modify = function(start_line, end_line, byte_offset, arg)
             vim.api.nvim_buf_set_lines(0, tagged['start'] - 1,
                                        tagged['start'] - 1 + #tagged.lines,
                                        false, tagged.lines)
-            print('updated')
+            print('SUCCESS')
         end
     })
 end

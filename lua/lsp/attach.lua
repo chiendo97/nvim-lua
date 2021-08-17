@@ -25,6 +25,7 @@ M.on_attach = function(_, bufnr)
             '<cmd>lua vim.lsp.diagnostic.goto_prev({ wrap = false })<CR>', opts)
     buf_map('n', ']d',
             '<cmd>lua vim.lsp.diagnostic.goto_next({ wrap = false })<CR>', opts)
+    buf_map('n', 'ga', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
 
     require'lsp_signature'.on_attach({
         floating_window = false,

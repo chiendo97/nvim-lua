@@ -6,15 +6,16 @@ require('lsp.tsserver')
 require('lsp.python')
 
 require'lspconfig'.yamlls.setup {
-    on_attach = function(client, bufnr)
-        require('lsp.attach').on_attach(client, bufnr)
-    end,
+    on_attach = require('lsp.attach').on_attach,
     capabilities = require('lsp.attach').capabilities
 }
 
 require'lspconfig'.clangd.setup {
-    on_attach = function(client, bufnr)
-        require('lsp.attach').on_attach(client, bufnr)
-    end,
+    on_attach = require('lsp.attach').on_attach,
+    capabilities = require('lsp.attach').capabilities
+}
+
+require'lspconfig'.rust_analyzer.setup {
+    on_attach = require('lsp.attach').on_attach,
     capabilities = require('lsp.attach').capabilities
 }

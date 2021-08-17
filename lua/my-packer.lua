@@ -60,7 +60,7 @@ return require('packer').startup(function(use)
     -- use 'junegunn/vim-easy-align'
 
     -- Preview markdown live: :Mark
-    -- use 'iamcco/markdown-preview.nvim'
+    use {'iamcco/markdown-preview.nvim'}
 
     -- Vim plugin that provides additional text objects
     -- use 'wellle/targets.vim'

@@ -23,7 +23,7 @@ local python_flake8 = {
     lintStdin = true,
     lintFormats = {'%f:%l:%c: %m'}
 }
-local python_black = {formatCommand = 'black --quiet -', formatStdin = true}
+local python_black = {formatCommand = 'black --quiet -S -', formatStdin = true}
 local python_isort = {formatCommand = 'isort --quiet -', formatStdin = true}
 
 local go_goimports = {formatCommand = 'goimports', formatStdin = true}
@@ -43,6 +43,7 @@ local format_config = {
 }
 
 require'lspconfig'.efm.setup {
+    on_attach = require('lsp.attach').on_attach,
     init_options = {documentFormatting = true},
     root_dir = require('lspconfig').util.root_pattern({'.git/', '.'}),
     filetypes = vim.tbl_keys(format_config),

@@ -1,5 +1,11 @@
 local M = {}
 
+vim.lsp.handlers['textDocument/hover'] =
+    vim.lsp.with(vim.lsp.handlers.hover, {border = 'single'})
+
+vim.lsp.handlers['textDocument/signatureHelp'] =
+    vim.lsp.with(vim.lsp.handlers.signature_help, {border = 'single'})
+
 M.on_attach = function(_, bufnr)
     local function buf_map(...)
         vim.api.nvim_buf_set_keymap(bufnr, ...)
@@ -22,9 +28,11 @@ M.on_attach = function(_, bufnr)
     buf_map('n', '<space>o',
             '<cmd>lua vim.lsp.buf.formatting_sync(nil, 10000)<CR>', opts)
     buf_map('n', '[d',
-            '<cmd>lua vim.lsp.diagnostic.goto_prev({ wrap = false })<CR>', opts)
+            '<cmd>lua vim.lsp.diagnostic.goto_prev({ wrap = false, popup_opts = { border = "single" } })<CR>',
+            opts)
     buf_map('n', ']d',
-            '<cmd>lua vim.lsp.diagnostic.goto_next({ wrap = false })<CR>', opts)
+            '<cmd>lua vim.lsp.diagnostic.goto_next({ wrap = false, popup_opts = { border = "single" } })<CR>',
+            opts)
     buf_map('n', 'ga', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
 
     require'lsp_signature'.on_attach({

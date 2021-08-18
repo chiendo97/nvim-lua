@@ -90,7 +90,10 @@ return require('packer').startup(function(use)
         config = function()
             vim.opt.termguicolors = true
             vim.opt.background = 'dark'
-            vim.g.gruvbox_flat_style = 'dark'
+
+            vim.g.gruvbox_flat_style = 'hard'
+            vim.g.gruvbox_sidebars = {'qf', 'vista_kind', 'terminal', 'packer'}
+            vim.g.gruvbox_hide_inactive_statusline = true
             vim.cmd 'colorscheme gruvbox-flat'
         end
     }

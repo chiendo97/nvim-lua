@@ -3,7 +3,7 @@ require'compe'.setup {
     autocomplete = true,
     debug = false,
     min_length = 1,
-    preselect = 'enable',
+    preselect = 'always',
     throttle_time = 80,
     source_timeout = 200,
     resolve_timeout = 800,
@@ -12,7 +12,7 @@ require'compe'.setup {
     max_kind_width = 100,
     max_menu_width = 100,
     documentation = {
-        border = {'', '', '', ' ', '', '', '', ' '}, -- the border option is the same as `|help nvim_open_win|`
+        border = 'rounded',
         winhighlight = 'NormalFloat:CompeDocumentation,FloatBorder:CompeDocumentationBorder',
         max_width = 120,
         min_width = 60,
@@ -22,7 +22,6 @@ require'compe'.setup {
 
     source = {
         path = true,
-        calc = true,
         buffer = {
             enable = true,
             priority = 1 -- last priority
@@ -31,11 +30,9 @@ require'compe'.setup {
             enable = true,
             priority = 10001 -- takes precedence over file completion
         },
-        nvim_lua = true,
         vsnip = true,
         ultisnips = true,
-        luasnip = true,
-        spell = true
+        luasnip = true
     }
 }
 

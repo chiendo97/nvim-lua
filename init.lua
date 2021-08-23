@@ -131,6 +131,5 @@ end
 require('statusline')
 require('tabline')
 require('keymaps')
-require('commands')
 require('autocmd')
 require('my-packer')

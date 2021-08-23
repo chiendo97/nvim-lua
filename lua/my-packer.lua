@@ -14,7 +14,7 @@ return require('packer').startup(function(use)
         'kyazdani42/nvim-tree.lua',
         requires = {'kyazdani42/nvim-web-devicons'},
         config = function()
-            require 'plugins.tree'
+            require('plugins.tree')
         end
     }
 
@@ -74,7 +74,7 @@ return require('packer').startup(function(use)
         end
     }
 
-    -- use {'tpope/vim-fugitive', cmd = {'Gread', 'Gwrite', 'Gcommit'}}
+    use {'tpope/vim-fugitive'}
 
     -- vim-tmux-navigation
     use {
@@ -101,7 +101,11 @@ return require('packer').startup(function(use)
     -- find file with name
     use {
         'nvim-telescope/telescope.nvim',
-        requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}},
+        requires = {
+            {'nvim-lua/popup.nvim'},
+            {'nvim-lua/plenary.nvim'},
+            {'nvim-telescope/telescope-fzy-native.nvim'}
+        },
         config = function()
             require('plugins.fzf')
         end
@@ -124,9 +128,6 @@ return require('packer').startup(function(use)
         end
     }
 
-    -- some go functions
-    -- use 'fatih/vim-go'
-
     -- generate go test
     use {'buoto/gotests-vim', cmd = 'GoTests'}
 
@@ -140,5 +141,27 @@ return require('packer').startup(function(use)
 
     -- auto lsp signature
     use 'ray-x/lsp_signature.nvim'
+
+    use {
+        'lukas-reineke/indent-blankline.nvim',
+        event = 'BufRead',
+        setup = function()
+            vim.g.indentLine_enabled = 1
+            vim.g.indent_blankline_char = '▏'
+
+            vim.g.indent_blankline_filetype_exclude = {
+                'help',
+                'terminal',
+                'dashboard',
+                'packer'
+            }
+            vim.g.indent_blankline_buftype_exclude = {'terminal'}
+
+            -- vim.g.indent_blankline_show_trailing_blankline_indent = false
+            -- vim.g.indent_blankline_show_first_indent_level = false
+        end
+    }
+
+    use {'tweekmonster/startuptime.vim', opt = true}
 
 end)

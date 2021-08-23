@@ -45,7 +45,10 @@ local format_config = {
 require'lspconfig'.efm.setup {
     on_attach = require('lsp.attach').on_attach,
     init_options = {documentFormatting = true},
-    root_dir = require('lspconfig').util.root_pattern({'.git/', '.'}),
+    root_dir = function(fname)
+        return require'lspconfig.util'.root_pattern('.git')(fname) or
+                   require'lspconfig.util'.path.dirname(fname)
+    end,
     filetypes = vim.tbl_keys(format_config),
     settings = {languages = format_config}
 }

@@ -28,7 +28,6 @@ o.linebreak = true -- do not break words on line wrap
 
 opt.list = true
 cmd [[
-set listchars=tab:┆\ 
 set listchars+=eol:¬
 set listchars+=trail:·,extends:→
 ]]
@@ -133,3 +132,4 @@ require('tabline')
 require('keymaps')
 require('autocmd')
 require('my-packer')
+require('go.tags')

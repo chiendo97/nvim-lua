@@ -28,17 +28,22 @@ return require('packer').startup(function(use)
 
     -- lsp autocomplete
     use {
-        'hrsh7th/nvim-compe',
-        event = 'InsertEnter',
+        'hrsh7th/nvim-cmp',
+        requires = {
+            'hrsh7th/cmp-buffer',
+            'hrsh7th/cmp-nvim-lsp',
+            'hrsh7th/cmp-nvim-lua',
+            'hrsh7th/cmp-path',
+            'hrsh7th/vim-vsnip',
+            'hrsh7th/vim-vsnip-integ'
+        },
         config = function()
-            require('plugins.nvim_compe')
+            require('plugins.nvim_cmp')
         end
     }
-    use 'hrsh7th/vim-vsnip'
-    use 'hrsh7th/vim-vsnip-integ'
 
     -- go vscode snippet
-    use 'golang/vscode-go'
+    use 'rafamadriz/friendly-snippets'
 
     -- add brackets
     use 'machakann/vim-sandwich'

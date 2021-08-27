@@ -24,39 +24,6 @@ require('telescope').setup {
         color_devicons = true,
         winblend = 0,
 
-        layout_strategy = 'flex',
-        layout_config = {
-            width = 0.95,
-            height = 0.85,
-            prompt_position = 'top',
-
-            horizontal = {
-                -- width_padding = 0.1,
-                -- height_padding = 0.1,
-                width = 0.9,
-                preview_cutoff = 60,
-                preview_width = function(_, cols, _)
-                    if cols > 200 then
-                        return math.floor(cols * 0.7)
-                    else
-                        return math.floor(cols * 0.6)
-                    end
-                end
-            },
-            vertical = {
-                -- width_padding = 0.05,
-                -- height_padding = 1,
-                width = 0.75,
-                height = 0.85,
-                preview_height = 0.4,
-                mirror = true
-            },
-            flex = {
-                -- change to horizontal after 120 cols
-                flip_columns = 120
-            }
-        },
-
         mappings = {
             i = {
                 ['<C-s>'] = actions.select_horizontal,
@@ -129,8 +96,7 @@ M.grep_cword = function()
     }
 end
 
-map('n', '<leader>R',
-    [[<cmd>lua require('plugins.fzf').grep_cword()<cr>]],
+map('n', '<leader>R', [[<cmd>lua require('plugins.fzf').grep_cword()<cr>]],
     map_options)
 
 M.grep_visual = function()
@@ -149,8 +115,7 @@ M.grep_visual = function()
     }
 end
 
-map('v', '<leader>R',
-    [[<cmd>lua require('plugins.fzf').grep_visual()<cr>]],
+map('v', '<leader>R', [[<cmd>lua require('plugins.fzf').grep_visual()<cr>]],
     map_options)
 
 return M

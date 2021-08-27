@@ -26,12 +26,6 @@ o.wrap = true -- wrap long lines
 o.breakindent = true -- start wrapped lines indented
 o.linebreak = true -- do not break words on line wrap
 
-opt.list = true
-cmd [[
-set listchars+=eol:¬
-set listchars+=trail:·,extends:→
-]]
-
 o.completeopt = 'noinsert,menuone,noselect'
 opt.wildmenu = true
 opt.wildmode = 'longest:full,full'

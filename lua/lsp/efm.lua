@@ -1,7 +1,4 @@
-local prettier = {
-    formatCommand = 'prettierd --stdin-filepath ${INPUT}',
-    formatStdin = true
-}
+local prettierd = {formatCommand = 'prettierd ${INPUT}', formatStdin = true}
 
 local eslint_d = {
     lintCommand = 'eslint_d -f unix --stdin --stdin-filename ${INPUT}',
@@ -34,10 +31,10 @@ local json_jq = {formatCommand = 'jq .', formatStdin = true}
 local format_config = {
     python = {python_black, python_flake8, python_isort},
     lua = {lua_format},
-    typescript = {prettier, eslint_d},
-    javascript = {prettier, eslint_d},
-    typescriptreact = {prettier, eslint_d},
-    javascriptreact = {prettier, eslint_d},
+    typescript = {prettierd, eslint_d},
+    javascript = {prettierd, eslint_d},
+    typescriptreact = {prettierd, eslint_d},
+    javascriptreact = {prettierd, eslint_d},
     json = {json_jq},
     go = {go_goimports}
 }

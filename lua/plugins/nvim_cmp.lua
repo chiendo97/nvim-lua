@@ -4,7 +4,6 @@ local map = vim.api.nvim_set_keymap
 cmp.setup {
     snippet = {
         expand = function(args)
-            -- You must install `vim-vsnip` if you use the following as-is.
             vim.fn['vsnip#anonymous'](args.body)
         end
     },
@@ -23,7 +22,12 @@ cmp.setup {
     },
 
     -- You should specify your *installed* sources.
-    sources = {{name = 'nvim_lsp'}, {name = 'path'}, {name = 'buffer'}}
+    sources = {
+        {name = 'nvim_lsp'},
+        {name = 'path'},
+        {name = 'buffer'},
+        {name = 'vsnip'}
+    }
 }
 
 map('i', '<Tab>',

@@ -30,12 +30,12 @@ return require('packer').startup(function(use)
     use {
         'hrsh7th/nvim-cmp',
         requires = {
-            'hrsh7th/cmp-buffer',
-            'hrsh7th/cmp-nvim-lsp',
-            'hrsh7th/cmp-nvim-lua',
-            'hrsh7th/cmp-path',
-            'hrsh7th/vim-vsnip',
-            'hrsh7th/vim-vsnip-integ'
+            'hrsh7th/cmp-buffer', -- buffer source
+            'hrsh7th/cmp-nvim-lsp', -- lsp source
+            'hrsh7th/cmp-nvim-lua', -- neovim's Lua runtime API such vim.lsp.* source
+            'hrsh7th/cmp-path', -- path source
+            'hrsh7th/cmp-vsnip', -- vsnip source
+            'hrsh7th/vim-vsnip'
         },
         config = function()
             require('plugins.nvim_cmp')
@@ -144,9 +144,6 @@ return require('packer').startup(function(use)
         end
     }
 
-    -- auto lsp signature
-    use 'ray-x/lsp_signature.nvim'
-
     use {
         'lukas-reineke/indent-blankline.nvim',
         event = 'BufRead',
@@ -167,6 +164,7 @@ return require('packer').startup(function(use)
         end
     }
 
-    use {'tweekmonster/startuptime.vim', opt = true}
+    use 'leafgarland/typescript-vim'
+    use 'peitalin/vim-jsx-typescript'
 
 end)

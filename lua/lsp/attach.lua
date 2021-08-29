@@ -34,32 +34,9 @@ M.on_attach = function(_, bufnr)
             '<cmd>lua vim.lsp.diagnostic.goto_next({ wrap = false, popup_opts = { border = "single" } })<CR>',
             opts)
     buf_map('n', 'ga', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
-
-    require'lsp_signature'.on_attach({
-        floating_window = false,
-        hint_enable = true,
-        hint_prefix = '',
-        hint_scheme = 'String',
-        use_lspsaga = false,
-        hi_parameter = 'Search',
-        extra_trigger_chars = {'(', ','}
-    })
 end
 
-M.capabilities = vim.lsp.protocol.make_client_capabilities()
-M.capabilities.textDocument.completion.completionItem.snippetSupport = true
-M.capabilities.textDocument.completion.completionItem.preselectSupport = true
-M.capabilities.textDocument.completion.completionItem.insertReplaceSupport =
-    true
-M.capabilities.textDocument.completion.completionItem.labelDetailsSupport = true
-M.capabilities.textDocument.completion.completionItem.deprecatedSupport = true
-M.capabilities.textDocument.completion.completionItem.commitCharactersSupport =
-    true
-M.capabilities.textDocument.completion.completionItem.tagSupport = {
-    valueSet = {1}
-}
-M.capabilities.textDocument.completion.completionItem.resolveSupport = {
-    properties = {'documentation', 'detail', 'additionalTextEdits'}
-}
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+M.capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 
 return M

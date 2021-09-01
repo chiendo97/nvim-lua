@@ -1,4 +1,3 @@
-local cmd = vim.cmd -- execute Vim commands
 local g = vim.g -- global variables
 local o = vim.o -- global options
 local b = vim.bo -- buffer-scoped options
@@ -26,7 +25,7 @@ o.wrap = true -- wrap long lines
 o.breakindent = true -- start wrapped lines indented
 o.linebreak = true -- do not break words on line wrap
 
-o.completeopt = 'noinsert,menuone,noselect'
+o.completeopt = 'menu,menuone,noinsert'
 opt.wildmenu = true
 opt.wildmode = 'longest:full,full'
 o.wildoptions = 'pum' -- Show completion items using the pop-up-menu (pum)
@@ -67,6 +66,7 @@ o.inccommand = 'nosplit' -- show search and replace in real time
 o.autoread = true -- reread a file if it's changed outside of vim
 o.wrapscan = true -- begin search from top of the file when nothng is found
 
+opt.list = true
 opt.backspace = 'indent,eol,start'
 opt.wrap = false
 -- LuaFormatter off

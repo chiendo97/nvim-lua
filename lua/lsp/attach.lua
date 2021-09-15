@@ -26,7 +26,7 @@ M.on_attach = function(_, bufnr)
     buf_map('n', 'gy', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
     buf_map('n', '<space>en', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
     buf_map('n', '<space>o',
-            '<cmd>lua vim.lsp.buf.formatting_sync(nil, 10000)<CR>', opts)
+            '<cmd>lua vim.lsp.buf.formatting_seq_sync(nil, 1000)<CR>', opts)
     buf_map('n', '[d',
             '<cmd>lua vim.lsp.diagnostic.goto_prev({ wrap = false, popup_opts = { border = "single" } })<CR>',
             opts)

@@ -23,7 +23,7 @@ local python_flake8 = {
 local python_black = {formatCommand = 'black --quiet -S -', formatStdin = true}
 local python_isort = {formatCommand = 'isort --quiet -', formatStdin = true}
 
-local go_goimports = {formatCommand = 'goimports', formatStdin = true}
+-- local go_goimports = {formatCommand = 'goimports', formatStdin = true}
 -- local go_ci = {lintCommand = 'golangci-lint run'}
 
 local json_jq = {formatCommand = 'jq .', formatStdin = true}
@@ -36,7 +36,7 @@ local format_config = {
     typescriptreact = {prettierd, eslint_d},
     javascriptreact = {prettierd, eslint_d},
     json = {json_jq},
-    go = {go_goimports}
+    -- go = {go_goimports}
 }
 
 require'lspconfig'.efm.setup {
@@ -49,4 +49,3 @@ require'lspconfig'.efm.setup {
     filetypes = vim.tbl_keys(format_config),
     settings = {languages = format_config}
 }
-

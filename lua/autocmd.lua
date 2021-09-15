@@ -7,5 +7,10 @@ if has("autocmd")
     autocmd!
     au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
   augroup END
+
+augroup vimrc_help
+  autocmd!
+  autocmd BufEnter *.txt if &buftype == 'help' | wincmd L | endif
+augroup END
 endif
 ]], false)

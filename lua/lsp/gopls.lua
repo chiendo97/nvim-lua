@@ -6,7 +6,7 @@ require('lspconfig').gopls.setup {
                    util.path.dirname(fname)
     end,
     on_attach = function(client, bufnr)
-        client.resolved_capabilities.document_formatting = false
+        -- client.resolved_capabilities.document_formatting = false
         require('lsp/attach').on_attach(client, bufnr)
     end,
     capabilities = require('lsp.attach').capabilities,

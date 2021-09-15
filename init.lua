@@ -32,10 +32,9 @@ o.wildoptions = 'pum' -- Show completion items using the pop-up-menu (pum)
 o.pumblend = 30 -- Give the pum some transparency
 
 opt.updatetime = 100
-opt.shortmess = 'c'
+opt.shortmess = 'scWFI'
 opt.autoread = true
 opt.autowrite = true
-opt.showmatch = true
 opt.timeoutlen = 1000
 opt.ttimeoutlen = 0
 o.backup = false -- no backup file
@@ -83,7 +82,7 @@ opt.formatoptions = opt.formatoptions
 -- LuaFormatter on
 opt.eb = false
 opt.vb = true
-opt.mouse = 'a'
+opt.mouse = ''
 opt.sidescrolloff = 30
 opt.eol = false
 

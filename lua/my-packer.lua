@@ -167,4 +167,12 @@ return require('packer').startup(function(use)
     use 'leafgarland/typescript-vim'
     use 'peitalin/vim-jsx-typescript'
 
+    use({
+        'jose-elias-alvarez/null-ls.nvim',
+        config = function()
+            require('lsp.null-ls')
+        end,
+        requires = {'nvim-lua/plenary.nvim', 'neovim/nvim-lspconfig'}
+    })
+
 end)

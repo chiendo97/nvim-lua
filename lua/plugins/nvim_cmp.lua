@@ -27,7 +27,24 @@ cmp.setup {
         {name = 'path'},
         {name = 'buffer'},
         {name = 'vsnip'}
+    },
+
+    formatting = {
+        format = function(entry, vim_item)
+            -- set a name for each source
+            vim_item.menu = ({
+                path = '[Path]',
+                buffer = '[Buffer]',
+                nvim_lsp = '[LSP]',
+                luasnip = '[LuaSnip]',
+                vsnip = '[VSnip]',
+                nvim_lua = '[Lua]',
+                latex_symbols = '[Latex]'
+            })[entry.source.name]
+            return vim_item
+        end
     }
+
 }
 
 map('i', '<Tab>',

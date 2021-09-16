@@ -1,6 +1,7 @@
 local exec = vim.api.nvim_exec -- execute Vimscript
 
-exec([[
+exec(
+    [[
 if has("autocmd")
   " Back to line
   augroup line
@@ -13,4 +14,6 @@ augroup vimrc_help
   autocmd BufEnter *.txt if &buftype == 'help' | wincmd L | endif
 augroup END
 endif
-]], false)
+]],
+    false
+)

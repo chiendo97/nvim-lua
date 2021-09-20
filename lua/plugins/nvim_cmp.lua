@@ -8,13 +8,18 @@ cmp.setup({
         end,
     },
 
-    documentation = { border = "rounded" },
+    documentation = {
+        border = "rounded",
+    },
+
+    preselect = require("cmp.types").cmp.PreselectMode.None,
 
     -- You must set mapping if you want.
     mapping = {
         ["<C-p>"] = cmp.mapping.select_prev_item(),
         ["<C-n>"] = cmp.mapping.select_next_item(),
         ["<C-Space>"] = cmp.mapping.complete(),
+        ["<C-e>"] = cmp.mapping.close(),
         ["<CR>"] = cmp.mapping.confirm({
             behavior = cmp.ConfirmBehavior.Insert,
             select = true,
@@ -25,10 +30,11 @@ cmp.setup({
     sources = {
         { name = "nvim_lsp" },
         { name = "path" },
-        { name = "buffer" },
         { name = "vsnip" },
         { name = "orgmode" },
         { name = "neorg" },
+        { name = "nvim_lua" },
+        { name = "buffer" },
     },
 
     formatting = {
@@ -50,7 +56,7 @@ cmp.setup({
     },
 })
 
-map("i", "<Tab>", [[vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab>']], { expr = true })
-map("s", "<Tab>", [[vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab>']], { expr = true })
-map("i", "<S-Tab>", [[vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>']], { expr = true })
-map("s", "<S-Tab>", [[vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>']], { expr = true })
+map("i", "<Tab>", [[   vsnip#jumpable(1)  ? '<Plug>(vsnip-jump-next)' : '<Tab>'   ]], { expr = true })
+map("s", "<Tab>", [[   vsnip#jumpable(1)  ? '<Plug>(vsnip-jump-next)' : '<Tab>'   ]], { expr = true })
+map("i", "<S-Tab>", [[ vsnip#jumpable(-1) ? '<Plug>(vsnip-jump-prev)' : '<S-Tab>' ]], { expr = true })
+map("s", "<S-Tab>", [[ vsnip#jumpable(-1) ? '<Plug>(vsnip-jump-prev)' : '<S-Tab>' ]], { expr = true })

@@ -1,7 +1,6 @@
 local M = {}
 
 vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "single" })
-
 vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = "single" })
 
 M.on_attach = function(_, bufnr)
@@ -11,10 +10,9 @@ M.on_attach = function(_, bufnr)
     local function buf_option(...)
         vim.api.nvim_buf_set_option(bufnr, ...)
     end
+    local opts = { noremap = true, silent = true }
 
     buf_option("omnifunc", "v:lua.vim.lsp.omnifunc")
-
-    local opts = { noremap = true, silent = true }
 
     buf_map("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
     buf_map("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
@@ -39,7 +37,6 @@ M.on_attach = function(_, bufnr)
     buf_map("n", "ga", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
 end
 
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-M.capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
+M.capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())
 
 return M

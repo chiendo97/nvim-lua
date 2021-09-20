@@ -1,5 +1,3 @@
--- This file can be loaded by calling `lua require('plugins')` from your init.vim
--- Only required if you have packer configured as `opt`
 vim.cmd([[packadd packer.nvim]])
 
 return require("packer").startup(function(use)
@@ -34,7 +32,7 @@ return require("packer").startup(function(use)
             "hrsh7th/cmp-nvim-lua", -- neovim's Lua runtime API such vim.lsp.* source
             "hrsh7th/cmp-path", -- path source
             "hrsh7th/cmp-vsnip", -- vsnip source
-            "hrsh7th/vim-vsnip",
+            "hrsh7th/vim-vsnip", -- snippet
         },
         config = function()
             require("plugins.nvim_cmp")
@@ -51,23 +49,38 @@ return require("packer").startup(function(use)
     use({
         "nvim-treesitter/nvim-treesitter",
         event = "BufRead",
+        run = ":TSUpdate",
         config = function()
             require("plugins.treesitter")
         end,
     })
-    use({
+    -- disable because of slow startup.
+    --[[ use({
         "nvim-treesitter/nvim-treesitter-textobjects",
         after = { "nvim-treesitter" },
+    }) ]]
+
+    -- align text with ga=
+    use({
+        "junegunn/vim-easy-align",
+        config = function()
+            local map = vim.api.nvim_set_keymap
+
+            -- Start interactive EasyAlign in visual mode (e.g. vipga)
+            map("x", "ga", "<Plug>(EasyAlign)", {})
+            -- Start interactive EasyAlign for a motion/text object (e.g. gaip)
+            map("n", "ga", "<Plug>(EasyAlign)", {})
+        end,
     })
 
-    -- align text ga=
-    -- use 'junegunn/vim-easy-align'
-
-    -- Preview markdown live: :Mark
-    use({ "iamcco/markdown-preview.nvim" })
-
-    -- Vim plugin that provides additional text objects
-    -- use 'wellle/targets.vim'
+    -- Preview markdown live: :MarkdownPreview
+    use({
+        "iamcco/markdown-preview.nvim",
+        run = "cd app && yarn install",
+        ft = "markdown",
+        cmd = "MarkdownPreview",
+        opt = true,
+    })
 
     -- Some Git stuff
     use({
@@ -102,7 +115,6 @@ return require("packer").startup(function(use)
         end,
     })
 
-    -- find file with name
     use({
         "nvim-telescope/telescope.nvim",
         requires = {
@@ -111,7 +123,7 @@ return require("packer").startup(function(use)
             { "nvim-telescope/telescope-fzy-native.nvim" },
         },
         config = function()
-            require("plugins.fzf")
+            require("plugins.telescope")
         end,
     })
 
@@ -119,6 +131,7 @@ return require("packer").startup(function(use)
     use({
         "norcalli/nvim-colorizer.lua",
         event = "BufRead",
+        opt = true,
         config = function()
             require("colorizer").setup()
         end,
@@ -128,38 +141,53 @@ return require("packer").startup(function(use)
     use({
         "b3nj5m1n/kommentary",
         config = function()
-            require("plugins.kommentary")
+            vim.g.kommentary_create_default_mappings = false
+
+            vim.api.nvim_set_keymap("n", "<C-_>", "<Plug>kommentary_line_default", {})
+            vim.api.nvim_set_keymap("v", "<C-_>", "<Plug>kommentary_visual_default", {})
         end,
     })
 
     -- generate go test
-    use({ "buoto/gotests-vim", cmd = "GoTests" })
+    use({
+        "buoto/gotests-vim",
+        ft = "go",
+        opt = true,
+    })
+
+    --[[ use({
+        "fatih/vim-go",
+        lock = true,
+        ft = "go",
+        opt = true,
+        config = function()
+            vim.g.go_fold_enable = false
+            vim.g.go_code_completion_enabled = 0
+            vim.g.go_doc_keywordprg_enabled = 0
+            vim.g.go_def_mapping_enabled = 0
+            vim.g.go_textobj_enabled = 0
+            vim.g.go_metalinter_autosave_enabled = 0
+            vim.g.go_metalinter_enabled = 0
+            vim.g.go_term_enabled = 0
+            vim.g.go_gopls_enabled = 0
+            vim.g.go_diagnostics_enabled = 0
+        end,
+    }) ]]
 
     -- better quickfix
     use({
         "kevinhwang91/nvim-bqf",
         config = function()
-            require("bqf").setup()
+            require("plugins.nvim-bqf")
         end,
+        ft = { "qf" },
     })
 
     use({
         "lukas-reineke/indent-blankline.nvim",
         event = "BufRead",
-        setup = function()
-            vim.g.indentLine_enabled = 1
-            vim.g.indent_blankline_char = "▏"
-
-            vim.g.indent_blankline_filetype_exclude = {
-                "help",
-                "terminal",
-                "dashboard",
-                "packer",
-            }
-            vim.g.indent_blankline_buftype_exclude = { "terminal" }
-
-            -- vim.g.indent_blankline_show_trailing_blankline_indent = false
-            -- vim.g.indent_blankline_show_first_indent_level = false
+        config = function()
+            require("plugins.indent-blankline")
         end,
     })
 
@@ -188,4 +216,13 @@ return require("packer").startup(function(use)
         end,
         requires = 'nvim-lua/plenary.nvim'
     } ]]
+
+    -- Lua
+    use({
+        "folke/which-key.nvim",
+        config = function()
+            require("which-key").setup({})
+        end,
+        event = "VimEnter",
+    })
 end)

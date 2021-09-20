@@ -1,6 +1,5 @@
 require("gitsigns").setup({
     keymaps = {
-        -- Default keymap options
         noremap = true,
         ["n ]h"] = {
             expr = true,

@@ -6,12 +6,12 @@ vim.g.mapleader = " " -- 'vim.g' sets global variables
 map("n", "<bs>", "<c-^>", { noremap = true })
 
 -- alt + jk to move line up/down
-map("n", "<A-j>", ":m .+1<CR>==", { noremap = true })
-map("n", "<A-k>", ":m .-2<CR>==", { noremap = true })
-map("i", "<A-j>", "<Esc>:m .+1<CR>==gi", { noremap = true })
-map("i", "<A-k>", "<Esc>:m .-2<CR>==gi", { noremap = true })
-map("v", "<A-j>", ":m '>+1<CR>gv=gv", { noremap = true })
-map("v", "<A-k>", ":m '<-2<CR>gv=gv", { noremap = true })
+map("n", "<A-j>", ":m .+1<CR>==", { noremap = true, silent = true })
+map("n", "<A-k>", ":m .-2<CR>==", { noremap = true, silent = true })
+map("i", "<A-j>", "<Esc>:m .+1<CR>==gi", { noremap = true, silent = true })
+map("i", "<A-k>", "<Esc>:m .-2<CR>==gi", { noremap = true, silent = true })
+map("v", "<A-j>", ":m '>+1<CR>gv=gv", { noremap = true, silent = true })
+map("v", "<A-k>", ":m '<-2<CR>gv=gv", { noremap = true, silent = true })
 
 -- ^ - jump to the first non-blank character of the line
 map("n", "H", "^", { noremap = true })
@@ -21,9 +21,8 @@ map("n", "L", "g_", { noremap = true })
 map("v", "L", "g_", { noremap = true })
 
 -- ctrl + c to turn off highlight and close quickfix windows and escape
-map("n", "<C-C>", ":noh<CR>:ccl<CR><esc>", { silent = true })
---[[ map('i', '<C-C>', '<esc><C-C>', {silent = true})
-map('v', '<C-C>', '<esc><C-C>', {silent = true}) ]]
+map("n", "<C-C>", ":noh<CR>:ccl<CR><esc>", { noremap = true, silent = true })
+map("n", "<esc>", ":noh<CR>:ccl<CR><esc>", { noremap = true, silent = true })
 
 -- * to highlight current word
 map("n", "*", [[:let @/ = '\<'.expand('<cword>').'\>' | set hlsearch <CR>]], { silent = true })
@@ -48,7 +47,7 @@ map("n", "k", "gk", { noremap = true, silent = true })
 
 -- copy to clipboard
 map("v", "y", '"*y', { noremap = true })
--- map('v', 'p', '"*p', {noremap = true})
+map("v", "p", '"*p', { noremap = true })
 -- copy line to clipboard
 map("n", "yy", '"*yy', { noremap = true })
 
@@ -63,3 +62,4 @@ map("n", "<Leader>sv", ":<C-u>source $MYVIMRC<CR>", { noremap = true })
 
 -- copy last pasted
 map("n", "gV", "`[v`]", { noremap = true })
+

@@ -3,7 +3,7 @@ require("nvim-treesitter.configs").setup({
     indent = { enable = true },
     textobjects = {
         select = {
-            enable = true,
+            enable = false,
             lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
             keymaps = {
                 ["af"] = "@function.outer",
@@ -13,7 +13,7 @@ require("nvim-treesitter.configs").setup({
             },
         },
         move = {
-            enable = true,
+            enable = false,
             set_jumps = true, -- whether to set jumps in the jumplist
             goto_next_start = {
                 ["]m"] = "@function.outer",

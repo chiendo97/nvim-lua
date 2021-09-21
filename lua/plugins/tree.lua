@@ -26,4 +26,58 @@ g.nvim_tree_disable_window_picker = 0 -- 0 by default, will disable the window p
 g.nvim_tree_special_files = { "README.md", "Makefile", "MAKEFILE" } -- List of filenames that gets highlighted with NvimTreeSpecialFile
 g.nvim_tree_show_icons = { git = 0, folders = 1, files = 1 }
 
+g.nvim_tree_follow_update_path = 0 -- 0 by default, will update the path of the current dir if the file is not inside the tree.
+g.nvim_tree_auto_resize = 1 -- 1 by default, will resize the tree to its saved width when opening a file
+g.nvim_tree_hijack_cursor = 1 -- 1 by default, when moving cursor in the tree, will position the cursor at the start of the file on the current line
+g.nvim_tree_icon_padding = " " -- one space by default, used for rendering the space between the icon and the filename. Use with caution, it could break rendering if you set an empty string depending on your font.
+g.nvim_tree_symlink_arrow = " ➛ " --  defaults to ' ➛ '. used as a separator between symlinks' source and target.
+g.nvim_tree_update_cwd = 1 -- 0 by default, will update the tree cwd when changing nvim's directory (DirChanged event). Behaves strangely with autochdir set.
+g.nvim_tree_respect_buf_cwd = 0 -- 0 by default, will change cwd of nvim-tree to that of new buffer's when opening nvim-tree.
+g.nvim_tree_refresh_wait = 1000 -- 1000 by default, control how often the tree can be refreshed, 1000 means the tree can be refresh once per 1000ms.
+g.nvim_tree_window_picker_exclude = {
+    filetype = {
+        "notify",
+        "packer",
+        "qf",
+    },
+    buftype = {
+        "terminal",
+    },
+}
+-- Dictionary of buffer option names mapped to a list of option values that
+-- indicates to the window picker that the buffer's window should not be
+-- selectable.
+
+-- default will show icon by default if no icon is provided
+-- default shows no icon by default
+g.nvim_tree_icons = {
+    default = "",
+    symlink = "",
+    git = {
+        unstaged = "✗",
+        staged = "✓",
+        unmerged = "",
+        renamed = "➜",
+        untracked = "★",
+        deleted = "",
+        ignored = "◌",
+    },
+    folder = {
+        arrow_open = "",
+        arrow_closed = "",
+        default = "",
+        open = "",
+        empty = "",
+        empty_open = "",
+        symlink = "",
+        symlink_open = "",
+    },
+    lsp = {
+        hint = "",
+        info = "",
+        warning = "",
+        error = "",
+    },
+}
+
 map("n", "<leader>c", ":<C-U>NvimTreeToggle<CR>", { noremap = true })

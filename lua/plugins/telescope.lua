@@ -121,7 +121,7 @@ map("n", "<leader>h", [[<cmd>lua require('telescope.builtin').help_tags({preview
 map("n", "<leader>m", [[<cmd>lua require('telescope.builtin').keymaps()<cr>]], map_options)
 map("n", "<leader>b", [[<cmd>lua require('telescope.builtin').builtin()<cr>]], map_options)
 
-map("n", "<leader>R", [[<cmd>lua require('plugins.fzf').grep_cword()<cr>]], map_options)
-map("v", "<leader>R", [[<cmd>lua require('plugins.fzf').grep_visual()<cr>]], map_options)
+map("n", "<leader>R", [[<cmd>lua require('plugins.telescope').grep_cword()<cr>]], map_options)
+map("v", "<leader>R", [[<cmd>lua require('plugins.telescope').grep_visual()<cr>]], map_options)
 
 return M

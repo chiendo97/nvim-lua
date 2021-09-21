@@ -132,6 +132,7 @@ return require("packer").startup(function(use)
     -- Syntax and languages
     use({
         "norcalli/nvim-colorizer.lua",
+        disable = true,
         event = "BufRead",
         opt = true,
         config = function()

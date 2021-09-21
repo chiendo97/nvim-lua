@@ -3,6 +3,7 @@ local o   = vim.o   -- global options
 local b   = vim.bo  -- buffer-scoped options
 local opt = vim.opt -- to set options
 
+opt.syntax         = 'off'
 opt.showtabline    = 2
 opt.ruler          = true -- show line,col at the cursor pos
 opt.number         = true -- show absolute line no. at the cursor pos
@@ -82,7 +83,7 @@ o.inccommand     = "nosplit" -- show search and replace in real time
 o.autoread       = true      -- reread a file if it's changed outside of vim
 o.wrapscan       = true      -- begin search from top of the file when nothng is found
 
-o.foldenable     = true      -- enable folding
+o.foldenable     = false     -- enable folding
 o.foldlevelstart = 10        -- open most folds by default
 o.foldnestmax    = 10        -- 10 nested fold max
 o.foldmethod     = 'indent'  -- fold based on indent level

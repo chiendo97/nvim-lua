@@ -47,7 +47,7 @@ map("n", "k", "gk", { noremap = true, silent = true })
 
 -- copy to clipboard
 map("v", "y", '"*y', { noremap = true })
-map("v", "p", '"*p', { noremap = true })
+-- map("v", "p", '"*p', { noremap = true })
 -- copy line to clipboard
 map("n", "yy", '"*yy', { noremap = true })
 

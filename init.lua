@@ -3,17 +3,13 @@ local o   = vim.o   -- global options
 local b   = vim.bo  -- buffer-scoped options
 local opt = vim.opt -- to set options
 
-opt.syntax         = "on"
-opt.lazyredraw     = true
-opt.hidden         = true -- do not unload buffer when abandoned
 opt.showtabline    = 2
 opt.ruler          = true -- show line,col at the cursor pos
 opt.number         = true -- show absolute line no. at the cursor pos
 opt.relativenumber = true -- otherwise, show relative numbers in the ruler
 opt.cursorline     = true -- Show a line where the current cursor is
 opt.signcolumn     = "yes"
-opt.wildmenu       = true
-opt.wildmode       = "longest:full,full"
+
 opt.updatetime     = 100
 opt.shortmess      = "scWFI"
 opt.autoread       = true
@@ -46,17 +42,23 @@ opt.listchars = {
     trail = "·",
     extends = "→",
 }
+opt.termguicolors = true
 
+o.showmatch      = true      -- highlight matching [{()}]
+o.showcmd        = true      -- show current command under the cmd line
+o.showmode       = true      -- show current mode (insert, etc) under the cmdline
 o.undofile       = false
 o.autochdir      = false
-o.showmode       = true      -- show current mode (insert, etc) under the cmdline
-o.showcmd        = true      -- show current command under the cmd line
 o.cmdheight      = 2         -- cmdline height
 o.laststatus     = 2         -- 2 = always show status line (filename, etc)
 o.breakindent    = true      -- start wrapped lines indented
 o.linebreak      = true      -- do not break words on line wrap
 o.completeopt    = "menu,menuone,noinsert"
+
+o.wildmenu       = true
+o.wildmode       = "longest:full,full"
 o.wildoptions    = "pum"     -- Show completion items using the pop-up-menu (pum)
+
 o.pumblend       = 30        -- Give the pum some transparency
 o.backup         = false     -- no backup file
 o.writebackup    = false     -- do not backup file before write
@@ -76,7 +78,6 @@ o.hlsearch       = true      -- highlight all text matching current search patte
 o.incsearch      = true      -- show search matches as you type
 o.ignorecase     = true      -- ignore case on search
 o.smartcase      = true      -- case sensitive when search includes uppercase
-o.showmatch      = true      -- highlight matching [{()}]
 o.inccommand     = "nosplit" -- show search and replace in real time
 o.autoread       = true      -- reread a file if it's changed outside of vim
 o.wrapscan       = true      -- begin search from top of the file when nothng is found

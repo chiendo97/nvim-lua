@@ -91,7 +91,9 @@ return require("packer").startup(function(use)
         end,
     })
 
-    use({ "tpope/vim-fugitive" })
+    use({
+        "tpope/vim-fugitive",
+    })
 
     -- vim-tmux-navigation
     use({

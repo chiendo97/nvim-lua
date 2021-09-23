@@ -47,8 +47,8 @@ map("n", "k", "gk", { noremap = true, silent = true })
 
 -- copy to clipboard
 map("v", "y", '"*y', { noremap = true })
--- map("v", "p", '"*p', { noremap = true })
--- copy line to clipboard
+--[[ map("n", "p", '"*p', { noremap = true })
+map("v", "d", '"*d', { noremap = true }) ]]
 map("n", "yy", '"*yy', { noremap = true })
 
 -- copy current relative path /Users/chien.le/.config/nvim/lua/keymaps.lua:56
@@ -62,4 +62,3 @@ map("n", "<Leader>sv", ":<C-u>source $MYVIMRC<CR>", { noremap = true })
 
 -- copy last pasted
 map("n", "gV", "`[v`]", { noremap = true })
-

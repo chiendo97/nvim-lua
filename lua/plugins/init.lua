@@ -188,14 +188,21 @@ return require("packer").startup(function(use)
 
     use({
         "lukas-reineke/indent-blankline.nvim",
-        event = "BufRead",
+        opt = true,
+        cmd = { "IndentBlanklineToggle" },
         config = function()
             require("plugins.indent-blankline")
         end,
     })
 
-    use("leafgarland/typescript-vim")
-    use("peitalin/vim-jsx-typescript")
+    use({
+        "leafgarland/typescript-vim",
+        ft = { "typescriptreact" },
+    })
+    use({
+        "peitalin/vim-jsx-typescript",
+        ft = { "typescriptreact" },
+    })
 
     use({
         "jose-elias-alvarez/null-ls.nvim",

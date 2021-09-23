@@ -3,7 +3,7 @@ local o   = vim.o   -- global options
 local b   = vim.bo  -- buffer-scoped options
 local opt = vim.opt -- to set options
 
-opt.syntax         = 'off'
+-- opt.syntax         = 'off'
 opt.showtabline    = 2
 opt.ruler          = true -- show line,col at the cursor pos
 opt.number         = true -- show absolute line no. at the cursor pos
@@ -38,8 +38,8 @@ opt.eol            = false
 opt.splitright     = true
 opt.list           = true
 opt.listchars = {
+    tab = "│ ",
     eol = "↴",
-    tab = "▏ ",
     trail = "·",
     extends = "→",
 }
@@ -66,7 +66,6 @@ o.writebackup    = false     -- do not backup file before write
 o.swapfile       = false     -- no swap file
 o.wb             = false
 o.smartindent    = true      -- add <tab> depending on syntax (C/C++)
-o.smarttab       = true
 b.autoindent     = true
 o.tabstop        = 4         -- Tab indentation levels every two columns
 o.softtabstop    = 4         -- Tab indentation when mixing tabs & spaces

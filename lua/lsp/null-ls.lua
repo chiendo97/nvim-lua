@@ -22,8 +22,12 @@ local sources = {
     null_ls.builtins.diagnostics.markdownlint,
 }
 
-null_ls.config({ debug = true, sources = sources })
+null_ls.config({
+    sources = sources,
+    diagnostics_format = "[#{c}] #{m} (#{s})",
+})
 
 require("lspconfig")["null-ls"].setup({
     on_attach = require("lsp.attach").on_attach,
+    capabilities = require("lsp.attach").capabilities,
 })

@@ -2,17 +2,31 @@ vim.cmd([[packadd packer.nvim]])
 
 return require("packer").startup(function(use)
     -- Packer can manage itself as an optional plugin
-    use({ "wbthomason/packer.nvim", event = "VimEnter" })
+    use({
+        "wbthomason/packer.nvim",
+        opt = true,
+    })
 
     -- add packages
 
-    -- nerdtree alternate
+    -- plenary is required by gitsigns and telescope
+    -- lazy load so gitsigns doesn't abuse our startup time
+    use({
+        "nvim-lua/plenary.nvim",
+        event = "BufRead",
+    })
+
+    -- nvim-tree
     use({
         "kyazdani42/nvim-tree.lua",
         requires = { "kyazdani42/nvim-web-devicons" },
+        setup = function()
+            vim.api.nvim_set_keymap("n", "<leader>c", ":<C-U>NvimTreeToggle<CR>", { noremap = true })
+        end,
         config = function()
             require("plugins.tree")
         end,
+        cmd = { "NvimTreeToggle", "NvimTreeFindFile" },
     })
 
     -- lspconfig
@@ -21,6 +35,7 @@ return require("packer").startup(function(use)
         config = function()
             require("lsp")
         end,
+        event = "BufRead",
     })
 
     -- lsp autocomplete
@@ -48,12 +63,14 @@ return require("packer").startup(function(use)
     -- treesitter syntax
     use({
         "nvim-treesitter/nvim-treesitter",
+        branch = "0.5-compat",
         event = "BufRead",
         run = ":TSUpdate",
         config = function()
             require("plugins.treesitter")
         end,
     })
+
     -- disable because of slow startup.
     --[[ use({
         "nvim-treesitter/nvim-treesitter-textobjects",
@@ -79,16 +96,16 @@ return require("packer").startup(function(use)
         run = "cd app && yarn install",
         ft = "markdown",
         cmd = "MarkdownPreview",
-        opt = true,
     })
 
-    -- Some Git stuff
+    -- Add git related info in the signs columns and popups
     use({
         "lewis6991/gitsigns.nvim",
         requires = { "nvim-lua/plenary.nvim" },
         config = function()
             require("plugins.gitgutter")
         end,
+        after = "plenary.nvim",
     })
 
     use({
@@ -124,28 +141,30 @@ return require("packer").startup(function(use)
             { "nvim-lua/plenary.nvim" },
             { "nvim-telescope/telescope-fzy-native.nvim" },
         },
+        setup = function()
+            require("plugins.telescope_map")
+        end,
         config = function()
             require("plugins.telescope")
         end,
+        after = "plenary.nvim",
     })
 
-    -- Syntax and languages
-    use({
+    --[[ use({
         "norcalli/nvim-colorizer.lua",
-        disable = true,
         event = "BufRead",
         opt = true,
         config = function()
             require("colorizer").setup()
         end,
-    })
+    }) ]]
 
     -- comment
     use({
         "b3nj5m1n/kommentary",
+        event = "BufRead",
         config = function()
             vim.g.kommentary_create_default_mappings = false
-
             vim.api.nvim_set_keymap("n", "<C-_>", "<Plug>kommentary_line_default", {})
             vim.api.nvim_set_keymap("v", "<C-_>", "<Plug>kommentary_visual_default", {})
         end,
@@ -195,21 +214,25 @@ return require("packer").startup(function(use)
         end,
     })
 
-    use({
+    --[[ use({
         "leafgarland/typescript-vim",
         ft = { "typescriptreact" },
     })
     use({
         "peitalin/vim-jsx-typescript",
         ft = { "typescriptreact" },
-    })
+    }) ]]
 
     use({
         "jose-elias-alvarez/null-ls.nvim",
         config = function()
             require("lsp.null-ls")
         end,
-        requires = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
+        requires = {
+            "nvim-lua/plenary.nvim",
+            "neovim/nvim-lspconfig",
+        },
+        after = "nvim-lspconfig",
     })
 
     use({
@@ -228,11 +251,11 @@ return require("packer").startup(function(use)
     } ]]
 
     -- Lua
-    use({
+    --[[ use({
         "folke/which-key.nvim",
         config = function()
             require("which-key").setup({})
         end,
         event = "VimEnter",
-    })
+    }) ]]
 end)

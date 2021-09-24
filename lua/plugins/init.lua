@@ -35,7 +35,6 @@ return require("packer").startup(function(use)
         config = function()
             require("lsp")
         end,
-        event = "BufRead",
     })
 
     -- lsp autocomplete
@@ -232,7 +231,10 @@ return require("packer").startup(function(use)
             "nvim-lua/plenary.nvim",
             "neovim/nvim-lspconfig",
         },
-        after = "nvim-lspconfig",
+        after = {
+            "plenary.nvim",
+            "nvim-lspconfig",
+        },
     })
 
     use({

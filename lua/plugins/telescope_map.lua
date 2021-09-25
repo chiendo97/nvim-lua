@@ -75,4 +75,9 @@ map("n", "<leader>b", [[<cmd>lua require('plugins.telescope_map').call("builtin"
 map("v", "<leader>r", [[<cmd>lua require('plugins.telescope_map').grep_visual()<cr>]], map_options)
 map("n", "<leader>R", [[<cmd>lua require('plugins.telescope_map').grep_cword()<cr>]], map_options)
 
+local my_map = function(mode, key, func)
+    map(mode, key, [[<cmd>lua require('plugins.telescope_map').call("builtin")<cr>]] .. func, map_options)
+    --  require("telescope.builtin")[func](options or { previewer = false })
+end
+
 return M

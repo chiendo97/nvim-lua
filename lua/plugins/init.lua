@@ -21,12 +21,12 @@ return require("packer").startup(function(use)
         "kyazdani42/nvim-tree.lua",
         requires = { "kyazdani42/nvim-web-devicons" },
         setup = function()
-            vim.api.nvim_set_keymap("n", "<leader>c", ":<C-U>NvimTreeToggle<CR>", { noremap = true })
+            vim.api.nvim_set_keymap("n", "<leader>c", "<cmd>NvimTreeToggle<cr>", { noremap = true })
         end,
         config = function()
             require("plugins.tree")
         end,
-        cmd = { "NvimTreeToggle", "NvimTreeFindFile" },
+        cmd = "NvimTreeToggle",
     })
 
     -- lspconfig
@@ -41,7 +41,6 @@ return require("packer").startup(function(use)
     use({
         "hrsh7th/nvim-cmp",
         requires = {
-            "hrsh7th/cmp-buffer", -- buffer source
             "hrsh7th/cmp-nvim-lsp", -- lsp source
             "hrsh7th/cmp-nvim-lua", -- neovim's Lua runtime API such vim.lsp.* source
             "hrsh7th/cmp-path", -- path source
@@ -206,8 +205,10 @@ return require("packer").startup(function(use)
 
     use({
         "lukas-reineke/indent-blankline.nvim",
-        opt = true,
-        cmd = { "IndentBlanklineToggle" },
+        cmd = "IndentBlanklineToggle",
+        setup = function()
+            vim.api.nvim_set_keymap("n", "<leader>i", "<cmd>IndentBlanklineToggle<cr>", { noremap = true })
+        end,
         config = function()
             require("plugins.indent-blankline")
         end,

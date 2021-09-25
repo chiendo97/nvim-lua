@@ -1,5 +1,4 @@
 local g = vim.g
-local map = vim.api.nvim_set_keymap
 
 g.nvim_tree_side = "left" -- left by default
 g.nvim_tree_width = 30 -- 30 by default
@@ -79,5 +78,3 @@ g.nvim_tree_icons = {
         error = "",
     },
 }
-
-map("n", "<leader>c", ":<C-U>NvimTreeToggle<CR>", { noremap = true })

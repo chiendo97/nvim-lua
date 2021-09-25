@@ -1,5 +1,8 @@
 local cmp = require("cmp")
-local map = vim.api.nvim_set_keymap
+
+local feedkey = function(key, mode)
+    vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), mode, true)
+end
 
 cmp.setup({
     snippet = {
@@ -24,6 +27,24 @@ cmp.setup({
             behavior = cmp.ConfirmBehavior.Insert,
             select = true,
         }),
+        ["<Tab>"] = cmp.mapping(function(fallback)
+            if vim.fn["vsnip#available"]() == 1 then
+                feedkey("<Plug>(vsnip-expand-or-jump)", "")
+            else
+                fallback()
+            end
+        end, {
+            "i",
+            "s",
+        }),
+        ["<S-Tab>"] = cmp.mapping(function()
+            if vim.fn["vsnip#jumpable"](-1) == 1 then
+                feedkey("<Plug>(vsnip-jump-prev)", "")
+            end
+        end, {
+            "i",
+            "s",
+        }),
     },
 
     -- You should specify your *installed* sources.
@@ -34,7 +55,6 @@ cmp.setup({
         { name = "orgmode" },
         { name = "neorg" },
         { name = "nvim_lua" },
-        { name = "buffer" },
     },
 
     formatting = {
@@ -55,8 +75,3 @@ cmp.setup({
         end,
     },
 })
-
-map("i", "<Tab>", [[   vsnip#jumpable(1)  ? '<Plug>(vsnip-jump-next)' : '<Tab>'   ]], { expr = true })
-map("s", "<Tab>", [[   vsnip#jumpable(1)  ? '<Plug>(vsnip-jump-next)' : '<Tab>'   ]], { expr = true })
-map("i", "<S-Tab>", [[ vsnip#jumpable(-1) ? '<Plug>(vsnip-jump-prev)' : '<S-Tab>' ]], { expr = true })
-map("s", "<S-Tab>", [[ vsnip#jumpable(-1) ? '<Plug>(vsnip-jump-prev)' : '<S-Tab>' ]], { expr = true })

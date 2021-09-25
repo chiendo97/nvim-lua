@@ -1,9 +1,6 @@
 require("indent_blankline").setup({
     char = "│",
     filetype_exclude = {
-        "go",
-        "bqf",
-
         "help",
         "terminal",
         "dashboard",

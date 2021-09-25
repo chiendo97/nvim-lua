@@ -57,7 +57,6 @@ map("n", "<leader>yp", ':let @* = expand("%")<cr>', { noremap = true })
 map("n", "<leader>yP", ':let @* = expand("%:p")<cr>', { noremap = true })
 
 -- open/source config files
-map("n", "<Leader>ev", "<cmd>e $MYVIMRC<cr>", { noremap = true })
 map("n", "<Leader>sv", "<cmd>source $MYVIMRC<cr>", { noremap = true })
 
 -- copy last pasted

@@ -11,11 +11,6 @@ M.load_telescope = function()
     end
 end
 
-M.call = function(func, options)
-    M.load_telescope()
-    require("telescope.builtin")[func](options or { previewer = false })
-end
-
 M.grep_cword = function()
     M.load_telescope()
     require("telescope.builtin").grep_string({
@@ -66,18 +61,13 @@ M.grep_visual = function()
     })
 end
 
-map("n", "<leader>g", [[<cmd>lua require('plugins.telescope_map').call("find_files")<cr>]], map_options)
-map("n", "<leader>r", [[<cmd>lua require('plugins.telescope_map').call("live_grep")<cr>]], map_options)
-map("n", "<leader>h", [[<cmd>lua require('plugins.telescope_map').call("help_tags")<cr>]], map_options)
-map("n", "<leader>m", [[<cmd>lua require('plugins.telescope_map').call("keymaps")<cr>]], map_options)
-map("n", "<leader>b", [[<cmd>lua require('plugins.telescope_map').call("builtin")<cr>]], map_options)
+map("n", "<leader>g", [[<cmd>Telescope find_files previewer=false<cr>]], map_options)
+map("n", "<leader>r", [[<cmd>Telescope live_grep previewer=false<cr>]], map_options)
+map("n", "<leader>h", [[<cmd>Telescope help_tags previewer=false<cr>]], map_options)
+map("n", "<leader>m", [[<cmd>Telescope keymaps previewer=false<cr>]], map_options)
+map("n", "<leader>b", [[<cmd>Telescope builtin previewer=false<cr>]], map_options)
 
 map("v", "<leader>r", [[<cmd>lua require('plugins.telescope_map').grep_visual()<cr>]], map_options)
 map("n", "<leader>R", [[<cmd>lua require('plugins.telescope_map').grep_cword()<cr>]], map_options)
-
-local my_map = function(mode, key, func)
-    map(mode, key, [[<cmd>lua require('plugins.telescope_map').call("builtin")<cr>]] .. func, map_options)
-    --  require("telescope.builtin")[func](options or { previewer = false })
-end
 
 return M

@@ -1,5 +1,12 @@
 vim.cmd([[packadd packer.nvim]])
 
+local map = vim.api.nvim_set_keymap
+map("n", "<leader>pi", "<cmd>PackerInstall<cr>", {})
+map("n", "<leader>ps", "<cmd>PackerSync<cr>", {})
+map("n", "<leader>pc", "<cmd>PackerCompile<cr>", {})
+map("n", "<leader>pt", "<cmd>PackerStatus<cr>", {})
+map("n", "<leader>pd", "<cmd>PackerClean<cr>", {})
+
 return require("packer").startup(function(use)
     -- Packer can manage itself as an optional plugin
     use({
@@ -11,14 +18,12 @@ return require("packer").startup(function(use)
 
     -- plenary is required by gitsigns and telescope
     -- lazy load so gitsigns doesn't abuse our startup time
-    use({
-        "nvim-lua/plenary.nvim",
-        event = "BufRead",
-    })
+    use({ "nvim-lua/plenary.nvim" })
 
     -- nvim-tree
     use({
         "kyazdani42/nvim-tree.lua",
+        cmd = "NvimTreeToggle",
         requires = { "kyazdani42/nvim-web-devicons" },
         setup = function()
             vim.api.nvim_set_keymap("n", "<leader>c", "<cmd>NvimTreeToggle<cr>", { noremap = true })
@@ -26,7 +31,6 @@ return require("packer").startup(function(use)
         config = function()
             require("plugins.tree")
         end,
-        cmd = "NvimTreeToggle",
     })
 
     -- lspconfig
@@ -69,22 +73,14 @@ return require("packer").startup(function(use)
         end,
     })
 
-    -- disable because of slow startup.
-    --[[ use({
-        "nvim-treesitter/nvim-treesitter-textobjects",
-        after = { "nvim-treesitter" },
-    }) ]]
-
     -- align text with ga=
     use({
         "junegunn/vim-easy-align",
         config = function()
-            local map = vim.api.nvim_set_keymap
-
             -- Start interactive EasyAlign in visual mode (e.g. vipga)
-            map("x", "ga", "<Plug>(EasyAlign)", {})
+            vim.api.nvim_set_keymap("x", "ga", "<Plug>(EasyAlign)", {})
             -- Start interactive EasyAlign for a motion/text object (e.g. gaip)
-            map("n", "ga", "<Plug>(EasyAlign)", {})
+            vim.api.nvim_set_keymap("n", "ga", "<Plug>(EasyAlign)", {})
         end,
     })
 
@@ -103,7 +99,9 @@ return require("packer").startup(function(use)
         config = function()
             require("plugins.gitgutter")
         end,
-        after = "plenary.nvim",
+        cond = function()
+            return vim.fn.isdirectory(".git") == 1
+        end,
     })
 
     use({
@@ -134,28 +132,19 @@ return require("packer").startup(function(use)
 
     use({
         "nvim-telescope/telescope.nvim",
-        requires = {
-            { "nvim-lua/popup.nvim" },
-            { "nvim-lua/plenary.nvim" },
-            { "nvim-telescope/telescope-fzy-native.nvim" },
-        },
+        cmd = "Telescope",
         setup = function()
             require("plugins.telescope_map")
         end,
         config = function()
             require("plugins.telescope")
         end,
-        after = "plenary.nvim",
+        requires = {
+            { "nvim-lua/popup.nvim" },
+            { "nvim-lua/plenary.nvim" },
+            { "nvim-telescope/telescope-fzy-native.nvim" },
+        },
     })
-
-    --[[ use({
-        "norcalli/nvim-colorizer.lua",
-        event = "BufRead",
-        opt = true,
-        config = function()
-            require("colorizer").setup()
-        end,
-    }) ]]
 
     -- comment
     use({
@@ -172,27 +161,7 @@ return require("packer").startup(function(use)
     use({
         "buoto/gotests-vim",
         ft = "go",
-        opt = true,
     })
-
-    --[[ use({
-        "fatih/vim-go",
-        lock = true,
-        ft = "go",
-        opt = true,
-        config = function()
-            vim.g.go_fold_enable = false
-            vim.g.go_code_completion_enabled = 0
-            vim.g.go_doc_keywordprg_enabled = 0
-            vim.g.go_def_mapping_enabled = 0
-            vim.g.go_textobj_enabled = 0
-            vim.g.go_metalinter_autosave_enabled = 0
-            vim.g.go_metalinter_enabled = 0
-            vim.g.go_term_enabled = 0
-            vim.g.go_gopls_enabled = 0
-            vim.g.go_diagnostics_enabled = 0
-        end,
-    }) ]]
 
     -- better quickfix
     use({
@@ -200,7 +169,7 @@ return require("packer").startup(function(use)
         config = function()
             require("plugins.nvim-bqf")
         end,
-        ft = { "qf" },
+        ft = "qf",
     })
 
     use({
@@ -214,15 +183,6 @@ return require("packer").startup(function(use)
         end,
     })
 
-    --[[ use({
-        "leafgarland/typescript-vim",
-        ft = { "typescriptreact" },
-    })
-    use({
-        "peitalin/vim-jsx-typescript",
-        ft = { "typescriptreact" },
-    }) ]]
-
     use({
         "jose-elias-alvarez/null-ls.nvim",
         config = function()
@@ -232,10 +192,6 @@ return require("packer").startup(function(use)
             "nvim-lua/plenary.nvim",
             "neovim/nvim-lspconfig",
         },
-        after = {
-            "plenary.nvim",
-            "nvim-lspconfig",
-        },
     })
 
     use({
@@ -244,14 +200,6 @@ return require("packer").startup(function(use)
             require("plugins.org")
         end,
     })
-
-    --[[ use {
-        'nvim-neorg/neorg',
-        config = function()
-            require('plugins.neorg')
-        end,
-        requires = 'nvim-lua/plenary.nvim'
-    } ]]
 
     -- Lua
     --[[ use({

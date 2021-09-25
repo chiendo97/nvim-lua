@@ -1,5 +1,3 @@
-local o = vim.o -- global options
-
 function _G.MyTabline()
     local s = ""
     for tab = 1, vim.fn.tabpagenr("$") do
@@ -21,4 +19,4 @@ function _G.MyTabline()
     return s
 end
 
-o.tabline = "%!v:lua.MyTabline()"
+vim.o.tabline = "%!v:lua.MyTabline()"

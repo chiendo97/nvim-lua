@@ -106,6 +106,9 @@ return require("packer").startup(function(use)
 
     use({
         "tpope/vim-fugitive",
+        cond = function()
+            return vim.fn.isdirectory(".git") == 1
+        end,
     })
 
     -- vim-tmux-navigation
@@ -209,4 +212,12 @@ return require("packer").startup(function(use)
         end,
         event = "VimEnter",
     }) ]]
+
+    use({
+        vim.fn.stdpath("config") .. "/lua/go-tag",
+        setup = function()
+            require("go-tag")
+        end,
+        ft = "go",
+    })
 end)

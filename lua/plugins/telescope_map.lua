@@ -64,6 +64,7 @@ end
 map("n", "<leader>g", [[<cmd>Telescope find_files previewer=false<cr>]], map_options)
 map("n", "<leader>r", [[<cmd>Telescope live_grep previewer=false<cr>]], map_options)
 map("n", "<leader>h", [[<cmd>Telescope help_tags previewer=false<cr>]], map_options)
+map("n", "<leader>j", [[<cmd>Telescope oldfiles previewer=false<cr>]], map_options)
 map("n", "<leader>m", [[<cmd>Telescope keymaps previewer=false<cr>]], map_options)
 map("n", "<leader>b", [[<cmd>Telescope builtin previewer=false<cr>]], map_options)
 

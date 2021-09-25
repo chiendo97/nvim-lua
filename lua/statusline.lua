@@ -1,5 +1,3 @@
-local o = vim.o -- global options
-
 local function dirname()
     if vim.fn.getcwd() == "/" then
         return "ROOT"
@@ -23,4 +21,4 @@ local stl = {
     " %p%% ",
 }
 
-o.statusline = table.concat(stl)
+vim.o.statusline = table.concat(stl)

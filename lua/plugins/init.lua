@@ -9,25 +9,16 @@ map("n", "<leader>pd", "<cmd>PackerClean<cr>", {})
 
 return require("packer").startup(function(use)
     -- Packer can manage itself as an optional plugin
-    use({
-        "wbthomason/packer.nvim",
-        opt = true,
-    })
+    use({ "wbthomason/packer.nvim", opt = true })
 
     -- add packages
 
-    -- plenary is required by gitsigns and telescope
-    -- lazy load so gitsigns doesn't abuse our startup time
     use({ "nvim-lua/plenary.nvim" })
 
     -- nvim-tree
     use({
         "kyazdani42/nvim-tree.lua",
-        cmd = "NvimTreeToggle",
         requires = { "kyazdani42/nvim-web-devicons" },
-        setup = function()
-            vim.api.nvim_set_keymap("n", "<leader>c", "<cmd>NvimTreeToggle<cr>", { noremap = true })
-        end,
         config = function()
             require("plugins.tree")
         end,
@@ -61,6 +52,24 @@ return require("packer").startup(function(use)
 
     -- add brackets
     use("machakann/vim-sandwich")
+
+    use({
+        "jose-elias-alvarez/null-ls.nvim",
+        config = function()
+            require("lsp.null-ls")
+        end,
+        requires = {
+            "nvim-lua/plenary.nvim",
+            "neovim/nvim-lspconfig",
+        },
+    })
+
+    use({
+        "kristijanhusak/orgmode.nvim",
+        config = function()
+            require("plugins.org")
+        end,
+    })
 
     -- treesitter syntax
     use({
@@ -185,33 +194,6 @@ return require("packer").startup(function(use)
             require("plugins.indent-blankline")
         end,
     })
-
-    use({
-        "jose-elias-alvarez/null-ls.nvim",
-        config = function()
-            require("lsp.null-ls")
-        end,
-        requires = {
-            "nvim-lua/plenary.nvim",
-            "neovim/nvim-lspconfig",
-        },
-    })
-
-    use({
-        "kristijanhusak/orgmode.nvim",
-        config = function()
-            require("plugins.org")
-        end,
-    })
-
-    -- Lua
-    --[[ use({
-        "folke/which-key.nvim",
-        config = function()
-            require("which-key").setup({})
-        end,
-        event = "VimEnter",
-    }) ]]
 
     use({
         vim.fn.stdpath("config") .. "/lua/go-tag",

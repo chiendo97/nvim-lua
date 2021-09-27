@@ -1,3 +1,4 @@
+vim.cmd('syntax off')
 vim.o.mouse         = "a"   -- disable the mouse
 vim.o.exrc          = false -- ignore '~/.exrc'
 vim.o.secure        = true
@@ -14,7 +15,7 @@ vim.o.fileencoding = "utf-8"
 vim.o.backspace    = "indent,eol,start"
 
 -- recursive :find in current dir
-vim.cmd([[set path=.,,,$PWD/**]])
+-- vim.cmd([[set path=.,,,$PWD/**]])
 
 vim.o.showtabline    = 2     -- always show tabline
 vim.o.showmode       = true  -- show current mode (insert, etc) under the cmdline
@@ -30,8 +31,6 @@ vim.o.number         = true  -- show absolute line no. at the cursor pos
 vim.o.relativenumber = true  -- otherwise, show relative numbers in the ruler
 vim.o.cursorline     = true  -- Show a line where the current cursor is
 vim.wo.signcolumn    = "yes" -- Show sign column as first column
--- vim.g.colorcolumn    = 81    -- mark column 81
--- vim.o.colorcolumn    = string.format(vim.g.colorcolumn)
 vim.o.wrap           = false -- wrap long lines
 vim.o.breakindent    = true  -- start wrapped lines indented
 vim.o.linebreak      = true  -- do not break words on line wrap

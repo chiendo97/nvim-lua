@@ -11,6 +11,8 @@ return require("packer").startup(function(use)
     -- Packer can manage itself as an optional plugin
     use({ "wbthomason/packer.nvim", opt = true })
 
+    use({ "tweekmonster/startuptime.vim", cmd = "StartupTime" })
+
     -- add packages
 
     use({ "nvim-lua/plenary.nvim" })
@@ -170,10 +172,7 @@ return require("packer").startup(function(use)
     })
 
     -- generate go test
-    use({
-        "buoto/gotests-vim",
-        ft = "go",
-    })
+    use({ "buoto/gotests-vim", ft = "go" })
 
     -- better quickfix
     use({
@@ -186,10 +185,6 @@ return require("packer").startup(function(use)
 
     use({
         "lukas-reineke/indent-blankline.nvim",
-        cmd = "IndentBlanklineToggle",
-        setup = function()
-            vim.api.nvim_set_keymap("n", "<leader>i", "<cmd>IndentBlanklineToggle<cr>", { noremap = true })
-        end,
         config = function()
             require("plugins.indent-blankline")
         end,

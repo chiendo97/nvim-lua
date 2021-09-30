@@ -49,12 +49,11 @@ cmp.setup({
 
     -- You should specify your *installed* sources.
     sources = {
-        { name = "nvim_lsp" },
-        { name = "path" },
-        { name = "vsnip" },
-        { name = "orgmode" },
-        { name = "neorg" },
-        { name = "nvim_lua" },
+        { name = "nvim_lsp", score = 3 },
+        { name = "path", score = 2 },
+        { name = "vsnip", score = 1 },
+        { name = "orgmode", score = 0 },
+        { name = "nvim_lua", score = 0 },
     },
 
     formatting = {

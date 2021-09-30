@@ -22,7 +22,7 @@ return require("packer").startup(function(use)
         "kyazdani42/nvim-tree.lua",
         requires = { "kyazdani42/nvim-web-devicons" },
         config = function()
-            require("plugins.tree")
+            require("plugins.nvim-tree")
         end,
     })
 
@@ -45,7 +45,7 @@ return require("packer").startup(function(use)
             "hrsh7th/vim-vsnip", -- snippet
         },
         config = function()
-            require("plugins.nvim_cmp")
+            require("plugins.nvim-cmp")
         end,
     })
 
@@ -68,9 +68,11 @@ return require("packer").startup(function(use)
 
     use({
         "kristijanhusak/orgmode.nvim",
+        branch = "tree-sitter",
         config = function()
-            require("plugins.org")
+            require("plugins.orgmode")
         end,
+        after = "nvim-treesitter",
     })
 
     -- treesitter syntax
@@ -192,7 +194,7 @@ return require("packer").startup(function(use)
 
     use({
         vim.fn.stdpath("config") .. "/lua/go-tag",
-        setup = function()
+        config = function()
             require("go-tag")
         end,
         ft = "go",

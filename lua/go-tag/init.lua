@@ -147,9 +147,11 @@ end
 
 vim.cmd([[
     command! -nargs=* -range GoDebug    call luaeval("require('go-tag').debug(_A.start_line, _A.end_line, _A.count, _A.args)",{'start_line':<line1>, 'end_line':<line2>, 'count':<count>, 'args':[<f-args>]})
-    command! -nargs=* -range GoAddTag   call luaeval("require('go-tag').add(_A.line1, _A.line2, _A.count, _A.args)",{'line1':<line1>, 'line2':<line2>, 'count':<count>, 'args':[<f-args>]})
-    command! -nargs=* -range GoRmTag    call luaeval("require('go-tag').rm(_A.line1, _A.line2, _A.count, _A.args)",{'line1':<line1>, 'line2':<line2>, 'count':<count>, 'args':[<f-args>]})
+    command! -nargs=* -range GoAddTag   call luaeval("require('go-tag').add(_A.start_line, _A.end_line, _A.count, _A.args)",{'start_line':<line1>, 'end_line':<line2>, 'count':<count>, 'args':[<f-args>]})
+    command! -nargs=* -range GoRmTag    call luaeval("require('go-tag').rm(_A.start_line, _A.end_line, _A.count, _A.args)",{'start_line':<line1>, 'end_line':<line2>, 'count':<count>, 'args':[<f-args>]})
     command!                 GoClearTag call luaeval("require('go-tag').clear()")
 ]])
+
+vim.api.nvim_set_keymap('n', '<leader>i', '<cmd>!goimports -w %<cr>', {})
 
 return M

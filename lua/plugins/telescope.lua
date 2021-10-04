@@ -35,10 +35,6 @@ require("telescope").setup({
         generic_sorter = sorters.get_fzy_sorter,
         file_ignore_patterns = { "node_modules", ".pyc" },
 
-        file_previewer = require("telescope.previewers").vim_buffer_cat.new,
-        grep_previewer = require("telescope.previewers").vim_buffer_vimgrep.new,
-        qflist_previewer = require("telescope.previewers").vim_buffer_qflist.new,
-
         vimgrep_arguments = {
             "rg",
             "--hidden",
@@ -55,10 +51,6 @@ require("telescope").setup({
             override_generic_sorter = true,
             override_file_sorter = true,
         },
-
-        fzf_writer = { use_highlighter = false, minimum_grep_characters = 6 },
-
-        frecency = { workspaces = { ["conf"] = "~/.config/nvim/" } },
     },
 })
 

@@ -1,5 +1,5 @@
 vim.cmd('syntax off')
-vim.o.mouse         = "a"   -- disable the mouse
+vim.o.mouse         = "a"   -- enable the mouse in all modes
 vim.o.exrc          = false -- ignore '~/.exrc'
 vim.o.secure        = true
 vim.o.modelines     = 1     -- read a modeline at EOF
@@ -21,10 +21,10 @@ vim.o.showtabline    = 2     -- always show tabline
 vim.o.showmode       = true  -- show current mode (insert, etc) under the cmdline
 vim.o.showcmd        = true  -- show current command under the cmd line
 vim.o.cmdheight      = 2     -- cmdline height
-vim.o.laststatus     = 2     -- 2 = always show status line (filename, etc)
+vim.o.laststatus     = 2     -- always show status line (filename, etc)
 vim.o.scrolloff      = 3     -- min number of lines to keep between cursor and screen edge
 vim.o.sidescrolloff  = 5     -- min number of cols to keep between cursor and screen edge
-vim.o.textwidth      = 78    -- max inserted text width for paste operations
+vim.o.textwidth      = 80    -- max inserted text width for paste operations
 vim.o.linespace      = 0     -- font spacing
 vim.o.ruler          = true  -- show line,col at the cursor pos
 vim.o.number         = true  -- show absolute line no. at the cursor pos
@@ -47,12 +47,12 @@ vim.o.autoindent  = true  -- copy indent from current line on newline
 vim.o.smartindent = true  -- add <tab> depending on syntax (C/C++)
 vim.o.startofline = false -- keep cursor column on navigation
 
-vim.o.tabstop     = 4    -- Tab indentation levels every two columns
-vim.o.softtabstop = 4    -- Tab indentation when mixing tabs & spaces
-vim.o.shiftwidth  = 4    -- Indent/outdent by two columns
-vim.o.shiftround  = true -- Always indent/outdent to nearest tabstop
-vim.o.expandtab   = true -- Convert all tabs that are typed into spaces
-vim.o.smarttab    = true -- Use shiftwidths at left margin, tabstops everywhere else
+vim.o.tabstop     = 4     -- Tab indentation levels every two columns
+vim.o.softtabstop = 4     -- Tab indentation when mixing tabs & spaces
+vim.o.shiftwidth  = 4     -- Indent/outdent by two columns
+vim.o.shiftround  = true  -- Always indent/outdent to nearest tabstop
+vim.o.expandtab   = true  -- Convert all tabs that are typed into spaces
+vim.o.smarttab    = true  -- Use shiftwidths at left margin, tabstops everywhere else
 
 vim.opt.list = true
 vim.opt.listchars = {
@@ -83,31 +83,31 @@ vim.opt.formatoptions = vim.opt.formatoptions
     + "j" -- Auto-remove comments if possible.
     - "2" -- I'm not in gradeschool anymore
 
-vim.o.splitbelow     = true                   -- ':new' ':split' below current
-vim.o.splitright     = true                   -- ':vnew' ':vsplit' right of current
+vim.o.splitbelow     = true      -- ':new' ':split' below current
+vim.o.splitright     = true      -- ':vnew' ':vsplit' right of current
 
-vim.o.foldenable     = true                   -- enable folding
-vim.o.foldlevelstart = 10                     -- open most folds by default
-vim.o.foldnestmax    = 10                     -- 10 nested fold max
-vim.o.foldmethod     = "indent"               -- fold based on indent level
+vim.o.foldenable     = true      -- enable folding
+vim.o.foldlevelstart = 10        -- open most folds by default
+vim.o.foldnestmax    = 10        -- 10 nested fold max
+vim.o.foldmethod     = "indent"  -- fold based on indent level
 
-vim.o.undofile       = false                  -- no undo file
-vim.o.hidden         = true                   -- do not unload buffer when abandoned
-vim.o.autochdir      = false                  -- do not change dir when opening a file
+vim.o.undofile       = false     -- no undo file
+vim.o.hidden         = true      -- do not unload buffer when abandoned
+vim.o.autochdir      = false     -- do not change dir when opening a file
 
-vim.o.magic          = false                  -- use 'magic' chars in search patterns
-vim.o.hlsearch       = true                   -- highlight all text matching current search pattern
-vim.o.incsearch      = true                   -- show search matches as you type
-vim.o.ignorecase     = true                   -- ignore case on search
-vim.o.smartcase      = true                   -- case sensitive when search includes uppercase
-vim.o.showmatch      = true                   -- highlight matching [{()}]
-vim.o.inccommand     = "nosplit"              -- show search and replace in real time
-vim.o.autoread       = true                   -- reread a file if it's changed outside of vim
-vim.o.wrapscan       = true                   -- begin search from top of the file when nothng is found
+vim.o.magic          = false     -- use 'magic' chars in search patterns
+vim.o.hlsearch       = true      -- highlight all text matching current search pattern
+vim.o.incsearch      = true      -- show search matches as you type
+vim.o.ignorecase     = true      -- ignore case on search
+vim.o.smartcase      = true      -- case sensitive when search includes uppercase
+vim.o.showmatch      = true      -- highlight matching [{()}]
+vim.o.inccommand     = "nosplit" -- show search and replace in real time
+vim.o.autoread       = true      -- reread a file if it's changed outside of vim
+vim.o.wrapscan       = true      -- begin search from top of the file when nothng is found
 
-vim.o.backup         = false                  -- no backup file
-vim.o.writebackup    = false                  -- do not backup file before write
-vim.o.swapfile       = false                  -- no swap file
+vim.o.backup         = false     -- no backup file
+vim.o.writebackup    = false     -- do not backup file before write
+vim.o.swapfile       = false     -- no swap file
 
 --[[
   ShDa (viminfo for vim): session data history
@@ -127,7 +127,8 @@ vim.o.swapfile       = false                  -- no swap file
   :rshada   - read the shada file (:rviminfo for vim)
   :wshada   - write the shada file (:wrviminfo for vim)
 ]]
-vim.o.shada          = [[!,'100,<0,s100,h]]
+-- vim.o.shada          = [[!,'100,<0,s100,h]]
+vim.opt.shadafile    = "NONE"
 vim.o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize"
 vim.o.diffopt        = "internal,filler,algorithm:histogram,indent-heuristic"
 

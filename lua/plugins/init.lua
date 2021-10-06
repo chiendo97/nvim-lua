@@ -134,13 +134,15 @@ return require("packer").startup(function(use)
 
     -- colorscheme
     use({
-        "eddyekofo94/gruvbox-flat.nvim",
+        "sainnhe/gruvbox-material",
         config = function()
             vim.opt.background = "dark"
-            vim.g.gruvbox_flat_style = "hard"
-            vim.g.gruvbox_sidebars = { "qf", "vista_kind", "terminal", "packer" }
-            vim.g.gruvbox_hide_inactive_statusline = true
-            vim.cmd("colorscheme gruvbox-flat")
+            vim.g.gruvbox_material_background = "hard"
+            vim.g.gruvbox_material_palette = "material"
+            vim.g.gruvbox_material_enable_bold = 1
+            vim.g.gruvbox_material_enable_italic = 1
+            vim.g.gruvbox_material_diagnostic_virtual_text = "colored"
+            vim.cmd("colorscheme gruvbox-material")
         end,
     })
 

@@ -6,6 +6,15 @@ local actions = require("telescope.actions")
 local sorters = require("telescope.sorters")
 
 require("telescope").setup({
+    preview = false,
+    pickers = {
+        live_grep = {
+            only_sort_text = true,
+        },
+        grep_string = {
+            only_sort_text = true,
+        },
+    },
     defaults = {
         prompt_prefix = "❯ ",
         selection_caret = "❯ ",

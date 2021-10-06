@@ -1,4 +1,4 @@
-vim.cmd('syntax off')
+-- vim.cmd('syntax off')
 vim.o.mouse         = "a"   -- enable the mouse in all modes
 vim.o.exrc          = false -- ignore '~/.exrc'
 vim.o.secure        = true
@@ -127,8 +127,8 @@ vim.o.swapfile       = false     -- no swap file
   :rshada   - read the shada file (:rviminfo for vim)
   :wshada   - write the shada file (:wrviminfo for vim)
 ]]
--- vim.o.shada          = [[!,'100,<0,s100,h]]
-vim.opt.shadafile    = "NONE"
+vim.o.shada          = [[!,'100,<0,s100,h]]
+-- vim.opt.shadafile    = "NONE"
 vim.o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize"
 vim.o.diffopt        = "internal,filler,algorithm:histogram,indent-heuristic"
 

@@ -6,23 +6,20 @@ local actions = require("telescope.actions")
 local sorters = require("telescope.sorters")
 
 require("telescope").setup({
-    preview = false,
-    pickers = {
-        live_grep = {
-            only_sort_text = true,
-        },
-        grep_string = {
-            only_sort_text = true,
-        },
-    },
     defaults = {
+        preview = false,
+
+        sorting_strategy = "ascending",
+
         prompt_prefix = "❯ ",
         selection_caret = "❯ ",
-        selection_strategy = "reset",
-        sorting_strategy = "ascending",
-        scroll_strategy = "cycle",
+        entry_prefix = "○ ",
+
         color_devicons = true,
-        winblend = 0,
+
+        layout_config = {
+            prompt_position = "top",
+        },
 
         mappings = {
             i = {
@@ -34,7 +31,7 @@ require("telescope").setup({
                 ["<C-k>"] = actions.move_selection_previous,
 
                 ["<C-c>"] = actions.close,
-                ["<esc>"] = actions.close,
+                ["<ESC>"] = actions.close,
             },
         },
 
@@ -42,11 +39,13 @@ require("telescope").setup({
 
         file_sorter = sorters.get_fzy_sorter,
         generic_sorter = sorters.get_fzy_sorter,
+
         file_ignore_patterns = { "node_modules", ".pyc" },
 
         vimgrep_arguments = {
             "rg",
             "--hidden",
+            "--color=never",
             "--no-heading",
             "--with-filename",
             "--line-number",

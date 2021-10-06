@@ -13,7 +13,7 @@ end
 
 M.grep_cword = function()
     M.load_telescope()
-    require("telescope.builtin").grep_string({ previewer = false, search = vim.fn.expand("<cword>") })
+    require("telescope.builtin").grep_string({ search = vim.fn.expand("<cword>") })
 end
 
 M.grep_visual = function()
@@ -52,17 +52,17 @@ M.grep_visual = function()
     dump(csrow, cscol, cerow, cecol, lines)
 
     M.load_telescope()
-    require("telescope.builtin").grep_string({ previewer = false, search = table.concat(lines, "\n") })
+    require("telescope.builtin").grep_string({ search = table.concat(lines, "\n") })
 end
 
-map("n", "<leader>g", [[<cmd>Telescope find_files previewer=false <cr>]], map_options)
-map("n", "<leader>r", [[<cmd>Telescope live_grep  previewer=false <cr>]], map_options)
-map("n", "<leader>h", [[<cmd>Telescope help_tags  previewer=false <cr>]], map_options)
-map("n", "<leader>j", [[<cmd>Telescope oldfiles   previewer=false <cr>]], map_options)
-map("n", "<leader>m", [[<cmd>Telescope keymaps    previewer=false <cr>]], map_options)
-map("n", "<leader>b", [[<cmd>Telescope builtin    previewer=false <cr>]], map_options)
+map("n", "<leader>g", [[<cmd>Telescope find_files <cr>]], map_options)
+map("n", "<leader>r", [[<cmd>Telescope live_grep  <cr>]], map_options)
+map("n", "<leader>h", [[<cmd>Telescope help_tags  <cr>]], map_options)
+map("n", "<leader>j", [[<cmd>Telescope oldfiles   <cr>]], map_options)
+map("n", "<leader>m", [[<cmd>Telescope keymaps    <cr>]], map_options)
+map("n", "<leader>b", [[<cmd>Telescope builtin    <cr>]], map_options)
 
-map("v", "<leader>r", [[<cmd>lua require('plugins.telescope_map').grep_visual()<cr>]], map_options)
-map("n", "<leader>R", [[<cmd>lua require('plugins.telescope_map').grep_cword() <cr>]], map_options)
+map("v", "<leader>r", [[<cmd>lua require('plugins.telescope_map').grep_visual() <cr>]], map_options)
+map("n", "<leader>R", [[<cmd>lua require('plugins.telescope_map').grep_cword()  <cr>]], map_options)
 
 return M

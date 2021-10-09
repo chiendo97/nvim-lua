@@ -86,6 +86,13 @@ return require("packer").startup(function(use)
         end,
     })
 
+    use({
+        "numToStr/Comment.nvim",
+        config = function()
+            require("plugins.Comment")
+        end,
+    })
+
     -- align text with ga=
     use({
         "junegunn/vim-easy-align",
@@ -165,9 +172,12 @@ return require("packer").startup(function(use)
     -- comment
     use({
         "b3nj5m1n/kommentary",
+        disable = true,
         event = "BufRead",
-        config = function()
+        setup = function()
             vim.g.kommentary_create_default_mappings = false
+        end,
+        config = function()
             vim.api.nvim_set_keymap("n", "<C-_>", "<Plug>kommentary_line_default", {})
             vim.api.nvim_set_keymap("v", "<C-_>", "<Plug>kommentary_visual_default", {})
         end,

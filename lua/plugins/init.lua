@@ -78,7 +78,6 @@ return require("packer").startup(function(use)
     -- treesitter syntax
     use({
         "nvim-treesitter/nvim-treesitter",
-        branch = "0.5-compat",
         event = "BufRead",
         run = ":TSUpdate",
         config = function()

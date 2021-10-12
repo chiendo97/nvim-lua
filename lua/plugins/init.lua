@@ -116,7 +116,7 @@ return require("packer").startup(function(use)
         "lewis6991/gitsigns.nvim",
         requires = { "nvim-lua/plenary.nvim" },
         config = function()
-            require("plugins.gitgutter")
+            require("plugins.gitsigns")
         end,
         cond = function()
             return vim.fn.isdirectory(".git") == 1

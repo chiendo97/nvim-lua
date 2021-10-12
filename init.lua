@@ -95,7 +95,7 @@ vim.o.undofile       = false     -- no undo file
 vim.o.hidden         = true      -- do not unload buffer when abandoned
 vim.o.autochdir      = false     -- do not change dir when opening a file
 
-vim.o.magic          = false     -- use 'magic' chars in search patterns
+vim.o.magic          = false     -- do not use 'magic' chars in search patterns
 vim.o.hlsearch       = true      -- highlight all text matching current search pattern
 vim.o.incsearch      = true      -- show search matches as you type
 vim.o.ignorecase     = true      -- ignore case on search
@@ -128,7 +128,6 @@ vim.o.swapfile       = false     -- no swap file
   :wshada   - write the shada file (:wrviminfo for vim)
 ]]
 vim.o.shada          = [[!,'100,<0,s100,h]]
--- vim.opt.shadafile    = "NONE"
 vim.o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize"
 vim.o.diffopt        = "internal,filler,algorithm:histogram,indent-heuristic"
 

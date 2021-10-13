@@ -54,7 +54,7 @@ map("v", "d", '"*d', { noremap = true }) ]]
 map("n", "yy", '"*yy', { noremap = true })
 
 -- copy current relative path /Users/chien.le/.config/nvim/lua/keymaps.lua:56
-map("n", "<leader>yp", ':let @* = expand("%")<cr>', { noremap = true })
+map("n", "<leader>yp", ':let @* = expand("%:~:.")<cr>', { noremap = true })
 -- copy current absolute path /Users/chien.le/.config/nvim/lua/keymaps.lua:59
 map("n", "<leader>yP", ':let @* = expand("%:p")<cr>', { noremap = true })
 

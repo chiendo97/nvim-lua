@@ -31,8 +31,9 @@ map("v", [[//]], [[y/\V<C-R>=escape(@",'/\')<cr><cr>]], { noremap = true })
 
 -- navigate tab by g
 map("n", "gt", ":tabedit<cr>", { noremap = true, silent = true })
-map("n", "gl", "<cmd>tabnext<cr>", { noremap = true, silent = true })
-map("n", "gh", "<cmd>tabprev<cr>", { noremap = true, silent = true })
+map("n", "gn", "<cmd>tabnext<cr>", { noremap = true, silent = true })
+map("n", "gp", "<cmd>tabprev<cr>", { noremap = true, silent = true })
+
 map("n", "g1", "1gt", { noremap = true, silent = true })
 map("n", "g2", "2gt", { noremap = true, silent = true })
 map("n", "g3", "3gt", { noremap = true, silent = true })

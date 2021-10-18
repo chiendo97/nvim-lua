@@ -6,7 +6,7 @@ M.load_telescope = function()
     if not pcall(require, "telescope.nvim") then
         require("packer").loader("plenary.nvim")
         require("packer").loader("popup.nvim")
-        require("packer").loader("telescope-fzy-native.nvim")
+        require("packer").loader("telescope-fzf-native.nvim")
         require("packer").loader("telescope.nvim")
     end
 end

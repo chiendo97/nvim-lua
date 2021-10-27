@@ -15,7 +15,7 @@ cmp.setup({
         border = "rounded",
     },
 
-    preselect = require("cmp.types").cmp.PreselectMode.None,
+    preselect = require("cmp.types").cmp.PreselectMode.Item,
 
     -- You must set mapping if you want.
     mapping = {
@@ -24,7 +24,7 @@ cmp.setup({
         ["<C-Space>"] = cmp.mapping.complete(),
         ["<C-e>"] = cmp.mapping.close(),
         ["<CR>"] = cmp.mapping.confirm({
-            behavior = cmp.ConfirmBehavior.Insert,
+            behavior = cmp.ConfirmBehavior.Replace,
             select = true,
         }),
         ["<Tab>"] = cmp.mapping(function(fallback)

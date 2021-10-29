@@ -1,7 +1,7 @@
 local g = vim.g
 
 g.nvim_tree_ignore = { ".git", "node_modules", ".cache" } -- empty by default
-g.nvim_tree_gitignore = 1 -- 0 by default
+g.nvim_tree_gitignore = 0 -- 0 by default
 g.nvim_tree_auto_ignore_ft = { "startify", "dashboard" } -- empty by default, don't auto open tree on specific filetypes.
 g.nvim_tree_quit_on_open = 0 -- 0 by default, closes the tree when you open a file
 g.nvim_tree_indent_markers = 1 -- 0 by default, this option shows indent markers when folders are open

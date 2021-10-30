@@ -183,7 +183,11 @@ return require("packer").startup(function(use)
     })
 
     -- generate go test
-    use({ "buoto/gotests-vim", ft = "go" })
+    use({
+        "buoto/gotests-vim",
+        ft = "go",
+        cmd = "GoTests",
+    })
 
     -- better quickfix
     use({

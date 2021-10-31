@@ -78,7 +78,6 @@ return require("packer").startup(function(use)
     -- treesitter syntax
     use({
         "nvim-treesitter/nvim-treesitter",
-        event = "BufRead",
         run = ":TSUpdate",
         config = function()
             require("plugins.treesitter")
@@ -125,9 +124,6 @@ return require("packer").startup(function(use)
 
     use({
         "tpope/vim-fugitive",
-        cond = function()
-            return vim.fn.isdirectory(".git") == 1
-        end,
     })
 
     -- vim-tmux-navigation

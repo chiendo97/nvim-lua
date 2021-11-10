@@ -64,3 +64,6 @@ map("n", "<Leader>sv", "<cmd>source $MYVIMRC<cr>", { noremap = true })
 
 -- copy last pasted
 map("n", "gV", "`[v`]", { noremap = true })
+
+-- <Esc> <C-\><C-n>
+map("t", "<esc>", "<C-\\><C-n>", { noremap = true })

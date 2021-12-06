@@ -5,6 +5,7 @@ local sources = {
     null_ls.builtins.diagnostics.flake8,
     null_ls.builtins.diagnostics.markdownlint,
 
+    null_ls.builtins.formatting.rustfmt,
     null_ls.builtins.formatting.black,
     null_ls.builtins.formatting.fixjson,
     null_ls.builtins.formatting.gofumpt,

@@ -22,9 +22,10 @@ M.on_attach = function(_, bufnr)
     buf_map("n", "gy", "<cmd>lua vim.lsp.buf.type_definition()<cr>", opts)
     buf_map("n", "<leader>e", "<cmd>lua vim.lsp.buf.rename()<cr>", opts)
     buf_map("n", "<leader>f", "<cmd>lua vim.lsp.buf.formatting_seq_sync(nil, 1000)<cr>", opts)
-    buf_map("n", "[d", '<cmd>lua vim.lsp.diagnostic.goto_prev({wrap=false,popup_opts={border="single"}})<cr>', opts)
-    buf_map("n", "]d", '<cmd>lua vim.lsp.diagnostic.goto_next({wrap=false,popup_opts={border="single"}})<cr>', opts)
+    buf_map("n", "[d", '<cmd>lua vim.diagnostic.goto_prev({float={border="single"}})<cr>', opts)
+    buf_map("n", "]d", '<cmd>lua vim.diagnostic.goto_next({float={border="single"}})<cr>', opts)
     buf_map("n", "<leader>a", "<cmd>lua vim.lsp.buf.code_action()<cr>", opts)
+    buf_map("n", "<leader>q", "<cmd>lua vim.diagnostic.setloclist()<cr>", opts)
 end
 
 M.capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())

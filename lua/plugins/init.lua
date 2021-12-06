@@ -135,15 +135,10 @@ return require("packer").startup(function(use)
 
     -- colorscheme
     use({
-        "sainnhe/gruvbox-material",
+        "catppuccin/nvim",
+        as = "catppuccin",
         config = function()
-            vim.opt.background = "dark"
-            vim.g.gruvbox_material_background = "hard"
-            vim.g.gruvbox_material_palette = "material"
-            vim.g.gruvbox_material_enable_bold = 1
-            vim.g.gruvbox_material_enable_italic = 1
-            vim.g.gruvbox_material_diagnostic_virtual_text = "colored"
-            vim.cmd("colorscheme gruvbox-material")
+            require("plugins.catppuccin")
         end,
     })
 

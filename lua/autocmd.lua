@@ -29,6 +29,13 @@ local autocmds = {
             [[if &buftype == 'help' | wincmd L | endif]],
         },
     },
+    quickfix_below = {
+        {
+            "FileType",
+            "qf",
+            "wincmd J",
+        },
+    },
 }
 
 nvim_create_augroups(autocmds)

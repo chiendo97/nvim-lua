@@ -21,12 +21,9 @@ local sources = {
     -- null_ls.builtins.code_actions.languagetool,
 }
 
-null_ls.config({
+null_ls.setup({
     sources = sources,
     diagnostics_format = "[#{c}] #{m} (#{s})",
-})
-
-require("lspconfig")["null-ls"].setup({
     on_attach = require("lsp.attach").on_attach,
     capabilities = require("lsp.attach").capabilities,
 })

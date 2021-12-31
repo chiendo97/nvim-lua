@@ -67,7 +67,7 @@ return require("packer").startup(function(use)
     })
 
     use({
-        "kristijanhusak/orgmode.nvim",
+        "nvim-orgmode/orgmode",
         config = function()
             require("plugins.orgmode")
         end,

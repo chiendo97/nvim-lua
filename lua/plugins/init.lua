@@ -73,6 +73,14 @@ return require("packer").startup(function(use)
         end,
         after = "nvim-treesitter",
     })
+    use({
+        "akinsho/org-bullets.nvim",
+        config = function()
+            require("org-bullets").setup({
+                symbols = { "◉", "○", "✸", "✿" },
+            })
+        end,
+    })
 
     -- treesitter syntax
     use({

@@ -15,7 +15,7 @@ cmp.setup({
         border = "rounded",
     },
 
-    preselect = require("cmp.types").cmp.PreselectMode.Item,
+    preselect = require("cmp.types").cmp.PreselectMode.None,
 
     -- You must set mapping if you want.
     mapping = {
@@ -49,11 +49,11 @@ cmp.setup({
 
     -- You should specify your *installed* sources.
     sources = {
-        { name = "nvim_lsp", score = 3 },
-        { name = "path", score = 2 },
-        { name = "vsnip", score = 1 },
-        { name = "orgmode", score = 0 },
-        { name = "nvim_lua", score = 0 },
+        { name = "vsnip", priority = 3 },
+        { name = "nvim_lsp", priority = 2 },
+        { name = "path", priority = 1 },
+        { name = "orgmode", priority = 0 },
+        { name = "nvim_lua", priority = 0 },
     },
 
     formatting = {

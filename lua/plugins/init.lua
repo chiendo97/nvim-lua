@@ -39,10 +39,9 @@ return require("packer").startup(function(use)
         "hrsh7th/nvim-cmp",
         requires = {
             "hrsh7th/cmp-nvim-lsp", -- lsp source
-            "hrsh7th/cmp-nvim-lua", -- neovim's Lua runtime API such vim.lsp.* source
             "hrsh7th/cmp-path", -- path source
             "hrsh7th/cmp-vsnip", -- vsnip source
-            "hrsh7th/vim-vsnip", -- snippet
+            "hrsh7th/vim-vsnip", -- snippet engine
         },
         config = function()
             require("plugins.nvim-cmp")
@@ -50,10 +49,18 @@ return require("packer").startup(function(use)
     })
 
     -- go vscode snippet
-    use("rafamadriz/friendly-snippets")
+    use({
+        "rafamadriz/friendly-snippets",
+        ft = "go",
+    })
 
     -- add brackets
-    use("machakann/vim-sandwich")
+    use({
+        "machakann/vim-sandwich",
+        config = function()
+            require("plugins.vim-sandwich")
+        end,
+    })
 
     use({
         "jose-elias-alvarez/null-ls.nvim",
@@ -72,14 +79,6 @@ return require("packer").startup(function(use)
             require("plugins.orgmode")
         end,
         after = "nvim-treesitter",
-    })
-    use({
-        "akinsho/org-bullets.nvim",
-        config = function()
-            require("org-bullets").setup({
-                symbols = { "◉", "○", "✸", "✿" },
-            })
-        end,
     })
 
     -- treesitter syntax
@@ -171,20 +170,6 @@ return require("packer").startup(function(use)
         },
     })
 
-    -- comment
-    use({
-        "b3nj5m1n/kommentary",
-        disable = true,
-        event = "BufRead",
-        setup = function()
-            vim.g.kommentary_create_default_mappings = false
-        end,
-        config = function()
-            vim.api.nvim_set_keymap("n", "<C-_>", "<Plug>kommentary_line_default", {})
-            vim.api.nvim_set_keymap("v", "<C-_>", "<Plug>kommentary_visual_default", {})
-        end,
-    })
-
     -- generate go test
     use({
         "buoto/gotests-vim",
@@ -219,6 +204,7 @@ return require("packer").startup(function(use)
     use({
         "NTBBloodbath/rest.nvim",
         requires = { "nvim-lua/plenary.nvim" },
+        ft = "http",
         config = function()
             require("rest-nvim").setup({
                 -- Open request results in a horizontal split

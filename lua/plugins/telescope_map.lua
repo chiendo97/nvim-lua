@@ -62,7 +62,7 @@ map("n", "<leader>j", [[<cmd>Telescope oldfiles   <cr>]], map_options)
 map("n", "<leader>m", [[<cmd>Telescope keymaps    <cr>]], map_options)
 map("n", "<leader>b", [[<cmd>Telescope builtin    <cr>]], map_options)
 
-map("v", "<leader>r", [[<cmd>lua require('plugins.telescope_map').grep_visual() <cr>]], map_options)
+map("x", "<leader>r", [[<cmd>lua require('plugins.telescope_map').grep_visual() <cr>]], map_options)
 map("n", "<leader>R", [[<cmd>lua require('plugins.telescope_map').grep_cword()  <cr>]], map_options)
 
 return M

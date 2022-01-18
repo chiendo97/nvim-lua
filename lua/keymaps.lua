@@ -10,15 +10,15 @@ map("n", "<A-j>", ":m .+1<cr>==", { noremap = true, silent = true })
 map("n", "<A-k>", ":m .-2<cr>==", { noremap = true, silent = true })
 map("i", "<A-j>", "<Esc>:m .+1<cr>==gi", { noremap = true, silent = true })
 map("i", "<A-k>", "<Esc>:m .-2<cr>==gi", { noremap = true, silent = true })
-map("v", "<A-j>", ":m '>+1<cr>gv=gv", { noremap = true, silent = true })
-map("v", "<A-k>", ":m '<-2<cr>gv=gv", { noremap = true, silent = true })
+map("x", "<A-j>", ":m '>+1<cr>gv=gv", { noremap = true, silent = true })
+map("x", "<A-k>", ":m '<-2<cr>gv=gv", { noremap = true, silent = true })
 
 -- ^ - jump to the first non-blank character of the line
 map("n", "H", "^", { noremap = true })
-map("v", "H", "^", { noremap = true })
+map("x", "H", "^", { noremap = true })
 -- g_ - jump to the end of the line
 map("n", "L", "g_", { noremap = true })
-map("v", "L", "g_", { noremap = true })
+map("x", "L", "g_", { noremap = true })
 
 -- ctrl + c to turn off highlight and close quickfix windows and escape
 map("n", "<C-C>", ":noh<cr>:ccl<cr><esc>", { noremap = true, silent = true })
@@ -27,7 +27,7 @@ map("n", "<esc>", ":noh<cr>:ccl<cr><esc>", { noremap = true, silent = true })
 -- * to highlight current word
 map("n", "*", [[:let @/ = '\<'.expand('<cword>').'\>' | set hlsearch <cr>]], { silent = true })
 -- // to highlight current sellected word
-map("v", [[//]], [[y/\V<C-R>=escape(@",'/\')<cr><cr>]], { noremap = true })
+map("x", [[//]], [[y/\V<C-R>=escape(@",'/\')<cr><cr>]], { noremap = true })
 
 -- navigate tab by g
 map("n", "gt", ":tabedit<cr>", { noremap = true, silent = true })
@@ -49,9 +49,9 @@ map("n", "j", "gj", { noremap = true, silent = true })
 map("n", "k", "gk", { noremap = true, silent = true })
 
 -- copy to clipboard
-map("v", "y", '"*y', { noremap = true })
+map("x", "y", '"*y', { noremap = true })
 --[[ map("n", "p", '"*p', { noremap = true })
-map("v", "d", '"*d', { noremap = true }) ]]
+map("x", "d", '"*d', { noremap = true }) ]]
 map("n", "yy", '"*yy', { noremap = true })
 
 -- copy current relative path /Users/chien.le/.config/nvim/lua/keymaps.lua:56

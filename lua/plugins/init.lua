@@ -55,12 +55,7 @@ return require("packer").startup(function(use)
     })
 
     -- add brackets
-    use({
-        "machakann/vim-sandwich",
-        config = function()
-            require("plugins.vim-sandwich")
-        end,
-    })
+    use({ "machakann/vim-sandwich" })
 
     use({
         "jose-elias-alvarez/null-ls.nvim",

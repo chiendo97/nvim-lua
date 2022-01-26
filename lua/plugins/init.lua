@@ -48,6 +48,13 @@ return require("packer").startup(function(use)
         end,
     })
 
+    use({
+        "j-hui/fidget.nvim",
+        config = function()
+            require("fidget").setup({})
+        end,
+    })
+
     -- go vscode snippet
     use({
         "rafamadriz/friendly-snippets",
@@ -179,6 +186,14 @@ return require("packer").startup(function(use)
             require("plugins.nvim-bqf")
         end,
         ft = "qf",
+    })
+
+    use({
+        "luukvbaal/stabilize.nvim",
+        disable = true,
+        config = function()
+            require("stabilize").setup()
+        end,
     })
 
     use({

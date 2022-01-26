@@ -3,7 +3,7 @@ if not pcall(require, "telescope") then
 end
 
 local actions = require("telescope.actions")
-local sorters = require("telescope.sorters")
+-- local sorters = require("telescope.sorters")
 
 require("telescope").setup({
     defaults = {

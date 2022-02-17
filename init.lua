@@ -62,6 +62,9 @@ vim.opt.listchars = {
     extends = "→",
 }
 
+vim.opt.conceallevel = 2
+vim.opt.concealcursor = 'nc'
+
 -- c: auto-wrap comments using textwidth
 -- r: auto-insert the current comment leader after hitting <Enter>
 -- o: auto-insert the current comment leader after hitting 'o' or 'O'

@@ -20,6 +20,7 @@ parser_config.org = {
 require("nvim-treesitter.configs").setup({
     highlight = {
         enable = true,
+        disable = { "org" }, -- Remove this to use TS highlighter for some of the highlights (Experimental)
         additional_vim_regex_highlighting = { "org" },
     },
     incremental_selection = {

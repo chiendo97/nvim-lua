@@ -1,6 +1,7 @@
 local map = vim.api.nvim_set_keymap
 
-vim.g.mapleader = " " -- 'vim.g' sets global variables
+-- leader key as space
+vim.g.mapleader = " "
 
 -- backspace to switch recent file
 map("n", "<bs>", "<c-^>", { noremap = true })
@@ -26,7 +27,7 @@ map("n", "<esc>", ":noh<cr>:ccl<cr><esc>", { noremap = true, silent = true })
 
 -- * to highlight current word
 map("n", "*", [[:let @/ = '\<'.expand('<cword>').'\>' | set hlsearch <cr>]], { silent = true })
--- // to highlight current sellected word
+-- to highlight current sellected word
 map("x", [[//]], [[y/\V<C-R>=escape(@",'/\')<cr><cr>]], { noremap = true })
 
 -- navigate tab by g
@@ -48,11 +49,11 @@ map("n", "g9", "9gt", { noremap = true, silent = true })
 map("n", "j", "gj", { noremap = true, silent = true })
 map("n", "k", "gk", { noremap = true, silent = true })
 
--- copy to clipboard
+-- copy to system's clipboard
 map("x", "y", '"*y', { noremap = true })
---[[ map("n", "p", '"*p', { noremap = true })
-map("x", "d", '"*d', { noremap = true }) ]]
 map("n", "yy", '"*yy', { noremap = true })
+-- map("n", "p", '"*p', { noremap = true })
+-- map("x", "d", '"*d', { noremap = true })
 
 -- copy current relative path /Users/chien.le/.config/nvim/lua/keymaps.lua:56
 map("n", "<leader>yp", ':let @* = expand("%:~:.")<cr>', { noremap = true })

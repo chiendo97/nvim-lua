@@ -1,19 +1,29 @@
+-- Bootstrap packer
+local install_path = vim.fn.stdpath("data") .. "/site/pack/packer/opt/packer.nvim"
+
+if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
+    print("installing packer")
+    vim.fn.execute("!git clone --depth 1 https://github.com/wbthomason/packer.nvim " .. install_path)
+end
+
 vim.cmd([[packadd packer.nvim]])
 
 local map = vim.api.nvim_set_keymap
-map("n", "<leader>pi", "<cmd>PackerInstall<cr>", {})
-map("n", "<leader>ps", "<cmd>PackerSync<cr>", {})
-map("n", "<leader>pc", "<cmd>PackerCompile<cr>", {})
-map("n", "<leader>pt", "<cmd>PackerStatus<cr>", {})
-map("n", "<leader>pd", "<cmd>PackerClean<cr>", {})
+map("n", "<leader>pi", "<cmd>PackerInstall<cr>", { noremap = true, silent = true })
+map("n", "<leader>ps", "<cmd>PackerSync<cr>", { noremap = true, silent = true })
+map("n", "<leader>pc", "<cmd>PackerCompile<cr>", { noremap = true, silent = true })
+map("n", "<leader>pt", "<cmd>PackerStatus<cr>", { noremap = true, silent = true })
+map("n", "<leader>pd", "<cmd>PackerClean<cr>", { noremap = true, silent = true })
 
 return require("packer").startup(function(use)
     -- Packer can manage itself as an optional plugin
     use({ "wbthomason/packer.nvim", opt = true })
 
-    use({ "tweekmonster/startuptime.vim", cmd = "StartupTime" })
-
     -- add packages
+    use({
+        "tweekmonster/startuptime.vim",
+        cmd = "StartupTime",
+    })
 
     use({ "nvim-lua/plenary.nvim" })
 
@@ -65,6 +75,7 @@ return require("packer").startup(function(use)
     -- add brackets
     use({ "machakann/vim-sandwich" })
 
+    -- linter, formater
     use({
         "jose-elias-alvarez/null-ls.nvim",
         config = function()
@@ -76,12 +87,13 @@ return require("packer").startup(function(use)
         },
     })
 
+    -- note manager
     use({
         "nvim-orgmode/orgmode",
+        ft = { "org" },
         config = function()
             require("plugins.orgmode")
         end,
-        after = "nvim-treesitter",
     })
 
     -- treesitter syntax
@@ -93,6 +105,7 @@ return require("packer").startup(function(use)
         end,
     })
 
+    -- Comment code
     use({
         "numToStr/Comment.nvim",
         config = function()
@@ -131,6 +144,7 @@ return require("packer").startup(function(use)
         end,
     })
 
+    -- Git commands
     use({
         "tpope/vim-fugitive",
     })
@@ -209,6 +223,16 @@ return require("packer").startup(function(use)
         requires = { "nvim-lua/plenary.nvim" },
         ft = "http",
         config = function()
+            local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
+
+            parser_config.http = {
+                install_info = {
+                    url = "https://github.com/NTBBloodbath/tree-sitter-http",
+                    files = { "src/parser.c" },
+                    branch = "main",
+                },
+            }
+
             require("rest-nvim").setup({
                 result_split_horizontal = false,
                 skip_ssl_verification = false,
@@ -218,6 +242,7 @@ return require("packer").startup(function(use)
                 },
                 jump_to_request = false,
             })
+
             vim.api.nvim_set_keymap("n", "<C-g>", "<Plug>RestNvim", {})
         end,
     })

@@ -180,9 +180,10 @@ _G.packer_plugins = {
     url = "https://github.com/kyazdani42/nvim-tree.lua"
   },
   ["nvim-treesitter"] = {
-    after = { "orgmode" },
+    config = { "\27LJ\2\n2\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\23plugins.treesitter\frequire\0" },
     loaded = true,
-    only_config = true
+    path = "/Users/chien.le/.local/share/nvim/site/pack/packer/start/nvim-treesitter",
+    url = "https://github.com/nvim-treesitter/nvim-treesitter"
   },
   ["nvim-web-devicons"] = {
     loaded = true,
@@ -191,9 +192,9 @@ _G.packer_plugins = {
   },
   orgmode = {
     config = { "\27LJ\2\n/\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\20plugins.orgmode\frequire\0" },
-    load_after = {},
-    loaded = true,
+    loaded = false,
     needs_bufread = true,
+    only_cond = false,
     path = "/Users/chien.le/.local/share/nvim/site/pack/packer/opt/orgmode",
     url = "https://github.com/nvim-orgmode/orgmode"
   },
@@ -214,7 +215,7 @@ _G.packer_plugins = {
     url = "https://github.com/nvim-lua/popup.nvim"
   },
   ["rest.nvim"] = {
-    config = { "\27LJ\2\n÷\1\0\0\6\0\f\0\0176\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0005\3\4\0=\3\5\2B\0\2\0016\0\6\0009\0\a\0009\0\b\0'\2\t\0'\3\n\0'\4\v\0004\5\0\0B\0\5\1K\0\1\0\19<Plug>RestNvim\n<C-g>\6n\20nvim_set_keymap\bapi\bvim\14highlight\1\0\2\ftimeout\3–\1\fenabled\2\1\0\3\20jump_to_request\1\26skip_ssl_verification\1\28result_split_horizontal\1\nsetup\14rest-nvim\frequire\0" },
+    config = { "\27LJ\2\n¾\3\0\0\a\0\20\0\0286\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\0025\1\a\0005\2\4\0005\3\5\0=\3\6\2=\2\b\1=\1\3\0006\1\0\0'\3\t\0B\1\2\0029\1\n\0015\3\v\0005\4\f\0=\4\r\3B\1\2\0016\1\14\0009\1\15\0019\1\16\1'\3\17\0'\4\18\0'\5\19\0004\6\0\0B\1\5\1K\0\1\0\19<Plug>RestNvim\n<C-g>\6n\20nvim_set_keymap\bapi\bvim\14highlight\1\0\2\fenabled\2\ftimeout\3–\1\1\0\3\26skip_ssl_verification\1\28result_split_horizontal\1\20jump_to_request\1\nsetup\14rest-nvim\17install_info\1\0\0\nfiles\1\2\0\0\17src/parser.c\1\0\2\vbranch\tmain\burl5https://github.com/NTBBloodbath/tree-sitter-http\thttp\23get_parser_configs\28nvim-treesitter.parsers\frequire\0" },
     loaded = false,
     needs_bufread = true,
     only_cond = false,
@@ -277,6 +278,14 @@ time([[Defining packer_plugins]], false)
 time([[Setup for telescope.nvim]], true)
 try_loadstring("\27LJ\2\n5\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\26plugins.telescope_map\frequire\0", "setup", "telescope.nvim")
 time([[Setup for telescope.nvim]], false)
+-- Config for: indent-blankline.nvim
+time([[Config for indent-blankline.nvim]], true)
+try_loadstring("\27LJ\2\n8\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\29plugins.indent-blankline\frequire\0", "config", "indent-blankline.nvim")
+time([[Config for indent-blankline.nvim]], false)
+-- Config for: nvim-cmp
+time([[Config for nvim-cmp]], true)
+try_loadstring("\27LJ\2\n0\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\21plugins.nvim-cmp\frequire\0", "config", "nvim-cmp")
+time([[Config for nvim-cmp]], false)
 -- Config for: nvim-lspconfig
 time([[Config for nvim-lspconfig]], true)
 try_loadstring("\27LJ\2\n#\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\blsp\frequire\0", "config", "nvim-lspconfig")
@@ -297,22 +306,14 @@ time([[Config for Comment.nvim]], false)
 time([[Config for gruvbox.nvim]], true)
 try_loadstring("\27LJ\2\nÂ\1\0\0\3\0\n\0\0216\0\0\0009\0\1\0)\1\1\0=\1\2\0006\0\0\0009\0\1\0)\1\1\0=\1\3\0006\0\0\0009\0\1\0)\1\1\0=\1\4\0006\0\0\0009\0\5\0'\1\a\0=\1\6\0006\0\0\0009\0\b\0'\2\t\0B\0\2\1K\0\1\0\24colorscheme gruvbox\bcmd\tdark\15background\6o\31gruvbox_italicize_comments\19gruvbox_italic\17gruvbox_bold\6g\bvim\0", "config", "gruvbox.nvim")
 time([[Config for gruvbox.nvim]], false)
--- Config for: vim-easy-align
-time([[Config for vim-easy-align]], true)
-try_loadstring("\27LJ\2\n|\0\0\6\0\a\0\0176\0\0\0009\0\1\0009\0\2\0'\2\3\0'\3\4\0'\4\5\0004\5\0\0B\0\5\0016\0\0\0009\0\1\0009\0\2\0'\2\6\0'\3\4\0'\4\5\0004\5\0\0B\0\5\1K\0\1\0\6n\22<Plug>(EasyAlign)\aga\6x\20nvim_set_keymap\bapi\bvim\0", "config", "vim-easy-align")
-time([[Config for vim-easy-align]], false)
--- Config for: indent-blankline.nvim
-time([[Config for indent-blankline.nvim]], true)
-try_loadstring("\27LJ\2\n8\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\29plugins.indent-blankline\frequire\0", "config", "indent-blankline.nvim")
-time([[Config for indent-blankline.nvim]], false)
--- Config for: nvim-cmp
-time([[Config for nvim-cmp]], true)
-try_loadstring("\27LJ\2\n0\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\21plugins.nvim-cmp\frequire\0", "config", "nvim-cmp")
-time([[Config for nvim-cmp]], false)
 -- Config for: nvim-treesitter
 time([[Config for nvim-treesitter]], true)
 try_loadstring("\27LJ\2\n2\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\23plugins.treesitter\frequire\0", "config", "nvim-treesitter")
 time([[Config for nvim-treesitter]], false)
+-- Config for: vim-easy-align
+time([[Config for vim-easy-align]], true)
+try_loadstring("\27LJ\2\n|\0\0\6\0\a\0\0176\0\0\0009\0\1\0009\0\2\0'\2\3\0'\3\4\0'\4\5\0004\5\0\0B\0\5\0016\0\0\0009\0\1\0009\0\2\0'\2\6\0'\3\4\0'\4\5\0004\5\0\0B\0\5\1K\0\1\0\6n\22<Plug>(EasyAlign)\aga\6x\20nvim_set_keymap\bapi\bvim\0", "config", "vim-easy-align")
+time([[Config for vim-easy-align]], false)
 -- Config for: null-ls.nvim
 time([[Config for null-ls.nvim]], true)
 try_loadstring("\27LJ\2\n+\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\16lsp.null-ls\frequire\0", "config", "null-ls.nvim")
@@ -321,20 +322,12 @@ time([[Config for null-ls.nvim]], false)
 time([[Conditional loading of gitsigns.nvim]], true)
   require("packer.load")({"gitsigns.nvim"}, {}, _G.packer_plugins)
 time([[Conditional loading of gitsigns.nvim]], false)
--- Load plugins in order defined by `after`
-time([[Sequenced loading]], true)
-vim.cmd [[ packadd orgmode ]]
-
--- Config for: orgmode
-try_loadstring("\27LJ\2\n/\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\20plugins.orgmode\frequire\0", "config", "orgmode")
-
-time([[Sequenced loading]], false)
 
 -- Command lazy-loads
 time([[Defining lazy-load commands]], true)
-pcall(vim.cmd, [[command -nargs=* -range -bang -complete=file MarkdownPreview lua require("packer.load")({'markdown-preview.nvim'}, { cmd = "MarkdownPreview", l1 = <line1>, l2 = <line2>, bang = <q-bang>, args = <q-args>, mods = "<mods>" }, _G.packer_plugins)]])
-pcall(vim.cmd, [[command -nargs=* -range -bang -complete=file GoTests lua require("packer.load")({'gotests-vim'}, { cmd = "GoTests", l1 = <line1>, l2 = <line2>, bang = <q-bang>, args = <q-args>, mods = "<mods>" }, _G.packer_plugins)]])
 pcall(vim.cmd, [[command -nargs=* -range -bang -complete=file StartupTime lua require("packer.load")({'startuptime.vim'}, { cmd = "StartupTime", l1 = <line1>, l2 = <line2>, bang = <q-bang>, args = <q-args>, mods = "<mods>" }, _G.packer_plugins)]])
+pcall(vim.cmd, [[command -nargs=* -range -bang -complete=file GoTests lua require("packer.load")({'gotests-vim'}, { cmd = "GoTests", l1 = <line1>, l2 = <line2>, bang = <q-bang>, args = <q-args>, mods = "<mods>" }, _G.packer_plugins)]])
+pcall(vim.cmd, [[command -nargs=* -range -bang -complete=file MarkdownPreview lua require("packer.load")({'markdown-preview.nvim'}, { cmd = "MarkdownPreview", l1 = <line1>, l2 = <line2>, bang = <q-bang>, args = <q-args>, mods = "<mods>" }, _G.packer_plugins)]])
 pcall(vim.cmd, [[command -nargs=* -range -bang -complete=file Telescope lua require("packer.load")({'telescope.nvim'}, { cmd = "Telescope", l1 = <line1>, l2 = <line2>, bang = <q-bang>, args = <q-args>, mods = "<mods>" }, _G.packer_plugins)]])
 time([[Defining lazy-load commands]], false)
 
@@ -342,13 +335,23 @@ vim.cmd [[augroup packer_load_aucmds]]
 vim.cmd [[au!]]
   -- Filetype lazy-loads
 time([[Defining lazy-load filetype autocommands]], true)
+vim.cmd [[au FileType qf ++once lua require("packer.load")({'nvim-bqf'}, { ft = "qf" }, _G.packer_plugins)]]
+vim.cmd [[au FileType go ++once lua require("packer.load")({'gotests-vim', 'friendly-snippets', 'go-tag'}, { ft = "go" }, _G.packer_plugins)]]
+vim.cmd [[au FileType org ++once lua require("packer.load")({'orgmode'}, { ft = "org" }, _G.packer_plugins)]]
 vim.cmd [[au FileType markdown ++once lua require("packer.load")({'markdown-preview.nvim'}, { ft = "markdown" }, _G.packer_plugins)]]
 vim.cmd [[au FileType http ++once lua require("packer.load")({'rest.nvim'}, { ft = "http" }, _G.packer_plugins)]]
-vim.cmd [[au FileType qf ++once lua require("packer.load")({'nvim-bqf'}, { ft = "qf" }, _G.packer_plugins)]]
-vim.cmd [[au FileType go ++once lua require("packer.load")({'gotests-vim', 'go-tag', 'friendly-snippets'}, { ft = "go" }, _G.packer_plugins)]]
 time([[Defining lazy-load filetype autocommands]], false)
 vim.cmd("augroup END")
 vim.cmd [[augroup filetypedetect]]
+time([[Sourcing ftdetect script at: /Users/chien.le/.local/share/nvim/site/pack/packer/opt/orgmode/ftdetect/filetype.lua]], true)
+vim.cmd [[source /Users/chien.le/.local/share/nvim/site/pack/packer/opt/orgmode/ftdetect/filetype.lua]]
+time([[Sourcing ftdetect script at: /Users/chien.le/.local/share/nvim/site/pack/packer/opt/orgmode/ftdetect/filetype.lua]], false)
+time([[Sourcing ftdetect script at: /Users/chien.le/.local/share/nvim/site/pack/packer/opt/orgmode/ftdetect/org.vim]], true)
+vim.cmd [[source /Users/chien.le/.local/share/nvim/site/pack/packer/opt/orgmode/ftdetect/org.vim]]
+time([[Sourcing ftdetect script at: /Users/chien.le/.local/share/nvim/site/pack/packer/opt/orgmode/ftdetect/org.vim]], false)
+time([[Sourcing ftdetect script at: /Users/chien.le/.local/share/nvim/site/pack/packer/opt/orgmode/ftdetect/org_archive.vim]], true)
+vim.cmd [[source /Users/chien.le/.local/share/nvim/site/pack/packer/opt/orgmode/ftdetect/org_archive.vim]]
+time([[Sourcing ftdetect script at: /Users/chien.le/.local/share/nvim/site/pack/packer/opt/orgmode/ftdetect/org_archive.vim]], false)
 time([[Sourcing ftdetect script at: /Users/chien.le/.local/share/nvim/site/pack/packer/opt/rest.nvim/ftdetect/http.vim]], true)
 vim.cmd [[source /Users/chien.le/.local/share/nvim/site/pack/packer/opt/rest.nvim/ftdetect/http.vim]]
 time([[Sourcing ftdetect script at: /Users/chien.le/.local/share/nvim/site/pack/packer/opt/rest.nvim/ftdetect/http.vim]], false)

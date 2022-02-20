@@ -50,6 +50,7 @@ return require("packer").startup(function(use)
 
     use({
         "j-hui/fidget.nvim",
+        disable = true,
         config = function()
             require("fidget").setup({})
         end,

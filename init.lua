@@ -93,6 +93,7 @@ vim.o.foldenable     = true      -- enable folding
 vim.o.foldlevelstart = 10        -- open most folds by default
 vim.o.foldnestmax    = 10        -- 10 nested fold max
 vim.o.foldmethod     = "marker"  -- fold based on indent level
+vim.opt.foldopen     = vim.opt.foldopen - "search"
 
 vim.o.undofile       = false     -- no undo file
 vim.o.hidden         = true      -- do not unload buffer when abandoned

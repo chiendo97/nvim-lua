@@ -12,7 +12,7 @@ local sources = {
     null_ls.builtins.formatting.goimports.with({ extra_args = { "-format-only" } }),
     null_ls.builtins.formatting.golines.with({ extra_args = { "--base-formatter", "gofmt", "--shorten-comments" } }),
     null_ls.builtins.formatting.isort,
-    null_ls.builtins.formatting.latexindent,
+    -- null_ls.builtins.formatting.latexindent,
     null_ls.builtins.formatting.markdownlint,
     null_ls.builtins.formatting.prettierd,
     null_ls.builtins.formatting.rustfmt,

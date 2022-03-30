@@ -58,14 +58,6 @@ return require("packer").startup(function(use)
         end,
     })
 
-    use({
-        "j-hui/fidget.nvim",
-        disable = true,
-        config = function()
-            require("fidget").setup({})
-        end,
-    })
-
     -- go vscode snippet
     use({
         "rafamadriz/friendly-snippets",
@@ -147,6 +139,7 @@ return require("packer").startup(function(use)
     -- Git commands
     use({
         "tpope/vim-fugitive",
+        disable = true,
     })
 
     -- vim-tmux-navigation
@@ -160,13 +153,12 @@ return require("packer").startup(function(use)
     -- colorscheme
     use({
         "ellisonleao/gruvbox.nvim",
-        requires = { "rktjmp/lush.nvim" },
         config = function()
             vim.g.gruvbox_bold = 1
             vim.g.gruvbox_italic = 1
             vim.g.gruvbox_italicize_comments = 1
 
-            vim.o.background = "dark" -- or "light" for light mode
+            vim.o.background = "dark"
             vim.cmd([[colorscheme gruvbox]])
         end,
     })

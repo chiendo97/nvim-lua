@@ -49,7 +49,6 @@ return require("packer").startup(function(use)
         "hrsh7th/nvim-cmp",
         requires = {
             "hrsh7th/cmp-nvim-lsp", -- lsp source
-            "hrsh7th/cmp-path", -- path source
             "hrsh7th/cmp-vsnip", -- vsnip source
             "hrsh7th/vim-vsnip", -- snippet engine
         },
@@ -136,12 +135,6 @@ return require("packer").startup(function(use)
         end,
     })
 
-    -- Git commands
-    use({
-        "tpope/vim-fugitive",
-        disable = true,
-    })
-
     -- vim-tmux-navigation
     use({
         "christoomey/vim-tmux-navigator",
@@ -215,27 +208,7 @@ return require("packer").startup(function(use)
         requires = { "nvim-lua/plenary.nvim" },
         ft = "http",
         config = function()
-            local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
-
-            parser_config.http = {
-                install_info = {
-                    url = "https://github.com/NTBBloodbath/tree-sitter-http",
-                    files = { "src/parser.c" },
-                    branch = "main",
-                },
-            }
-
-            require("rest-nvim").setup({
-                result_split_horizontal = false,
-                skip_ssl_verification = false,
-                highlight = {
-                    enabled = true,
-                    timeout = 150,
-                },
-                jump_to_request = false,
-            })
-
-            vim.api.nvim_set_keymap("n", "<C-g>", "<Plug>RestNvim", {})
+            require("plugins.rest")
         end,
     })
 end)

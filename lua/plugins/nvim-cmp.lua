@@ -52,6 +52,7 @@ cmp.setup({
     sources = {
         { name = "vsnip", priority = 2 },
         { name = "nvim_lsp", priority = 2 },
+        { name = "nvim_lsp_signature_help" },
         -- { name = "path", priority = 1 },
         -- { name = "nvim_lua", priority = 0 },
     },

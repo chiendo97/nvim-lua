@@ -11,8 +11,9 @@ cmp.setup({
         end,
     },
 
-    documentation = {
-        border = "rounded",
+    window = {
+        -- completion = cmp.config.window.bordered(),
+        -- documentation = cmp.config.window.bordered(),
     },
 
     preselect = require("cmp.types").cmp.PreselectMode.None,

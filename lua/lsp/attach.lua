@@ -4,15 +4,10 @@ vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { 
 vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = "single" })
 
 M.on_attach = function(_, bufnr)
-    local function buf_map(...)
+    local buf_map = function(...)
         vim.api.nvim_buf_set_keymap(bufnr, ...)
     end
-    local function buf_option(...)
-        vim.api.nvim_buf_set_option(bufnr, ...)
-    end
     local opts = { noremap = true, silent = true }
-
-    buf_option("omnifunc", "v:lua.vim.lsp.omnifunc")
 
     buf_map("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<cr>", opts)
     buf_map("n", "gd", "<cmd>lua vim.lsp.buf.definition()<cr>", opts)

@@ -1,8 +1,8 @@
-local M = {}
 local map = vim.api.nvim_set_keymap
+local set = vim.keymap.set
 local map_options = { noremap = true, silent = true }
 
-M.load_telescope = function()
+local load_telescope = function()
     if not pcall(require, "telescope.nvim") then
         require("packer").loader("plenary.nvim")
         require("packer").loader("popup.nvim")
@@ -11,12 +11,12 @@ M.load_telescope = function()
     end
 end
 
-M.grep_cword = function()
-    M.load_telescope()
+local grep_cword = function()
+    load_telescope()
     require("telescope.builtin").grep_string({ search = vim.fn.expand("<cword>") })
 end
 
-M.grep_visual = function()
+local grep_visual = function()
     local _, csrow, cscol, cerow, cecol
     local mode = vim.fn.mode()
     if mode == "v" or mode == "V" or mode == "" then
@@ -51,7 +51,7 @@ M.grep_visual = function()
 
     dump(csrow, cscol, cerow, cecol, lines)
 
-    M.load_telescope()
+    load_telescope()
     require("telescope.builtin").grep_string({ search = table.concat(lines, "\n") })
 end
 
@@ -62,7 +62,5 @@ map("n", "<leader>j", [[<cmd>Telescope oldfiles   <cr>]], map_options)
 map("n", "<leader>m", [[<cmd>Telescope keymaps    <cr>]], map_options)
 map("n", "<leader>b", [[<cmd>Telescope builtin    <cr>]], map_options)
 
-map("x", "<leader>r", [[<cmd>lua require('plugins.telescope_map').grep_visual() <cr>]], map_options)
-map("n", "<leader>R", [[<cmd>lua require('plugins.telescope_map').grep_cword()  <cr>]], map_options)
-
-return M
+set("x", "<leader>r", grep_visual)
+set("n", "<leader>R", grep_cword)

@@ -1,13 +1,15 @@
+local packer = require("packer")
+
 local map = vim.api.nvim_set_keymap
 local set = vim.keymap.set
+
 local map_options = { noremap = true, silent = true }
 
 local load_telescope = function()
-    if not pcall(require, "telescope.nvim") then
-        require("packer").loader("plenary.nvim")
-        require("packer").loader("popup.nvim")
-        require("packer").loader("telescope-fzf-native.nvim")
-        require("packer").loader("telescope.nvim")
+    if not pcall(require, "telescope") then
+        packer.loader("plenary.nvim")
+        packer.loader("telescope-fzf-native.nvim")
+        packer.loader("telescope.nvim")
     end
 end
 

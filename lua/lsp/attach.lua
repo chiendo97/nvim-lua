@@ -4,23 +4,26 @@ vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { 
 vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = "single" })
 
 M.on_attach = function(_, bufnr)
-    local buf_map = function(...)
-        vim.api.nvim_buf_set_keymap(bufnr, ...)
-    end
-    local opts = { noremap = true, silent = true }
+    local opts = { noremap = true, silent = true, buffer = bufnr }
 
-    buf_map("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<cr>", opts)
-    buf_map("n", "gd", "<cmd>lua vim.lsp.buf.definition()<cr>", opts)
-    buf_map("n", "gr", "<cmd>lua vim.lsp.buf.references()<cr>", opts)
-    buf_map("n", "K", "<cmd>lua vim.lsp.buf.hover()<cr>", opts)
-    buf_map("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<cr>", opts)
-    buf_map("n", "gy", "<cmd>lua vim.lsp.buf.type_definition()<cr>", opts)
-    buf_map("n", "<leader>e", "<cmd>lua vim.lsp.buf.rename()<cr>", opts)
-    buf_map("n", "<leader>f", "<cmd>lua vim.lsp.buf.formatting_seq_sync(nil, 1000)<cr>", opts)
-    buf_map("n", "[d", '<cmd>lua vim.diagnostic.goto_prev({float={border="single"}})<cr>', opts)
-    buf_map("n", "]d", '<cmd>lua vim.diagnostic.goto_next({float={border="single"}})<cr>', opts)
-    buf_map("n", "<leader>a", "<cmd>lua vim.lsp.buf.code_action()<cr>", opts)
-    buf_map("n", "<leader>q", "<cmd>lua vim.diagnostic.setloclist()<cr>", opts)
+    vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
+    vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
+    vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
+    vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
+    vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
+    vim.keymap.set("n", "gy", vim.lsp.buf.type_definition, opts)
+    vim.keymap.set("n", "<leader>e", vim.lsp.buf.rename, opts)
+    vim.keymap.set("n", "<leader>f", function()
+        return vim.lsp.buf.formatting_seq_sync(nil, 1000)
+    end, opts)
+    vim.keymap.set("n", "[d", function()
+        return vim.diagnostic.goto_prev({ float = { border = "single" } })
+    end, opts)
+    vim.keymap.set("n", "]d", function()
+        return vim.diagnostic.goto_next({ float = { border = "single" } })
+    end, opts)
+    vim.keymap.set("n", "<leader>a", vim.lsp.buf.code_action, opts)
+    vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, opts)
 end
 
 M.capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())

@@ -211,4 +211,10 @@ return require("packer").startup(function(use)
             require("plugins.rest")
         end,
     })
+
+    -- nvim-treesitter/playground
+    use({
+        "nvim-treesitter/playground",
+        config = function() end,
+    })
 end)

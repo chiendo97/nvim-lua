@@ -146,14 +146,21 @@ return require("packer").startup(function(use)
 
     -- colorscheme
     use({
-        "ellisonleao/gruvbox.nvim",
+        "sainnhe/gruvbox-material",
         config = function()
-            vim.g.gruvbox_bold = 1
-            vim.g.gruvbox_italic = 1
-            vim.g.gruvbox_italicize_comments = 1
+            local set = vim.opt
+            local g = vim.g
+            local cmd = vim.api.nvim_command
 
-            vim.o.background = "dark"
-            vim.cmd([[colorscheme gruvbox]])
+            set.background = "dark"
+            g.gruvbox_material_palette = "mix"
+            g.gruvbox_material_statusline_style = "mix"
+            g.gruvbox_material_enable_italic = 1
+            g.gruvbox_material_diagnostic_text_highlight = 1
+            g.gruvbox_material_diagnostic_line_highlight = 1
+            g.gruvbox_material_diagnostic_virtual_text = "colored"
+            g.gruvbox_material_sign_column_background = "none"
+            cmd("colorscheme gruvbox-material")
         end,
     })
 

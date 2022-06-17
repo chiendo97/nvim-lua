@@ -51,8 +51,8 @@ cmp.setup({
 
     -- You should specify your *installed* sources.
     sources = {
-        { name = "vsnip", priority = 2 },
-        { name = "nvim_lsp", priority = 3 },
+        { name = "vsnip" },
+        { name = "nvim_lsp" },
         { name = "nvim_lsp_signature_help" },
     },
 

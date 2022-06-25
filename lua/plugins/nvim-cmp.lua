@@ -51,8 +51,8 @@ cmp.setup({
 
     -- You should specify your *installed* sources.
     sources = {
-        { name = "vsnip" },
         { name = "nvim_lsp" },
+        { name = "vsnip" },
         { name = "nvim_lsp_signature_help" },
     },
 
@@ -77,5 +77,17 @@ cmp.setup({
     experimental = {
         native_menu = false,
         ghost_text = true,
+    },
+
+    sorting = {
+        comparators = {
+            cmp.config.compare.offset,
+            cmp.config.compare.exact,
+            cmp.config.compare.score,
+            cmp.config.compare.kind,
+            cmp.config.compare.sort_text,
+            cmp.config.compare.length,
+            cmp.config.compare.order,
+        },
     },
 })

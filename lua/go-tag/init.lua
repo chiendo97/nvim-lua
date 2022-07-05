@@ -152,6 +152,6 @@ vim.cmd([[
     command!                 GoClearTag call luaeval("require('go-tag').clear()")
 ]])
 
-vim.api.nvim_set_keymap('n', '<leader>i', '<cmd>%!goimports %<cr>', {})
+vim.api.nvim_set_keymap("n", "<leader>i", "<cmd>%!goimports %<cr>", {})
 
 return M

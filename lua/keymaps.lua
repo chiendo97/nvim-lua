@@ -30,11 +30,10 @@ map("n", "*", [[:let @/ = '\<'.expand('<cword>').'\>' | set hlsearch <cr>]], { s
 -- to highlight current sellected word
 map("x", [[//]], [[y/\V<C-R>=escape(@",'/\')<cr><cr>]], { noremap = true })
 
--- navigate tab by g
+-- navigate between tabs
 map("n", "gt", ":tabedit<cr>", { noremap = true, silent = true })
 map("n", "gn", "<cmd>tabnext<cr>", { noremap = true, silent = true })
 map("n", "gp", "<cmd>tabprev<cr>", { noremap = true, silent = true })
-
 map("n", "g1", "1gt", { noremap = true, silent = true })
 map("n", "g2", "2gt", { noremap = true, silent = true })
 map("n", "g3", "3gt", { noremap = true, silent = true })
@@ -61,7 +60,7 @@ map("n", "<leader>yp", ':let @* = expand("%:~:.")<cr>', { noremap = true })
 map("n", "<leader>yP", ':let @* = expand("%:p")<cr>', { noremap = true })
 
 -- open/source config files
-map("n", "<Leader>sv", "<cmd>source $MYVIMRC<cr>", { noremap = true })
+-- map("n", "<Leader>sv", "<cmd>source $MYVIMRC<cr>", { noremap = true })
 
 -- copy last pasted
 map("n", "gV", "`[v`]", { noremap = true })

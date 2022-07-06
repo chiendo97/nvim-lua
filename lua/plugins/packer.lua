@@ -49,7 +49,6 @@ return require("packer").startup(function(use)
         "hrsh7th/nvim-cmp",
         requires = {
             "hrsh7th/cmp-nvim-lsp", -- lsp source
-            "hrsh7th/cmp-nvim-lsp-signature-help",
             "hrsh7th/cmp-vsnip", -- vsnip source
             "hrsh7th/vim-vsnip", -- snippet engine
         },

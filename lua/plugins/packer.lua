@@ -81,7 +81,6 @@ return require("packer").startup(function(use)
     -- note manager
     use({
         "nvim-orgmode/orgmode",
-        ft = { "org" },
         config = function()
             require("plugins.orgmode")
         end,

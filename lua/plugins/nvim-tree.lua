@@ -25,7 +25,7 @@ require("nvim-tree").setup({ -- BEGIN_DEFAULT_OPTS
         preserve_window_proportions = false,
         number = false,
         relativenumber = false,
-        signcolumn = "yes",
+        signcolumn = "no", -- disable signcolumn
         mappings = {
             custom_only = false,
             list = {
@@ -40,7 +40,7 @@ require("nvim-tree").setup({ -- BEGIN_DEFAULT_OPTS
         highlight_opened_files = "none",
         root_folder_modifier = ":~",
         indent_markers = {
-            enable = true, -- able indent markers
+            enable = false, -- disable indent markers
             icons = {
                 corner = "└ ",
                 edge = "│ ",

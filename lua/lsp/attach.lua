@@ -12,7 +12,8 @@ local goto_prev_diagnositc = function()
 end
 
 local buf_format = function()
-    return vim.lsp.buf.format({ timeout_ms = 2000 })
+    return vim.lsp.buf.formatting_seq_sync(nil, 1000)
+    -- return vim.lsp.buf.format({ timeout_ms = 2000 })
 end
 
 M.on_attach = function(_, bufnr)

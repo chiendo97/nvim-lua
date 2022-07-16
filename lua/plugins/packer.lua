@@ -8,7 +8,7 @@ end
 
 vim.cmd([[packadd packer.nvim]])
 
-local map = vim.api.nvim_set_keymap
+local map = vim.keymap.set
 map("n", "<leader>pi", "<cmd>PackerInstall<cr>", { noremap = true, silent = true })
 map("n", "<leader>ps", "<cmd>PackerSync<cr>", { noremap = true, silent = true })
 map("n", "<leader>pc", "<cmd>PackerCompile<cr>", { noremap = true, silent = true })
@@ -31,6 +31,10 @@ return require("packer").startup(function(use)
     use({
         "kyazdani42/nvim-tree.lua",
         requires = { "kyazdani42/nvim-web-devicons" },
+        cmd = "NvimTreeToggle",
+        setup = function()
+            vim.keymap.set("n", "<leader>c", "<cmd>NvimTreeToggle<cr>", { noremap = true })
+        end,
         config = function()
             require("plugins.nvim-tree")
         end,

@@ -25,7 +25,7 @@ require("nvim-tree").setup({ -- BEGIN_DEFAULT_OPTS
         preserve_window_proportions = false,
         number = false,
         relativenumber = false,
-        signcolumn = "no", -- disable signcolumn
+        signcolumn = "yes", -- enable signcolumn
         mappings = {
             custom_only = false,
             list = {
@@ -40,10 +40,11 @@ require("nvim-tree").setup({ -- BEGIN_DEFAULT_OPTS
         highlight_opened_files = "none",
         root_folder_modifier = ":~",
         indent_markers = {
-            enable = false, -- disable indent markers
+            enable = true, -- enable indent markers
             icons = {
                 corner = "└ ",
                 edge = "│ ",
+                item = "│ ",
                 none = "  ",
             },
         },
@@ -165,5 +166,3 @@ require("nvim-tree").setup({ -- BEGIN_DEFAULT_OPTS
         },
     },
 })
-
-vim.api.nvim_set_keymap("n", "<leader>c", "<cmd>NvimTreeToggle<cr>", { noremap = true })

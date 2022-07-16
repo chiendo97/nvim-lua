@@ -144,21 +144,21 @@ return require("packer").startup(function(use)
 
     -- colorscheme
     use({
-        "sainnhe/gruvbox-material",
+        "eddyekofo94/gruvbox-flat.nvim",
         config = function()
-            local set = vim.opt
-            local g = vim.g
-            local cmd = vim.api.nvim_command
+            -- Example config in Lua
+            vim.g.gruvbox_italic_functions = true
+            vim.g.gruvbox_sidebars = { "qf", "vista_kind", "terminal", "packer" }
 
-            set.background = "dark"
-            g.gruvbox_material_palette = "mix"
-            g.gruvbox_material_statusline_style = "mix"
-            g.gruvbox_material_enable_italic = 1
-            g.gruvbox_material_diagnostic_text_highlight = 1
-            g.gruvbox_material_diagnostic_line_highlight = 1
-            g.gruvbox_material_diagnostic_virtual_text = "colored"
-            g.gruvbox_material_sign_column_background = "none"
-            cmd("colorscheme gruvbox-material")
+            -- Change the "hint" color to the "orange" color, and make the "error" color bright red
+            vim.g.gruvbox_colors = { hint = "orange", error = "#ff0000" }
+
+            -- Change the TabLineSel highlight group (used by barbar.nvim) to the "orange" color
+            vim.g.gruvbox_theme = { TabLineSel = { bg = "orange" } }
+            vim.g.gruvbox_flat_style = "dark"
+
+            -- Load the colorscheme
+            vim.cmd([[colorscheme gruvbox-flat]])
         end,
     })
 
@@ -215,6 +215,12 @@ return require("packer").startup(function(use)
         config = function()
             require("plugins.rest")
         end,
+    })
+
+    use({
+        "chrisbra/csv.vim",
+        ft = "csv",
+        config = function() end,
     })
 
     -- nvim-treesitter/playground

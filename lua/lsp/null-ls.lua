@@ -1,25 +1,4 @@
 local null_ls = require("null-ls")
-local helpers = require("null-ls.helpers")
-local methods = require("null-ls.methods")
-
-local FORMATTING = methods.internal.FORMATTING
-
-null_ls.register(helpers.make_builtin({
-    name = "pandoc",
-    method = FORMATTING,
-    filetypes = { "org" },
-    generator_opts = {
-        command = "pandoc",
-        args = {
-            "$FILENAME",
-            "-t",
-            "org",
-            "--lua-filter=/Users/chien.le/Source/demo/null-ls.nvim/remove-header-attr.lua",
-        },
-        to_stdin = true,
-    },
-    factory = helpers.formatter_factory,
-}))
 
 local sources = {
     null_ls.builtins.diagnostics.eslint_d,

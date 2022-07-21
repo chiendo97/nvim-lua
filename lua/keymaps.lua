@@ -15,10 +15,10 @@ map("x", "<A-j>", ":m '>+1<cr>gv=gv", { noremap = true, silent = true })
 map("x", "<A-k>", ":m '<-2<cr>gv=gv", { noremap = true, silent = true })
 
 -- ^ - jump to the first non-blank character of the line
-map("n", "H", "^", { noremap = true })
-map("x", "H", "^", { noremap = true })
+map("n", "H", "g^", { noremap = true })
+map("x", "H", "g^", { noremap = true })
 -- g_ - jump to the end of the line
-map("n", "L", "g_", { noremap = true })
+map("n", "L", "g$", { noremap = true })
 map("x", "L", "g_", { noremap = true })
 
 -- ctrl + c to turn off highlight and close quickfix windows and escape
@@ -47,6 +47,8 @@ map("n", "g9", "9gt", { noremap = true, silent = true })
 -- move up/down without breaking column
 map("n", "j", "gj", { noremap = true, silent = true })
 map("n", "k", "gk", { noremap = true, silent = true })
+map("x", "j", "gj", { noremap = true, silent = true })
+map("x", "k", "gk", { noremap = true, silent = true })
 
 -- copy to system's clipboard
 map("x", "y", '"*y', { noremap = true })

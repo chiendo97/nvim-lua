@@ -146,7 +146,7 @@ return require("packer").startup(function(use)
         end,
     })
 
-    -- colorscheme
+    -- colorscheme https://www.reddit.com/r/neovim/comments/nkqkdy/gruvbox_flat_colorscheme_written_in_lua_with/
     use({
         "eddyekofo94/gruvbox-flat.nvim",
         config = function()

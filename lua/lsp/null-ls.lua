@@ -1,4 +1,23 @@
 local null_ls = require("null-ls")
+local helpers = require("null-ls.helpers")
+local methods = require("null-ls.methods")
+
+local FORMATTING = methods.internal.FORMATTING
+
+null_ls.register(helpers.make_builtin({
+    name = "hledger",
+    method = FORMATTING,
+    filetypes = { "ledger" },
+    generator_opts = {
+        command = "hledger",
+        args = {
+            "-f-",
+            "print",
+        },
+        to_stdin = true,
+    },
+    factory = helpers.formatter_factory,
+}))
 
 local sources = {
     null_ls.builtins.diagnostics.eslint_d,

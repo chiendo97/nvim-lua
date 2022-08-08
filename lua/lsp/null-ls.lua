@@ -19,6 +19,23 @@ null_ls.register(helpers.make_builtin({
     factory = helpers.formatter_factory,
 }))
 
+null_ls.register(helpers.make_builtin({
+    name = "latex",
+    method = FORMATTING,
+    filetypes = { "plaintex" },
+    generator_opts = {
+        command = "latexindent",
+        args = {
+            "-s",
+            "-w",
+            "$FILENAME",
+        },
+        from_temp_file = true,
+        to_temp_file = true,
+    },
+    factory = helpers.formatter_factory,
+}))
+
 local sources = {
     null_ls.builtins.diagnostics.eslint_d,
     -- null_ls.builtins.diagnostics.flake8,
@@ -47,6 +64,7 @@ local sources = {
 }
 
 null_ls.setup({
+    -- debug = true,
     sources = sources,
     diagnostics_format = "[#{c}] #{m} (#{s})",
     on_attach = require("lsp.attach").on_attach,

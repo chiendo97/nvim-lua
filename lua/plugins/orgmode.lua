@@ -11,7 +11,7 @@ require("orgmode").setup({
         plain_list_item = false,
     },
     org_deadline_warning_days = 5,
-    org_agenda_span = "day",
+    org_agenda_span = "week",
     org_agenda_skip_scheduled_if_done = true,
     org_agenda_skip_deadline_if_done = true,
 })

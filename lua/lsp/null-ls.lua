@@ -23,16 +23,7 @@ null_ls.register(helpers.make_builtin({
     name = "latex",
     method = FORMATTING,
     filetypes = { "plaintex" },
-    generator_opts = {
-        command = "latexindent",
-        args = {
-            "-s",
-            "-w",
-            "$FILENAME",
-        },
-        from_temp_file = true,
-        to_temp_file = true,
-    },
+    generator_opts = { command = "latexindent", args = { "-" }, to_stdin = true },
     factory = helpers.formatter_factory,
 }))
 
@@ -55,7 +46,8 @@ local sources = {
     null_ls.builtins.formatting.golines.with({ extra_args = { "--base-formatter", "gofmt", "--shorten-comments" } }),
     null_ls.builtins.formatting.isort,
     null_ls.builtins.formatting.markdownlint,
-    null_ls.builtins.formatting.pg_format,
+    -- null_ls.builtins.formatting.pg_format,
+    null_ls.builtins.formatting.sql_formatter,
     null_ls.builtins.formatting.prettierd,
     null_ls.builtins.formatting.rustfmt,
     null_ls.builtins.formatting.stylua,

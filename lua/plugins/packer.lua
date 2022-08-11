@@ -64,7 +64,10 @@ return require("packer").startup(function(use)
     -- go vscode snippet
     use({
         "rafamadriz/friendly-snippets",
-        ft = "go",
+        ft = {
+            "go",
+            "plaintex",
+        },
     })
 
     -- add brackets

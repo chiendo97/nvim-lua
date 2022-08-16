@@ -60,7 +60,7 @@ end
 map("n", "<leader>g", [[<cmd>Telescope find_files <cr>]], map_options)
 map("n", "<leader>r", [[<cmd>Telescope live_grep  <cr>]], map_options)
 map("n", "<leader>h", [[<cmd>Telescope help_tags  <cr>]], map_options)
-map("n", "<leader>j", [[<cmd>Telescope oldfiles   <cr>]], map_options)
+map("n", "<leader>j", [[<cmd>Telescope oldfiles only_cwd=true<cr>]], map_options)
 map("n", "<leader>m", [[<cmd>Telescope keymaps    <cr>]], map_options)
 map("n", "<leader>b", [[<cmd>Telescope builtin    <cr>]], map_options)
 

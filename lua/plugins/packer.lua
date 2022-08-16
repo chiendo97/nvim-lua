@@ -55,6 +55,7 @@ return require("packer").startup(function(use)
             "hrsh7th/cmp-nvim-lsp", -- lsp source
             "hrsh7th/cmp-vsnip", -- vsnip source
             "hrsh7th/vim-vsnip", -- snippet engine
+            "hrsh7th/cmp-buffer",
         },
         config = function()
             require("plugins.nvim-cmp")

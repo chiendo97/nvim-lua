@@ -11,6 +11,10 @@ null_ls.register(helpers.make_builtin({
     generator_opts = {
         command = "hledger",
         args = {
+            "-c",
+            "1,000.0 vnd",
+            "-c",
+            "1,000.00 sgd",
             "-f-",
             "print",
         },

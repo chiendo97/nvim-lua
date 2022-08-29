@@ -127,6 +127,9 @@ return require("packer").startup(function(use)
         "iamcco/markdown-preview.nvim",
         run = "cd app && yarn install",
         ft = "markdown",
+        setup = function()
+            vim.g.mkdp_filetypes = { "markdown" }
+        end,
         cmd = "MarkdownPreview",
     })
 
@@ -232,8 +235,7 @@ return require("packer").startup(function(use)
     })
 
     -- nvim-treesitter/playground
-    use({
-        "nvim-treesitter/playground",
-        config = function() end,
-    })
+    -- use({
+    --     "nvim-treesitter/playground",
+    -- })
 end)

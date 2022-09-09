@@ -55,12 +55,10 @@ gs.setup({
         map("n", "ghb", function()
             gs.blame_line({ full = true })
         end)
-        -- map("n", "<leader>tb", gs.toggle_current_line_blame)
         map("n", "ghd", gs.diffthis)
         map("n", "ghD", function()
             gs.diffthis("~")
         end)
-        -- map("n", "<leader>td", gs.toggle_deleted)
 
         -- Text object
         map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>")

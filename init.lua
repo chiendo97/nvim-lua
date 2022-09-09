@@ -134,7 +134,7 @@ vim.o.shada          = [[!,'100,<0,s100,h]]
 vim.o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize"
 vim.o.diffopt        = "internal,filler,algorithm:histogram,indent-heuristic"
 
-vim.g.python3_host_prog = "/usr/local/bin/python3"
+vim.g.python3_host_prog = "/opt/homebrew/bin/python3"
 
 -- use ':grep' to send resulsts to quickfix
 -- use ':lgrep' to send resulsts to loclist

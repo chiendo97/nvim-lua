@@ -34,7 +34,7 @@ null_ls.register(helpers.make_builtin({
 local sources = {
     null_ls.builtins.diagnostics.eslint_d,
     -- null_ls.builtins.diagnostics.flake8,
-    null_ls.builtins.diagnostics.markdownlint,
+    -- null_ls.builtins.diagnostics.markdownlint,
 
     -- null_ls.builtins.diagnostics.buf,
     null_ls.builtins.diagnostics.protoc_gen_lint,

@@ -1,8 +1,43 @@
 require("nvim-treesitter.configs").setup({
+    -- A list of parser names, or "all"
+    ensure_installed = {
+        "javascript",
+        "typescript",
+        "python",
+        "comment",
+        "json",
+        "vim",
+        "yaml",
+        "go",
+        "lua",
+        "rust",
+        "sql",
+        "markdown",
+        "proto",
+        "ledger",
+        "cpp",
+        "markdown_inline",
+        "org",
+        "c",
+        "gomod",
+        "dockerfile",
+        "gowork",
+    },
+
+    -- Install parsers synchronously (only applied to `ensure_installed`)
+    sync_install = false,
+
+    -- Automatically install missing parsers when entering buffer
+    auto_install = true,
+
     highlight = {
         enable = true,
         disable = { "org" }, -- Remove this to use TS highlighter for some of the highlights (Experimental)
-        additional_vim_regex_highlighting = { "org" }, -- Required since TS highlighter doesn't support all syntax features (conceal)
+        -- Required since TS highlighter doesn't support all syntax features (conceal)
+        additional_vim_regex_highlighting = {
+            "org",
+            "lua",
+        },
     },
     incremental_selection = {
         enable = false,
@@ -43,7 +78,7 @@ require("nvim-treesitter.configs").setup({
         },
     },
     playground = {
-        enable = true,
+        enable = false,
         disable = {},
         updatetime = 25, -- Debounced time for highlighting nodes in the playground from source code
         persist_queries = false, -- Whether the query persists across vim sessions

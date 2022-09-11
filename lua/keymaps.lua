@@ -67,5 +67,5 @@ map("n", "<leader>yP", ':let @* = expand("%:p")<cr>', { noremap = true })
 -- copy last pasted
 map("n", "gV", "`[v`]", { noremap = true })
 
--- <Esc> <C-\><C-n>
+-- terminal mode <Esc> <C-\><C-n>
 map("t", "<esc>", "<C-\\><C-n>", { noremap = true })

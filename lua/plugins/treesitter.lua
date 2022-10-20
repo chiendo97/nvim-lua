@@ -36,7 +36,6 @@ require("nvim-treesitter.configs").setup({
         -- Required since TS highlighter doesn't support all syntax features (conceal)
         additional_vim_regex_highlighting = {
             "org",
-            "lua",
         },
     },
     incremental_selection = {

@@ -54,21 +54,18 @@ return require("packer").startup(function(use)
         requires = {
             "hrsh7th/cmp-nvim-lsp", -- lsp source
             "hrsh7th/cmp-vsnip", -- vsnip source
-            "hrsh7th/vim-vsnip", -- snippet engine
+            -- "hrsh7th/vim-vsnip", -- snippet engine
             "hrsh7th/cmp-buffer",
+            "L3MON4D3/LuaSnip",
+            "hrsh7th/cmp-nvim-lsp",
         },
         config = function()
             require("plugins.nvim-cmp")
         end,
     })
 
-    -- go vscode snippet
     use({
         "rafamadriz/friendly-snippets",
-        ft = {
-            "go",
-            "plaintex",
-        },
     })
 
     -- add brackets

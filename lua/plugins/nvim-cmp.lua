@@ -1,13 +1,16 @@
 local cmp = require("cmp")
-
-local feedkey = function(key, mode)
-    vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), mode, true)
+if not cmp then
+    return
 end
+
+local luasnip = require("luasnip")
+
+require("luasnip.loaders.from_vscode").lazy_load()
 
 cmp.setup({
     snippet = {
         expand = function(args)
-            vim.fn["vsnip#anonymous"](args.body)
+            require("luasnip").lsp_expand(args.body)
         end,
     },
 
@@ -28,32 +31,27 @@ cmp.setup({
         ["<C-n>"] = cmp.mapping.select_next_item(),
 
         ["<Tab>"] = cmp.mapping(function(fallback)
-            if vim.fn["vsnip#jumpable"]() == 1 then
-                feedkey("<Plug>(vsnip-jump-next)", "")
+            if luasnip.expand_or_jumpable() then
+                luasnip.expand_or_jump()
             else
                 fallback()
             end
-        end, {
-            "i",
-            "s",
-        }),
+        end, { "i", "s" }),
+
         ["<S-Tab>"] = cmp.mapping(function(fallback)
-            if vim.fn["vsnip#jumpable"](-1) == 1 then
-                feedkey("<Plug>(vsnip-jump-prev)", "")
+            if luasnip.jumpable(-1) then
+                luasnip.jump(-1)
             else
                 fallback()
             end
-        end, {
-            "i",
-            "s",
-        }),
+        end, { "i", "s" }),
     },
 
     -- You should specify your *installed* sources.
     sources = {
         { name = "nvim_lsp" },
-        { name = "vsnip" },
         { name = "buffer" },
+        { name = "luasnip" },
     },
 
     formatting = {

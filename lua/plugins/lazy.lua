@@ -1,117 +1,104 @@
--- Bootstrap packer
-local install_path = vim.fn.stdpath("data") .. "/site/pack/packer/opt/packer.nvim"
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 
-if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
-    print("installing packer")
-    vim.fn.execute("!git clone --depth 1 https://github.com/wbthomason/packer.nvim " .. install_path)
+if not vim.loop.fs_stat(lazypath) then
+    vim.fn.system({
+        "git",
+        "clone",
+        "--filter=blob:none",
+        "https://github.com/folke/lazy.nvim.git",
+        lazypath,
+    })
 end
 
-vim.cmd([[packadd packer.nvim]])
+vim.opt.rtp:prepend(lazypath)
 
-local map = vim.keymap.set
-map("n", "<leader>pi", "<cmd>PackerInstall<cr>", { noremap = true, silent = true })
-map("n", "<leader>ps", "<cmd>PackerSync<cr>", { noremap = true, silent = true })
-map("n", "<leader>pc", "<cmd>PackerCompile<cr>", { noremap = true, silent = true })
-map("n", "<leader>pt", "<cmd>PackerStatus<cr>", { noremap = true, silent = true })
-map("n", "<leader>pd", "<cmd>PackerClean<cr>", { noremap = true, silent = true })
-
-return require("packer").startup(function(use)
-    -- Packer can manage itself as an optional plugin
-    use({ "wbthomason/packer.nvim", opt = true })
-
+require("lazy").setup({
     -- add packages
-    use({
+    {
         "tweekmonster/startuptime.vim",
         cmd = "StartupTime",
-    })
-
-    use({ "nvim-lua/plenary.nvim" })
+    },
 
     -- nvim-tree
-    use({
+    {
         "kyazdani42/nvim-tree.lua",
-        requires = { "kyazdani42/nvim-web-devicons" },
+        dependencies = { "kyazdani42/nvim-web-devicons" },
         cmd = "NvimTreeToggle",
-        setup = function()
+        init = function()
             vim.keymap.set("n", "<leader>c", "<cmd>NvimTreeToggle<cr>", { noremap = true })
         end,
         config = function()
             require("plugins.nvim-tree")
         end,
-    })
+    },
 
     -- lspconfig
-    use({
+    {
         "neovim/nvim-lspconfig",
         config = function()
             require("lsp")
         end,
-    })
+    },
 
     -- lsp autocomplete
-    use({
+    {
         "hrsh7th/nvim-cmp",
-        requires = {
+        dependencies = {
             "hrsh7th/cmp-nvim-lsp", -- lsp source
-            "hrsh7th/cmp-vsnip", -- vsnip source
-            -- "hrsh7th/vim-vsnip", -- snippet engine
             "hrsh7th/cmp-buffer",
             "L3MON4D3/LuaSnip",
-            "hrsh7th/cmp-nvim-lsp",
         },
         config = function()
             require("plugins.nvim-cmp")
         end,
-    })
-
-    use({
-        "rafamadriz/friendly-snippets",
-    })
+    },
 
     -- add brackets
-    use({ "machakann/vim-sandwich" })
+    {
+        "machakann/vim-sandwich",
+    },
 
     -- linter, formater
-    use({
+    {
         "jose-elias-alvarez/null-ls.nvim",
+        dependencies = {
+            "nvim-lua/plenary.nvim",
+        },
         config = function()
             require("lsp.null-ls")
         end,
-        requires = {
-            "nvim-lua/plenary.nvim",
-            "neovim/nvim-lspconfig",
-        },
-    })
+    },
 
     -- note manager
-    use({
+    {
         "nvim-orgmode/orgmode",
+        ft = "org",
         config = function()
             require("plugins.orgmode")
         end,
-    })
+    },
 
     -- treesitter syntax
-    use({
+    {
         "nvim-treesitter/nvim-treesitter",
-        run = function()
+        build = function()
             require("nvim-treesitter.install").update({ with_sync = true })
         end,
         config = function()
             require("plugins.treesitter")
         end,
-    })
+    },
 
     -- Comment code
-    use({
+    {
         "numToStr/Comment.nvim",
         config = function()
             require("plugins.Comment")
         end,
-    })
+    },
 
     -- align text with ga=
-    use({
+    {
         "junegunn/vim-easy-align",
         config = function()
             -- Start interactive EasyAlign in visual mode (e.g. vipga)
@@ -119,33 +106,32 @@ return require("packer").startup(function(use)
             -- Start interactive EasyAlign for a motion/text object (e.g. gaip)
             vim.api.nvim_set_keymap("n", "ga", "<Plug>(EasyAlign)", {})
         end,
-    })
+    },
 
     -- Preview markdown live: :MarkdownPreview
-    use({
+    {
         "iamcco/markdown-preview.nvim",
-        run = "cd app && yarn install",
-        ft = "markdown",
-        setup = function()
+        build = "cd app && yarn install",
+        init = function()
             vim.g.mkdp_filetypes = { "markdown" }
         end,
         cmd = "MarkdownPreview",
-    })
+    },
 
     -- Add git related info in the signs columns and popups
-    use({
+    {
         "lewis6991/gitsigns.nvim",
-        requires = { "nvim-lua/plenary.nvim" },
+        dependencies = { "nvim-lua/plenary.nvim" },
         config = function()
             require("plugins.gitsigns")
         end,
         cond = function()
             return vim.fn.isdirectory(".git") == 1
         end,
-    })
+    },
 
     -- vim-tmux-navigation
-    use({
+    {
         "alexghergh/nvim-tmux-navigation",
         config = function()
             local nvim_tmux_nav = require("nvim-tmux-navigation")
@@ -159,11 +145,13 @@ return require("packer").startup(function(use)
             vim.keymap.set("n", "<C-k>", nvim_tmux_nav.NvimTmuxNavigateUp)
             vim.keymap.set("n", "<C-l>", nvim_tmux_nav.NvimTmuxNavigateRight)
         end,
-    })
+    },
 
     -- colorscheme https://www.reddit.com/r/neovim/comments/nkqkdy/gruvbox_flat_colorscheme_written_in_lua_with/
-    use({
+    {
         "eddyekofo94/gruvbox-flat.nvim",
+        lazy = false, -- make sure we load this during startup if it is your main colorscheme
+        priority = 1000, -- make sure to load this before all the other start plugins
         config = function()
             -- Example config in Lua
             vim.g.gruvbox_italic_functions = true
@@ -179,71 +167,50 @@ return require("packer").startup(function(use)
             -- Load the colorscheme
             vim.cmd([[colorscheme gruvbox-flat]])
         end,
-    })
+    },
 
-    use({
+    {
         "nvim-telescope/telescope.nvim",
         cmd = "Telescope",
-        setup = function()
+        init = function()
             require("plugins.telescope_map")
         end,
         config = function()
             require("plugins.telescope")
         end,
-        requires = {
+        dependencies = {
             { "nvim-lua/plenary.nvim" },
-            { "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
+            { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
         },
-    })
-
-    -- generate go test
-    use({
-        "buoto/gotests-vim",
-        ft = "go",
-        cmd = "GoTests",
-    })
+    },
 
     -- better quickfix
-    use({
+    {
         "kevinhwang91/nvim-bqf",
         config = function()
             require("plugins.nvim-bqf")
         end,
         ft = "qf",
-    })
+    },
 
-    use({
+    {
         "lukas-reineke/indent-blankline.nvim",
         config = function()
             require("plugins.indent-blankline")
         end,
-    })
+    },
 
-    use({
-        vim.fn.stdpath("config") .. "/lua/go-tag",
-        config = function()
-            require("go-tag")
-        end,
-        ft = "go",
-    })
-
-    use({
+    {
         "NTBBloodbath/rest.nvim",
-        requires = { "nvim-lua/plenary.nvim" },
+        dependencies = { "nvim-lua/plenary.nvim" },
         ft = "http",
         config = function()
             require("plugins.rest")
         end,
-    })
+    },
 
-    use({
+    {
         "chrisbra/csv.vim",
         ft = "csv",
-        config = function() end,
-    })
-
-    -- nvim-treesitter/playground
-    -- use({
-    --     "nvim-treesitter/playground",
-    -- })
-end)
+    },
+})

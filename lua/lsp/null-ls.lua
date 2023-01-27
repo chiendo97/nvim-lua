@@ -27,7 +27,11 @@ null_ls.register(helpers.make_builtin({
     name = "latex",
     method = FORMATTING,
     filetypes = { "plaintex" },
-    generator_opts = { command = "latexindent", args = { "-" }, to_stdin = true },
+    generator_opts = {
+        command = "latexindent",
+        args = { "-" },
+        to_stdin = true,
+    },
     factory = helpers.formatter_factory,
 }))
 
@@ -41,7 +45,9 @@ local sources = {
 
     -- null_ls.builtins.formatting.buf,
     -- null_ls.builtins.formatting.protolint,
+    null_ls.builtins.formatting.beautysh,
     null_ls.builtins.formatting.black,
+    null_ls.builtins.formatting.ruff,
     null_ls.builtins.formatting.fixjson,
     null_ls.builtins.formatting.gofumpt,
     null_ls.builtins.formatting.goimports.with({ extra_args = { "-format-only" } }),

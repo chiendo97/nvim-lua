@@ -2,7 +2,7 @@
 -- add("~/.local/share/nvim/site/pack/packer/opt/*")
 -- add("~/.local/share/nvim/site/pack/packer/start/*")
 
-require("lspconfig").sumneko_lua.setup({
+require("lspconfig").lua_ls.setup({
     on_attach = require("lsp.attach").on_attach,
     settings = {
         Lua = {

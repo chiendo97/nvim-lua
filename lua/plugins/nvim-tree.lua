@@ -122,7 +122,7 @@ require("nvim-tree").setup({ -- BEGIN_DEFAULT_OPTS
     },
     filters = {
         dotfiles = true,
-        custom = {},
+        custom = { ".org_archive" },
         exclude = {},
     },
     git = {

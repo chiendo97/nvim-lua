@@ -72,7 +72,6 @@ require("lazy").setup({
     -- note manager
     {
         "nvim-orgmode/orgmode",
-        ft = "org",
         config = function()
             require("plugins.orgmode")
         end,

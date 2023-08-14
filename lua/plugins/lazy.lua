@@ -149,81 +149,38 @@ require("lazy").setup({
         end,
     },
 
-    -- colorscheme https://www.reddit.com/r/neovim/comments/nkqkdy/gruvbox_flat_colorscheme_written_in_lua_with/
     {
-        "eddyekofo94/gruvbox-flat.nvim",
-        lazy = false, -- make sure we load this during startup if it is your main colorscheme
-        priority = 1000, -- make sure to load this before all the other start plugins
-        cond = false,
-        config = function()
-            -- Example config in Lua
-            vim.g.gruvbox_italic_functions = true
-            vim.g.gruvbox_sidebars = { "qf", "vista_kind", "terminal", "packer" }
-
-            -- Change the "hint" color to the "orange" color, and make the "error" color bright red
-            vim.g.gruvbox_colors = { hint = "orange", error = "#ff0000" }
-
-            -- Change the TabLineSel highlight group (used by barbar.nvim) to the "orange" color
-            vim.g.gruvbox_theme = { TabLineSel = { bg = "orange" } }
-            vim.g.gruvbox_flat_style = "dark"
-
-            -- Load the colorscheme
-            vim.cmd([[colorscheme gruvbox-flat]])
-        end,
-    },
-    -- "loctvl842/monokai-pro.nvim",
-    {
-        "loctvl842/monokai-pro.nvim",
+        "ellisonleao/gruvbox.nvim",
         lazy = false, -- make sure we load this during startup if it is your main colorscheme
         priority = 1000, -- make sure to load this before all the other start plugins
         config = function()
-            require("monokai-pro").setup({
-                transparent_background = false,
-                terminal_colors = true,
-                devicons = true, -- highlight the icons of `nvim-web-devicons`
-                styles = {
-                    comment = { italic = true },
-                    keyword = { italic = true }, -- any other keyword
-                    type = { italic = true }, -- (preferred) int, long, char, etc
-                    storageclass = { italic = true }, -- static, register, volatile, etc
-                    structure = { italic = true }, -- struct, union, enum, etc
-                    parameter = { italic = true }, -- parameter pass in function
-                    annotation = { italic = true },
-                    tag_attribute = { italic = true }, -- attribute of tag in reactjs
+            -- setup must be called before loading the colorscheme
+            -- Default options:
+            require("gruvbox").setup({
+                undercurl = true,
+                underline = true,
+                bold = true,
+                italic = {
+                    strings = true,
+                    comments = true,
+                    operators = false,
+                    folds = true,
                 },
-                filter = "pro", -- classic | octagon | pro | machine | ristretto | spectrum
-                -- Enable this will disable filter option
-                day_night = {
-                    enable = false, -- turn off by default
-                    day_filter = "pro", -- classic | octagon | pro | machine | ristretto | spectrum
-                    night_filter = "spectrum", -- classic | octagon | pro | machine | ristretto | spectrum
-                },
-                inc_search = "background", -- underline | background
-                background_clear = {
-                    "float_win",
-                    "toggleterm",
-                    "telescope",
-                    -- "which-key",
-                    "renamer",
-                    "notify",
-                    -- "nvim-tree",
-                    -- "neo-tree",
-                    -- "bufferline", -- better used if background of `neo-tree` or `nvim-tree` is cleared
-                }, -- "float_win", "toggleterm", "telescope", "which-key", "renamer", "neo-tree", "nvim-tree", "bufferline"
-                plugins = {
-                    indent_blankline = {
-                        context_highlight = "default", -- default | pro
-                        context_start_underline = false,
-                    },
-                },
-                ---@param c Colorscheme
-                override = function(c) end,
+                strikethrough = true,
+                invert_selection = false,
+                invert_signs = false,
+                invert_tabline = false,
+                invert_intend_guides = false,
+                inverse = true, -- invert background for search, diffs, statuslines and errors
+                contrast = "", -- can be "hard", "soft" or empty string
+                palette_overrides = {},
+                overrides = {},
+                dim_inactive = false,
+                transparent_mode = false,
             })
-
-            vim.cmd([[colorscheme monokai-pro]])
+            vim.cmd("colorscheme gruvbox")
         end,
     },
-
     {
         "nvim-telescope/telescope.nvim",
         cmd = "Telescope",

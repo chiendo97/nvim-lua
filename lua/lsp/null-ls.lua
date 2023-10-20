@@ -60,7 +60,7 @@ local sources = {
 
     -- null_ls.builtins.formatting.markdownlint,
 
-    null_ls.builtins.formatting.pg_format,
+    -- null_ls.builtins.formatting.pg_format,
     -- null_ls.builtins.formatting.sql_formatter,
     --
     -- null_ls.builtins.diagnostics.eslint_d,

@@ -40,6 +40,7 @@ local sources = {
     -- null_ls.builtins.diagnostics.markdownlint,
     -- null_ls.builtins.diagnostics.buf,
     null_ls.builtins.diagnostics.ruff,
+    null_ls.builtins.diagnostics.shellcheck,
 
     -- null_ls.builtins.diagnostics.protoc_gen_lint,
     -- null_ls.builtins.diagnostics.protolint,
@@ -71,6 +72,7 @@ local sources = {
     null_ls.builtins.formatting.stylua,
 
     -- null_ls.builtins.code_actions.eslint_d,
+    null_ls.builtins.code_actions.shellcheck,
 }
 
 null_ls.setup({

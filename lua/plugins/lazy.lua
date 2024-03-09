@@ -46,7 +46,14 @@ require("lazy").setup({
         dependencies = {
             "hrsh7th/cmp-nvim-lsp", -- lsp source
             "hrsh7th/cmp-buffer",
+            "hrsh7th/cmp-path",
             "L3MON4D3/LuaSnip",
+            {
+                "zbirenbaum/copilot-cmp",
+                config = function()
+                    require("copilot_cmp").setup()
+                end,
+            },
         },
         config = function()
             require("plugins.nvim-cmp")
@@ -225,5 +232,54 @@ require("lazy").setup({
     {
         "chrisbra/csv.vim",
         ft = "csv",
+    },
+    {
+        "zbirenbaum/copilot.lua",
+        dependencies = {
+            "hrsh7th/nvim-cmp",
+        },
+        cmd = "Copilot",
+        build = ":Copilot auth",
+        event = "InsertEnter",
+        config = function()
+            require("copilot").setup({
+                panel = {
+                    enabled = false,
+                    auto_refresh = true,
+                },
+                suggestion = {
+                    enabled = false,
+                    -- use the built-in keymapping for "accept" (<M-l>)
+                    auto_trigger = true,
+                    accept = false, -- disable built-in keymapping
+                },
+            })
+
+            -- hide copilot suggestions when cmp menu is open
+            -- to prevent odd behavior/garbled up suggestions
+            local cmp_status_ok, cmp = pcall(require, "cmp")
+            if cmp_status_ok then
+                cmp.event:on("menu_opened", function()
+                    vim.b.copilot_suggestion_hidden = true
+                end)
+
+                cmp.event:on("menu_closed", function()
+                    vim.b.copilot_suggestion_hidden = false
+                end)
+            end
+        end,
+    },
+    {
+        "jackMort/ChatGPT.nvim",
+        event = "VeryLazy",
+        config = function()
+            require("chatgpt").setup()
+        end,
+        dependencies = {
+            "MunifTanjim/nui.nvim",
+            "nvim-lua/plenary.nvim",
+            "folke/trouble.nvim",
+            "nvim-telescope/telescope.nvim",
+        },
     },
 })

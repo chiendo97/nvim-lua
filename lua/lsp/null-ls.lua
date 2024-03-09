@@ -39,21 +39,22 @@ local sources = {
     -- null_ls.builtins.diagnostics.flake8,
     -- null_ls.builtins.diagnostics.markdownlint,
     -- null_ls.builtins.diagnostics.buf,
-    null_ls.builtins.diagnostics.ruff,
-    null_ls.builtins.diagnostics.shellcheck,
+    -- null_ls.builtins.diagnostics.ruff,
+    -- null_ls.builtins.diagnostics.shellcheck,
 
     -- null_ls.builtins.diagnostics.protoc_gen_lint,
     -- null_ls.builtins.diagnostics.protolint,
 
-    null_ls.builtins.formatting.black,
-    null_ls.builtins.formatting.isort,
-    null_ls.builtins.formatting.ruff,
+    -- null_ls.builtins.formatting.black,
+    -- null_ls.builtins.formatting.isort,
+    -- null_ls.builtins.formatting.ruff,
 
     null_ls.builtins.formatting.buf,
     -- null_ls.builtins.formatting.protolint,
     --
-    null_ls.builtins.formatting.beautysh,
-    null_ls.builtins.formatting.fixjson,
+    -- null_ls.builtins.formatting.beautysh,
+    null_ls.builtins.formatting.shfmt,
+    -- null_ls.builtins.formatting.fixjson,
 
     -- null_ls.builtins.formatting.gofumpt,
     -- null_ls.builtins.formatting.goimports.with({ extra_args = { "-format-only" } }),
@@ -67,14 +68,14 @@ local sources = {
     -- null_ls.builtins.diagnostics.eslint_d,
     -- null_ls.builtins.formatting.prettierd,
 
-    null_ls.builtins.formatting.rustfmt,
+    -- null_ls.builtins.formatting.rustfmt,
     --
     null_ls.builtins.formatting.stylua,
 
     null_ls.builtins.formatting.yamlfmt,
 
     -- null_ls.builtins.code_actions.eslint_d,
-    null_ls.builtins.code_actions.shellcheck,
+    -- null_ls.builtins.code_actions.shellcheck,
 }
 
 null_ls.setup({

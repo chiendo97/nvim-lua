@@ -48,11 +48,14 @@ cmp.setup({
     },
 
     -- You should specify your *installed* sources.
-    sources = {
+    sources = cmp.config.sources({
         { name = "nvim_lsp" },
-        { name = "buffer" },
         { name = "luasnip" },
-    },
+        { name = "path" },
+        { name = "copilot" },
+    }, {
+        { name = "buffer" },
+    }),
 
     formatting = {
         format = function(entry, vim_item)
@@ -67,6 +70,7 @@ cmp.setup({
                 latex_symbols = "[Latex]",
                 orgmode = "[OrgMode]",
                 neorg = "[NeOrg]",
+                Copilot = "[Copilot]",
             })[entry.source.name]
             return vim_item
         end,

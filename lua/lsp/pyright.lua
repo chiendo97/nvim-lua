@@ -21,8 +21,21 @@ local function get_python_path(workspace)
 end
 
 nvim_lsp.pyright.setup({
-    on_attach = require("lsp.attach").on_attach,
+    on_attach = function(client, bufnr)
+        client.server_capabilities.document_formatting = false
+        require("lsp.attach").on_attach(client, bufnr)
+    end,
     capabilities = require("lsp.attach").capabilities,
+    settings = {
+        python = {
+            analysis = {
+                autoSearchPaths = true,
+                diagnosticMode = "workspace",
+                useLibraryCodeForTypes = true,
+                stubPath = "",
+            },
+        },
+    },
     before_init = function(_, config)
         config.settings.python.pythonPath = get_python_path(config.root_dir)
     end,

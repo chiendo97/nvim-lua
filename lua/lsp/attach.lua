@@ -1,20 +1,10 @@
 local M = {}
 
-vim.diagnostic.config({
-    float = {
-        format = function(diagnostic)
-            return string.format("%s (%s)", diagnostic.message, diagnostic.source)
-        end,
-        border = "single",
-    },
-})
-
-local buf_format = function()
-    return vim.lsp.buf.format({ timeout_ms = 2000 })
-end
-
 M.on_attach = function(_, bufnr)
     local opts = { noremap = true, silent = true, buffer = bufnr }
+    local buf_format = function()
+        return vim.lsp.buf.format({ async = true })
+    end
 
     vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
     vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)

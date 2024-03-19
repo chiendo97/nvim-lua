@@ -1,6 +1,6 @@
 local M = {}
 
-M.on_attach = function(_, bufnr)
+M.on_attach = function(client, bufnr)
     local opts = { noremap = true, silent = true, buffer = bufnr }
     local buf_format = function()
         return vim.lsp.buf.format({ async = true })
@@ -18,6 +18,10 @@ M.on_attach = function(_, bufnr)
     vim.keymap.set("n", "]d", vim.diagnostic.goto_next, opts)
     vim.keymap.set("n", "<leader>a", vim.lsp.buf.code_action, opts)
     vim.keymap.set("n", "<leader>q", vim.diagnostic.setqflist, opts)
+
+    if client.server_capabilities.inlayHintProvider then
+        vim.lsp.inlay_hint.enable(bufnr, true)
+    end
 end
 
 M.capabilities = require("cmp_nvim_lsp").default_capabilities()

@@ -31,22 +31,18 @@ require("lspconfig").rust_analyzer.setup({
     capabilities = require("lsp.attach").capabilities,
 })
 
-require("lspconfig").ruff_lsp.setup({
-    init_options = {
-        settings = {
-            -- Any extra CLI arguments for `ruff` go here.
-            args = {},
-            lint = {
-                args = {
-                    "--select",
-                    "E",
-                },
-            },
-        },
-    },
-    on_attach = require("lsp.attach").on_attach,
-    capabilities = require("lsp.attach").capabilities,
-})
+-- require("lspconfig").ruff_lsp.setup({
+--     init_options = {
+--         settings = {
+--             -- Any extra CLI arguments for `ruff` go here.
+--             args = {
+--                 "--unsafe-fixes",
+--             },
+--         },
+--     },
+--     on_attach = require("lsp.attach").on_attach,
+--     capabilities = require("lsp.attach").capabilities,
+-- })
 
 require("lspconfig").bashls.setup({
     on_attach = require("lsp.attach").on_attach,

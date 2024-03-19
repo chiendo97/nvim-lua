@@ -20,7 +20,7 @@ local function get_python_path(workspace)
     return vim.fn.exepath("python3") or vim.fn.exepath("python") or "python"
 end
 
-nvim_lsp.pyright.setup({
+nvim_lsp.basedpyright.setup({
     on_attach = function(client, bufnr)
         client.server_capabilities.document_formatting = false
         require("lsp.attach").on_attach(client, bufnr)
@@ -30,9 +30,8 @@ nvim_lsp.pyright.setup({
         python = {
             analysis = {
                 autoSearchPaths = true,
-                diagnosticMode = "workspace",
+                diagnosticMode = "openFilesOnly",
                 useLibraryCodeForTypes = true,
-                stubPath = "",
             },
         },
     },

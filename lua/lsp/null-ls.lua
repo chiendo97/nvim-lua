@@ -45,8 +45,8 @@ local sources = {
     -- null_ls.builtins.diagnostics.protoc_gen_lint,
     -- null_ls.builtins.diagnostics.protolint,
 
-    -- null_ls.builtins.formatting.black,
-    -- null_ls.builtins.formatting.isort,
+    null_ls.builtins.formatting.black,
+    null_ls.builtins.formatting.isort,
     -- null_ls.builtins.formatting.ruff,
 
     null_ls.builtins.formatting.buf,

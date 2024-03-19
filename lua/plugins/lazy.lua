@@ -22,7 +22,7 @@ require("lazy").setup({
     -- nvim-tree
     {
         "kyazdani42/nvim-tree.lua",
-        dependencies = { "kyazdani42/nvim-web-devicons" },
+        dependencies = { "nvim-tree/nvim-web-devicons" },
         cmd = "NvimTreeToggle",
         init = function()
             vim.keymap.set("n", "<leader>c", "<cmd>NvimTreeToggle<cr>", { noremap = true })
@@ -281,5 +281,10 @@ require("lazy").setup({
             "folke/trouble.nvim",
             "nvim-telescope/telescope.nvim",
         },
+    },
+    {
+        "stevearc/oil.nvim",
+        opts = {},
+        dependencies = { "nvim-tree/nvim-web-devicons" },
     },
 })

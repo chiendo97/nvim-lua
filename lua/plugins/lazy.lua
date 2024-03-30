@@ -73,6 +73,7 @@ require("lazy").setup({
         "nvimtools/none-ls.nvim",
         dependencies = {
             "nvim-lua/plenary.nvim",
+            "nvimtools/none-ls-extras.nvim",
         },
         config = function()
             require("lsp.null-ls")
@@ -82,6 +83,10 @@ require("lazy").setup({
     -- note manager
     {
         "nvim-orgmode/orgmode",
+        dependencies = {
+            { "nvim-treesitter/nvim-treesitter", lazy = true },
+        },
+        event = "VeryLazy",
         config = function()
             require("plugins.orgmode")
         end,

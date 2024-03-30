@@ -23,6 +23,7 @@ end
 nvim_lsp.basedpyright.setup({
     on_attach = function(client, bufnr)
         client.server_capabilities.document_formatting = false
+        client.server_capabilities.semanticTokensProvider = nil
         require("lsp.attach").on_attach(client, bufnr)
     end,
     capabilities = require("lsp.attach").capabilities,

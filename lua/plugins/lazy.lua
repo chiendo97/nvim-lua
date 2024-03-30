@@ -122,15 +122,15 @@ require("lazy").setup({
         end,
     },
 
-    -- Preview markdown live: :MarkdownPreview
-    {
-        "iamcco/markdown-preview.nvim",
-        build = "cd app && yarn install",
-        init = function()
-            vim.g.mkdp_filetypes = { "markdown" }
-        end,
-        cmd = "MarkdownPreview",
-    },
+    -- -- Preview markdown live: :MarkdownPreview
+    -- {
+    --     "iamcco/markdown-preview.nvim",
+    --     build = "cd app && yarn install",
+    --     init = function()
+    --         vim.g.mkdp_filetypes = { "markdown" }
+    --     end,
+    --     cmd = "MarkdownPreview",
+    -- },
 
     -- Add git related info in the signs columns and popups
     {

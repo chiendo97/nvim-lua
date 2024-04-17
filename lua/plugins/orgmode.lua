@@ -1,6 +1,4 @@
 -- Load custom tree-sitter grammar for org filetype
-require("orgmode").setup_ts_grammar()
-
 require("orgmode").setup({
     org_agenda_files = "/Users/chiendo97/Library/CloudStorage/Dropbox/org/*",
     org_default_notes_file = "/Users/chiendo97/Library/CloudStorage/Dropbox/org/inbox.org",

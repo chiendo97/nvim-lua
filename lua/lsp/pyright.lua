@@ -28,7 +28,7 @@ nvim_lsp.basedpyright.setup({
     end,
     capabilities = require("lsp.attach").capabilities,
     settings = {
-        python = {
+        basedpython = {
             analysis = {
                 autoSearchPaths = true,
                 diagnosticMode = "openFilesOnly",
@@ -37,6 +37,6 @@ nvim_lsp.basedpyright.setup({
         },
     },
     before_init = function(_, config)
-        config.settings.python.pythonPath = get_python_path(config.root_dir)
+        config.settings.basedpython.pythonPath = get_python_path(config.root_dir)
     end,
 })

@@ -122,16 +122,6 @@ require("lazy").setup({
         end,
     },
 
-    -- -- Preview markdown live: :MarkdownPreview
-    -- {
-    --     "iamcco/markdown-preview.nvim",
-    --     build = "cd app && yarn install",
-    --     init = function()
-    --         vim.g.mkdp_filetypes = { "markdown" }
-    --     end,
-    --     cmd = "MarkdownPreview",
-    -- },
-
     -- Add git related info in the signs columns and popups
     {
         "lewis6991/gitsigns.nvim",
@@ -222,15 +212,6 @@ require("lazy").setup({
         main = "ibl",
         config = function()
             require("plugins.indent-blankline")
-        end,
-    },
-
-    {
-        "NTBBloodbath/rest.nvim",
-        dependencies = { "nvim-lua/plenary.nvim" },
-        ft = "http",
-        config = function()
-            require("plugins.rest")
         end,
     },
 

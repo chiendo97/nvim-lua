@@ -53,6 +53,9 @@ require("lazy").setup({
                 config = function()
                     require("copilot_cmp").setup()
                 end,
+                cond = function()
+                    return os.getenv("OPENAI_API_KEY") ~= nil
+                end,
             },
         },
         config = function()
@@ -221,6 +224,9 @@ require("lazy").setup({
     },
     {
         "zbirenbaum/copilot.lua",
+        cond = function()
+            return os.getenv("OPENAI_API_KEY") ~= nil
+        end,
         dependencies = {
             "hrsh7th/nvim-cmp",
         },
@@ -258,6 +264,9 @@ require("lazy").setup({
     {
         "jackMort/ChatGPT.nvim",
         event = "VeryLazy",
+        cond = function()
+            return os.getenv("OPENAI_API_KEY") ~= nil
+        end,
         config = function()
             require("chatgpt").setup()
         end,
@@ -270,6 +279,7 @@ require("lazy").setup({
     },
     {
         "stevearc/oil.nvim",
+        cmd = "Oil",
         opts = {},
         dependencies = { "nvim-tree/nvim-web-devicons" },
     },

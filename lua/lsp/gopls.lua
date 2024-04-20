@@ -12,7 +12,7 @@ require("lspconfig").gopls.setup({
     init_options = {
         usePlaceholders = true,
         linksInHover = false,
-        allowModfileModifications = true,
+        -- allowModfileModifications = true,
         staticcheck = true,
     },
 })

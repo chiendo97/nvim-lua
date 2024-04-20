@@ -283,4 +283,16 @@ require("lazy").setup({
         opts = {},
         dependencies = { "nvim-tree/nvim-web-devicons" },
     },
+
+    {
+        "garymjr/nvim-snippets",
+        opts = {
+            create_cmp_source = true,
+            friendly_snippets = true,
+        },
+        dependencies = {
+            "rafamadriz/friendly-snippets",
+            "hrsh7th/nvim-cmp",
+        },
+    },
 })

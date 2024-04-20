@@ -10,7 +10,8 @@ require("luasnip.loaders.from_vscode").lazy_load()
 cmp.setup({
     snippet = {
         expand = function(args)
-            require("luasnip").lsp_expand(args.body)
+            -- Native neovim snippet support
+            vim.snippet.expand(args.body)
         end,
     },
 
@@ -31,20 +32,20 @@ cmp.setup({
         ["<C-n>"] = cmp.mapping.select_next_item(),
 
         ["<Tab>"] = cmp.mapping(function(fallback)
-            if luasnip.expand_or_jumpable() then
-                luasnip.expand_or_jump()
+            if vim.snippet.jumpable(1) then
+                vim.snippet.jump(1)
             else
                 fallback()
             end
-        end, { "i", "s" }),
+        end, { "i", "s", expr = true }),
 
         ["<S-Tab>"] = cmp.mapping(function(fallback)
-            if luasnip.jumpable(-1) then
-                luasnip.jump(-1)
+            if vim.snippet.jumpable(-1) then
+                vim.snippet.jump(-1)
             else
                 fallback()
             end
-        end, { "i", "s" }),
+        end, { "i", "s", expr = true }),
     },
 
     -- You should specify your *installed* sources.
@@ -53,6 +54,7 @@ cmp.setup({
         { name = "luasnip" },
         { name = "path" },
         { name = "copilot" },
+        { name = "snippets" },
     }, {
         { name = "buffer" },
     }),

@@ -59,9 +59,9 @@ local sources = {
     null_ls.builtins.formatting.shfmt,
     -- null_ls.builtins.formatting.fixjson,
 
-    -- null_ls.builtins.formatting.gofumpt,
-    -- null_ls.builtins.formatting.goimports.with({ extra_args = { "-format-only" } }),
-    -- null_ls.builtins.formatting.golines.with({ extra_args = { "--base-formatter", "gofmt", "--shorten-comments" } }),
+    null_ls.builtins.formatting.gofumpt,
+    null_ls.builtins.formatting.goimports.with({ extra_args = { "-format-only" } }),
+    null_ls.builtins.formatting.golines.with({ extra_args = { "--base-formatter", "gofmt", "--shorten-comments" } }),
 
     -- null_ls.builtins.formatting.markdownlint,
 

@@ -20,7 +20,7 @@ M.on_attach = function(client, bufnr)
     vim.keymap.set("n", "<leader>q", vim.diagnostic.setqflist, opts)
 
     if client.server_capabilities.inlayHintProvider then
-        vim.lsp.inlay_hint.enable(bufnr, true)
+        vim.lsp.inlay_hint.enable(true)
     end
 end
 

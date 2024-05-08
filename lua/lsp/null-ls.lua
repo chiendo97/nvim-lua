@@ -47,10 +47,9 @@ local sources = {
 
     null_ls.builtins.formatting.typstfmt,
 
-    -- null_ls.builtins.formatting.black,
-    -- null_ls.builtins.formatting.isort,
-    -- null_ls.builtins.formatting.ruff,
-    require("none-ls.formatting.ruff"),
+    null_ls.builtins.formatting.black,
+    null_ls.builtins.formatting.isort,
+    -- require("none-ls.formatting.ruff"),
 
     null_ls.builtins.formatting.buf,
     -- null_ls.builtins.formatting.protolint,

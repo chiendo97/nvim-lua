@@ -32,7 +32,7 @@ cmp.setup({
         ["<C-n>"] = cmp.mapping.select_next_item(),
 
         ["<Tab>"] = cmp.mapping(function(fallback)
-            if vim.snippet.jumpable(1) then
+            if vim.snippet.active({ direction = 1 }) then
                 vim.snippet.jump(1)
             else
                 fallback()
@@ -40,7 +40,7 @@ cmp.setup({
         end, { "i", "s", expr = true }),
 
         ["<S-Tab>"] = cmp.mapping(function(fallback)
-            if vim.snippet.jumpable(-1) then
+            if vim.snippet.active({ direction = -1 }) then
                 vim.snippet.jump(-1)
             else
                 fallback()

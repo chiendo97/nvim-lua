@@ -7,7 +7,7 @@ local actions = require("telescope.actions")
 
 telescope.setup({
     defaults = {
-        preview = false,
+        preview = true,
 
         sorting_strategy = "ascending",
 

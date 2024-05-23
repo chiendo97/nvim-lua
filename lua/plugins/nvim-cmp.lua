@@ -3,10 +3,6 @@ if not cmp then
     return
 end
 
-local luasnip = require("luasnip")
-
-require("luasnip.loaders.from_vscode").lazy_load()
-
 cmp.setup({
     snippet = {
         expand = function(args)
@@ -51,7 +47,6 @@ cmp.setup({
     -- You should specify your *installed* sources.
     sources = cmp.config.sources({
         { name = "nvim_lsp" },
-        { name = "luasnip" },
         { name = "path" },
         { name = "copilot" },
         { name = "snippets" },
@@ -66,7 +61,6 @@ cmp.setup({
                 path = "[Path]",
                 buffer = "[Buffer]",
                 nvim_lsp = "[LSP]",
-                luasnip = "[LuaSnip]",
                 vsnip = "[VSnip]",
                 nvim_lua = "[Lua]",
                 latex_symbols = "[Latex]",

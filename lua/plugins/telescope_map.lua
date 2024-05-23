@@ -1,8 +1,6 @@
 local map = vim.api.nvim_set_keymap
 local set = vim.keymap.set
 
-local map_options = { noremap = true, silent = true }
-
 local load_telescope = function()
     local lazy = require("lazy")
     if not pcall(require, "telescope") then
@@ -55,6 +53,8 @@ local grep_visual = function()
     load_telescope()
     require("telescope.builtin").grep_string({ search = table.concat(lines, "\n") })
 end
+
+local map_options = { noremap = true, silent = true }
 
 map("n", "<leader>g", [[<cmd>Telescope find_files <cr>]], map_options)
 map("n", "<leader>r", [[<cmd>Telescope live_grep  <cr>]], map_options)

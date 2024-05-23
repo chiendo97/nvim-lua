@@ -31,7 +31,7 @@ require("lspconfig").rust_analyzer.setup({
     capabilities = require("lsp.attach").capabilities,
 })
 
-require("lspconfig").ruff_lsp.setup({
+require("lspconfig").ruff.setup({
     on_attach = function(client, bufnr)
         client.server_capabilities.document_formatting = false
         require("lsp.attach").on_attach(client, bufnr)

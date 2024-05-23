@@ -104,7 +104,7 @@ vim.o.incsearch      = true      -- show search matches as you type
 vim.o.ignorecase     = true      -- ignore case on search
 vim.o.smartcase      = true      -- case sensitive when search includes uppercase
 vim.o.showmatch      = true      -- highlight matching [{()}]
-vim.o.inccommand     = "nosplit" -- show search and replace in real time
+vim.o.inccommand     = "split"   -- show search and replace in real time
 vim.o.autoread       = true      -- reread a file if it's changed outside of vim
 vim.o.wrapscan       = true      -- begin search from top of the file when nothng is found
 
@@ -174,7 +174,7 @@ for _, plugin in pairs(disabled_built_ins) do
     vim.g["loaded_" .. plugin] = 1
 end
 
-vim.g.ftplugin_sql_omni_key = "<c-j>"
+-- vim.g.ftplugin_sql_omni_key = "<c-j>"
 
 function _G.dump(...)
     local objects = vim.tbl_map(vim.inspect, { ... })

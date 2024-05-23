@@ -47,7 +47,6 @@ require("lazy").setup({
             "hrsh7th/cmp-nvim-lsp", -- lsp source
             "hrsh7th/cmp-buffer",
             "hrsh7th/cmp-path",
-            "L3MON4D3/LuaSnip",
             {
                 "zbirenbaum/copilot-cmp",
                 config = function()

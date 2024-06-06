@@ -52,3 +52,7 @@ require("lspconfig").typst_lsp.setup({
         -- serverPath = "" -- Normally, there is no need to uncomment it.
     },
 })
+
+vim.keymap.del("n", "grr")
+vim.keymap.del({ "x", "n" }, "gra")
+vim.keymap.del("n", "grn")

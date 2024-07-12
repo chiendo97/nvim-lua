@@ -53,7 +53,7 @@ require("lazy").setup({
                     require("copilot_cmp").setup()
                 end,
                 cond = function()
-                    return os.getenv("OPENAI_API_KEY") ~= nil
+                    return os.getenv("OPENAI_API_KEY") ~= nil and vim.fn.executable("node") == 1
                 end,
             },
         },

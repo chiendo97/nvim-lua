@@ -25,6 +25,13 @@ nvim_lsp.basedpyright.setup({
                 autoSearchPaths = true,
                 diagnosticMode = "openFilesOnly",
                 useLibraryCodeForTypes = true,
+                typeCheckingMode = "all",
+                diagnosticSeverityOverrides = {
+                    reportMissingTypeStubs = false,
+                    reportUnknownMemberType = false,
+                    reportUnknownParameterType = false,
+                    reportUnknownArgumentType = false,
+                },
             },
         },
     },

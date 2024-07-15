@@ -85,9 +85,8 @@ require("lazy").setup({
     -- note manager
     {
         "nvim-orgmode/orgmode",
-        dependencies = {
-            { "nvim-treesitter/nvim-treesitter", lazy = true },
-        },
+        event = "VeryLazy",
+        ft = { "org" },
         event = "VeryLazy",
         config = function()
             require("plugins.orgmode")

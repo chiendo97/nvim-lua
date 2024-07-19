@@ -46,6 +46,7 @@ require("lazy").setup({
         dependencies = {
             "hrsh7th/cmp-nvim-lsp", -- lsp source
             "hrsh7th/cmp-buffer",
+            "hrsh7th/cmp-nvim-lsp-signature-help",
             "hrsh7th/cmp-path",
             {
                 "zbirenbaum/copilot-cmp",

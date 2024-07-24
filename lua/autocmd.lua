@@ -1,41 +1,22 @@
 local vim = vim
 local api = vim.api
 
--- Taken from https://github.com/norcalli/nvim_utils
-local function nvim_create_augroups(definitions)
-    for group_name, definition in pairs(definitions) do
-        api.nvim_command("augroup " .. group_name)
-        api.nvim_command("autocmd!")
-        for _, def in ipairs(definition) do
-            local command = table.concat(vim.tbl_flatten({ "autocmd", def }), " ")
-            api.nvim_command(command)
+api.nvim_create_augroup("back_to_line", { clear = true })
+api.nvim_create_autocmd("BufReadPost", {
+    pattern = "*",
+    callback = function()
+        if vim.fn.line('"') > 0 and vim.fn.line('"') <= vim.fn.line("$") then
+            vim.cmd('normal! g"`')
         end
-        api.nvim_command("augroup END")
-    end
-end
+    end,
+    group = "back_to_line",
+})
 
-local autocmds = {
-    back_to_line = {
-        {
-            "BufReadPost",
-            "*",
-            [[if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! g`\"" | endif]],
-        },
-    },
-    vimrc_help = {
-        {
-            "BufEnter",
-            "*.txt",
-            [[if &buftype == 'help' | wincmd L | endif]],
-        },
-    },
-    quickfix_below = {
-        {
-            "FileType",
-            "qf",
-            "wincmd J",
-        },
-    },
-}
-
-nvim_create_augroups(autocmds)
+api.nvim_create_augroup("quickfix_below", { clear = true })
+api.nvim_create_autocmd("FileType", {
+    pattern = "qf",
+    callback = function()
+        vim.api.nvim_cmd({ cmd = "wincmd", args = { "J" } }, {})
+    end,
+    group = "quickfix_below",
+})

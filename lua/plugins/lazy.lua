@@ -1,6 +1,6 @@
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 
-if not vim.loop.fs_stat(lazypath) then
+if not vim.uv.fs_stat(lazypath) then
     vim.fn.system({
         "git",
         "clone",
@@ -88,7 +88,6 @@ require("lazy").setup({
         "nvim-orgmode/orgmode",
         event = "VeryLazy",
         ft = { "org" },
-        event = "VeryLazy",
         config = function()
             require("plugins.orgmode")
         end,
@@ -187,7 +186,7 @@ require("lazy").setup({
     },
     {
         "nvim-telescope/telescope.nvim",
-        cmd = "Telescope",
+        -- cmd = "Telescope",
         init = function()
             require("plugins.telescope_map")
         end,
@@ -197,6 +196,7 @@ require("lazy").setup({
         dependencies = {
             { "nvim-lua/plenary.nvim" },
             { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+            { "nvim-telescope/telescope-ui-select.nvim" },
         },
     },
 
@@ -261,20 +261,11 @@ require("lazy").setup({
         end,
     },
     {
-        "jackMort/ChatGPT.nvim",
-        event = "VeryLazy",
-        cond = function()
-            return os.getenv("OPENAI_API_KEY") ~= nil
-        end,
+        -- "David-Kunz/gen.nvim",
+        dir = "/Users/chiendo97/Source/demo/gen.nvim",
         config = function()
-            require("chatgpt").setup()
+            require("plugins.gen")
         end,
-        dependencies = {
-            "MunifTanjim/nui.nvim",
-            "nvim-lua/plenary.nvim",
-            "folke/trouble.nvim",
-            "nvim-telescope/telescope.nvim",
-        },
     },
     {
         "stevearc/oil.nvim",

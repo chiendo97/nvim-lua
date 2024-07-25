@@ -32,11 +32,18 @@ gen.prompts["Implement_Code"] = {
 }
 
 gen.prompts["Docstring"] = {
-    prompt = "Generate short and nice docstring. Only output the result in format ```$filetype\n...\n```:\n```$filetype\n$text\n```",
+    prompt = "Generate short and concise docstring for this code ```$filetype\n$text\n```."
+        .. "Only output the code with docstring in format ```$filetype\n...\n```",
+    replace = true,
+    extract = "```$filetype\n(.-)```",
 }
 
 gen.prompts["Refactor_Code"] = {
     prompt = "$input. Only output the result in format ```$filetype\n...\n```:\n```$filetype\n$text\n```",
     replace = true,
     extract = "```$filetype\n(.-)```",
+}
+gen.prompts["Improve_Text"] = {
+    prompt = "Modify the following text as this request: %input, just output the final text without additional quotes around it:\n$text",
+    replace = true,
 }

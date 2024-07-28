@@ -154,7 +154,7 @@ require("lazy").setup({
 
     {
         "ellisonleao/gruvbox.nvim",
-        lazy = false, -- make sure we load this during startup if it is your main colorscheme
+        lazy = false,    -- make sure we load this during startup if it is your main colorscheme
         priority = 1000, -- make sure to load this before all the other start plugins
         config = function()
             -- setup must be called before loading the colorscheme
@@ -175,7 +175,7 @@ require("lazy").setup({
                 invert_tabline = false,
                 invert_intend_guides = false,
                 inverse = true, -- invert background for search, diffs, statuslines and errors
-                contrast = "", -- can be "hard", "soft" or empty string
+                contrast = "",  -- can be "hard", "soft" or empty string
                 palette_overrides = {},
                 overrides = {},
                 dim_inactive = false,
@@ -261,8 +261,7 @@ require("lazy").setup({
         end,
     },
     {
-        -- "David-Kunz/gen.nvim",
-        dir = "/Users/chiendo97/Source/demo/gen.nvim",
+        "David-Kunz/gen.nvim",
         config = function()
             require("plugins.gen")
         end,
@@ -331,21 +330,6 @@ require("lazy").setup({
                         endpoint = "https://api.openai.com/v1/chat/completions",
                         -- secret = os.getenv("OPENAI_API_KEY"),
                     },
-                    azure = {
-                        disable = true,
-                        endpoint = "https://$URL.openai.azure.com/openai/deployments/{{model}}/chat/completions",
-                        secret = os.getenv("AZURE_API_KEY"),
-                    },
-                    googleai = {
-                        disable = true,
-                        endpoint = "https://generativelanguage.googleapis.com/v1beta/models/{{model}}:streamGenerateContent?key={{secret}}",
-                        secret = os.getenv("GOOGLEAI_API_KEY"),
-                    },
-                    anthropic = {
-                        disable = true,
-                        endpoint = "https://api.anthropic.com/v1/messages",
-                        secret = os.getenv("ANTHROPIC_API_KEY"),
-                    },
                 },
 
                 -- prefix for all commands
@@ -367,36 +351,6 @@ require("lazy").setup({
                 -- agents = {  { name = "ChatGPT3-5", disable = true, }, ... },
                 agents = {
                     {
-                        provider = "googleai",
-                        name = "ChatGemini",
-                        chat = true,
-                        command = false,
-                        -- string with model name or table with model name and parameters
-                        model = { model = "gemini-pro", temperature = 1.1, top_p = 1 },
-                        -- system prompt (use this to specify the persona/role of the AI)
-                        system_prompt = require("gp.defaults").chat_system_prompt,
-                    },
-                    {
-                        provider = "anthropic",
-                        name = "ChatClaude-3-5-Sonnet",
-                        chat = true,
-                        command = false,
-                        -- string with model name or table with model name and parameters
-                        model = { model = "claude-3-5-sonnet-20240620", temperature = 0.8, top_p = 1 },
-                        -- system prompt (use this to specify the persona/role of the AI)
-                        system_prompt = require("gp.defaults").chat_system_prompt,
-                    },
-                    {
-                        provider = "anthropic",
-                        name = "ChatClaude-3-Haiku",
-                        chat = true,
-                        command = false,
-                        -- string with model name or table with model name and parameters
-                        model = { model = "claude-3-haiku-20240307", temperature = 0.8, top_p = 1 },
-                        -- system prompt (use this to specify the persona/role of the AI)
-                        system_prompt = require("gp.defaults").chat_system_prompt,
-                    },
-                    {
                         provider = "openai",
                         name = "CodeGPT4o",
                         chat = false,
@@ -415,24 +369,6 @@ require("lazy").setup({
                         model = { model = "gpt-4o-mini", temperature = 0.7, top_p = 1 },
                         -- system prompt (use this to specify the persona/role of the AI)
                         system_prompt = "Please return ONLY code snippets.\nSTART AND END YOUR ANSWER WITH:\n\n```",
-                    },
-                    {
-                        provider = "anthropic",
-                        name = "CodeClaude-3-5-Sonnet",
-                        chat = false,
-                        command = true,
-                        -- string with model name or table with model name and parameters
-                        model = { model = "claude-3-5-sonnet-20240620", temperature = 0.8, top_p = 1 },
-                        system_prompt = require("gp.defaults").code_system_prompt,
-                    },
-                    {
-                        provider = "anthropic",
-                        name = "CodeClaude-3-Haiku",
-                        chat = false,
-                        command = true,
-                        -- string with model name or table with model name and parameters
-                        model = { model = "claude-3-haiku-20240307", temperature = 0.8, top_p = 1 },
-                        system_prompt = require("gp.defaults").code_system_prompt,
                     },
                 },
 
@@ -551,47 +487,47 @@ require("lazy").setup({
                             agent,
                             template,
                             nil, -- command will run directly without any prompting for user input
-                            nil -- no predefined instructions (e.g. speech-to-text from Whisper)
+                            nil  -- no predefined instructions (e.g. speech-to-text from Whisper)
                         )
                     end,
 
                     -- your own functions can go here, see README for more examples like
                     -- :GpExplain, :GpUnitTests.., :GpTranslator etc.
 
-                    -- -- example of making :%GpChatNew a dedicated command which
-                    -- -- opens new chat with the entire current buffer as a context
-                    -- BufferChatNew = function(gp, _)
-                    -- 	-- call GpChatNew command in range mode on whole buffer
-                    -- 	vim.api.nvim_command("%" .. gp.config.cmd_prefix .. "ChatNew")
-                    -- end,
+                    -- example of making :%GpChatNew a dedicated command which
+                    -- opens new chat with the entire current buffer as a context
+                    BufferChatNew = function(gp, _)
+                        -- call GpChatNew command in range mode on whole buffer
+                        vim.api.nvim_command("%" .. gp.config.cmd_prefix .. "ChatNew")
+                    end,
 
-                    -- -- example of adding command which opens new chat dedicated for translation
-                    -- Translator = function(gp, params)
-                    -- 	local chat_system_prompt = "You are a Translator, please translate between English and Chinese."
-                    -- 	gp.cmd.ChatNew(params, chat_system_prompt)
-                    --
-                    -- 	-- -- you can also create a chat with a specific fixed agent like this:
-                    -- 	-- local agent = gp.get_chat_agent("ChatGPT4o")
-                    -- 	-- gp.cmd.ChatNew(params, chat_system_prompt, agent)
-                    -- end,
+                    -- example of adding command which opens new chat dedicated for translation
+                    Translator = function(gp, params)
+                        local chat_system_prompt = "You are a Translator, please translate between English and Chinese."
+                        gp.cmd.ChatNew(params, chat_system_prompt)
 
-                    -- -- example of adding command which writes unit tests for the selected code
-                    -- UnitTests = function(gp, params)
-                    -- 	local template = "I have the following code from {{filename}}:\n\n"
-                    -- 		.. "```{{filetype}}\n{{selection}}\n```\n\n"
-                    -- 		.. "Please respond by writing table driven unit tests for the code above."
-                    -- 	local agent = gp.get_command_agent()
-                    -- 	gp.Prompt(params, gp.Target.enew, agent, template)
-                    -- end,
+                        -- -- you can also create a chat with a specific fixed agent like this:
+                        -- local agent = gp.get_chat_agent("ChatGPT4o")
+                        -- gp.cmd.ChatNew(params, chat_system_prompt, agent)
+                    end,
 
-                    -- -- example of adding command which explains the selected code
-                    -- Explain = function(gp, params)
-                    -- 	local template = "I have the following code from {{filename}}:\n\n"
-                    -- 		.. "```{{filetype}}\n{{selection}}\n```\n\n"
-                    -- 		.. "Please respond by explaining the code above."
-                    -- 	local agent = gp.get_chat_agent()
-                    -- 	gp.Prompt(params, gp.Target.popup, agent, template)
-                    -- end,
+                    -- example of adding command which writes unit tests for the selected code
+                    UnitTests = function(gp, params)
+                        local template = "I have the following code from {{filename}}:\n\n"
+                            .. "```{{filetype}}\n{{selection}}\n```\n\n"
+                            .. "Please respond by writing table driven unit tests for the code above."
+                        local agent = gp.get_command_agent()
+                        gp.Prompt(params, gp.Target.enew, agent, template)
+                    end,
+
+                    -- example of adding command which explains the selected code
+                    Explain = function(gp, params)
+                        local template = "I have the following code from {{filename}}:\n\n"
+                            .. "```{{filetype}}\n{{selection}}\n```\n\n"
+                            .. "Please respond by explaining the code above."
+                        local agent = gp.get_chat_agent()
+                        gp.Prompt(params, gp.Target.popup, agent, template)
+                    end,
                 },
             }
             require("gp").setup(config)

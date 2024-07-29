@@ -5,9 +5,7 @@ api.nvim_create_augroup("back_to_line", { clear = true })
 api.nvim_create_autocmd("BufReadPost", {
     pattern = "*",
     callback = function()
-        if vim.fn.line('"') > 0 and vim.fn.line('"') <= vim.fn.line("$") then
-            vim.cmd('normal! g"`')
-        end
+        vim.cmd([[if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! g`\"" | endif]])
     end,
     group = "back_to_line",
 })

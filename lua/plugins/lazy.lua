@@ -333,10 +333,10 @@ require("lazy").setup({
                 curl_params = {},
 
                 -- log file location
-                log_file = vim.fn.stdpath("log"):gsub("/$", "") .. "/gp.nvim.log",
+                -- log_file = vim.fn.stdpath("log"):gsub("/$", "") .. "/gp.nvim.log",
 
                 -- directory for persisting state dynamically changed by user (like model or persona)
-                state_dir = vim.fn.stdpath("data"):gsub("/$", "") .. "/gp/persisted",
+                -- state_dir = vim.fn.stdpath("data"):gsub("/$", "") .. "/gp/persisted",
 
                 -- default command agents (model + persona)
                 -- name, model and system_prompt are mandatory fields
@@ -344,6 +344,26 @@ require("lazy").setup({
                 -- to remove some default agent completely set it like:
                 -- agents = {  { name = "ChatGPT3-5", disable = true, }, ... },
                 agents = {
+                    {
+                        provider = "openai",
+                        name = "ChatGPT4o",
+                        chat = true,
+                        command = false,
+                        -- string with model name or table with model name and parameters
+                        model = { model = "gpt-4o", temperature = 1.1, top_p = 1 },
+                        -- system prompt (use this to specify the persona/role of the AI)
+                        system_prompt = require("gp.defaults").chat_system_prompt,
+                    },
+                    {
+                        provider = "openai",
+                        name = "ChatGPT4o-mini",
+                        chat = true,
+                        command = false,
+                        -- string with model name or table with model name and parameters
+                        model = { model = "gpt-4o-mini", temperature = 1.1, top_p = 1 },
+                        -- system prompt (use this to specify the persona/role of the AI)
+                        system_prompt = require("gp.defaults").chat_system_prompt,
+                    },
                     {
                         provider = "openai",
                         name = "CodeGPT4o",
@@ -362,21 +382,21 @@ require("lazy").setup({
                         -- string with model name or table with model name and parameters
                         model = { model = "gpt-4o-mini", temperature = 0.7, top_p = 1 },
                         -- system prompt (use this to specify the persona/role of the AI)
-                        system_prompt = "Please return ONLY code snippets.\nSTART AND END YOUR ANSWER WITH:\n\n```",
+                        system_prompt = require("gp.defaults").code_system_prompt,
                     },
                 },
 
                 -- directory for storing chat files
-                chat_dir = vim.fn.stdpath("data"):gsub("/$", "") .. "/gp/chats",
+                -- chat_dir = vim.fn.stdpath("data"):gsub("/$", "") .. "/gp/chats",
                 -- chat user prompt prefix
-                chat_user_prefix = "💬:",
+                -- chat_user_prefix = "💬:",
                 -- chat assistant prompt prefix (static string or a table {static, template})
                 -- first string has to be static, second string can contain template {{agent}}
                 -- just a static string is legacy and the [{{agent}}] element is added automatically
                 -- if you really want just a static string, make it a table with one element { "🤖:" }
-                chat_assistant_prefix = { "🤖:", "[{{agent}}]" },
+                -- chat_assistant_prefix = { "🤖:", "[{{agent}}]" },
                 -- The banner shown at the top of each chat file.
-                chat_template = require("gp.defaults").chat_template,
+                -- chat_template = require("gp.defaults").chat_template,
                 -- if you want more real estate in your chat files and don't need the helper text
                 -- chat_template = require("gp.defaults").short_chat_template,
                 -- chat topic generation prompt
@@ -396,16 +416,16 @@ require("lazy").setup({
                 -- default search term when using :GpChatFinder
                 chat_finder_pattern = "topic ",
                 -- if true, finished ChatResponder won't move the cursor to the end of the buffer
-                chat_free_cursor = false,
+                chat_free_cursor = true,
                 -- use prompt buftype for chats (:h prompt-buffer)
                 chat_prompt_buf_type = false,
 
                 -- how to display GpChatToggle or GpContext: popup / split / vsplit / tabnew
-                toggle_target = "popup",
+                toggle_target = "tabnew",
 
                 -- styling for chatfinder
                 -- border can be "single", "double", "rounded", "solid", "shadow", "none"
-                style_chat_finder_border = "single",
+                style_chat_finder_border = "rounded",
                 -- margins are number of characters or lines
                 style_chat_finder_margin_bottom = 8,
                 style_chat_finder_margin_left = 1,
@@ -416,7 +436,7 @@ require("lazy").setup({
 
                 -- styling for popup
                 -- border can be "single", "double", "rounded", "solid", "shadow", "none"
-                style_popup_border = "single",
+                style_popup_border = "rounded",
                 -- margins are number of characters or lines
                 style_popup_margin_bottom = 8,
                 style_popup_margin_left = 1,
@@ -526,6 +546,69 @@ require("lazy").setup({
             }
             require("gp").setup(config)
             -- Setup shortcuts here (see Usage > Shortcuts in the Documentation/Readme)
+            local function keymapOptions(desc)
+                return {
+                    noremap = true,
+                    silent = true,
+                    nowait = true,
+                    desc = "GPT prompt " .. desc,
+                }
+            end
+
+            -- Chat commands
+            vim.keymap.set({ "n", "i" }, "<C-g>c", "<cmd>GpChatNew<cr>", keymapOptions("New Chat"))
+            vim.keymap.set({ "n", "i" }, "<C-g>t", "<cmd>GpChatToggle<cr>", keymapOptions("Toggle Chat"))
+            vim.keymap.set({ "n", "i" }, "<C-g>f", "<cmd>GpChatFinder<cr>", keymapOptions("Chat Finder"))
+
+            vim.keymap.set("v", "<C-g>c", ":<C-u>'<,'>GpChatNew<cr>", keymapOptions("Visual Chat New"))
+            vim.keymap.set("v", "<C-g>p", ":<C-u>'<,'>GpChatPaste<cr>", keymapOptions("Visual Chat Paste"))
+            vim.keymap.set("v", "<C-g>t", ":<C-u>'<,'>GpChatToggle<cr>", keymapOptions("Visual Toggle Chat"))
+
+            vim.keymap.set({ "n", "i" }, "<C-g><C-x>", "<cmd>GpChatNew split<cr>", keymapOptions("New Chat split"))
+            vim.keymap.set({ "n", "i" }, "<C-g><C-v>", "<cmd>GpChatNew vsplit<cr>", keymapOptions("New Chat vsplit"))
+            vim.keymap.set({ "n", "i" }, "<C-g><C-t>", "<cmd>GpChatNew tabnew<cr>", keymapOptions("New Chat tabnew"))
+
+            vim.keymap.set("v", "<C-g><C-x>", ":<C-u>'<,'>GpChatNew split<cr>", keymapOptions("Visual Chat New split"))
+            vim.keymap.set(
+                "v",
+                "<C-g><C-v>",
+                ":<C-u>'<,'>GpChatNew vsplit<cr>",
+                keymapOptions("Visual Chat New vsplit")
+            )
+            vim.keymap.set(
+                "v",
+                "<C-g><C-t>",
+                ":<C-u>'<,'>GpChatNew tabnew<cr>",
+                keymapOptions("Visual Chat New tabnew")
+            )
+
+            -- Prompt commands
+            vim.keymap.set({ "n", "i" }, "<C-g>r", "<cmd>GpRewrite<cr>", keymapOptions("Inline Rewrite"))
+            vim.keymap.set({ "n", "i" }, "<C-g>a", "<cmd>GpAppend<cr>", keymapOptions("Append (after)"))
+            vim.keymap.set({ "n", "i" }, "<C-g>b", "<cmd>GpPrepend<cr>", keymapOptions("Prepend (before)"))
+
+            vim.keymap.set("v", "<C-g>r", ":<C-u>'<,'>GpRewrite<cr>", keymapOptions("Visual Rewrite"))
+            vim.keymap.set("v", "<C-g>a", ":<C-u>'<,'>GpAppend<cr>", keymapOptions("Visual Append (after)"))
+            vim.keymap.set("v", "<C-g>b", ":<C-u>'<,'>GpPrepend<cr>", keymapOptions("Visual Prepend (before)"))
+            vim.keymap.set("v", "<C-g>i", ":<C-u>'<,'>GpImplement<cr>", keymapOptions("Implement selection"))
+
+            vim.keymap.set({ "n", "i" }, "<C-g>gp", "<cmd>GpPopup<cr>", keymapOptions("Popup"))
+            vim.keymap.set({ "n", "i" }, "<C-g>ge", "<cmd>GpEnew<cr>", keymapOptions("GpEnew"))
+            vim.keymap.set({ "n", "i" }, "<C-g>gn", "<cmd>GpNew<cr>", keymapOptions("GpNew"))
+            vim.keymap.set({ "n", "i" }, "<C-g>gv", "<cmd>GpVnew<cr>", keymapOptions("GpVnew"))
+            vim.keymap.set({ "n", "i" }, "<C-g>gt", "<cmd>GpTabnew<cr>", keymapOptions("GpTabnew"))
+
+            vim.keymap.set("v", "<C-g>gp", ":<C-u>'<,'>GpPopup<cr>", keymapOptions("Visual Popup"))
+            vim.keymap.set("v", "<C-g>ge", ":<C-u>'<,'>GpEnew<cr>", keymapOptions("Visual GpEnew"))
+            vim.keymap.set("v", "<C-g>gn", ":<C-u>'<,'>GpNew<cr>", keymapOptions("Visual GpNew"))
+            vim.keymap.set("v", "<C-g>gv", ":<C-u>'<,'>GpVnew<cr>", keymapOptions("Visual GpVnew"))
+            vim.keymap.set("v", "<C-g>gt", ":<C-u>'<,'>GpTabnew<cr>", keymapOptions("Visual GpTabnew"))
+
+            vim.keymap.set({ "n", "i" }, "<C-g>x", "<cmd>GpContext<cr>", keymapOptions("Toggle Context"))
+            vim.keymap.set("v", "<C-g>x", ":<C-u>'<,'>GpContext<cr>", keymapOptions("Visual Toggle Context"))
+
+            vim.keymap.set({ "n", "i", "v", "x" }, "<C-g>s", "<cmd>GpStop<cr>", keymapOptions("Stop"))
+            vim.keymap.set({ "n", "i", "v", "x" }, "<C-g>n", "<cmd>GpNextAgent<cr>", keymapOptions("Next Agent"))
         end,
     },
 })

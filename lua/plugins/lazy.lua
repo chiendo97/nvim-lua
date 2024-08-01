@@ -154,7 +154,7 @@ require("lazy").setup({
 
     {
         "ellisonleao/gruvbox.nvim",
-        lazy = false,    -- make sure we load this during startup if it is your main colorscheme
+        lazy = false, -- make sure we load this during startup if it is your main colorscheme
         priority = 1000, -- make sure to load this before all the other start plugins
         config = function()
             -- setup must be called before loading the colorscheme
@@ -175,7 +175,7 @@ require("lazy").setup({
                 invert_tabline = false,
                 invert_intend_guides = false,
                 inverse = true, -- invert background for search, diffs, statuslines and errors
-                contrast = "",  -- can be "hard", "soft" or empty string
+                contrast = "", -- can be "hard", "soft" or empty string
                 palette_overrides = {},
                 overrides = {},
                 dim_inactive = false,
@@ -258,12 +258,6 @@ require("lazy").setup({
                     vim.b.copilot_suggestion_hidden = false
                 end)
             end
-        end,
-    },
-    {
-        "David-Kunz/gen.nvim",
-        config = function()
-            require("plugins.gen")
         end,
     },
     {
@@ -487,7 +481,7 @@ require("lazy").setup({
                             agent,
                             template,
                             nil, -- command will run directly without any prompting for user input
-                            nil  -- no predefined instructions (e.g. speech-to-text from Whisper)
+                            nil -- no predefined instructions (e.g. speech-to-text from Whisper)
                         )
                     end,
 

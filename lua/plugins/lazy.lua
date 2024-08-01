@@ -485,6 +485,44 @@ require("lazy").setup({
                         vim.api.nvim_win_set_buf(0, bufnr)
                     end,
 
+                    -- Improvement improve wording and fix grammar for the provided selection/range
+                    Improvement = function(gp, params)
+                        local template = "Having following from {{filename}}:\n\n"
+                            .. "```{{filetype}}\n{{selection}}\n```\n\n"
+                            .. "Please help to improve wording and fix grammar errors."
+
+                        local agent = gp.get_command_agent()
+                        gp.logger.info("Implementing selection with agent: " .. agent.name)
+
+                        gp.Prompt(
+                            params,
+                            gp.Target.rewrite,
+                            agent,
+                            template,
+                            nil, -- command will run directly without any prompting for user input
+                            nil -- no predefined instructions (e.g. speech-to-text from Whisper)
+                        )
+                    end,
+
+                    -- Consise make the provided selection/range concise
+                    Consise = function(gp, params)
+                        local template = "Having following from nvim/lua/plugins/lazy.lua:\n\n"
+                            .. "```{{filetype}}\n{{selection}}\n```\n\n"
+                            .. "Please help to make the provided text more concise."
+
+                        local agent = gp.get_command_agent()
+                        gp.logger.info("Implementing selection with agent: " .. agent.name)
+
+                        gp.Prompt(
+                            params,
+                            gp.Target.rewrite,
+                            agent,
+                            template,
+                            nil, -- command will run directly without any prompting for user input
+                            nil -- no predefined instructions (e.g. speech-to-text from Whisper)
+                        )
+                    end,
+
                     -- GpImplement rewrites the provided selection/range based on comments in it
                     Implement = function(gp, params)
                         local template = "Having following from {{filename}}:\n\n"

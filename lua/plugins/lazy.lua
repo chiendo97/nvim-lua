@@ -409,7 +409,7 @@ require("lazy").setup({
                         -- string with the Copilot engine name or table with engine name and parameters if applicable
                         model = {
                             model = "llama3.1:latest",
-                            temperature = 1.9,
+                            temperature = 0,
                             top_p = 1,
                             num_ctx = 8192,
                         },
@@ -616,6 +616,12 @@ require("lazy").setup({
                         local agent = gp.get_chat_agent()
                         gp.Prompt(params, gp.Target.popup, agent, template)
                     end,
+                },
+                whisper = {
+                    disable = true,
+                },
+                image = {
+                    disable = true,
                 },
             }
             require("gp").setup(config)

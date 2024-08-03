@@ -324,6 +324,9 @@ require("lazy").setup({
                         endpoint = "https://api.openai.com/v1/chat/completions",
                         -- secret = os.getenv("OPENAI_API_KEY"),
                     },
+                    ollama = {
+                        endpoint = "http://100.72.233.13:11434/v1/chat/completions",
+                    },
                 },
 
                 -- prefix for all commands
@@ -382,6 +385,39 @@ require("lazy").setup({
                         -- string with model name or table with model name and parameters
                         model = { model = "gpt-4o-mini", temperature = 0.7, top_p = 1 },
                         -- system prompt (use this to specify the persona/role of the AI)
+                        system_prompt = require("gp.defaults").code_system_prompt,
+                    },
+                    {
+                        provider = "ollama",
+                        name = "ChatOllamaLlama3",
+                        chat = true,
+                        command = false,
+                        -- string with model name or table with model name and parameters
+                        model = {
+                            model = "llama3.1:latest",
+                            num_ctx = 8192,
+                        },
+                        -- system prompt (use this to specify the persona/role of the AI)
+                        -- system_prompt = "You are a general AI assistant.",
+                        system_prompt = require("gp.defaults").chat_system_prompt,
+                    },
+                    {
+                        provider = "ollama",
+                        name = "CodeOllamaLlama3",
+                        chat = false,
+                        command = true,
+                        -- string with the Copilot engine name or table with engine name and parameters if applicable
+                        model = {
+                            model = "llama3.1:latest",
+                            temperature = 1.9,
+                            top_p = 1,
+                            num_ctx = 8192,
+                        },
+                        -- system prompt (use this to specify the persona/role of the AI)
+                        -- system_prompt = "You are an AI working as a code editor providing answers.\n\n"
+                        --     .. "Use 4 SPACES FOR INDENTATION.\n"
+                        --     .. "Please AVOID COMMENTARY OUTSIDE OF THE SNIPPET RESPONSE.\n"
+                        --     .. "START AND END YOUR ANSWER WITH:\n\n```",
                         system_prompt = require("gp.defaults").code_system_prompt,
                     },
                 },

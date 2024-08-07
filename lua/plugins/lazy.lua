@@ -154,7 +154,7 @@ require("lazy").setup({
 
     {
         "ellisonleao/gruvbox.nvim",
-        lazy = false, -- make sure we load this during startup if it is your main colorscheme
+        lazy = false,    -- make sure we load this during startup if it is your main colorscheme
         priority = 1000, -- make sure to load this before all the other start plugins
         config = function()
             -- setup must be called before loading the colorscheme
@@ -175,7 +175,7 @@ require("lazy").setup({
                 invert_tabline = false,
                 invert_intend_guides = false,
                 inverse = true, -- invert background for search, diffs, statuslines and errors
-                contrast = "", -- can be "hard", "soft" or empty string
+                contrast = "",  -- can be "hard", "soft" or empty string
                 palette_overrides = {},
                 overrides = {},
                 dim_inactive = false,
@@ -320,26 +320,19 @@ require("lazy").setup({
                     -- secret : "sk-...",
                     -- secret = os.getenv("env_name.."),
                     openai = {
-                        disable = false,
+                        disable = true,
                         endpoint = "https://api.openai.com/v1/chat/completions",
-                        -- secret = os.getenv("OPENAI_API_KEY"),
+                        secret = os.getenv("OPENAI_API_KEY"),
                     },
                     ollama = {
                         endpoint = "http://100.72.233.13:11434/v1/chat/completions",
                     },
+                    anthropic = {
+                        disable = false,
+                        endpoint = "https://api.anthropic.com/v1/messages",
+                        secret = os.getenv("ANTHROPIC_API_KEY"),
+                    },
                 },
-
-                -- prefix for all commands
-                cmd_prefix = "Gp",
-                -- optional curl parameters (for proxy, etc.)
-                -- curl_params = { "--proxy", "http://X.X.X.X:XXXX" }
-                curl_params = {},
-
-                -- log file location
-                -- log_file = vim.fn.stdpath("log"):gsub("/$", "") .. "/gp.nvim.log",
-
-                -- directory for persisting state dynamically changed by user (like model or persona)
-                -- state_dir = vim.fn.stdpath("data"):gsub("/$", "") .. "/gp/persisted",
 
                 -- default command agents (model + persona)
                 -- name, model and system_prompt are mandatory fields
@@ -395,6 +388,8 @@ require("lazy").setup({
                         -- string with model name or table with model name and parameters
                         model = {
                             model = "llama3.1:latest",
+                            temperature = 0,
+                            top_p = 1,
                             num_ctx = 8192,
                         },
                         -- system prompt (use this to specify the persona/role of the AI)
@@ -413,48 +408,47 @@ require("lazy").setup({
                             top_p = 1,
                             num_ctx = 8192,
                         },
+                        system_prompt = require("gp.defaults").code_system_prompt,
+                    },
+                    {
+                        provider = "anthropic",
+                        name = "ChatClaude-3-5-Sonnet",
+                        chat = true,
+                        command = false,
+                        -- string with model name or table with model name and parameters
+                        model = { model = "claude-3-5-sonnet-20240620", temperature = 0.8, top_p = 1 },
                         -- system prompt (use this to specify the persona/role of the AI)
-                        -- system_prompt = "You are an AI working as a code editor providing answers.\n\n"
-                        --     .. "Use 4 SPACES FOR INDENTATION.\n"
-                        --     .. "Please AVOID COMMENTARY OUTSIDE OF THE SNIPPET RESPONSE.\n"
-                        --     .. "START AND END YOUR ANSWER WITH:\n\n```",
+                        system_prompt = require("gp.defaults").chat_system_prompt,
+                    },
+                    {
+                        provider = "anthropic",
+                        name = "ChatClaude-3-Haiku",
+                        chat = true,
+                        command = false,
+                        -- string with model name or table with model name and parameters
+                        model = { model = "claude-3-haiku-20240307", temperature = 0.8, top_p = 1 },
+                        -- system prompt (use this to specify the persona/role of the AI)
+                        system_prompt = require("gp.defaults").chat_system_prompt,
+                    },
+                    {
+                        provider = "anthropic",
+                        name = "CodeClaude-3-5-Sonnet",
+                        chat = false,
+                        command = true,
+                        -- string with model name or table with model name and parameters
+                        model = { model = "claude-3-5-sonnet-20240620", temperature = 0.8, top_p = 1 },
+                        system_prompt = require("gp.defaults").code_system_prompt,
+                    },
+                    {
+                        provider = "anthropic",
+                        name = "CodeClaude-3-Haiku",
+                        chat = false,
+                        command = true,
+                        -- string with model name or table with model name and parameters
+                        model = { model = "claude-3-haiku-20240307", temperature = 0.8, top_p = 1 },
                         system_prompt = require("gp.defaults").code_system_prompt,
                     },
                 },
-
-                -- directory for storing chat files
-                -- chat_dir = vim.fn.stdpath("data"):gsub("/$", "") .. "/gp/chats",
-                -- chat user prompt prefix
-                -- chat_user_prefix = "💬:",
-                -- chat assistant prompt prefix (static string or a table {static, template})
-                -- first string has to be static, second string can contain template {{agent}}
-                -- just a static string is legacy and the [{{agent}}] element is added automatically
-                -- if you really want just a static string, make it a table with one element { "🤖:" }
-                -- chat_assistant_prefix = { "🤖:", "[{{agent}}]" },
-                -- The banner shown at the top of each chat file.
-                -- chat_template = require("gp.defaults").chat_template,
-                -- if you want more real estate in your chat files and don't need the helper text
-                -- chat_template = require("gp.defaults").short_chat_template,
-                -- chat topic generation prompt
-                chat_topic_gen_prompt = "Summarize the topic of our conversation above"
-                    .. " in two or three words. Respond only with those words.",
-                -- chat topic model (string with model name or table with model name and parameters)
-                -- explicitly confirm deletion of a chat file
-                chat_confirm_delete = true,
-                -- conceal model parameters in chat
-                chat_conceal_model_params = true,
-                -- local shortcuts bound to the chat buffer
-                -- (be careful to choose something which will work across specified modes)
-                chat_shortcut_respond = { modes = { "n", "i", "v", "x" }, shortcut = "<C-g><C-g>" },
-                chat_shortcut_delete = { modes = { "n", "i", "v", "x" }, shortcut = "<C-g>d" },
-                chat_shortcut_stop = { modes = { "n", "i", "v", "x" }, shortcut = "<C-g>s" },
-                chat_shortcut_new = { modes = { "n", "i", "v", "x" }, shortcut = "<C-g>c" },
-                -- default search term when using :GpChatFinder
-                chat_finder_pattern = "topic ",
-                -- if true, finished ChatResponder won't move the cursor to the end of the buffer
-                chat_free_cursor = true,
-                -- use prompt buftype for chats (:h prompt-buffer)
-                chat_prompt_buf_type = false,
 
                 -- how to display GpChatToggle or GpContext: popup / split / vsplit / tabnew
                 toggle_target = "tabnew",
@@ -463,29 +457,6 @@ require("lazy").setup({
                 -- border can be "single", "double", "rounded", "solid", "shadow", "none"
                 style_chat_finder_border = "rounded",
                 -- margins are number of characters or lines
-                style_chat_finder_margin_bottom = 8,
-                style_chat_finder_margin_left = 1,
-                style_chat_finder_margin_right = 2,
-                style_chat_finder_margin_top = 2,
-                -- how wide should the preview be, number between 0.0 and 1.0
-                style_chat_finder_preview_ratio = 0.5,
-
-                -- styling for popup
-                -- border can be "single", "double", "rounded", "solid", "shadow", "none"
-                style_popup_border = "rounded",
-                -- margins are number of characters or lines
-                style_popup_margin_bottom = 8,
-                style_popup_margin_left = 1,
-                style_popup_margin_right = 2,
-                style_popup_margin_top = 2,
-                style_popup_max_width = 160,
-
-                -- command config and templates below are used by commands like GpRewrite, GpEnew, etc.
-                -- command prompt prefix for asking user for input (supports {{agent}} template variable)
-                command_prompt_prefix_template = "🤖 {{agent}} ~ ",
-                -- auto select command response (easier chaining of commands)
-                -- if false it also frees up the buffer cursor for further editing elsewhere
-                command_auto_select_response = true,
 
                 -- templates
                 template_selection = "I have the following from {{filename}}:"
@@ -536,7 +507,7 @@ require("lazy").setup({
                             agent,
                             template,
                             nil, -- command will run directly without any prompting for user input
-                            nil -- no predefined instructions (e.g. speech-to-text from Whisper)
+                            nil  -- no predefined instructions (e.g. speech-to-text from Whisper)
                         )
                     end,
 
@@ -555,7 +526,7 @@ require("lazy").setup({
                             agent,
                             template,
                             nil, -- command will run directly without any prompting for user input
-                            nil -- no predefined instructions (e.g. speech-to-text from Whisper)
+                            nil  -- no predefined instructions (e.g. speech-to-text from Whisper)
                         )
                     end,
 
@@ -575,7 +546,7 @@ require("lazy").setup({
                             agent,
                             template,
                             nil, -- command will run directly without any prompting for user input
-                            nil -- no predefined instructions (e.g. speech-to-text from Whisper)
+                            nil  -- no predefined instructions (e.g. speech-to-text from Whisper)
                         )
                     end,
 

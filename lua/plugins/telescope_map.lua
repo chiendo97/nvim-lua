@@ -10,3 +10,4 @@ map("n", "<leader>j", [[<cmd>Telescope oldfiles only_cwd=true<cr>]], map_options
 map("n", "<leader>m", [[<cmd>Telescope keymaps    <cr>]], map_options)
 map("n", "<leader>n", [[<cmd>Telescope resume    <cr>]], map_options)
 map("n", "<leader>b", [[<cmd>Telescope builtin    <cr>]], map_options)
+map("n", "<leader>s", [[<cmd>Telescope spell_suggest <cr>]], map_options)

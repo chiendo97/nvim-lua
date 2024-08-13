@@ -104,13 +104,13 @@ require("lazy").setup({
         end,
     },
 
-    -- Comment code
-    {
-        "numToStr/Comment.nvim",
-        config = function()
-            require("plugins.Comment")
-        end,
-    },
+    -- -- Comment code
+    -- {
+    --     "numToStr/Comment.nvim",
+    --     config = function()
+    --         require("plugins.Comment")
+    --     end,
+    -- },
 
     -- align text with ga=
     {

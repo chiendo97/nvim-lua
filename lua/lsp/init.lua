@@ -54,6 +54,11 @@ require("lspconfig").typst_lsp.setup({
     },
 })
 
+require("lspconfig").typos_lsp.setup({
+    on_attach = require("lsp.attach").on_attach,
+    capabilities = require("lsp.attach").capabilities,
+})
+
 vim.keymap.del("n", "grr")
 vim.keymap.del({ "x", "n" }, "gra")
 vim.keymap.del("n", "grn")

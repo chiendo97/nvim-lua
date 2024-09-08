@@ -562,7 +562,7 @@ require("lazy").setup({
 
                     -- example of adding command which opens new chat dedicated for translation
                     Translator = function(gp, params)
-                        local chat_system_prompt = "You are a Translator, please translate between English and Chinese."
+                        local chat_system_prompt = "You are a Translator, please translate between English and Vietnamese."
                         gp.cmd.ChatNew(params, chat_system_prompt)
 
                         -- -- you can also create a chat with a specific fixed agent like this:

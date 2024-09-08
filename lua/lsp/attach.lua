@@ -1,23 +1,24 @@
 local M = {}
 
-local buf_format = function()
-    return vim.lsp.buf.format({ async = true })
-end
-
-local toggle_diagnostic = function()
-    vim.diagnostic.enable(not vim.diagnostic.is_enabled())
-end
-
-local go_to_next_diagnostic = function()
-    vim.diagnostic.jump({ count = 1, float = true })
-end
-
-local go_to_prev_diagnostic = function()
-    vim.diagnostic.jump({ count = -1, float = true })
-end
-
 M.on_attach = function(client, bufnr)
     local opts = { noremap = true, silent = true, buffer = bufnr }
+    local buffnr_opts = { bufnr = bufnr }
+
+    local buf_format = function()
+        return vim.lsp.buf.format({ async = true })
+    end
+
+    local toggle_diagnostic = function()
+        vim.diagnostic.enable(not vim.diagnostic.is_enabled(buffnr_opts), buffnr_opts)
+    end
+
+    local go_to_next_diagnostic = function()
+        vim.diagnostic.jump({ count = 1, float = true })
+    end
+
+    local go_to_prev_diagnostic = function()
+        vim.diagnostic.jump({ count = -1, float = true })
+    end
 
     vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
     vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)

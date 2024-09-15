@@ -13,16 +13,9 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
-    -- add packages
-    {
-        "tweekmonster/startuptime.vim",
-        cmd = "StartupTime",
-    },
-
-    -- nvim-tree
+    { "tweekmonster/startuptime.vim", cmd = "StartupTime" },
     {
         "kyazdani42/nvim-tree.lua",
-        dependencies = { "nvim-tree/nvim-web-devicons" },
         cmd = "NvimTreeToggle",
         init = function()
             vim.keymap.set("n", "<leader>c", "<cmd>NvimTreeToggle<cr>", { noremap = true })
@@ -31,8 +24,8 @@ require("lazy").setup({
             require("plugins.nvim-tree")
         end,
     },
+    { "nvim-tree/nvim-web-devicons", lazy = true },
 
-    -- lspconfig
     {
         "neovim/nvim-lspconfig",
         config = function()
@@ -40,26 +33,25 @@ require("lazy").setup({
         end,
     },
 
-    -- lsp autocomplete
     {
         "hrsh7th/nvim-cmp",
-        dependencies = {
-            "hrsh7th/cmp-nvim-lsp", -- lsp source
-            "hrsh7th/cmp-buffer",
-            "hrsh7th/cmp-nvim-lsp-signature-help",
-            "hrsh7th/cmp-path",
-            {
-                "zbirenbaum/copilot-cmp",
-                config = function()
-                    require("copilot_cmp").setup()
-                end,
-                cond = function()
-                    return os.getenv("OPENAI_API_KEY") ~= nil and vim.fn.executable("node") == 1
-                end,
-            },
-        },
+        lazy = true,
         config = function()
             require("plugins.nvim-cmp")
+        end,
+    },
+    { "hrsh7th/cmp-nvim-lsp", event = "InsertEnter" },
+    { "hrsh7th/cmp-buffer", event = "InsertEnter" },
+    { "hrsh7th/cmp-nvim-lsp-signature-help", event = "InsertEnter" },
+    { "hrsh7th/cmp-path", event = "InsertEnter" },
+    {
+        "zbirenbaum/copilot-cmp",
+        event = "InsertEnter",
+        config = function()
+            require("copilot_cmp").setup()
+        end,
+        cond = function()
+            return os.getenv("OPENAI_API_KEY") ~= nil and vim.fn.executable("node") == 1
         end,
     },
 
@@ -71,19 +63,15 @@ require("lazy").setup({
         end,
     },
 
-    -- linter, formater
     {
         "nvimtools/none-ls.nvim",
-        dependencies = {
-            "nvim-lua/plenary.nvim",
-            "nvimtools/none-ls-extras.nvim",
-        },
         config = function()
             require("lsp.null-ls")
         end,
     },
+    { "nvim-lua/plenary.nvim", lazy = true },
+    { "nvimtools/none-ls-extras.nvim", lazy = true },
 
-    -- note manager
     {
         "nvim-orgmode/orgmode",
         event = "VeryLazy",
@@ -93,7 +81,6 @@ require("lazy").setup({
         end,
     },
 
-    -- treesitter syntax
     {
         "nvim-treesitter/nvim-treesitter",
         build = function()
@@ -104,29 +91,16 @@ require("lazy").setup({
         end,
     },
 
-    -- -- Comment code
-    -- {
-    --     "numToStr/Comment.nvim",
-    --     config = function()
-    --         require("plugins.Comment")
-    --     end,
-    -- },
-
-    -- align text with ga=
     {
         "junegunn/vim-easy-align",
         config = function()
-            -- Start interactive EasyAlign in visual mode (e.g. vipga)
             vim.api.nvim_set_keymap("x", "ga", "<Plug>(EasyAlign)", {})
-            -- Start interactive EasyAlign for a motion/text object (e.g. gaip)
             vim.api.nvim_set_keymap("n", "ga", "<Plug>(EasyAlign)", {})
         end,
     },
 
-    -- Add git related info in the signs columns and popups
     {
         "lewis6991/gitsigns.nvim",
-        dependencies = { "nvim-lua/plenary.nvim" },
         config = function()
             require("plugins.gitsigns")
         end,
@@ -135,14 +109,13 @@ require("lazy").setup({
         end,
     },
 
-    -- vim-tmux-navigation
     {
         "alexghergh/nvim-tmux-navigation",
         config = function()
             local nvim_tmux_nav = require("nvim-tmux-navigation")
 
             nvim_tmux_nav.setup({
-                disable_when_zoomed = true, -- defaults to false
+                disable_when_zoomed = true,
             })
 
             vim.keymap.set("n", "<C-h>", nvim_tmux_nav.NvimTmuxNavigateLeft)
@@ -154,11 +127,9 @@ require("lazy").setup({
 
     {
         "ellisonleao/gruvbox.nvim",
-        lazy = false,    -- make sure we load this during startup if it is your main colorscheme
-        priority = 1000, -- make sure to load this before all the other start plugins
+        lazy = false,
+        priority = 1000,
         config = function()
-            -- setup must be called before loading the colorscheme
-            -- Default options:
             require("gruvbox").setup({
                 undercurl = true,
                 underline = true,
@@ -174,8 +145,8 @@ require("lazy").setup({
                 invert_signs = false,
                 invert_tabline = false,
                 invert_intend_guides = false,
-                inverse = true, -- invert background for search, diffs, statuslines and errors
-                contrast = "",  -- can be "hard", "soft" or empty string
+                inverse = true,
+                contrast = "",
                 palette_overrides = {},
                 overrides = {},
                 dim_inactive = false,
@@ -184,23 +155,20 @@ require("lazy").setup({
             vim.cmd("colorscheme gruvbox")
         end,
     },
+
     {
         "nvim-telescope/telescope.nvim",
-        -- cmd = "Telescope",
+        cmd = { "Telescope" },
         init = function()
             require("plugins.telescope_map")
         end,
         config = function()
             require("plugins.telescope")
         end,
-        dependencies = {
-            { "nvim-lua/plenary.nvim" },
-            { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
-            { "nvim-telescope/telescope-ui-select.nvim" },
-        },
     },
+    { "nvim-telescope/telescope-fzf-native.nvim", build = "make", lazy = true },
+    { "nvim-telescope/telescope-ui-select.nvim", lazy = true },
 
-    -- better quickfix
     {
         "kevinhwang91/nvim-bqf",
         config = function()
@@ -217,18 +185,13 @@ require("lazy").setup({
         end,
     },
 
-    {
-        "chrisbra/csv.vim",
-        ft = "csv",
-    },
+    { "chrisbra/csv.vim", ft = "csv" },
+
     {
         "zbirenbaum/copilot.lua",
         cond = function()
             return os.getenv("OPENAI_API_KEY") ~= nil and vim.fn.executable("node") == 1
         end,
-        dependencies = {
-            "hrsh7th/nvim-cmp",
-        },
         cmd = "Copilot",
         build = ":Copilot auth",
         event = "InsertEnter",
@@ -240,14 +203,11 @@ require("lazy").setup({
                 },
                 suggestion = {
                     enabled = false,
-                    -- use the built-in keymapping for "accept" (<M-l>)
                     auto_trigger = true,
-                    accept = false, -- disable built-in keymapping
+                    accept = false,
                 },
             })
 
-            -- hide copilot suggestions when cmp menu is open
-            -- to prevent odd behavior/garbled up suggestions
             local cmp_status_ok, cmp = pcall(require, "cmp")
             if cmp_status_ok then
                 cmp.event:on("menu_opened", function()
@@ -260,11 +220,11 @@ require("lazy").setup({
             end
         end,
     },
+
     {
         "stevearc/oil.nvim",
         cmd = "Oil",
         opts = {},
-        dependencies = { "nvim-tree/nvim-web-devicons" },
     },
 
     {
@@ -273,20 +233,14 @@ require("lazy").setup({
             create_cmp_source = true,
             friendly_snippets = true,
         },
-        dependencies = {
-            "rafamadriz/friendly-snippets",
-            "hrsh7th/nvim-cmp",
-        },
     },
+    { "rafamadriz/friendly-snippets", lazy = true },
+
     {
         "folke/todo-comments.nvim",
-        dependencies = { "nvim-lua/plenary.nvim" },
-        opts = {
-            -- your configuration comes here
-            -- or leave it empty to use the default settings
-            -- refer to the configuration section below
-        },
+        opts = {},
     },
+
     {
         "robitx/gp.nvim",
         config = function()
@@ -320,7 +274,7 @@ require("lazy").setup({
                     -- secret : "sk-...",
                     -- secret = os.getenv("env_name.."),
                     openai = {
-                        disable = true,
+                        disable = false,
                         endpoint = "https://api.openai.com/v1/chat/completions",
                         secret = os.getenv("OPENAI_API_KEY"),
                     },
@@ -507,7 +461,7 @@ require("lazy").setup({
                             agent,
                             template,
                             nil, -- command will run directly without any prompting for user input
-                            nil  -- no predefined instructions (e.g. speech-to-text from Whisper)
+                            nil -- no predefined instructions (e.g. speech-to-text from Whisper)
                         )
                     end,
 
@@ -526,7 +480,7 @@ require("lazy").setup({
                             agent,
                             template,
                             nil, -- command will run directly without any prompting for user input
-                            nil  -- no predefined instructions (e.g. speech-to-text from Whisper)
+                            nil -- no predefined instructions (e.g. speech-to-text from Whisper)
                         )
                     end,
 
@@ -546,7 +500,7 @@ require("lazy").setup({
                             agent,
                             template,
                             nil, -- command will run directly without any prompting for user input
-                            nil  -- no predefined instructions (e.g. speech-to-text from Whisper)
+                            nil -- no predefined instructions (e.g. speech-to-text from Whisper)
                         )
                     end,
 
@@ -562,7 +516,8 @@ require("lazy").setup({
 
                     -- example of adding command which opens new chat dedicated for translation
                     Translator = function(gp, params)
-                        local chat_system_prompt = "You are a Translator, please translate between English and Vietnamese."
+                        local chat_system_prompt =
+                            "You are a Translator, please translate between English and Vietnamese."
                         gp.cmd.ChatNew(params, chat_system_prompt)
 
                         -- -- you can also create a chat with a specific fixed agent like this:

@@ -45,19 +45,19 @@ require("lspconfig").bashls.setup({
     capabilities = require("lsp.attach").capabilities,
 })
 
--- require("lspconfig").typst_lsp.setup({
---     on_attach = require("lsp.attach").on_attach,
---     capabilities = require("lsp.attach").capabilities,
---     settings = {
---         -- exportPdf = "onType" -- Choose onType, onSave or never.
---         -- serverPath = "" -- Normally, there is no need to uncomment it.
---     },
--- })
-
-require("lspconfig").typos_lsp.setup({
+require("lspconfig").typst_lsp.setup({
     on_attach = require("lsp.attach").on_attach,
     capabilities = require("lsp.attach").capabilities,
+    settings = {
+        -- exportPdf = "onType" -- Choose onType, onSave or never.
+        -- serverPath = "" -- Normally, there is no need to uncomment it.
+    },
 })
+
+-- require("lspconfig").typos_lsp.setup({
+--     on_attach = require("lsp.attach").on_attach,
+--     capabilities = require("lsp.attach").capabilities,
+-- })
 
 vim.keymap.del("n", "grr")
 vim.keymap.del({ "x", "n" }, "gra")

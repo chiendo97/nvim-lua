@@ -13,6 +13,7 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
+    { "nvim-lua/plenary.nvim", lazy = true },
     { "tweekmonster/startuptime.vim", cmd = "StartupTime" },
     {
         "kyazdani42/nvim-tree.lua",
@@ -28,6 +29,7 @@ require("lazy").setup({
 
     {
         "neovim/nvim-lspconfig",
+        event = "VeryLazy",
         config = function()
             require("lsp")
         end,
@@ -65,11 +67,11 @@ require("lazy").setup({
 
     {
         "nvimtools/none-ls.nvim",
+        event = "VeryLazy",
         config = function()
             require("lsp.null-ls")
         end,
     },
-    { "nvim-lua/plenary.nvim", lazy = true },
     { "nvimtools/none-ls-extras.nvim", lazy = true },
 
     {
@@ -83,6 +85,7 @@ require("lazy").setup({
 
     {
         "nvim-treesitter/nvim-treesitter",
+        event = "VeryLazy",
         build = function()
             require("nvim-treesitter.install").update({ with_sync = true })
         end,
@@ -93,6 +96,7 @@ require("lazy").setup({
 
     {
         "junegunn/vim-easy-align",
+        event = "VeryLazy",
         config = function()
             vim.api.nvim_set_keymap("x", "ga", "<Plug>(EasyAlign)", {})
             vim.api.nvim_set_keymap("n", "ga", "<Plug>(EasyAlign)", {})
@@ -101,6 +105,7 @@ require("lazy").setup({
 
     {
         "lewis6991/gitsigns.nvim",
+        event = "VeryLazy",
         config = function()
             require("plugins.gitsigns")
         end,
@@ -111,6 +116,7 @@ require("lazy").setup({
 
     {
         "alexghergh/nvim-tmux-navigation",
+        event = "VeryLazy",
         config = function()
             local nvim_tmux_nav = require("nvim-tmux-navigation")
 
@@ -179,6 +185,7 @@ require("lazy").setup({
 
     {
         "lukas-reineke/indent-blankline.nvim",
+        event = "VeryLazy",
         main = "ibl",
         config = function()
             require("plugins.indent-blankline")
@@ -229,6 +236,7 @@ require("lazy").setup({
 
     {
         "garymjr/nvim-snippets",
+        event = "InsertEnter",
         opts = {
             create_cmp_source = true,
             friendly_snippets = true,
@@ -238,6 +246,7 @@ require("lazy").setup({
 
     {
         "folke/todo-comments.nvim",
+        event = "VeryLazy",
         opts = {},
     },
 

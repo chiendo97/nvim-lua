@@ -55,7 +55,7 @@ vim.keymap.set({ "n", "v", "x" }, "<C-g>n", "<cmd>GpNextAgent<cr>", keymapOption
 
 -- Function to delete all files in the specified directory
 local function delete_all_chat_files()
-    local dir = "/Users/chiendo97/.local/share/nvim/gp/chats"
+    local dir = vim.fn.expand("$HOME") .. "/.local/share/nvim/gp/chats"
     local handle = io.popen("ls -1 " .. dir)
     if handle then
         for file in handle:lines() do

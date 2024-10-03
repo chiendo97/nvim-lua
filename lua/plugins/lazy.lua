@@ -194,7 +194,7 @@ require("lazy").setup({
         end,
     },
     { "nvim-telescope/telescope-fzf-native.nvim", build = "make", lazy = true },
-    { "nvim-telescope/telescope-ui-select.nvim", lazy = true },
+    -- { "nvim-telescope/telescope-ui-select.nvim", lazy = true },
 
     {
         "kevinhwang91/nvim-bqf",
@@ -279,11 +279,48 @@ require("lazy").setup({
             require("base46").load_all_highlights()
         end,
     },
-})
+    {
+        "stevearc/dressing.nvim",
+        opts = {
+            input = {
 
--- -- put this after lazy setup
--- dofile(vim.g.base46_cache .. "defaults")
--- dofile(vim.g.base46_cache .. "statusline")
+                -- Can be 'left', 'right', or 'center'
+                title_pos = "center",
+
+                -- Set to `false` to disable
+                mappings = {
+                    n = {
+                        ["<Esc>"] = "Close",
+                        ["<C-c>"] = "Close",
+                        ["<CR>"] = "Confirm",
+                    },
+                    i = {
+                        ["<C-c>"] = "Close",
+                        ["<CR>"] = "Confirm",
+                        ["<Up>"] = "HistoryPrev",
+                        ["<Down>"] = "HistoryNext",
+                    },
+                },
+            },
+        },
+    },
+    -- lazy.nvim
+    {
+        "folke/noice.nvim",
+        event = "VeryLazy",
+        opts = {
+            -- add any options here
+        },
+        dependencies = {
+            -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
+            "MunifTanjim/nui.nvim",
+            -- OPTIONAL:
+            --   `nvim-notify` is only needed, if you want to use the notification view.
+            --   If not available, we use `mini` as the fallback
+            "rcarriga/nvim-notify",
+        },
+    },
+})
 
 -- To load all integrations at once
 for _, v in ipairs(vim.fn.readdir(vim.g.base46_cache)) do

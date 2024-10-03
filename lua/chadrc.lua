@@ -14,4 +14,6 @@ M.ui = {
     telescope = { style = "bordered" }, -- borderless / bordered
 }
 
+M.lsp = { signature = false }
+
 return M

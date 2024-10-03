@@ -1,5 +1,8 @@
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 
+-- put this in your main init.lua file ( before lazy setup )
+vim.g.base46_cache = vim.fn.stdpath("data") .. "/base46_cache/"
+
 if not vim.uv.fs_stat(lazypath) then
     vim.fn.system({
         "git",
@@ -29,7 +32,7 @@ require("lazy").setup({
 
     {
         "neovim/nvim-lspconfig",
-        event = "VeryLazy",
+        -- event = "VeryLazy",
         config = function()
             require("lsp")
         end,
@@ -54,6 +57,24 @@ require("lazy").setup({
         config = function()
             require("copilot_cmp").setup()
         end,
+        dependencies = {
+            "zbirenbaum/copilot.lua",
+            cmd = "Copilot",
+            build = ":Copilot auth",
+            config = function()
+                require("copilot").setup({
+                    panel = {
+                        enabled = false,
+                        auto_refresh = true,
+                    },
+                    suggestion = {
+                        enabled = false,
+                        auto_trigger = true,
+                        accept = false,
+                    },
+                })
+            end,
+        },
     },
 
     {
@@ -134,6 +155,7 @@ require("lazy").setup({
         "ellisonleao/gruvbox.nvim",
         lazy = false,
         priority = 1000,
+        enable = false,
         config = function()
             require("gruvbox").setup({
                 undercurl = true,
@@ -194,37 +216,6 @@ require("lazy").setup({
     { "chrisbra/csv.vim", ft = "csv" },
 
     {
-        "zbirenbaum/copilot.lua",
-        cmd = "Copilot",
-        build = ":Copilot auth",
-        event = "InsertEnter",
-        config = function()
-            require("copilot").setup({
-                panel = {
-                    enabled = false,
-                    auto_refresh = true,
-                },
-                suggestion = {
-                    enabled = false,
-                    auto_trigger = true,
-                    accept = false,
-                },
-            })
-
-            local cmp_status_ok, cmp = pcall(require, "cmp")
-            if cmp_status_ok then
-                cmp.event:on("menu_opened", function()
-                    vim.b.copilot_suggestion_hidden = true
-                end)
-
-                cmp.event:on("menu_closed", function()
-                    vim.b.copilot_suggestion_hidden = false
-                end)
-            end
-        end,
-    },
-
-    {
         "stevearc/oil.nvim",
         cmd = "Oil",
         opts = {},
@@ -273,4 +264,28 @@ require("lazy").setup({
             require("plugins.gp-nvim")
         end,
     },
+
+    {
+        "nvchad/ui",
+        config = function()
+            require("nvchad")
+        end,
+    },
+
+    {
+        "nvchad/base46",
+        lazy = true,
+        build = function()
+            require("base46").load_all_highlights()
+        end,
+    },
 })
+
+-- -- put this after lazy setup
+-- dofile(vim.g.base46_cache .. "defaults")
+-- dofile(vim.g.base46_cache .. "statusline")
+
+-- To load all integrations at once
+for _, v in ipairs(vim.fn.readdir(vim.g.base46_cache)) do
+    dofile(vim.g.base46_cache .. v)
+end

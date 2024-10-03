@@ -320,6 +320,12 @@ require("lazy").setup({
             "rcarriga/nvim-notify",
         },
     },
+
+    {
+        "MeanderingProgrammer/render-markdown.nvim",
+        opts = {},
+        ft = { "md" },
+    },
 })
 
 -- To load all integrations at once

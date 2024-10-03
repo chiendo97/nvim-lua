@@ -36,7 +36,9 @@ require("lazy").setup({
     },
 
     {
-        "hrsh7th/nvim-cmp",
+        -- "hrsh7th/nvim-cmp",
+        "yioneko/nvim-cmp",
+        branch = "perf-up",
         lazy = true,
         config = function()
             require("plugins.nvim-cmp")
@@ -51,9 +53,6 @@ require("lazy").setup({
         event = "InsertEnter",
         config = function()
             require("copilot_cmp").setup()
-        end,
-        cond = function()
-            return os.getenv("OPENAI_API_KEY") ~= nil and vim.fn.executable("node") == 1
         end,
     },
 
@@ -196,9 +195,6 @@ require("lazy").setup({
 
     {
         "zbirenbaum/copilot.lua",
-        cond = function()
-            return os.getenv("OPENAI_API_KEY") ~= nil and vim.fn.executable("node") == 1
-        end,
         cmd = "Copilot",
         build = ":Copilot auth",
         event = "InsertEnter",

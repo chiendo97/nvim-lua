@@ -4,9 +4,9 @@ M.on_attach = function(client, bufnr)
     local opts = { noremap = true, silent = true, buffer = bufnr }
     local buffnr_opts = { bufnr = bufnr }
 
-    local buf_format = function()
-        return vim.lsp.buf.format({ async = true })
-    end
+    -- local buf_format = function()
+    --     return vim.lsp.buf.format({ async = true })
+    -- end
 
     local toggle_diagnostic = function()
         vim.diagnostic.enable(not vim.diagnostic.is_enabled(buffnr_opts), buffnr_opts)
@@ -27,6 +27,7 @@ M.on_attach = function(client, bufnr)
     vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
     vim.keymap.set("n", "gy", vim.lsp.buf.type_definition, opts)
     vim.keymap.set("n", "<leader>e", vim.lsp.buf.rename, opts)
+    -- vim.keymap.set("n", "<leader>e", require("nvchad.lsp.renamer"), opts)
     -- vim.keymap.set("n", "<leader>f", buf_format, opts)
     vim.keymap.set("n", "[d", go_to_prev_diagnostic, opts)
     vim.keymap.set("n", "]d", go_to_next_diagnostic, opts)

@@ -47,7 +47,7 @@ local cmp_options = {
     -- You should specify your *installed* sources.
     sources = cmp.config.sources({
         { name = "nvim_lsp" },
-        { name = "nvim_lsp_signature_help" },
+        -- { name = "nvim_lsp_signature_help" },
         { name = "path" },
         { name = "copilot" },
         { name = "snippets" },

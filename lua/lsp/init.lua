@@ -58,6 +58,10 @@ require("lspconfig").typst_lsp.setup({
 --     on_attach = require("lsp.attach").on_attach,
 --     capabilities = require("lsp.attach").capabilities,
 -- })
+require("lspconfig").dartls.setup({
+    on_attach = require("lsp.attach").on_attach,
+    capabilities = require("lsp.attach").capabilities,
+})
 
 vim.keymap.del("n", "grr")
 vim.keymap.del({ "x", "n" }, "gra")

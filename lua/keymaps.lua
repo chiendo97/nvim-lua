@@ -69,3 +69,5 @@ map("n", "gV", "`[v`]", { noremap = true })
 
 -- terminal mode <Esc> <C-\><C-n>
 map("t", "<esc>", "<C-\\><C-n>", { noremap = true })
+
+map("n", "<leader>W", ":set wrap!<CR>", { noremap = true, silent = true })

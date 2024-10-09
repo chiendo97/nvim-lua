@@ -40,8 +40,9 @@ require("lazy").setup({
 
     {
         -- "hrsh7th/nvim-cmp",
-        "yioneko/nvim-cmp",
-        branch = "perf-up",
+        -- "yioneko/nvim-cmp",
+        -- branch = "perf-up",
+        "iguanacucumber/magazine.nvim",
         lazy = true,
         config = function()
             require("plugins.nvim-cmp")
@@ -71,6 +72,15 @@ require("lazy").setup({
                         enabled = false,
                         auto_trigger = true,
                         accept = false,
+                    },
+                    filetypes = {
+                        yaml = true,
+                        markdown = true,
+                        help = true,
+                        gitcommit = true,
+                        svn = false,
+                        cvs = false,
+                        ["."] = false,
                     },
                 })
             end,

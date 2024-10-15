@@ -63,6 +63,19 @@ require("lspconfig").dartls.setup({
     capabilities = require("lsp.attach").capabilities,
 })
 
+require("lspconfig").sourcekit.setup({
+    on_attach = require("lsp.attach").on_attach,
+    capabilities = require("lsp.attach").capabilities,
+})
+
+--                                           *grr* *gra* *grn* *gri* *i_CTRL-S*
+-- Some keymaps are created unconditionally when Nvim starts:
+-- - "grn" is mapped in Normal mode to |vim.lsp.buf.rename()|
+-- - "gra" is mapped in Normal and Visual mode to |vim.lsp.buf.code_action()|
+-- - "grr" is mapped in Normal mode to |vim.lsp.buf.references()|
+-- - "gri" is mapped in Normal mode to |vim.lsp.buf.implementation()|
+-- Remove above keymaps
 vim.keymap.del("n", "grr")
-vim.keymap.del({ "x", "n" }, "gra")
+vim.keymap.del("n", "gri")
+vim.keymap.del("n", "gra")
 vim.keymap.del("n", "grn")

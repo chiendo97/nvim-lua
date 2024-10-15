@@ -337,7 +337,7 @@ require("lazy").setup({
     {
         "MeanderingProgrammer/render-markdown.nvim",
         opts = {},
-        ft = { "md" },
+        ft = { "markdown" },
     },
     {
         "stevearc/conform.nvim",

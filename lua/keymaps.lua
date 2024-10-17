@@ -71,3 +71,12 @@ map("n", "gV", "`[v`]", { noremap = true })
 map("t", "<esc>", "<C-\\><C-n>", { noremap = true })
 
 map("n", "<leader>W", ":set wrap!<CR>", { noremap = true, silent = true })
+
+-- make the window bigger vertically:
+-- make the window smaller verticallyz
+-- make the window bigger horizontally by pressing shift and =1
+-- make the window smaller horizontally by pressing shift and -?
+map("n", "=", "<cmd>vertical resize +5<CR>", { noremap = true })
+map("n", "-", "<cmd>vertical resize -5<CR>", { noremap = true })
+map("n", "+", "<cmd>horizontal resize +2<CR>", { noremap = true })
+map("n", "_", "<cmd>horizontal resize -2<CR>", { noremap = true })

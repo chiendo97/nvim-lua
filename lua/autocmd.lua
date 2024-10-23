@@ -1,20 +1,21 @@
-local vim = vim
-local api = vim.api
-
-api.nvim_create_augroup("back_to_line", { clear = true })
-api.nvim_create_autocmd("BufReadPost", {
-    pattern = "*",
-    callback = function()
-        vim.cmd([[if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! g`\"" | endif]])
-    end,
-    group = "back_to_line",
-})
-
-api.nvim_create_augroup("quickfix_below", { clear = true })
-api.nvim_create_autocmd("FileType", {
+vim.api.nvim_create_autocmd("FileType", {
     pattern = "qf",
     callback = function()
         vim.api.nvim_cmd({ cmd = "wincmd", args = { "J" } }, {})
     end,
-    group = "quickfix_below",
+})
+
+vim.api.nvim_create_autocmd("BufReadPost", {
+    pattern = "*",
+    callback = function()
+        local line = vim.fn.line("'\"")
+        if
+            line > 1
+            and line <= vim.fn.line("$")
+            and vim.bo.filetype ~= "commit"
+            and vim.fn.index({ "xxd", "gitrebase" }, vim.bo.filetype) == -1
+        then
+            vim.cmd('normal! g`"')
+        end
+    end,
 })

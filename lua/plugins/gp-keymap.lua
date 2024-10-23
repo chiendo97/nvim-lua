@@ -74,4 +74,4 @@ local function delete_all_chat_files()
 end
 
 -- Create the mapping
-vim.keymap.set("n", "<C-g>da", delete_all_chat_files, { noremap = true, silent = false })
+vim.keymap.set("n", "<C-g>da", delete_all_chat_files, keymapOptions("Delete all chats"))

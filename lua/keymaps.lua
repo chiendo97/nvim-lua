@@ -1,82 +1,83 @@
-local map = vim.api.nvim_set_keymap
+local map = vim.keymap.set
 
--- leader key as space
+-- Leader key as space
 vim.g.mapleader = " "
 
--- backspace to switch recent file
-map("n", "<bs>", "<c-^>", { noremap = true })
+-- Backspace to switch to the most recent file
+map("n", "<bs>", "<c-^>", { noremap = true, desc = "Switch to recent file" })
 
--- alt + jk to move line up/down
-map("n", "<A-j>", ":m .+1<cr>==", { noremap = true, silent = true })
-map("n", "<A-k>", ":m .-2<cr>==", { noremap = true, silent = true })
-map("i", "<A-j>", "<Esc>:m .+1<cr>==gi", { noremap = true, silent = true })
-map("i", "<A-k>", "<Esc>:m .-2<cr>==gi", { noremap = true, silent = true })
-map("x", "<A-j>", ":m '>+1<cr>gv=gv", { noremap = true, silent = true })
-map("x", "<A-k>", ":m '<-2<cr>gv=gv", { noremap = true, silent = true })
+-- Alt + jk to move line up/down
+map("n", "<A-j>", ":m .+1<cr>==", { noremap = true, silent = true, desc = "Move line down" })
+map("n", "<A-k>", ":m .-2<cr>==", { noremap = true, silent = true, desc = "Move line up" })
+map("i", "<A-j>", "<Esc>:m .+1<cr>==gi", { noremap = true, silent = true, desc = "Move line down (insert mode)" })
+map("i", "<A-k>", "<Esc>:m .-2<cr>==gi", { noremap = true, silent = true, desc = "Move line up (insert mode)" })
+map("x", "<A-j>", ":m '>+1<cr>gv=gv", { noremap = true, silent = true, desc = "Move block down" })
+map("x", "<A-k>", ":m '<-2<cr>gv=gv", { noremap = true, silent = true, desc = "Move block up" })
 
 -- ^ - jump to the first non-blank character of the line
-map("n", "H", "g^", { noremap = true })
-map("x", "H", "g^", { noremap = true })
--- g_ - jump to the end of the line
-map("n", "L", "g$", { noremap = true })
-map("x", "L", "g_", { noremap = true })
+map("n", "H", "g^", { noremap = true, desc = "Jump to first non-blank" })
+map("x", "H", "g^", { noremap = true, desc = "Jump to first non-blank" })
 
--- ctrl + c to turn off highlight and close quickfix windows and escape
+-- g_ - jump to the end of the line
+map("n", "L", "g$", { noremap = true, desc = "Jump to end of line" })
+map("x", "L", "g_", { noremap = true, desc = "Jump to end of line" })
+
+-- Ctrl + c to turn off highlight and close quickfix windows and escape
 map("n", "<C-C>", ":noh<cr>:ccl<cr><esc>", { noremap = true, silent = true })
 map("n", "<esc>", ":noh<cr>:ccl<cr><esc>", { noremap = true, silent = true })
 
 -- * to highlight current word
-map("n", "*", [[:let @/ = '\<'.expand('<cword>').'\>' | set hlsearch <cr>]], { silent = true })
--- to highlight current sellected word
-map("x", [[//]], [[y/\V<C-R>=escape(@",'/\')<cr><cr>]], { noremap = true })
+map(
+    "n",
+    "*",
+    [[:let @/ = '\<'.expand('<cword>').'\>' | set hlsearch <cr>]],
+    { silent = true, desc = "Highlight current word" }
+)
 
--- navigate between tabs
-map("n", "gt", ":tabedit<cr>", { noremap = true, silent = true })
-map("n", "gn", "<cmd>tabnext<cr>", { noremap = true, silent = true })
-map("n", "gp", "<cmd>tabprev<cr>", { noremap = true, silent = true })
-map("n", "g1", "1gt", { noremap = true, silent = true })
-map("n", "g2", "2gt", { noremap = true, silent = true })
-map("n", "g3", "3gt", { noremap = true, silent = true })
-map("n", "g4", "4gt", { noremap = true, silent = true })
-map("n", "g5", "5gt", { noremap = true, silent = true })
-map("n", "g6", "6gt", { noremap = true, silent = true })
-map("n", "g7", "7gt", { noremap = true, silent = true })
-map("n", "g8", "8gt", { noremap = true, silent = true })
-map("n", "g9", "9gt", { noremap = true, silent = true })
+-- To highlight currently selected word
+map("x", [[//]], [[y/\V<C-R>=escape(@",'/\')<cr><cr>]], { noremap = true, desc = "Highlight selected word" })
 
--- move up/down without breaking column
-map("n", "j", "gj", { noremap = true, silent = true })
-map("n", "k", "gk", { noremap = true, silent = true })
-map("x", "j", "gj", { noremap = true, silent = true })
-map("x", "k", "gk", { noremap = true, silent = true })
+-- Navigate between tabs
+map("n", "gt", ":tabedit<cr>", { noremap = true, silent = true, desc = "Open new tab" })
+map("n", "gn", "<cmd>tabnext<cr>", { noremap = true, silent = true, desc = "Next tab" })
+map("n", "gp", "<cmd>tabprev<cr>", { noremap = true, silent = true, desc = "Previous tab" })
+map("n", "g1", "1gt", { noremap = true, silent = true, desc = "Go to tab 1" })
+map("n", "g2", "2gt", { noremap = true, silent = true, desc = "Go to tab 2" })
+map("n", "g3", "3gt", { noremap = true, silent = true, desc = "Go to tab 3" })
+map("n", "g4", "4gt", { noremap = true, silent = true, desc = "Go to tab 4" })
+map("n", "g5", "5gt", { noremap = true, silent = true, desc = "Go to tab 5" })
+map("n", "g6", "6gt", { noremap = true, silent = true, desc = "Go to tab 6" })
+map("n", "g7", "7gt", { noremap = true, silent = true, desc = "Go to tab 7" })
+map("n", "g8", "8gt", { noremap = true, silent = true, desc = "Go to tab 8" })
+map("n", "g9", "9gt", { noremap = true, silent = true, desc = "Go to tab 9" })
 
--- copy to system's clipboard
-map("x", "y", '"*y', { noremap = true })
-map("n", "yy", '"*yy', { noremap = true })
--- map("n", "p", '"*p', { noremap = true })
--- map("x", "d", '"*d', { noremap = true })
+-- Move up/down without breaking column
+map("n", "j", "gj", { noremap = true, silent = true, desc = "Down with line wraps" })
+map("n", "k", "gk", { noremap = true, silent = true, desc = "Up with line wraps" })
+map("x", "j", "gj", { noremap = true, silent = true, desc = "Down with line wraps" })
+map("x", "k", "gk", { noremap = true, silent = true, desc = "Up with line wraps" })
 
--- copy current relative path /Users/chien.le/.config/nvim/lua/keymaps.lua:56
-map("n", "<leader>yp", ':let @* = expand("%:~:.")<cr>', { noremap = true })
--- copy current absolute path /Users/chien.le/.config/nvim/lua/keymaps.lua:59
-map("n", "<leader>yP", ':let @* = expand("%:p")<cr>', { noremap = true })
+-- Copy to system's clipboard
+map("x", "y", '"*y', { noremap = true, desc = "Yank to clipboard" })
+map("n", "yy", '"*yy', { noremap = true, desc = "Yank line to clipboard" })
 
--- open/source config files
--- map("n", "<Leader>sv", "<cmd>source $MYVIMRC<cr>", { noremap = true })
+-- Copy current relative path
+map("n", "<leader>yp", ':let @* = expand("%:~:.")<cr>', { noremap = true, desc = "Yank relative path" })
 
--- copy last pasted
-map("n", "gV", "`[v`]", { noremap = true })
+-- Copy current absolute path
+map("n", "<leader>yP", ':let @* = expand("%:p")<cr>', { noremap = true, desc = "Yank absolute path" })
 
--- terminal mode <Esc> <C-\><C-n>
-map("t", "<esc>", "<C-\\><C-n>", { noremap = true })
+-- Copy last pasted
+map("n", "gV", "`[v`]", { noremap = true, desc = "Select last pasted region" })
 
-map("n", "<leader>W", ":set wrap!<CR>", { noremap = true, silent = true })
+-- Terminal mode escape
+map("t", "<esc>", "<C-\\><C-n>", { noremap = true, desc = "Escape terminal mode" })
 
--- make the window bigger vertically:
--- make the window smaller verticallyz
--- make the window bigger horizontally by pressing shift and =1
--- make the window smaller horizontally by pressing shift and -?
-map("n", "=", "<cmd>vertical resize +5<CR>", { noremap = true })
-map("n", "-", "<cmd>vertical resize -5<CR>", { noremap = true })
-map("n", "+", "<cmd>horizontal resize +2<CR>", { noremap = true })
-map("n", "_", "<cmd>horizontal resize -2<CR>", { noremap = true })
+-- Toggle line wrapping
+map("n", "<leader>W", ":set wrap!<CR>", { noremap = true, silent = true, desc = "Toggle wrap" })
+
+-- Resize window commands
+map("n", "=", "<cmd>vertical resize +5<CR>", { noremap = true, desc = "Increase vertical size" })
+map("n", "-", "<cmd>vertical resize -5<CR>", { noremap = true, desc = "Decrease vertical size" })
+map("n", "+", "<cmd>horizontal resize +2<CR>", { noremap = true, desc = "Increase horizontal size" })
+map("n", "_", "<cmd>horizontal resize -2<CR>", { noremap = true, desc = "Decrease horizontal size" })

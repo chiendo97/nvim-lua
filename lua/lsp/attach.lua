@@ -1,7 +1,7 @@
 local M = {}
 
 M.on_attach = function(client, bufnr)
-    local opts = { noremap = true, silent = true, buffer = bufnr }
+    local opts = { nowait = true, noremap = true, silent = true, buffer = bufnr }
     local buffnr_opts = { bufnr = bufnr }
 
     -- local buf_format = function()

@@ -38,54 +38,54 @@ require("lazy").setup({
         end,
     },
 
-    -- {
-    --     -- "hrsh7th/nvim-cmp",
-    --     -- "yioneko/nvim-cmp",
-    --     -- branch = "perf-up",
-    --     "iguanacucumber/magazine.nvim",
-    --     lazy = true,
-    --     config = function()
-    --         require("plugins.nvim-cmp")
-    --     end,
-    -- },
-    -- { "hrsh7th/cmp-nvim-lsp", event = "InsertEnter" },
-    -- { "hrsh7th/cmp-buffer", event = "InsertEnter" },
-    -- -- { "hrsh7th/cmp-nvim-lsp-signature-help", event = "InsertEnter" },
-    -- { "hrsh7th/cmp-path", event = "InsertEnter" },
-    -- {
-    --     "zbirenbaum/copilot-cmp",
-    --     event = "InsertEnter",
-    --     config = function()
-    --         require("copilot_cmp").setup()
-    --     end,
-    --     dependencies = {
-    --         "zbirenbaum/copilot.lua",
-    --         cmd = "Copilot",
-    --         build = ":Copilot auth",
-    --         config = function()
-    --             require("copilot").setup({
-    --                 panel = {
-    --                     enabled = false,
-    --                     auto_refresh = true,
-    --                 },
-    --                 suggestion = {
-    --                     enabled = false,
-    --                     auto_trigger = true,
-    --                     accept = false,
-    --                 },
-    --                 filetypes = {
-    --                     yaml = true,
-    --                     markdown = true,
-    --                     help = true,
-    --                     gitcommit = true,
-    --                     svn = false,
-    --                     cvs = false,
-    --                     ["."] = false,
-    --                 },
-    --             })
-    --         end,
-    --     },
-    -- },
+    {
+        -- "hrsh7th/nvim-cmp",
+        -- "yioneko/nvim-cmp",
+        -- branch = "perf-up",
+        "iguanacucumber/magazine.nvim",
+        lazy = true,
+        config = function()
+            require("plugins.nvim-cmp")
+        end,
+    },
+    { "hrsh7th/cmp-nvim-lsp", event = "InsertEnter" },
+    { "hrsh7th/cmp-buffer", event = "InsertEnter" },
+    -- { "hrsh7th/cmp-nvim-lsp-signature-help", event = "InsertEnter" },
+    { "hrsh7th/cmp-path", event = "InsertEnter" },
+    {
+        "zbirenbaum/copilot-cmp",
+        event = "InsertEnter",
+        config = function()
+            require("copilot_cmp").setup()
+        end,
+        dependencies = {
+            "zbirenbaum/copilot.lua",
+            cmd = "Copilot",
+            build = ":Copilot auth",
+            config = function()
+                require("copilot").setup({
+                    panel = {
+                        enabled = false,
+                        auto_refresh = true,
+                    },
+                    suggestion = {
+                        enabled = false,
+                        auto_trigger = true,
+                        accept = false,
+                    },
+                    filetypes = {
+                        yaml = true,
+                        markdown = true,
+                        help = true,
+                        gitcommit = true,
+                        svn = false,
+                        cvs = false,
+                        ["."] = false,
+                    },
+                })
+            end,
+        },
+    },
 
     {
         "kylechui/nvim-surround",
@@ -381,150 +381,150 @@ require("lazy").setup({
             on_attach = nil, -- (fun(buf: integer): boolean) return false to disable attaching
         },
     },
-    {
-        "saghen/blink.cmp",
-        lazy = false, -- lazy loading handled internally
-        -- optional: provides snippets for the snippet source
-        dependencies = "rafamadriz/friendly-snippets",
-
-        -- use a release tag to download pre-built binaries
-        version = "v0.*",
-        -- OR build from source, requires nightly: https://rust-lang.github.io/rustup/concepts/channels.html#working-with-nightly-rust
-        -- build = 'cargo build --release',
-        -- On musl libc based systems you need to add this flag
-        -- build = 'RUSTFLAGS="-C target-feature=-crt-static" cargo build --release',
-        -- If you use nix, you can build from source using latest nightly rust with:
-        -- build = 'nix run .#build-plugin',
-
-        ---@module 'blink.cmp'
-        ---@type blink.cmp.Config
-        opts = {
-            -- for keymap, all values may be string | string[]
-            -- use an empty table to disable a keymap
-            keymap = {
-                show = "<C-space>",
-                hide = "<C-e>",
-                accept = "<CR>",
-
-                -- select_and_accept = {},
-                -- select_prev = { "<Up>", "<C-p>" },
-                -- select_next = { "<Down>", "<C-n>" },
-
-                show_documentation = "<C-space>",
-                hide_documentation = "<C-space>",
-
-                scroll_documentation_up = "<C-b>",
-                scroll_documentation_down = "<C-f>",
-
-                snippet_forward = "<Tab>",
-                snippet_backward = "<S-Tab>",
-            },
-
-            trigger = {
-                completion = {
-                    -- 'prefix' will fuzzy match on the text before the cursor
-                    -- 'full' will fuzzy match on the text before *and* after the cursor
-                    -- example: 'foo_|_bar' will match 'foo_' for 'prefix' and 'foo__bar' for 'full'
-                    keyword_range = "prefix",
-                    -- regex used to get the text when fuzzy matching
-                    -- changing this may break some sources, so please report if you run into issues
-                    -- todo: shouldnt this also affect the accept command? should this also be per language?
-                    keyword_regex = "[%w_\\-]",
-                    -- after matching with keyword_regex, any characters matching this regex at the prefix will be excluded
-                    exclude_from_prefix_regex = "[\\-]",
-                    -- LSPs can indicate when to show the completion window via trigger characters
-                    -- however, some LSPs (*cough* tsserver *cough*) return characters that would essentially
-                    -- always show the window. We block these by default
-                    blocked_trigger_characters = { " ", "\n", "\t" },
-                    -- when true, will show the completion window when the cursor comes after a trigger character when entering insert mode
-                    show_on_insert_on_trigger_character = true,
-                    -- list of additional trigger characters that won't trigger the completion window when the cursor comes after a trigger character when entering insert mode
-                    show_on_insert_blocked_trigger_characters = { "'", '"' },
-                },
-
-                signature_help = {
-                    enabled = false,
-                    blocked_trigger_characters = {},
-                    blocked_retrigger_characters = {},
-                    -- when true, will show the signature help window when the cursor comes after a trigger character when entering insert mode
-                    show_on_insert_on_trigger_character = true,
-                },
-            },
-            sources = {
-                -- similar to nvim-cmp's sources, but we point directly to the source's lua module
-                -- multiple groups can be provided, where it'll fallback to the next group if the previous
-                -- returns no completion items
-                -- WARN: This API will have breaking changes during the beta
-                providers = {
-                    { "blink.cmp.sources.lsp", name = "LSP" },
-                    { "blink.cmp.sources.path", name = "Path", score_offset = 3 },
-                    { "blink.cmp.sources.snippets", name = "Snippets", score_offset = -3 },
-                    { "blink.cmp.sources.buffer", name = "Buffer" },
-                },
-            },
-
-            windows = {
-                autocomplete = {
-                    min_width = 15,
-                    max_height = 10,
-                    border = "single",
-                    winhighlight = "Normal:BlinkCmpMenu,FloatBorder:BlinkCmpMenuBorder,CursorLine:BlinkCmpMenuSelection,Search:None",
-                    -- keep the cursor X lines away from the top/bottom of the window
-                    scrolloff = 2,
-                    -- which directions to show the window,
-                    -- falling back to the next direction when there's not enough space
-                    direction_priority = { "s", "n" },
-                    -- Controls whether the completion window will automatically show when typing
-                    auto_show = true,
-                    -- Controls how the completion items are selected
-                    -- 'preselect' will automatically select the first item in the completion list
-                    -- 'manual' will not select any item by default
-                    -- 'auto_insert' will not select any item by default, and insert the completion items automatically when selecting them
-                    selection = "preselect",
-                    -- Controls how the completion items are rendered on the popup window
-                    -- 'simple' will render the item's kind icon the left alongside the label
-                    -- 'reversed' will render the label on the left and the kind icon + name on the right
-                    -- 'minimal' will render the label on the left and the kind name on the right
-                    -- 'function(blink.cmp.CompletionRenderContext): blink.cmp.Component[]' for custom rendering
-                    draw = "reversed",
-                    -- Controls the cycling behavior when reaching the beginning or end of the completion list.
-                    cycle = {
-                        -- When `true`, calling `select_next` at the *bottom* of the completion list will select the *first* completion item.
-                        from_bottom = true,
-                        -- When `true`, calling `select_prev` at the *top* of the completion list will select the *last* completion item.
-                        from_top = true,
-                    },
-                },
-                documentation = {
-                    min_width = 10,
-                    max_width = 60,
-                    max_height = 20,
-                    border = "single",
-                    winhighlight = "Normal:BlinkCmpDoc,FloatBorder:BlinkCmpDocBorder,CursorLine:BlinkCmpDocCursorLine,Search:None",
-                    -- which directions to show the documentation window,
-                    -- for each of the possible autocomplete window directions,
-                    -- falling back to the next direction when there's not enough space
-                    direction_priority = {
-                        autocomplete_north = { "e", "w", "n", "s" },
-                        autocomplete_south = { "e", "w", "s", "n" },
-                    },
-                    -- Controls whether the documentation window will automatically show when selecting a completion item
-                    auto_show = true,
-                    auto_show_delay_ms = 0,
-                    update_delay_ms = 50,
-                },
-                signature_help = {
-                    min_width = 1,
-                    max_width = 100,
-                    max_height = 10,
-                    border = "single",
-                    winhighlight = "Normal:BlinkCmpSignatureHelp,FloatBorder:BlinkCmpSignatureHelpBorder",
-                },
-            },
-
-            nerd_font_variant = "normal",
-        },
-    },
+    -- {
+    --     "saghen/blink.cmp",
+    --     lazy = false, -- lazy loading handled internally
+    --     -- optional: provides snippets for the snippet source
+    --     dependencies = "rafamadriz/friendly-snippets",
+    --
+    --     -- use a release tag to download pre-built binaries
+    --     version = "v0.*",
+    --     -- OR build from source, requires nightly: https://rust-lang.github.io/rustup/concepts/channels.html#working-with-nightly-rust
+    --     -- build = 'cargo build --release',
+    --     -- On musl libc based systems you need to add this flag
+    --     -- build = 'RUSTFLAGS="-C target-feature=-crt-static" cargo build --release',
+    --     -- If you use nix, you can build from source using latest nightly rust with:
+    --     -- build = 'nix run .#build-plugin',
+    --
+    --     ---@module 'blink.cmp'
+    --     ---@type blink.cmp.Config
+    --     opts = {
+    --         -- for keymap, all values may be string | string[]
+    --         -- use an empty table to disable a keymap
+    --         keymap = {
+    --             show = "<C-space>",
+    --             hide = "<C-e>",
+    --             accept = "<CR>",
+    --
+    --             -- select_and_accept = {},
+    --             -- select_prev = { "<Up>", "<C-p>" },
+    --             -- select_next = { "<Down>", "<C-n>" },
+    --
+    --             show_documentation = "<C-space>",
+    --             hide_documentation = "<C-space>",
+    --
+    --             scroll_documentation_up = "<C-b>",
+    --             scroll_documentation_down = "<C-f>",
+    --
+    --             snippet_forward = "<Tab>",
+    --             snippet_backward = "<S-Tab>",
+    --         },
+    --
+    --         trigger = {
+    --             completion = {
+    --                 -- 'prefix' will fuzzy match on the text before the cursor
+    --                 -- 'full' will fuzzy match on the text before *and* after the cursor
+    --                 -- example: 'foo_|_bar' will match 'foo_' for 'prefix' and 'foo__bar' for 'full'
+    --                 keyword_range = "prefix",
+    --                 -- regex used to get the text when fuzzy matching
+    --                 -- changing this may break some sources, so please report if you run into issues
+    --                 -- todo: shouldnt this also affect the accept command? should this also be per language?
+    --                 keyword_regex = "[%w_\\-]",
+    --                 -- after matching with keyword_regex, any characters matching this regex at the prefix will be excluded
+    --                 exclude_from_prefix_regex = "[\\-]",
+    --                 -- LSPs can indicate when to show the completion window via trigger characters
+    --                 -- however, some LSPs (*cough* tsserver *cough*) return characters that would essentially
+    --                 -- always show the window. We block these by default
+    --                 blocked_trigger_characters = { " ", "\n", "\t" },
+    --                 -- when true, will show the completion window when the cursor comes after a trigger character when entering insert mode
+    --                 show_on_insert_on_trigger_character = true,
+    --                 -- list of additional trigger characters that won't trigger the completion window when the cursor comes after a trigger character when entering insert mode
+    --                 show_on_insert_blocked_trigger_characters = { "'", '"' },
+    --             },
+    --
+    --             signature_help = {
+    --                 enabled = false,
+    --                 blocked_trigger_characters = {},
+    --                 blocked_retrigger_characters = {},
+    --                 -- when true, will show the signature help window when the cursor comes after a trigger character when entering insert mode
+    --                 show_on_insert_on_trigger_character = true,
+    --             },
+    --         },
+    --         sources = {
+    --             -- similar to nvim-cmp's sources, but we point directly to the source's lua module
+    --             -- multiple groups can be provided, where it'll fallback to the next group if the previous
+    --             -- returns no completion items
+    --             -- WARN: This API will have breaking changes during the beta
+    --             providers = {
+    --                 { "blink.cmp.sources.lsp", name = "LSP" },
+    --                 { "blink.cmp.sources.path", name = "Path", score_offset = 3 },
+    --                 { "blink.cmp.sources.snippets", name = "Snippets", score_offset = -3 },
+    --                 { "blink.cmp.sources.buffer", name = "Buffer" },
+    --             },
+    --         },
+    --
+    --         windows = {
+    --             autocomplete = {
+    --                 min_width = 15,
+    --                 max_height = 10,
+    --                 border = "single",
+    --                 winhighlight = "Normal:BlinkCmpMenu,FloatBorder:BlinkCmpMenuBorder,CursorLine:BlinkCmpMenuSelection,Search:None",
+    --                 -- keep the cursor X lines away from the top/bottom of the window
+    --                 scrolloff = 2,
+    --                 -- which directions to show the window,
+    --                 -- falling back to the next direction when there's not enough space
+    --                 direction_priority = { "s", "n" },
+    --                 -- Controls whether the completion window will automatically show when typing
+    --                 auto_show = true,
+    --                 -- Controls how the completion items are selected
+    --                 -- 'preselect' will automatically select the first item in the completion list
+    --                 -- 'manual' will not select any item by default
+    --                 -- 'auto_insert' will not select any item by default, and insert the completion items automatically when selecting them
+    --                 selection = "preselect",
+    --                 -- Controls how the completion items are rendered on the popup window
+    --                 -- 'simple' will render the item's kind icon the left alongside the label
+    --                 -- 'reversed' will render the label on the left and the kind icon + name on the right
+    --                 -- 'minimal' will render the label on the left and the kind name on the right
+    --                 -- 'function(blink.cmp.CompletionRenderContext): blink.cmp.Component[]' for custom rendering
+    --                 draw = "reversed",
+    --                 -- Controls the cycling behavior when reaching the beginning or end of the completion list.
+    --                 cycle = {
+    --                     -- When `true`, calling `select_next` at the *bottom* of the completion list will select the *first* completion item.
+    --                     from_bottom = true,
+    --                     -- When `true`, calling `select_prev` at the *top* of the completion list will select the *last* completion item.
+    --                     from_top = true,
+    --                 },
+    --             },
+    --             documentation = {
+    --                 min_width = 10,
+    --                 max_width = 60,
+    --                 max_height = 20,
+    --                 border = "single",
+    --                 winhighlight = "Normal:BlinkCmpDoc,FloatBorder:BlinkCmpDocBorder,CursorLine:BlinkCmpDocCursorLine,Search:None",
+    --                 -- which directions to show the documentation window,
+    --                 -- for each of the possible autocomplete window directions,
+    --                 -- falling back to the next direction when there's not enough space
+    --                 direction_priority = {
+    --                     autocomplete_north = { "e", "w", "n", "s" },
+    --                     autocomplete_south = { "e", "w", "s", "n" },
+    --                 },
+    --                 -- Controls whether the documentation window will automatically show when selecting a completion item
+    --                 auto_show = true,
+    --                 auto_show_delay_ms = 0,
+    --                 update_delay_ms = 50,
+    --             },
+    --             signature_help = {
+    --                 min_width = 1,
+    --                 max_width = 100,
+    --                 max_height = 10,
+    --                 border = "single",
+    --                 winhighlight = "Normal:BlinkCmpSignatureHelp,FloatBorder:BlinkCmpSignatureHelpBorder",
+    --             },
+    --         },
+    --
+    --         nerd_font_variant = "normal",
+    --     },
+    -- },
 })
 
 -- To load all integrations at once

@@ -20,10 +20,14 @@ M.on_attach = function(client, bufnr)
         vim.diagnostic.jump({ count = -1, float = true })
     end
 
+    local hover = function()
+        vim.lsp.buf.hover({ border = "single" })
+    end
+
     vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
     vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
     vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
-    vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
+    vim.keymap.set("n", "K", hover, opts)
     vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
     vim.keymap.set("n", "gy", vim.lsp.buf.type_definition, opts)
     vim.keymap.set("n", "<leader>e", vim.lsp.buf.rename, opts)

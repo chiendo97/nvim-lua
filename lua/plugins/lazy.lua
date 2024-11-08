@@ -54,6 +54,8 @@ require("lazy").setup({
     { "hrsh7th/cmp-path", event = "InsertEnter" },
     {
         "zbirenbaum/copilot-cmp",
+        -- disable if node is not executable
+        enabled = vim.fn.executable("node") == 1,
         event = "InsertEnter",
         config = function()
             require("copilot_cmp").setup()
@@ -525,6 +527,14 @@ require("lazy").setup({
     --         nerd_font_variant = "normal",
     --     },
     -- },
+    {
+        "mistweaverco/kulala.nvim",
+        ft = "http",
+        opts = {
+            split_direction = "horizontal",
+            default_view = "body",
+        },
+    },
 })
 
 -- To load all integrations at once

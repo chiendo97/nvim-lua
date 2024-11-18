@@ -14,7 +14,6 @@ require("nvim-treesitter.configs").setup({
         "lua",
         "markdown",
         "markdown_inline",
-        "org",
         "python",
         "query",
         "swift",
@@ -23,6 +22,7 @@ require("nvim-treesitter.configs").setup({
         "xml",
         "yaml",
     },
+    ignore_install = { "org" },
 
     -- Install parsers synchronously (only applied to `ensure_installed`)
     sync_install = false,

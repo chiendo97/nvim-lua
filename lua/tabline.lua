@@ -19,4 +19,6 @@ function _G.MyTabline()
     return s
 end
 
+vim.api.nvim_set_hl(0, 'TabLine', { fg = '#ffffff', bg = '#505050' })
+vim.api.nvim_set_hl(0, 'TabLineSel', { fg = '#000000', bg = '#a0a0a0' })
 vim.o.tabline = "%!v:lua.MyTabline()"

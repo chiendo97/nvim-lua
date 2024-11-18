@@ -177,7 +177,7 @@ function _G.dump(...)
     print(unpack(objects))
 end
 
-require("statusline")
+-- require("statusline")
 require("tabline")
 require("keymaps")
 require("autocmd")

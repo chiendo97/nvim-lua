@@ -59,6 +59,7 @@ map("x", "k", "gk", { noremap = true, silent = true, desc = "Up with line wraps"
 
 -- Copy to system's clipboard
 map("x", "y", '"*y', { noremap = true, desc = "Yank to clipboard" })
+map("x", "p", '"+p', { noremap = true, desc = "Paste from last Yank" })
 map("n", "yy", '"*yy', { noremap = true, desc = "Yank line to clipboard" })
 
 -- Copy current relative path

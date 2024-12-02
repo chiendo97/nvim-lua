@@ -23,15 +23,13 @@ telescope.setup({
 
         mappings = {
             i = {
-                ["<C-s>"] = actions.select_horizontal,
-                ["<C-v>"] = actions.select_vertical,
-                ["<C-t>"] = actions.select_tab,
-
+                ["<C-e>"] = actions.to_fuzzy_refine,
+                ["<C-h>"] = actions.which_key,
                 ["<C-j>"] = actions.move_selection_next,
                 ["<C-k>"] = actions.move_selection_previous,
-
-                ["<C-c>"] = actions.close,
-                ["<ESC>"] = actions.close,
+                ["<C-s>"] = actions.select_horizontal,
+                ["<C-t>"] = actions.select_tab,
+                ["<C-v>"] = actions.select_vertical,
             },
         },
 

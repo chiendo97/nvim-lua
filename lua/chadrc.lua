@@ -30,12 +30,19 @@ M.ui = {
                     return ""
                 end
 
-                return "%#St_relativepath#  " .. vim.fn.expand("%:.:h") .. " /"
+                return "%#St_relativepath# " .. vim.fn.expand("%:.:h") .. "/"
             end,
         },
     },
 }
 
 M.lsp = { signature = true }
+
+M.colorify = {
+    enabled = false,
+    mode = "bg", -- fg, bg, virtual
+    virt_text = "󱓻 ",
+    highlight = { hex = true, lspvars = true },
+}
 
 return M

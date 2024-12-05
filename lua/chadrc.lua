@@ -36,7 +36,7 @@ M.ui = {
     },
 }
 
-M.lsp = { signature = true }
+M.lsp = { signature = false }
 
 M.colorify = {
     enabled = false,

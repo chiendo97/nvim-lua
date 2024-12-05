@@ -68,12 +68,9 @@ require("lazy").setup({
                 require("copilot").setup({
                     panel = {
                         enabled = false,
-                        auto_refresh = true,
                     },
                     suggestion = {
                         enabled = false,
-                        auto_trigger = true,
-                        accept = false,
                     },
                     filetypes = {
                         yaml = true,
@@ -96,16 +93,6 @@ require("lazy").setup({
             require("nvim-surround").setup({})
         end,
     },
-
-    {
-        "nvimtools/none-ls.nvim",
-        event = "VeryLazy",
-        enabled = false,
-        config = function()
-            require("lsp.null-ls")
-        end,
-    },
-    { "nvimtools/none-ls-extras.nvim", lazy = true },
 
     {
         "nvim-orgmode/orgmode",
@@ -161,38 +148,6 @@ require("lazy").setup({
             vim.keymap.set("n", "<C-j>", nvim_tmux_nav.NvimTmuxNavigateDown)
             vim.keymap.set("n", "<C-k>", nvim_tmux_nav.NvimTmuxNavigateUp)
             vim.keymap.set("n", "<C-l>", nvim_tmux_nav.NvimTmuxNavigateRight)
-        end,
-    },
-
-    {
-        "ellisonleao/gruvbox.nvim",
-        lazy = false,
-        priority = 1000,
-        enabled = false,
-        config = function()
-            require("gruvbox").setup({
-                undercurl = true,
-                underline = true,
-                bold = true,
-                italic = {
-                    strings = true,
-                    comments = true,
-                    operators = false,
-                    folds = true,
-                },
-                strikethrough = true,
-                invert_selection = false,
-                invert_signs = false,
-                invert_tabline = false,
-                invert_intend_guides = false,
-                inverse = true,
-                contrast = "",
-                palette_overrides = {},
-                overrides = {},
-                dim_inactive = false,
-                transparent_mode = false,
-            })
-            vim.cmd("colorscheme gruvbox")
         end,
     },
 
@@ -293,50 +248,6 @@ require("lazy").setup({
         end,
     },
     {
-        "stevearc/dressing.nvim",
-        enabled = false,
-        opts = {
-            input = {
-
-                -- Can be 'left', 'right', or 'center'
-                title_pos = "center",
-
-                -- Set to `false` to disable
-                mappings = {
-                    n = {
-                        ["<Esc>"] = "Close",
-                        ["<C-c>"] = "Close",
-                        ["<CR>"] = "Confirm",
-                    },
-                    i = {
-                        ["<C-c>"] = "Close",
-                        ["<CR>"] = "Confirm",
-                        ["<Up>"] = "HistoryPrev",
-                        ["<Down>"] = "HistoryNext",
-                    },
-                },
-            },
-        },
-    },
-    -- lazy.nvim
-    {
-        "folke/noice.nvim",
-        enabled = false,
-        event = "VeryLazy",
-        opts = {
-            -- add any options here
-        },
-        dependencies = {
-            -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
-            "MunifTanjim/nui.nvim",
-            -- OPTIONAL:
-            --   `nvim-notify` is only needed, if you want to use the notification view.
-            --   If not available, we use `mini` as the fallback
-            "rcarriga/nvim-notify",
-        },
-    },
-
-    {
         "MeanderingProgrammer/render-markdown.nvim",
         opts = {},
         ft = { "markdown" },
@@ -365,25 +276,6 @@ require("lazy").setup({
         end,
     },
     {
-        "nvim-treesitter/nvim-treesitter-context",
-        event = "VeryLazy",
-        enabled = false,
-        opts = {
-            enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
-            max_lines = 0, -- How many lines the window should span. Values <= 0 mean no limit.
-            min_window_height = 0, -- Minimum editor window height to enable context. Values <= 0 mean no limit.
-            line_numbers = true,
-            multiline_threshold = 20, -- Maximum number of lines to show for a single context
-            trim_scope = "outer", -- Which context lines to discard if `max_lines` is exceeded. Choices: 'inner', 'outer'
-            mode = "cursor", -- Line used to calculate context. Choices: 'cursor', 'topline'
-            -- Separator between context and content. Should be a single character string, like '-'.
-            -- When separator is set, the context will only show up when there are at least 2 lines above cursorline.
-            separator = nil,
-            zindex = 20, -- The Z-index of the context window
-            on_attach = nil, -- (fun(buf: integer): boolean) return false to disable attaching
-        },
-    },
-    {
         "mistweaverco/kulala.nvim",
         ft = "http",
         opts = {
@@ -395,6 +287,21 @@ require("lazy").setup({
         "sphamba/smear-cursor.nvim",
         opts = {
             use_floating_windows = false,
+        },
+    },
+    {
+        "folke/snacks.nvim",
+        priority = 1000,
+        lazy = false,
+        opts = {
+            -- your configuration comes here
+            -- or leave it empty to use the default settings
+            -- refer to the configuration section below
+            bigfile = { enabled = true },
+            notifier = { enabled = true },
+            quickfile = { enabled = true },
+            -- statuscolumn = { enabled = true },
+            -- words = { enabled = true },
         },
     },
 })

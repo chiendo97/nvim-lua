@@ -115,37 +115,20 @@ local cfg = {
     toggle_target = "tabnew",
     style_chat_finder_border = "rounded",
     hooks = {
-        InspectPlugin = function(plugin, params)
-            local bufnr = vim.api.nvim_create_buf(false, true)
-            local copy = vim.deepcopy(plugin)
-            local key = copy.config.openai_api_key or ""
-            copy.config.openai_api_key = key:sub(1, 3) .. string.rep("*", #key - 6) .. key:sub(-3)
-            for provider, _ in pairs(copy.providers) do
-                local s = copy.providers[provider].secret
-                if s and type(s) == "string" then
-                    copy.providers[provider].secret = s:sub(1, 3) .. string.rep("*", #s - 6) .. s:sub(-3)
-                end
-            end
-            local plugin_info = string.format("Plugin structure:\n%s", vim.inspect(copy))
-            local params_info = string.format("Command params:\n%s", vim.inspect(params))
-            local lines = vim.split(plugin_info .. "\n" .. params_info, "\n")
-            vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, lines)
-            vim.api.nvim_win_set_buf(0, bufnr)
-        end,
-        Improvement = function(gp, params)
+        Concise = function(gp, params)
             local template = "Having following from {{filename}}:\n\n"
                 .. "```{{filetype}}\n{{selection}}\n```\n\n"
-                .. "Please help to improve wording and fix grammar errors."
+                .. "Please help to make the provided text more concise."
 
             local agent = gp.get_command_agent()
             gp.logger.info("Implementing selection with agent: " .. agent.name)
 
             gp.Prompt(params, gp.Target.rewrite, agent, template, nil, nil)
         end,
-        Consise = function(gp, params)
-            local template = "Having following from nvim/lua/plugins/lazy.lua:\n\n"
+        Proofread = function(gp, params)
+            local template = "Having following from {{filename}}:\n\n"
                 .. "```{{filetype}}\n{{selection}}\n```\n\n"
-                .. "Please help to make the provided text more concise."
+                .. "Please help to proofread the provided text."
 
             local agent = gp.get_command_agent()
             gp.logger.info("Implementing selection with agent: " .. agent.name)
@@ -163,24 +146,31 @@ local cfg = {
 
             gp.Prompt(params, gp.Target.rewrite, agent, template, nil, nil)
         end,
-        BufferChatNew = function(gp, _)
-            vim.api.nvim_command("%" .. gp.config.cmd_prefix .. "ChatNew")
-        end,
-        Translator = function(gp, params)
-            local chat_system_prompt = "You are a Translator, please translate between English and Vietnamese."
-            gp.cmd.ChatNew(params, chat_system_prompt)
-        end,
-        UnitTests = function(gp, params)
-            local template = "I have the following code from {{filename}}:\n\n"
-                .. "```{{filetype}}\n{{selection}}\n```\n\n"
-                .. "Please respond by writing table driven unit tests for the code above."
-            local agent = gp.get_command_agent()
-            gp.Prompt(params, gp.Target.enew, agent, template)
-        end,
         Explain = function(gp, params)
-            local template = "I have the following code from {{filename}}:\n\n"
+            local template = "I have the following text from {{filename}}:\n\n"
                 .. "```{{filetype}}\n{{selection}}\n```\n\n"
                 .. "Please respond by explaining the code above."
+            local agent = gp.get_chat_agent()
+            gp.Prompt(params, gp.Target.popup, agent, template)
+        end,
+        Summarize = function(gp, params)
+            local template = "Please summarize the following text from {{filename}}:\n\n"
+                .. "```{{filetype}}\n{{selection}}\n```\n\n"
+                .. "Provide a brief summary of the code above."
+            local agent = gp.get_chat_agent()
+            gp.Prompt(params, gp.Target.popup, agent, template)
+        end,
+        MakeList = function(gp, params)
+            local template = "Please create a list of key components from the following text in {{filename}}:\n\n"
+                .. "```{{filetype}}\n{{selection}}\n```\n\n"
+                .. "Generate a list of important elements in the code above."
+            local agent = gp.get_chat_agent()
+            gp.Prompt(params, gp.Target.popup, agent, template)
+        end,
+        MakeKeyPoint = function(gp, params)
+            local template = "Please highlight the key points of the following text from {{filename}}:\n\n"
+                .. "```{{filetype}}\n{{selection}}\n```\n\n"
+                .. "Identify the main points of interest in the code above."
             local agent = gp.get_chat_agent()
             gp.Prompt(params, gp.Target.popup, agent, template)
         end,

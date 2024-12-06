@@ -68,7 +68,7 @@ vim.keymap.set("x", "k", "gk", { noremap = true, silent = true, desc = "Up with 
 -- Copy to system's clipboard
 vim.keymap.set("x", "y", '"*y', { noremap = true, desc = "Yank to clipboard" })
 vim.keymap.set({ "x", "n" }, "p", '"+p', { noremap = true, desc = "Paste from last Yank" })
-vim.keymap.set("n", "yy", '"*yy', { noremap = true, desc = "Yank line to clipboard" })
+vim.keymap.set("n", "yy", '"*yy', { noremap = false, desc = "Yank line to clipboard" })
 
 -- Copy current relative path
 vim.keymap.set("n", "<leader>yp", ':let @* = expand("%:~:.")<cr>', { noremap = true, desc = "Yank relative path" })
@@ -95,3 +95,21 @@ vim.keymap.set("n", "_", "<cmd>horizontal resize -2<CR>", { noremap = true, desc
 vim.keymap.set("n", "<leader><space>x", "<cmd>source %<CR>", { noremap = true, desc = "Source current file" })
 vim.keymap.set("n", "<leader>x", ":.lua<CR>", { noremap = true, desc = "Execute current line as Lua" })
 vim.keymap.set("v", "<leader>x", ":lua<CR>", { noremap = true, desc = "Execute selected text as Lua" })
+
+-- Duplicate a line and comment out the first line
+vim.keymap.set("n", "yc", "<cmd>norm yygc<cr>p", { noremap = true, desc = "Duplicate line and comment original" })
+
+-- From the Vim wiki: https://bit.ly/4eLAARp
+-- Search and replace word under the cursor
+vim.keymap.set(
+    "n",
+    "<leader>e",
+    [[:%s/\<<C-r><C-w>\>//g<Left><Left>]],
+    { noremap = true, desc = "Search & replace word under cursor" }
+)
+
+-- Sort selected text
+vim.keymap.set("x", "<leader>s", ":sort<cr>", { noremap = true, desc = "Sort selected text" })
+
+-- Format selected text with jq command
+vim.keymap.set("x", "<leader>j", ":!jq<cr>", { noremap = true, desc = "Format selected text with jq" })

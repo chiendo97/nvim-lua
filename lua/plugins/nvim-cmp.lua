@@ -11,10 +11,10 @@ local cmp_options = {
         end,
     },
 
-    -- window = {
-    --     completion = cmp.config.window.bordered(),
-    --     documentation = cmp.config.window.bordered(),
-    -- },
+    window = {
+        completion = cmp.config.window.bordered(),
+        documentation = cmp.config.window.bordered(),
+    },
 
     preselect = require("cmp.types").cmp.PreselectMode.None,
 
@@ -55,23 +55,23 @@ local cmp_options = {
         { name = "buffer" },
     }),
 
-    -- formatting = {
-    --     format = function(entry, vim_item)
-    --         -- set a name for each source
-    --         vim_item.menu = ({
-    --             path = "[Path]",
-    --             buffer = "[Buffer]",
-    --             nvim_lsp = "[LSP]",
-    --             vsnip = "[VSnip]",
-    --             nvim_lua = "[Lua]",
-    --             latex_symbols = "[Latex]",
-    --             orgmode = "[OrgMode]",
-    --             neorg = "[NeOrg]",
-    --             Copilot = "[Copilot]",
-    --         })[entry.source.name]
-    --         return vim_item
-    --     end,
-    -- },
+    formatting = {
+        format = function(entry, vim_item)
+            -- set a name for each source
+            vim_item.menu = ({
+                path = "[Path]",
+                buffer = "[Buffer]",
+                nvim_lsp = "[LSP]",
+                vsnip = "[VSnip]",
+                nvim_lua = "[Lua]",
+                latex_symbols = "[Latex]",
+                orgmode = "[OrgMode]",
+                neorg = "[NeOrg]",
+                Copilot = "[Copilot]",
+            })[entry.source.name]
+            return vim_item
+        end,
+    },
 
     experimental = {
         native_menu = false,
@@ -91,5 +91,5 @@ local cmp_options = {
     },
 }
 
-cmp_options = vim.tbl_deep_extend("force", cmp_options, require("nvchad.cmp"))
+-- cmp_options = vim.tbl_deep_extend("force", cmp_options, require("nvchad.cmp"))
 require("cmp").setup(cmp_options)

@@ -114,6 +114,10 @@ local cfg = {
     },
     toggle_target = "tabnew",
     style_chat_finder_border = "rounded",
+    -- write sensitive data to log file for	debugging purposes (like api keys)
+    log_sensitive = false,
+    -- if true, finished ChatResponder won't move the cursor to the end of the buffer
+    chat_free_cursor = true,
     hooks = {
         Concise = function(gp, params)
             local template = "Having following from {{filename}}:\n\n"
@@ -182,5 +186,9 @@ local cfg = {
         disable = true,
     },
 }
+
+require("gp.defaults").code_system_prompt = "You are an advanced AI code editor designed to assist with programming tasks.\n\n"
+    .. "Provide clear and concise code snippets without any additional commentary or explanation.\n"
+    .. "Begin and end each response with:\n\n```"
 
 require("gp").setup(cfg)

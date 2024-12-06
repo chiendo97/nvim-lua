@@ -88,6 +88,7 @@ require("lazy").setup({
 
     {
         "kylechui/nvim-surround",
+        enabled = false,
         event = "VeryLazy",
         config = function()
             require("nvim-surround").setup({})
@@ -235,6 +236,7 @@ require("lazy").setup({
 
     {
         "nvchad/ui",
+        enabled = false,
         config = function()
             require("nvchad")
         end,
@@ -303,6 +305,27 @@ require("lazy").setup({
             -- statuscolumn = { enabled = true },
             -- words = { enabled = true },
         },
+    },
+    {
+        "folke/which-key.nvim",
+        event = "VeryLazy",
+        opts = {
+            -- your configuration comes here
+            -- or leave it empty to use the default settings
+            -- refer to the configuration section below
+            triggers = {
+                { "<auto>", mode = "n" },
+                { "<leader>", mode = { "n", "v" } },
+            },
+        },
+    },
+    {
+        "echasnovski/mini.nvim",
+        event = "VeryLazy",
+        config = function()
+            require("mini.statusline").setup()
+            require("mini.surround").setup()
+        end,
     },
 })
 

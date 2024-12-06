@@ -2,7 +2,7 @@ local nvim_lsp = require("lspconfig")
 local util = nvim_lsp.util
 local path = util.path
 
-local function get_python_path(workspace)
+local function get_python_path()
     -- Use activated virtualenv.
     if vim.env.VIRTUAL_ENV then
         return path.join(vim.env.VIRTUAL_ENV, "bin", "python")
@@ -38,8 +38,11 @@ nvim_lsp.basedpyright.setup({
                 },
             },
         },
+        python = {},
     },
     before_init = function(_, config)
-        config.settings.basedpyright.pythonPath = get_python_path(config.root_dir)
+        local python_path = get_python_path()
+        config.settings.python.pythonPath = python_path
+        vim.notify(python_path)
     end,
 })

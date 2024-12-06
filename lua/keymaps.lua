@@ -97,7 +97,7 @@ vim.keymap.set("n", "<leader>x", ":.lua<CR>", { noremap = true, desc = "Execute 
 vim.keymap.set("v", "<leader>x", ":lua<CR>", { noremap = true, desc = "Execute selected text as Lua" })
 
 -- Duplicate a line and comment out the first line
-vim.keymap.set("n", "yc", "<cmd>norm yygc<cr>p", { noremap = true, desc = "Duplicate line and comment original" })
+vim.keymap.set("n", "yc", "<cmd>norm yygcp<cr>", { noremap = true, desc = "Duplicate line and comment original" })
 
 -- From the Vim wiki: https://bit.ly/4eLAARp
 -- Search and replace word under the cursor

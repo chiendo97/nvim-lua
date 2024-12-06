@@ -44,7 +44,7 @@ require("lspconfig").bashls.setup({
     capabilities = require("lsp.attach").capabilities,
 })
 
-require("lspconfig").typst_lsp.setup({
+require("lspconfig").tinymist.setup({
     on_attach = require("lsp.attach").on_attach,
     capabilities = require("lsp.attach").capabilities,
     settings = {

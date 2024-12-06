@@ -1,6 +1,6 @@
-vim.bo.shiftwidth = 2
-vim.bo.tabstop = 2
-vim.bo.softtabstop = 2
-vim.bo.expandtab = true
+vim.opt_local.shiftwidth = 2
+vim.opt_local.tabstop = 2
+vim.opt_local.softtabstop = 2
+vim.opt_local.expandtab = true
 
-vim.o.foldmethod = "indent" -- fold based on indent level
+vim.opt_local.foldmethod = "indent" -- fold based on indent level

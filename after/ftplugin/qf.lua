@@ -1,1 +1,1 @@
-vim.api.nvim_buf_set_keymap(0, "n", "q", ":cclose<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "q", ":cclose<cr>", { noremap = true, silent = true, buffer = true })

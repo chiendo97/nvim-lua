@@ -39,10 +39,10 @@ require("lazy").setup({
     },
 
     {
-        -- "hrsh7th/nvim-cmp",
+        "hrsh7th/nvim-cmp",
         -- "yioneko/nvim-cmp",
         -- branch = "perf-up",
-        "iguanacucumber/magazine.nvim",
+        -- "iguanacucumber/magazine.nvim",
         lazy = true,
         config = function()
             require("plugins.nvim-cmp")

@@ -4,6 +4,115 @@
 --------------------------------------------------------------------------------
 -- Default config
 --------------------------------------------------------------------------------
+---@alias ModelProvider "openai" | "ollama" | "anthropic"
+
+---@class AgentModel
+---@field model string
+---@field temperature number
+---@field top_p number
+
+---@class Agent
+---@field provider ModelProvider
+---@field name string
+---@field chat boolean
+---@field command boolean
+---@field model AgentModel
+---@field system_prompt string
+
+---Create a new agent configuration
+---@param provider ModelProvider
+---@param name string
+---@param chat boolean
+---@param command boolean
+---@param model_name string
+---@param temperature number
+---@param system_prompt string
+---@return Agent
+local function create_agent(provider, name, chat, command, model_name, temperature, system_prompt)
+    return {
+        provider = provider,
+        name = name,
+        chat = chat,
+        command = command,
+        model = {
+            model = model_name,
+            temperature = temperature,
+            top_p = 1,
+        },
+        system_prompt = system_prompt,
+    }
+end
+
+local default_prompts = require("gp.defaults")
+
+local model_configs = {
+    {
+        provider = "openai",
+        models = {
+            { name = "gpt-4o" },
+            { name = "gpt-4o-mini" },
+            { name = "o1-mini" },
+            { name = "o1-preview" },
+        },
+    },
+    {
+        provider = "ollama",
+        models = {
+            {
+                name = "llama3.1:latest",
+                extra_params = { num_ctx = 8192 },
+            },
+        },
+    },
+    {
+        provider = "anthropic",
+        models = {
+            { name = "claude-3-5-sonnet-20240620" },
+            { name = "claude-3-haiku-20240307" },
+        },
+    },
+}
+
+local agents = {}
+
+for _, config in ipairs(model_configs) do
+    for _, model in ipairs(config.models) do
+        local base_name = model.name:match("([^:]+)"):gsub("%-", "")
+
+        -- Chat agent
+        local chat_agent = create_agent(
+            config.provider,
+            "Chat" .. config.provider:gsub("^%l", string.upper) .. base_name,
+            true, -- chat
+            false, -- command
+            model.name,
+            0.8, -- Fixed temperature for chat agents
+            default_prompts.chat_system_prompt
+        )
+
+        -- Code agent
+        local code_agent = create_agent(
+            config.provider,
+            "Code" .. config.provider:gsub("^%l", string.upper) .. base_name,
+            false, -- chat
+            true, -- command
+            model.name,
+            0.5, -- Fixed temperature for code agents
+            default_prompts.code_system_prompt
+        )
+
+        -- Add extra parameters if they exist
+        if model.extra_params then
+            for k, v in pairs(model.extra_params) do
+                chat_agent.model[k] = v
+                code_agent.model[k] = v
+            end
+        end
+
+        table.insert(agents, chat_agent)
+        table.insert(agents, code_agent)
+    end
+end
 
 -- README_REFERENCE_MARKER_START
 local cfg = {
@@ -20,98 +129,7 @@ local cfg = {
             secret = os.getenv("ANTHROPIC_API_KEY"),
         },
     },
-    agents = {
-        {
-            provider = "openai",
-            name = "ChatGPT4o",
-            chat = true,
-            command = false,
-            model = { model = "gpt-4o", temperature = 1.1, top_p = 1 },
-            system_prompt = require("gp.defaults").chat_system_prompt,
-        },
-        {
-            provider = "openai",
-            name = "ChatGPT4o-mini",
-            chat = true,
-            command = false,
-            model = { model = "gpt-4o-mini", temperature = 1.1, top_p = 1 },
-            system_prompt = require("gp.defaults").chat_system_prompt,
-        },
-        {
-            provider = "openai",
-            name = "CodeGPT4o",
-            chat = false,
-            command = true,
-            model = { model = "gpt-4o", temperature = 0.8, top_p = 1 },
-            system_prompt = require("gp.defaults").code_system_prompt,
-        },
-        {
-            provider = "openai",
-            name = "CodeGPT4o-mini",
-            chat = false,
-            command = true,
-            model = { model = "gpt-4o-mini", temperature = 0.7, top_p = 1 },
-            system_prompt = require("gp.defaults").code_system_prompt,
-        },
-        {
-            provider = "ollama",
-            name = "ChatOllamaLlama3",
-            chat = true,
-            command = false,
-            model = {
-                model = "llama3.1:latest",
-                temperature = 0,
-                top_p = 1,
-                num_ctx = 8192,
-            },
-            system_prompt = require("gp.defaults").chat_system_prompt,
-        },
-        {
-            provider = "ollama",
-            name = "CodeOllamaLlama3",
-            chat = false,
-            command = true,
-            model = {
-                model = "llama3.1:latest",
-                temperature = 0,
-                top_p = 1,
-                num_ctx = 8192,
-            },
-            system_prompt = require("gp.defaults").code_system_prompt,
-        },
-        {
-            provider = "anthropic",
-            name = "ChatClaude-3-5-Sonnet",
-            chat = true,
-            command = false,
-            model = { model = "claude-3-5-sonnet-20240620", temperature = 0.8, top_p = 1 },
-            system_prompt = require("gp.defaults").chat_system_prompt,
-        },
-        {
-            provider = "anthropic",
-            name = "ChatClaude-3-Haiku",
-            chat = true,
-            command = false,
-            model = { model = "claude-3-haiku-20240307", temperature = 0.8, top_p = 1 },
-            system_prompt = require("gp.defaults").chat_system_prompt,
-        },
-        {
-            provider = "anthropic",
-            name = "CodeClaude-3-5-Sonnet",
-            chat = false,
-            command = true,
-            model = { model = "claude-3-5-sonnet-20240620", temperature = 0.8, top_p = 1 },
-            system_prompt = require("gp.defaults").code_system_prompt,
-        },
-        {
-            provider = "anthropic",
-            name = "CodeClaude-3-Haiku",
-            chat = false,
-            command = true,
-            model = { model = "claude-3-haiku-20240307", temperature = 0.8, top_p = 1 },
-            system_prompt = require("gp.defaults").code_system_prompt,
-        },
-    },
+    agents = agents,
     toggle_target = "tabnew",
     style_chat_finder_border = "rounded",
     -- write sensitive data to log file for	debugging purposes (like api keys)
@@ -187,7 +205,7 @@ local cfg = {
     },
 }
 
-require("gp.defaults").code_system_prompt = "You are an advanced AI code editor designed to assist with programming tasks.\n\n"
+default_prompts.code_system_prompt = "You are an advanced AI code editor designed to assist with programming tasks.\n\n"
     .. "Provide clear and concise code snippets without any additional commentary or explanation.\n"
     .. "Begin and end each response with:\n\n```"
 

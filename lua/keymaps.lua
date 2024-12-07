@@ -67,7 +67,7 @@ vim.keymap.set("x", "k", "gk", { noremap = true, silent = true, desc = "Up with 
 
 -- Copy to system's clipboard
 vim.keymap.set("x", "y", '"*y', { noremap = true, desc = "Yank to clipboard" })
-vim.keymap.set({ "x", "n" }, "p", '"+p', { noremap = true, desc = "Paste from last Yank" })
+vim.keymap.set("x", "p", '"+p', { noremap = true, desc = "Paste from last Yank" })
 vim.keymap.set("n", "yy", '"*yy', { noremap = false, desc = "Yank line to clipboard" })
 
 -- Copy current relative path
@@ -97,7 +97,7 @@ vim.keymap.set("n", "<leader>x", ":.lua<CR>", { noremap = true, desc = "Execute 
 vim.keymap.set("v", "<leader>x", ":lua<CR>", { noremap = true, desc = "Execute selected text as Lua" })
 
 -- Duplicate a line and comment out the first line
-vim.keymap.set("n", "yc", "<cmd>norm yygcp<cr>", { noremap = true, desc = "Duplicate line and comment original" })
+vim.keymap.set("n", "yc", "<cmd>norm yygccp<cr>", { noremap = true, desc = "Duplicate line and comment original" })
 
 -- From the Vim wiki: https://bit.ly/4eLAARp
 -- Search and replace word under the cursor

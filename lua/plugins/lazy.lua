@@ -295,16 +295,63 @@ require("lazy").setup({
         "folke/snacks.nvim",
         priority = 1000,
         lazy = false,
-        opts = {
-            -- your configuration comes here
-            -- or leave it empty to use the default settings
-            -- refer to the configuration section below
-            bigfile = { enabled = true },
-            notifier = { enabled = true },
-            quickfile = { enabled = true },
-            -- statuscolumn = { enabled = true },
-            -- words = { enabled = true },
-            -- lazygit = { enabled = true },
+        config = function()
+            require("snacks").setup({
+                -- your configuration comes here
+                -- or leave it empty to use the default settings
+                -- refer to the configuration section below
+                bigfile = { enabled = true },
+                notifier = { enabled = true },
+                quickfile = { enabled = true },
+                -- statuscolumn = { enabled = true },
+                -- words = { enabled = true },
+                -- lazygit = { enabled = true },
+                terminal = {
+                    -- your terminal configuration comes here
+                    -- or leave it empty to use the default settings
+                    -- refer to the configuration section below
+                    win = {
+                        style = {
+                            keys = {
+                                term_normal = {
+                                    "<esc>",
+                                    "<C-\\><C-n>",
+                                    mode = "t",
+                                    noremap = true,
+                                    expr = false,
+                                    desc = "Escape to normal mode",
+                                },
+                            },
+                        },
+                    },
+                },
+            })
+
+            _G.dd = function(...)
+                require("snacks").debug.inspect(...)
+            end
+
+            _G.bt = function()
+                require("snacks").debug.backtrace()
+            end
+
+            vim.print = _G.dd
+        end,
+        keys = {
+            {
+                "<c-/>",
+                function()
+                    require("snacks").terminal()
+                end,
+                desc = "Toggle Terminal",
+            },
+            {
+                "<c-_>",
+                function()
+                    require("snacks").terminal()
+                end,
+                desc = "which_key_ignore",
+            },
         },
     },
     {
@@ -314,9 +361,20 @@ require("lazy").setup({
             -- your configuration comes here
             -- or leave it empty to use the default settings
             -- refer to the configuration section below
+            preset = "modern",
+            delay = 1000,
             triggers = {
-                { "<auto>", mode = "n" },
+                { "<auto>", mode = "nxso" },
                 { "<leader>", mode = { "n", "v" } },
+            },
+        },
+        keys = {
+            {
+                "<leader>?",
+                function()
+                    require("which-key").show({ global = false })
+                end,
+                desc = "Buffer Local Keymaps (which-key)",
             },
         },
     },

@@ -103,6 +103,15 @@ require("lazy").setup({
             require("plugins.orgmode")
         end,
     },
+    {
+        "akinsho/org-bullets.nvim",
+        event = "VeryLazy",
+        ft = { "org" },
+        dependencies = { "nvim-orgmode/orgmode" },
+        config = function()
+            require("org-bullets").setup()
+        end,
+    },
 
     {
         "nvim-treesitter/nvim-treesitter",
@@ -384,6 +393,13 @@ require("lazy").setup({
         config = function()
             require("mini.statusline").setup()
             require("mini.surround").setup()
+            local gen_spec = require("mini.ai").gen_spec
+            require("mini.ai").setup({
+                custom_textobjects = {
+                    -- Function definition (needs treesitter queries with these captures)
+                    F = gen_spec.treesitter({ a = "@function.outer", i = "@function.inner" }),
+                },
+            })
         end,
     },
 })

@@ -80,7 +80,7 @@ vim.keymap.set("n", "<leader>yP", ':let @* = expand("%:p")<cr>', { noremap = tru
 vim.keymap.set("n", "gV", "`[v`]", { noremap = true, desc = "Select last pasted region" })
 
 -- Terminal mode escape
-vim.keymap.set("t", "<esc>", "<C-\\><C-n>", { noremap = true, desc = "Escape terminal mode" })
+vim.keymap.set("t", "<esc>", "<cmd>stopinsert<cr>", { noremap = true, desc = "Escape terminal mode" })
 
 -- Toggle line wrapping
 vim.keymap.set("n", "<leader>W", ":set wrap!<CR>", { noremap = true, silent = true, desc = "Toggle wrap" })

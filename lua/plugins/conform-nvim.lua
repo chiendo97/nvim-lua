@@ -11,7 +11,10 @@ require("conform").setup({
     },
     -- Set default options
     default_format_opts = {
-        lsp_format = "fallback",
+        -- LSP formatting is used when no other formatters are available
+        -- lsp_format = "fallback",
+        -- LSP formatting is used when available and then other formatters
+        lsp_format = "first",
     },
     -- Customize formatters
     formatters = {
@@ -43,7 +46,9 @@ require("conform").setup({
             prepend_args = { "-format-only" },
         },
         goline = {
-            prepend_args = { "--base-formatter", "gofmt", "--shorten-comments"}
+            prepend_args = { "--base-formatter", "gofmt", "--shorten-comments" },
         },
     },
 })
+
+vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"

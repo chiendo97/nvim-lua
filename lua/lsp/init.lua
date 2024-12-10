@@ -17,7 +17,7 @@ require("lspconfig.ui.windows").default_options = { border = "single" }
 
 require("lsp.gopls")
 require("lsp.sumneko")
--- require("lsp.tsserver")
+require("lsp.tsserver")
 require("lsp.pyright")
 
 -- require("lspconfig").yamlls.setup({

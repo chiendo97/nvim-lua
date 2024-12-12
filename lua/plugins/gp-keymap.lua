@@ -34,6 +34,7 @@ vim.keymap.set("v", "<C-g>r", ":<C-u>'<,'>GpRewrite<cr>", keymapOptions("Visual 
 vim.keymap.set("v", "<C-g>a", ":<C-u>'<,'>GpAppend<cr>", keymapOptions("Visual Append (after)"))
 vim.keymap.set("v", "<C-g>b", ":<C-u>'<,'>GpPrepend<cr>", keymapOptions("Visual Prepend (before)"))
 vim.keymap.set("v", "<C-g>i", ":<C-u>'<,'>GpImplement<cr>", keymapOptions("Implement selection"))
+vim.keymap.set("v", "<C-g>P", ":<C-u>'<,'>GpProofread<cr>", keymapOptions("Proofread selection"))
 
 vim.keymap.set({ "n" }, "<C-g>gp", "<cmd>GpPopup<cr>", keymapOptions("Popup"))
 vim.keymap.set({ "n" }, "<C-g>ge", "<cmd>GpEnew<cr>", keymapOptions("GpEnew"))

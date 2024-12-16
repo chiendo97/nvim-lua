@@ -307,31 +307,15 @@ require("lazy").setup({
         lazy = false,
         config = function()
             require("snacks").setup({
-                -- your configuration comes here
-                -- or leave it empty to use the default settings
-                -- refer to the configuration section below
                 bigfile = { enabled = true },
                 notifier = { enabled = true },
                 quickfile = { enabled = true },
-                -- statuscolumn = { enabled = true },
-                -- words = { enabled = true },
-                -- lazygit = { enabled = true },
-                terminal = {
-                    -- your terminal configuration comes here
-                    -- or leave it empty to use the default settings
-                    -- refer to the configuration section below
-                    win = {
-                        style = {
-                            keys = {
-                                term_normal = {
-                                    "<esc>",
-                                    "<C-\\><C-n>",
-                                    mode = "t",
-                                    noremap = true,
-                                    expr = false,
-                                    desc = "Escape to normal mode",
-                                },
-                            },
+                scope = {},
+
+                styles = {
+                    notification = {
+                        wo = {
+                            wrap = true,
                         },
                     },
                 },
@@ -347,22 +331,6 @@ require("lazy").setup({
 
             vim.print = _G.dd
         end,
-        keys = {
-            {
-                "<c-/>",
-                function()
-                    require("snacks").terminal()
-                end,
-                desc = "Toggle Terminal",
-            },
-            {
-                "<c-_>",
-                function()
-                    require("snacks").terminal()
-                end,
-                desc = "which_key_ignore",
-            },
-        },
     },
     {
         "folke/which-key.nvim",
@@ -394,11 +362,11 @@ require("lazy").setup({
         config = function()
             require("mini.statusline").setup()
             require("mini.surround").setup()
-            local gen_spec = require("mini.ai").gen_spec
+            require("mini.operators").setup({ replace = { prefix = "cr" } })
             require("mini.ai").setup({
                 custom_textobjects = {
                     -- Function definition (needs treesitter queries with these captures)
-                    F = gen_spec.treesitter({ a = "@function.outer", i = "@function.inner" }),
+                    F = require("mini.ai").gen_spec.treesitter({ a = "@function.outer", i = "@function.inner" }),
                 },
             })
         end,

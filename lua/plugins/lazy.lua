@@ -530,14 +530,14 @@ require("lazy").setup({
         ---@type blink.cmp.Config
         opts = {
             keymap = {
-                ["<CR>"] = { "accept" },
-                ["<C-n>"] = { "select_next" },
-                ["<C-p>"] = { "select_prev" },
-                ["<C-l>"] = { "show", "hide" },
-                ["<C-_>"] = { "cancel" },
-                ["<C-Space>"] = { "show_documentation", "hide_documentation" },
-                ["<C-f>"] = { "scroll_documentation_down" },
-                ["<C-u>"] = { "scroll_documentation_up" },
+                ["<CR>"] = { "accept", "fallback" },
+                ["<C-n>"] = { "select_next", "fallback" },
+                ["<C-p>"] = { "select_prev", "fallback" },
+                ["<C-e>"] = { "hide", "fallback" },
+                ["<C-_>"] = { "cancel", "fallback" },
+                ["<C-Space>"] = { "show", "show_documentation", "hide_documentation" },
+                ["<C-f>"] = { "scroll_documentation_down", "fallback" },
+                ["<C-u>"] = { "scroll_documentation_up", "fallback" },
                 ["<Tab>"] = { "snippet_forward", "fallback" },
                 ["<S-Tab>"] = { "snippet_backward", "fallback" },
             },

@@ -32,6 +32,7 @@ vim.keymap.set("x", "L", "g_", { noremap = true, desc = "Jump to end of line" })
 
 -- Ctrl + c to turn off highlight and close quickfix windows and escape
 vim.keymap.set("n", "<C-C>", ":noh<cr>:ccl<cr><esc>", { noremap = true, silent = true })
+vim.keymap.set("i", "<C-C>", "<esc>", { noremap = true, silent = true })
 vim.keymap.set("n", "<esc>", ":noh<cr>:ccl<cr><esc>", { noremap = true, silent = true })
 
 -- * to highlight current word

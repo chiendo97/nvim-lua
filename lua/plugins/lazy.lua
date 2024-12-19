@@ -161,18 +161,19 @@ require("lazy").setup({
         end,
     },
 
-    {
-        "nvim-telescope/telescope.nvim",
-        cmd = { "Telescope" },
-        init = function()
-            require("plugins.telescope_map")
-        end,
-        config = function()
-            require("plugins.telescope")
-        end,
-    },
-    { "nvim-telescope/telescope-fzf-native.nvim", build = "make", lazy = true },
-    { "nvim-telescope/telescope-ui-select.nvim", lazy = true },
+    -- {
+    --     "nvim-telescope/telescope.nvim",
+    --     enabled = false,
+    --     cmd = { "Telescope" },
+    --     init = function()
+    --         require("plugins.telescope_map")
+    --     end,
+    --     config = function()
+    --         require("plugins.telescope")
+    --     end,
+    -- },
+    -- { "nvim-telescope/telescope-fzf-native.nvim", build = "make", lazy = true },
+    -- { "nvim-telescope/telescope-ui-select.nvim", lazy = true },
 
     {
         "kevinhwang91/nvim-bqf",
@@ -369,6 +370,116 @@ require("lazy").setup({
                     F = require("mini.ai").gen_spec.treesitter({ a = "@function.outer", i = "@function.inner" }),
                 },
             })
+        end,
+    },
+    {
+        "ibhagwan/fzf-lua",
+        event = "VeryLazy",
+        cmd = { "FzfLua" },
+        keys = {
+            {
+                -- FzfLua Find Files
+                "<leader>g",
+                function()
+                    require("fzf-lua").files()
+                end,
+                mode = { "n" },
+                desc = "Find files",
+            },
+            {
+                -- FzfLua Live Grep
+                "<leader>r",
+                function()
+                    require("fzf-lua").live_grep()
+                end,
+                mode = { "n" },
+                desc = "Live grep",
+            },
+            {
+                -- FzfLua Grep String (from visual selection)
+                "<leader>r",
+                function()
+                    require("fzf-lua").grep_visual()
+                end,
+                mode = { "x" },
+                desc = "Grep string (visual)",
+            },
+            {
+                -- FzfLua Grep Word Under Cursor
+                "<leader>R",
+                function()
+                    require("fzf-lua").grep_cword()
+                end,
+                mode = { "n" },
+                desc = "Grep word under cursor",
+            },
+            {
+                -- FzfLua Help Tags
+                "<leader>h",
+                function()
+                    require("fzf-lua").helptags()
+                end,
+                mode = { "n" },
+                desc = "Show help tags",
+            },
+            {
+                -- FzfLua Old Files
+                "<leader>j",
+                function()
+                    require("fzf-lua").oldfiles({
+                        cwd_only = true,
+                        stat_file = true, -- verify files exist on disk
+                    })
+                end,
+                mode = { "n" },
+                desc = "Show old files",
+            },
+            {
+                -- FzfLua Keymaps
+                "<leader>m",
+                function()
+                    require("fzf-lua").keymaps()
+                end,
+                mode = { "n" },
+                desc = "Show keymaps",
+            },
+            {
+                -- FzfLua Resume Last Search
+                "<leader>n",
+                function()
+                    require("fzf-lua").resume()
+                end,
+                mode = { "n" },
+                desc = "Resume last FzfLua command",
+            },
+            {
+                -- FzfLua Built-in Commands
+                "<leader>b",
+                function()
+                    require("fzf-lua").builtin()
+                end,
+                mode = { "n" },
+                desc = "Show built-in commands",
+            },
+            {
+                -- FzfLua Spell Suggest
+                "<leader>s",
+                function()
+                    require("fzf-lua").spell_suggest()
+                end,
+                mode = { "n" },
+                desc = "Show spelling suggestions",
+            },
+        },
+        config = function()
+            require("fzf-lua").setup({
+                keymap = {
+                    fzf = {
+                        ["ctrl-q"] = "select-all+accept",
+                    },
+                },
+            })
+            require("fzf-lua").register_ui_select()
         end,
     },
 })

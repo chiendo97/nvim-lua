@@ -566,12 +566,6 @@ require("lazy").setup({
                 },
                 menu = {
                     border = "rounded",
-                    draw = {
-                        columns = {
-                            { "label", "label_description", gap = 1 },
-                            { "kind" },
-                        },
-                    },
                 },
             },
             sources = {
@@ -603,6 +597,19 @@ require("lazy").setup({
         -- allows extending the providers array elsewhere in your config
         -- without having to redefine it
         opts_extend = { "sources.default" },
+    },
+    {
+        "toppair/peek.nvim",
+        enabled = vim.fn.executable("deno") == 1,
+        ft = { "markdown" },
+        build = "deno task --quiet build:fast",
+        config = function()
+            require("peek").setup({
+                app = "browser",
+            })
+            vim.api.nvim_create_user_command("PeekOpen", require("peek").open, {})
+            vim.api.nvim_create_user_command("PeekClose", require("peek").close, {})
+        end,
     },
 })
 

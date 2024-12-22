@@ -298,6 +298,7 @@ require("lazy").setup({
     },
     {
         "sphamba/smear-cursor.nvim",
+        -- enabled = false,
         opts = {
             use_floating_windows = false,
         },
@@ -309,7 +310,7 @@ require("lazy").setup({
         config = function()
             require("snacks").setup({
                 bigfile = { enabled = true },
-                notifier = { enabled = true },
+                notifier = { enabled = false },
                 quickfile = { enabled = true },
                 scope = {},
 
@@ -363,7 +364,7 @@ require("lazy").setup({
         config = function()
             require("mini.statusline").setup()
             require("mini.surround").setup()
-            require("mini.operators").setup({ replace = { prefix = "cr" } })
+            require("mini.operators").setup({ replace = { prefix = "" } })
             require("mini.ai").setup({
                 custom_textobjects = {
                     -- Function definition (needs treesitter queries with these captures)
@@ -520,7 +521,7 @@ require("lazy").setup({
         },
 
         -- use a release tag to download pre-built binaries
-        version = "v0.*",
+        version = "*",
         -- AND/OR build from source, requires nightly: https://rust-lang.github.io/rustup/concepts/channels.html#working-with-nightly-rust
         -- build = 'cargo build --release',
         -- If you use nix, you can build from source using latest nightly rust with:
@@ -557,9 +558,7 @@ require("lazy").setup({
                     auto_show = true,
                     auto_show_delay_ms = 0,
                     treesitter_highlighting = true,
-                    window = {
-                        border = "rounded",
-                    },
+                    window = { border = "rounded" },
                 },
                 ghost_text = {
                     enabled = true,
@@ -586,16 +585,16 @@ require("lazy").setup({
                         end,
                     },
                 },
-                completion = {
-                    enabled_providers = { "lsp", "path", "snippets", "buffer", "copilot" },
-                },
+                default = { "lsp", "path", "snippets", "buffer", "copilot" },
             },
             appearance = {
                 use_nvim_cmp_as_default = false,
             },
+            signature = {
+                enabled = true,
+                window = { border = "rounded" },
+            },
         },
-        -- allows extending the providers array elsewhere in your config
-        -- without having to redefine it
         opts_extend = { "sources.default" },
     },
     {

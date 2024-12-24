@@ -38,63 +38,6 @@ require("lazy").setup({
         end,
     },
 
-    -- {
-    --     "hrsh7th/nvim-cmp",
-    --     -- "yioneko/nvim-cmp",
-    --     -- branch = "perf-up",
-    --     -- "iguanacucumber/magazine.nvim",
-    --     lazy = true,
-    --     config = function()
-    --         require("plugins.nvim-cmp")
-    --     end,
-    -- },
-    -- { "hrsh7th/cmp-nvim-lsp", event = "InsertEnter" },
-    -- { "hrsh7th/cmp-buffer", event = "InsertEnter" },
-    -- -- { "hrsh7th/cmp-nvim-lsp-signature-help", event = "InsertEnter" },
-    -- { "hrsh7th/cmp-path", event = "InsertEnter" },
-    -- {
-    --     "zbirenbaum/copilot-cmp",
-    --     -- disable if node is not executable
-    --     enabled = vim.fn.executable("node") == 1,
-    --     event = "InsertEnter",
-    --     config = function()
-    --         require("copilot_cmp").setup()
-    --     end,
-    --     dependencies = {
-    --         "zbirenbaum/copilot.lua",
-    --         cmd = "Copilot",
-    --         build = ":Copilot auth",
-    --         config = function()
-    --             require("copilot").setup({
-    --                 panel = {
-    --                     enabled = false,
-    --                 },
-    --                 suggestion = {
-    --                     enabled = false,
-    --                 },
-    --                 filetypes = {
-    --                     yaml = true,
-    --                     markdown = true,
-    --                     help = true,
-    --                     gitcommit = true,
-    --                     svn = false,
-    --                     cvs = false,
-    --                     ["."] = false,
-    --                 },
-    --             })
-    --         end,
-    --     },
-    -- },
-
-    {
-        "kylechui/nvim-surround",
-        enabled = false,
-        event = "VeryLazy",
-        config = function()
-            require("nvim-surround").setup({})
-        end,
-    },
-
     {
         "nvim-orgmode/orgmode",
         event = "VeryLazy",
@@ -103,6 +46,7 @@ require("lazy").setup({
             require("plugins.orgmode")
         end,
     },
+
     {
         "akinsho/org-bullets.nvim",
         event = "VeryLazy",
@@ -161,20 +105,6 @@ require("lazy").setup({
         end,
     },
 
-    -- {
-    --     "nvim-telescope/telescope.nvim",
-    --     enabled = false,
-    --     cmd = { "Telescope" },
-    --     init = function()
-    --         require("plugins.telescope_map")
-    --     end,
-    --     config = function()
-    --         require("plugins.telescope")
-    --     end,
-    -- },
-    -- { "nvim-telescope/telescope-fzf-native.nvim", build = "make", lazy = true },
-    -- { "nvim-telescope/telescope-ui-select.nvim", lazy = true },
-
     {
         "kevinhwang91/nvim-bqf",
         config = function()
@@ -208,6 +138,7 @@ require("lazy").setup({
             friendly_snippets = true,
         },
     },
+
     { "rafamadriz/friendly-snippets", lazy = true },
 
     {
@@ -242,14 +173,6 @@ require("lazy").setup({
         end,
         config = function()
             require("plugins.gp-nvim")
-        end,
-    },
-
-    {
-        "nvchad/ui",
-        enabled = false,
-        config = function()
-            require("nvchad")
         end,
     },
 
@@ -310,7 +233,7 @@ require("lazy").setup({
         config = function()
             require("snacks").setup({
                 bigfile = { enabled = true },
-                notifier = { enabled = false },
+                notifier = { enabled = true },
                 quickfile = { enabled = true },
                 scope = {},
 
@@ -531,7 +454,7 @@ require("lazy").setup({
         ---@type blink.cmp.Config
         opts = {
             keymap = {
-                ["<CR>"] = { "accept", "fallback" },
+                ["<CR>"] = { "select_and_accept", "fallback" },
                 ["<C-n>"] = { "select_next", "fallback" },
                 ["<C-p>"] = { "select_prev", "fallback" },
                 ["<C-e>"] = { "hide", "fallback" },
@@ -544,14 +467,12 @@ require("lazy").setup({
             },
             completion = {
                 list = {
-                    selection = "preselect",
+                    selection = "auto_insert",
                 },
                 accept = {
                     auto_brackets = {
                         enabled = false,
-                        semantic_token_resolution = {
-                            enabled = false,
-                        },
+                        semantic_token_resolution = { enabled = false },
                     },
                 },
                 documentation = {
@@ -586,6 +507,7 @@ require("lazy").setup({
                     },
                 },
                 default = { "lsp", "path", "snippets", "buffer", "copilot" },
+                cmdline = {},
             },
             appearance = {
                 use_nvim_cmp_as_default = false,
@@ -595,7 +517,6 @@ require("lazy").setup({
                 window = { border = "rounded" },
             },
         },
-        opts_extend = { "sources.default" },
     },
     {
         "toppair/peek.nvim",

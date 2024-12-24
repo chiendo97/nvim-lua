@@ -46,8 +46,7 @@ M.on_attach = function(client, bufnr)
     end
 end
 
--- M.capabilities = require("cmp_nvim_lsp").default_capabilities()
--- M.capabilities = vim.lsp.protocol.make_client_capabilities()
-M.capabilities = require("blink.cmp").get_lsp_capabilities()
+local ok, blink_cmp = pcall(require, "blink.cmp")
+M.capabilities = ok and blink_cmp.get_lsp_capabilities() or vim.lsp.protocol.make_client_capabilities()
 
 return M

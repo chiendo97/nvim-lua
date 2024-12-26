@@ -454,7 +454,7 @@ require("lazy").setup({
         ---@type blink.cmp.Config
         opts = {
             keymap = {
-                ["<CR>"] = { "select_and_accept", "fallback" },
+                ["<CR>"] = { "accept", "fallback" },
                 ["<C-n>"] = { "select_next", "fallback" },
                 ["<C-p>"] = { "select_prev", "fallback" },
                 ["<C-e>"] = { "hide", "fallback" },
@@ -464,10 +464,23 @@ require("lazy").setup({
                 ["<C-u>"] = { "scroll_documentation_up", "fallback" },
                 ["<Tab>"] = { "snippet_forward", "fallback" },
                 ["<S-Tab>"] = { "snippet_backward", "fallback" },
+                cmdline = {
+                    ["<C-space>"] = { "show", "show_documentation", "hide_documentation" },
+                    ["<C-e>"] = { "hide" },
+                    ["<C-y>"] = { "select_and_accept" },
+
+                    ["<C-p>"] = { "select_prev", "fallback" },
+                    ["<C-n>"] = { "select_next", "fallback" },
+
+                    ["<Tab>"] = { "select_next", "fallback" },
+                    ["<S-Tab>"] = { "select_prev", "fallback" },
+                },
             },
             completion = {
                 list = {
-                    selection = "auto_insert",
+                    selection = function(ctx)
+                        return ctx.mode == "cmdline" and "auto_insert" or "preselect"
+                    end,
                 },
                 accept = {
                     auto_brackets = {
@@ -507,10 +520,10 @@ require("lazy").setup({
                     },
                 },
                 default = { "lsp", "path", "snippets", "buffer", "copilot" },
-                cmdline = {},
             },
             appearance = {
                 use_nvim_cmp_as_default = false,
+                nerd_font_variant = "mono",
             },
             signature = {
                 enabled = true,

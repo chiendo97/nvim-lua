@@ -1,1 +1,1 @@
-vim.bo.wrap = true -- wrap long lines
+vim.opt_local.wrap = true -- wrap long lines

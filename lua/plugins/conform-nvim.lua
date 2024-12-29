@@ -9,7 +9,7 @@ require("conform").setup({
         yaml = { "yamlfmt" },
         ledger = { "hledger" },
         -- javascript = { "prettierd", "prettier", stop_after_first = true },
-        typescriptreact = { "eslint_d" },
+        typescriptreact = { "eslint_d", "prettierd" },
     },
     -- Set default options
     default_format_opts = {

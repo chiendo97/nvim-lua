@@ -478,9 +478,7 @@ require("lazy").setup({
             },
             completion = {
                 list = {
-                    selection = function(ctx)
-                        return ctx.mode == "cmdline" and "auto_insert" or "preselect"
-                    end,
+                    selection = "auto_insert",
                 },
                 accept = {
                     auto_brackets = {

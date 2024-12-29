@@ -8,6 +8,8 @@ require("conform").setup({
         go = { "gofumpt", "goimports", "golines" },
         yaml = { "yamlfmt" },
         ledger = { "hledger" },
+        -- javascript = { "prettierd", "prettier", stop_after_first = true },
+        typescriptreact = { "eslint_d" },
     },
     -- Set default options
     default_format_opts = {

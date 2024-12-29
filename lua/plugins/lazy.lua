@@ -454,7 +454,7 @@ require("lazy").setup({
         ---@type blink.cmp.Config
         opts = {
             keymap = {
-                ["<CR>"] = { "accept", "fallback" },
+                ["<CR>"] = { "select_and_accept", "fallback" },
                 ["<C-n>"] = { "select_next", "fallback" },
                 ["<C-p>"] = { "select_prev", "fallback" },
                 ["<C-e>"] = { "hide", "fallback" },

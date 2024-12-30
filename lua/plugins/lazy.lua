@@ -264,11 +264,11 @@ require("lazy").setup({
             -- your configuration comes here
             -- or leave it empty to use the default settings
             -- refer to the configuration section below
-            preset = "modern",
+            preset = "helix",
             delay = 1000,
             triggers = {
                 { "<auto>", mode = "nxso" },
-                { "<leader>", mode = { "n", "v" } },
+                -- { "<leader>", mode = { "n", "v" } },
             },
         },
         keys = {
@@ -293,6 +293,7 @@ require("lazy").setup({
                     -- Function definition (needs treesitter queries with these captures)
                     F = require("mini.ai").gen_spec.treesitter({ a = "@function.outer", i = "@function.inner" }),
                 },
+                n_lines = 200,
             })
         end,
     },

@@ -22,6 +22,17 @@ require("ibl").setup({
         },
     },
     scope = {
-        enabled = false,
+        enabled = true,
+        highlight = { "Function", "Label" },
+        priority = 500,
+        include = {
+            node_type = {
+                ["*"] = {
+                    "if_statement",
+                    "for_statement",
+                    "while_statement",
+                },
+            },
+        },
     },
 })

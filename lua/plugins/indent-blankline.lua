@@ -31,6 +31,7 @@ require("ibl").setup({
                     "if_statement",
                     "for_statement",
                     "while_statement",
+                    "table_constructor",
                 },
             },
         },

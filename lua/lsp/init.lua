@@ -69,6 +69,11 @@ require("lsp.pyright")
 --     capabilities = require("lsp.attach").capabilities,
 -- })
 
+require("lspconfig").zls.setup({
+    on_attach = require("lsp.attach").on_attach,
+    capabilities = require("lsp.attach").capabilities,
+})
+
 require("lspconfig").rust_analyzer.setup({
     on_attach = require("lsp.attach").on_attach,
     capabilities = require("lsp.attach").capabilities,

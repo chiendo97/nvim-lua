@@ -16,7 +16,6 @@ require("nvim-treesitter.configs").setup({
         "markdown_inline",
         "python",
         "query",
-        "swift",
         "vim",
         "vimdoc",
         "xml",

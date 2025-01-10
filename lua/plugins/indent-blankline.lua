@@ -25,11 +25,14 @@ require("ibl").setup({
         enabled = true,
         highlight = { "Function", "Label" },
         priority = 500,
+        show_start = false,
+        show_end = false,
         include = {
             node_type = {
                 python = {
                     "if_statement",
                     "for_statement",
+                    "with_statement",
                     "while_statement",
                     "table_constructor",
                 },

@@ -2,8 +2,8 @@
 require("orgmode").setup({
     org_agenda_files = "/Users/chiendo97/Library/CloudStorage/Dropbox/org/*",
     org_default_notes_file = "/Users/chiendo97/Library/CloudStorage/Dropbox/org/inbox.org",
-    org_hide_leading_stars = true,
-    org_ellipsis = "", -- hide marker used to indicate a folded headline.
+    -- org_hide_leading_stars = true,
+    -- org_ellipsis = "", -- hide marker used to indicate a folded headline.
     org_blank_before_new_entry = {
         heading = false,
         plain_list_item = false,

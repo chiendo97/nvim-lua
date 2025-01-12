@@ -471,9 +471,6 @@ require("lazy").setup({
                     ["<C-e>"] = { "hide" },
                     ["<C-y>"] = { "select_and_accept" },
 
-                    ["<C-p>"] = { "select_prev", "fallback" },
-                    ["<C-n>"] = { "select_next", "fallback" },
-
                     ["<Tab>"] = { "select_next", "fallback" },
                     ["<S-Tab>"] = { "select_prev", "fallback" },
                 },

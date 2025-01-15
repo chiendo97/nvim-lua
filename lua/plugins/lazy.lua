@@ -417,8 +417,10 @@ require("lazy").setup({
                 {
                     "giuxtaposition/blink-cmp-copilot",
                     enabled = vim.fn.executable("node") == 1,
+                    lazy = true,
                     dependencies = {
                         "zbirenbaum/copilot.lua",
+                        lazy = true,
                         cmd = "Copilot",
                         build = ":Copilot auth",
                         config = function()
@@ -510,14 +512,12 @@ require("lazy").setup({
             },
             sources = {
                 providers = {
-                    copilot = vim.fn.executable("node") == 1
-                            and {
-                                name = "copilot",
-                                module = "blink-cmp-copilot",
-                                score_offset = 100,
-                                async = true,
-                            }
-                        or nil,
+                    copilot = vim.fn.executable("node") == 1 and {
+                        name = "copilot",
+                        module = "blink-cmp-copilot",
+                        score_offset = 100,
+                        async = true,
+                    } or nil,
                 },
                 default = function(_)
                     local default = { "lsp", "path", "snippets", "buffer", "copilot" }

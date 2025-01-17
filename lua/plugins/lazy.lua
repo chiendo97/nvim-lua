@@ -15,6 +15,8 @@ end
 
 vim.opt.rtp:prepend(lazypath)
 
+local is_node_available = vim.fn.executable("node") == 1
+
 require("lazy").setup({
     { "nvim-lua/plenary.nvim", lazy = true },
     { "tweekmonster/startuptime.vim", cmd = "StartupTime" },
@@ -83,7 +85,7 @@ require("lazy").setup({
             require("plugins.gitsigns")
         end,
         cond = function()
-            return vim.fn.isdirectory(".git") == 1
+            return is_node_available
         end,
     },
 
@@ -415,7 +417,7 @@ require("lazy").setup({
                 "rafamadriz/friendly-snippets",
                 {
                     "giuxtaposition/blink-cmp-copilot",
-                    enabled = vim.fn.executable("node") == 1,
+                    enabled = is_node_available,
                     lazy = true,
                     dependencies = {
                         "zbirenbaum/copilot.lua",
@@ -511,7 +513,7 @@ require("lazy").setup({
             },
             sources = {
                 providers = {
-                    copilot = vim.fn.executable("node") == 1 and {
+                    copilot = is_node_available and {
                         name = "copilot",
                         module = "blink-cmp-copilot",
                         score_offset = 100,
@@ -520,7 +522,7 @@ require("lazy").setup({
                 },
                 default = function(_)
                     local default = { "lsp", "path", "snippets", "buffer", "copilot" }
-                    if vim.fn.executable("node") == 1 then
+                    if is_node_available then
                         table.insert(default, "copilot")
                     end
 

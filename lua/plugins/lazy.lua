@@ -40,7 +40,6 @@ require("lazy").setup({
 
     {
         "nvim-orgmode/orgmode",
-        event = "VeryLazy",
         ft = { "org" },
         config = function()
             require("plugins.orgmode")
@@ -539,16 +538,11 @@ require("lazy").setup({
         },
     },
     {
-        "toppair/peek.nvim",
-        enabled = vim.fn.executable("deno") == 1,
+        "iamcco/markdown-preview.nvim",
+        cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
         ft = { "markdown" },
-        build = "deno task --quiet build:fast",
-        config = function()
-            require("peek").setup({
-                app = "browser",
-            })
-            vim.api.nvim_create_user_command("PeekOpen", require("peek").open, {})
-            vim.api.nvim_create_user_command("PeekClose", require("peek").close, {})
+        build = function()
+            vim.fn["mkdp#util#install"]()
         end,
     },
 })

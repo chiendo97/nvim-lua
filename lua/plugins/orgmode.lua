@@ -21,4 +21,5 @@ require("orgmode").setup({
             org_todo_prev = "cT",
         },
     },
+    org_startup_folded = "content",
 })

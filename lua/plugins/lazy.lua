@@ -1,8 +1,5 @@
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 
--- put this in your main init.lua file ( before lazy setup )
-vim.g.base46_cache = vim.fn.stdpath("data") .. "/base46_cache/"
-
 if not vim.uv.fs_stat(lazypath) then
     vim.fn.system({
         "git",
@@ -176,12 +173,31 @@ require("lazy").setup({
             require("plugins.gp-nvim")
         end,
     },
-
     {
-        "nvchad/base46",
-        lazy = true,
-        build = function()
-            require("base46").load_all_highlights()
+        "comfysage/evergarden",
+        priority = 1000, -- Colorscheme plugin is loaded first before any other plugins
+        config = function()
+            require("evergarden").setup({
+                -- transparent_background = true,
+                transparent_background = false,
+                -- variant = "medium", -- 'hard'|'medium'|'soft'
+                variant = "hard", -- 'hard'|'medium'|'soft'
+                -- variant = "soft", -- 'hard'|'medium'|'soft'
+                overrides = {}, -- add custom overrides
+            })
+            vim.cmd.colorscheme("evergarden")
+            local highlight_links = {
+                ["@org.headline.level1.org"] = "@markup.heading.1",
+                ["@org.headline.level2.org"] = "@markup.heading.2",
+                ["@org.headline.level3.org"] = "@markup.heading.3",
+                ["@org.headline.level4.org"] = "@markup.heading.4",
+                ["@org.headline.level5.org"] = "@markup.heading.5",
+                ["@org.headline.level6.org"] = "@markup.heading.6",
+            }
+
+            for from, to in pairs(highlight_links) do
+                vim.api.nvim_set_hl(0, from, { link = to })
+            end
         end,
     },
     {
@@ -548,8 +564,3 @@ require("lazy").setup({
         end,
     },
 })
-
--- To load all integrations at once
-for _, v in ipairs(vim.fn.readdir(vim.g.base46_cache)) do
-    dofile(vim.g.base46_cache .. v)
-end

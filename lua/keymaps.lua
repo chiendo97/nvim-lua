@@ -31,9 +31,17 @@ vim.keymap.set("n", "L", "g$", { noremap = true, desc = "Jump to end of line" })
 vim.keymap.set("x", "L", "g_", { noremap = true, desc = "Jump to end of line" })
 
 -- Ctrl + c to turn off highlight and close quickfix windows and escape
-vim.keymap.set("n", "<C-C>", ":noh<cr>:ccl<cr><esc>", { noremap = true, silent = true })
-vim.keymap.set("i", "<C-C>", "<esc>", { noremap = true, silent = true })
-vim.keymap.set("n", "<esc>", ":noh<cr>:ccl<cr><esc>", { noremap = true, silent = true })
+-- vim.keymap.set("n", "<C-C>", ":noh<cr>:ccl<cr><esc>", { noremap = true, silent = true })
+vim.keymap.set("n", "<C-C>", function()
+    vim.cmd.noh()
+    vim.cmd.ccl()
+end, {
+    noremap = true,
+    silent = true,
+    desc = "Clear search highlight and close quickfix window",
+})
+-- vim.keymap.set("i", "<C-C>", "<esc>", { noremap = true, silent = true })
+-- vim.keymap.set("n", "<esc>", ":noh<cr>:ccl<cr><esc>", { noremap = true, silent = true })
 
 -- * to highlight current word
 vim.keymap.set(
@@ -44,7 +52,8 @@ vim.keymap.set(
 )
 
 -- To highlight currently selected word
-vim.keymap.set("x", [[//]], [[y/\V<C-R>=escape(@",'/\')<cr><cr>]], { noremap = true, desc = "Highlight selected word" })
+-- vim.keymap.set("x", [[//]], [[y/\V<C-R>=escape(@",'/\')<cr><cr>]], { noremap = true, desc = "Highlight selected word" })
+vim.api.nvim_set_keymap("x", "/", '"vy/<C-r>v<cr>', { noremap = true, desc = "Search for visually selected text" })
 
 -- Navigate between tabs
 vim.keymap.set("n", "gt", ":tabedit<cr>", { noremap = true, silent = true, desc = "Open new tab" })
@@ -111,6 +120,3 @@ vim.keymap.set(
 
 -- Sort selected text
 vim.keymap.set("x", "<leader>s", ":sort<cr>", { noremap = true, desc = "Sort selected text" })
-
--- Format selected text with jq command
-vim.keymap.set("x", "<leader>j", ":!jq<cr>", { noremap = true, desc = "Format selected text with jq" })

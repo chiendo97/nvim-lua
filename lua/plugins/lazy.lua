@@ -276,17 +276,24 @@ require("lazy").setup({
     },
     {
         "folke/which-key.nvim",
+        enabled = true,
         event = "VeryLazy",
         opts = {
             -- your configuration comes here
             -- or leave it empty to use the default settings
             -- refer to the configuration section below
             preset = "helix",
-            delay = 1000,
+            delay = 500,
             triggers = {
-                { "<auto>", mode = "nxso" },
+                { "<auto>", mode = "nixsotc" },
                 -- { "<leader>", mode = { "n", "v" } },
             },
+            defer = function(ctx)
+                if vim.list_contains({ "d", "y" }, ctx.operator) then
+                    return true
+                end
+                return vim.list_contains({ "<C-V>", "V" }, ctx.mode)
+            end,
         },
         keys = {
             {
@@ -311,6 +318,7 @@ require("lazy").setup({
                     F = require("mini.ai").gen_spec.treesitter({ a = "@function.outer", i = "@function.inner" }),
                 },
                 n_lines = 200,
+                silent = true,
             })
         end,
     },

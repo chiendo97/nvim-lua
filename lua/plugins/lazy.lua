@@ -463,6 +463,9 @@ require("lazy").setup({
                         ["ctrl-q"] = "select-all+accept",
                     },
                 },
+                files = {
+                    git_icons = false,
+                },
             })
             require("fzf-lua").register_ui_select()
         end,

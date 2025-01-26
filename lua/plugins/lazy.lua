@@ -236,8 +236,14 @@ require("lazy").setup({
     },
     {
         "MeanderingProgrammer/render-markdown.nvim",
+        enabled = false,
         opts = {},
         ft = { "markdown" },
+    },
+    -- For `plugins.lua` users.
+    {
+        "OXY2DEV/markview.nvim",
+        lazy = false,
     },
     {
         "stevearc/conform.nvim",
@@ -582,7 +588,7 @@ require("lazy").setup({
                     } or nil,
                 },
                 default = function(_)
-                    local default = { "lsp", "path", "snippets", "buffer", "copilot" }
+                    local default = { "lsp", "path", "snippets", "buffer" }
                     if is_node_available then
                         table.insert(default, "copilot")
                     end

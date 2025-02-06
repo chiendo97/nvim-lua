@@ -236,14 +236,23 @@ require("lazy").setup({
     },
     {
         "MeanderingProgrammer/render-markdown.nvim",
-        enabled = false,
+        -- enabled = false,
         opts = {},
         ft = { "markdown" },
     },
     -- For `plugins.lua` users.
     {
         "OXY2DEV/markview.nvim",
+        enabled = false,
         lazy = false,
+        config = function()
+            require("markview").setup({
+                markdown = {
+                    headings = require("markview.presets").headings.marker,
+                    list_items = {},
+                },
+            })
+        end,
     },
     {
         "stevearc/conform.nvim",

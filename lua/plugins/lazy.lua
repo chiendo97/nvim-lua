@@ -545,7 +545,9 @@ require("lazy").setup({
                 ["<C-u>"] = { "scroll_documentation_up", "fallback" },
                 ["<Tab>"] = { "snippet_forward", "fallback" },
                 ["<S-Tab>"] = { "snippet_backward", "fallback" },
-                cmdline = {
+            },
+            cmdline = {
+                keymap = {
                     ["<C-space>"] = { "show", "show_documentation", "hide_documentation" },
                     ["<C-e>"] = { "hide" },
                     ["<C-y>"] = { "select_and_accept" },

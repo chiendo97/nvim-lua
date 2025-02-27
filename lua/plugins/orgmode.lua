@@ -15,10 +15,10 @@ require("orgmode").setup({
     org_todo_keywords = { "TODO(t)", "NEXT(n)", "|", "DONE(d)" },
     win_split_mode = "tabnew",
     mappings = {
-        org_return_uses_meta_return = false,
         org = {
             org_todo = "ct",
             org_todo_prev = "cT",
+            org_return = false,
         },
     },
     org_startup_folded = "overview",

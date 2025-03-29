@@ -1,4 +1,7 @@
-vim.o.winborder     = "rounded"
+if vim.fn.exists('&winborder') == 1 then
+  vim.o.winborder = "rounded"
+end
+
 vim.o.mouse         = "a"   -- enable the mouse in all modes
 vim.o.exrc          = false -- ignore '~/.exrc'
 vim.o.secure        = true

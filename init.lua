@@ -1,3 +1,4 @@
+vim.o.winborder     = "rounded"
 vim.o.mouse         = "a"   -- enable the mouse in all modes
 vim.o.exrc          = false -- ignore '~/.exrc'
 vim.o.secure        = true

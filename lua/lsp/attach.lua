@@ -24,14 +24,10 @@ M.on_attach = function(client, bufnr)
         vim.diagnostic.jump({ count = -1, float = true })
     end
 
-    local hover = function()
-        vim.lsp.buf.hover({ border = "single" })
-    end
-
     vim.keymap.set("n", "gD", vim.lsp.buf.declaration, keymapOptions("Go to declaration"))
     vim.keymap.set("n", "gd", vim.lsp.buf.definition, keymapOptions("Go to definition"))
     vim.keymap.set("n", "gr", vim.lsp.buf.references, keymapOptions("Go to references"))
-    vim.keymap.set("n", "K", hover, keymapOptions("Hover for info"))
+    vim.keymap.set("n", "K", vim.lsp.buf.hover, keymapOptions("Hover for info"))
     vim.keymap.set("n", "gi", vim.lsp.buf.implementation, keymapOptions("Go to implementation"))
     vim.keymap.set("n", "gy", vim.lsp.buf.type_definition, keymapOptions("Go to type definition"))
     vim.keymap.set("n", "<leader>e", vim.lsp.buf.rename, keymapOptions("Rename symbol"))

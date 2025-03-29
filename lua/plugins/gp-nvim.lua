@@ -1,6 +1,70 @@
 -- Gp (GPT prompt) lua plugin for Neovim
 -- https://github.com/Robitx/gp.defaults")
 
+---@alias AgentType "chat" | "command"
+
+---@class AgentSpec
+---@field provider string
+---@field model string
+
+---@class Agent
+---@field provider string
+---@field name string
+---@field chat boolean
+---@field command boolean
+---@field model string
+---@field system_prompt string
+
+-- Define global system prompts
+local chat_system_prompt = require("gp.defaults").chat_system_prompt
+local code_system_prompt = require("gp.defaults").code_system_prompt
+
+---@param spec AgentSpec
+---@param agent_type AgentType
+---@return Agent
+local function create_agent(spec, agent_type)
+    local name_prefix = agent_type == "chat" and "Chat" or "Code"
+    local model_name = table.concat({ unpack(vim.split(spec.model, "-", { plain = true }), 1, 3) })
+    local name = name_prefix .. model_name:gsub("^%l", string.upper)
+
+    return {
+        provider = spec.provider,
+        name = name,
+        chat = agent_type == "chat",
+        command = agent_type == "command",
+        model = { model = spec.model },
+        system_prompt = agent_type == "chat" and chat_system_prompt or code_system_prompt,
+    }
+end
+
+---@type AgentSpec[]
+local agent_specs = {
+    {
+        provider = "openai",
+        model = "gpt-4o",
+    },
+    {
+        provider = "openai",
+        model = "gpt-4o-mini",
+    },
+    {
+        provider = "openai",
+        model = "o3-mini",
+    },
+    {
+        provider = "anthropic",
+        model = "claude-3-7-sonnet-20250219",
+    },
+}
+
+---@type Agent[]
+local agents = {}
+
+for _, spec in ipairs(agent_specs) do
+    table.insert(agents, create_agent(spec, "chat"))
+    table.insert(agents, create_agent(spec, "command"))
+end
+
 local cfg = {
     providers = {
         openai = {
@@ -16,66 +80,8 @@ local cfg = {
             secret = os.getenv("ANTHROPIC_API_KEY"),
         },
     },
-    agents = {
-        {
-            name = "ChatGPT4o",
-            chat = true,
-            command = false,
-            -- string with model name or table with model name and parameters
-            model = { model = "gpt-4o", temperature = 1.1, top_p = 1 },
-            -- system prompt (use this to specify the persona/role of the AI)
-            system_prompt = require("gp.defaults").chat_system_prompt,
-        },
-        {
-            provider = "openai",
-            name = "ChatGPT4o-mini",
-            chat = true,
-            command = false,
-            -- string with model name or table with model name and parameters
-            model = { model = "gpt-4o-mini", temperature = 1.1, top_p = 1 },
-            -- system prompt (use this to specify the persona/role of the AI)
-            system_prompt = require("gp.defaults").chat_system_prompt,
-        },
-        {
-            provider = "openai",
-            name = "CodeGPT4o",
-            chat = false,
-            command = true,
-            -- string with model name or table with model name and parameters
-            model = { model = "gpt-4o", temperature = 0.8, top_p = 1 },
-            -- system prompt (use this to specify the persona/role of the AI)
-            system_prompt = require("gp.defaults").code_system_prompt,
-        },
-        {
-            provider = "openai",
-            name = "CodeGPT4o-mini",
-            chat = false,
-            command = true,
-            -- string with model name or table with model name and parameters
-            model = { model = "gpt-4o-mini", temperature = 0.7, top_p = 1 },
-            -- system prompt (use this to specify the persona/role of the AI)
-            system_prompt = "Please return ONLY code snippets.\nSTART AND END YOUR ANSWER WITH:\n\n```",
-        },
-        {
-            provider = "anthropic",
-            name = "CodeClaude-3-5-Sonnet",
-            chat = false,
-            command = true,
-            -- string with model name or table with model name and parameters
-            model = { model = "claude-3-5-sonnet-latest", temperature = 0.8, top_p = 1 },
-            system_prompt = require("gp.defaults").code_system_prompt,
-        },
-        {
-            disable = true,
-            name = "CodeClaude-3-Haiku",
-        },
-        {
-            disable = true,
-            name = "ChatClaude-3-Haiku",
-        },
-    },
+    agents = agents,
     toggle_target = "tabnew",
-    style_chat_finder_border = "rounded",
     -- write sensitive data to log file for	debugging purposes (like api keys)
     log_sensitive = false,
     -- if true, finished ChatResponder won't move the cursor to the end of the buffer
@@ -152,5 +158,7 @@ local cfg = {
 require("gp.defaults").code_system_prompt = "You are an advanced AI code editor designed to assist with programming tasks.\n\n"
     .. "Provide clear and concise code snippets without any additional commentary or explanation.\n"
     .. "Begin and end each response with:\n\n```"
+
+require("gp.config").agents = {}
 
 require("gp").setup(cfg)

@@ -43,6 +43,7 @@ nvim_lsp.basedpyright.setup({
     before_init = function(_, config)
         local python_path = get_python_path()
         config.settings.python.pythonPath = python_path
-        vim.notify(python_path)
+
+        vim.notify(string.format("python path: %s", python_path))
     end,
 })

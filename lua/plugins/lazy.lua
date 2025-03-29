@@ -236,8 +236,7 @@ require("lazy").setup({
     },
     {
         "MeanderingProgrammer/render-markdown.nvim",
-        -- enabled = false,
-        opts = {},
+        opts = { code = { border = "thick" } },
         ft = { "markdown" },
     },
     -- For `plugins.lua` users.
@@ -296,14 +295,27 @@ require("lazy").setup({
         "folke/snacks.nvim",
         priority = 1000,
         lazy = false,
+        keys = {
+            {
+                "<leader>t",
+                function()
+                    require("snacks").notifier.show_history()
+                end,
+                mode = { "n" },
+                desc = "Show notification history",
+            },
+        },
         config = function()
             require("snacks").setup({
                 bigfile = { enabled = true },
                 notifier = { enabled = true },
                 quickfile = { enabled = true },
-                scope = {},
-
                 styles = {
+                    notification_history = {
+                        wo = {
+                            wrap = true,
+                        },
+                    },
                     notification = {
                         wo = {
                             wrap = true,
@@ -549,8 +561,8 @@ require("lazy").setup({
             cmdline = {
                 enabled = true,
                 completion = {
-                  menu = { auto_show = true },
-                  ghost_text = { enabled = false }
+                    menu = { auto_show = true },
+                    ghost_text = { enabled = false },
                 },
                 keymap = {
                     ["<Tab>"] = { "show", "accept" },
@@ -587,13 +599,9 @@ require("lazy").setup({
                     auto_show = true,
                     auto_show_delay_ms = 0,
                     treesitter_highlighting = true,
-                    window = { border = "rounded" },
                 },
                 ghost_text = {
                     enabled = true,
-                },
-                menu = {
-                    border = "rounded",
                 },
             },
             sources = {
@@ -620,7 +628,6 @@ require("lazy").setup({
             },
             signature = {
                 enabled = true,
-                window = { border = "rounded" },
             },
         },
     },

@@ -22,6 +22,9 @@ vim.diagnostic.config({
             return string.format("%s (%s)", diagnostic.message, diagnostic.source)
         end,
     },
+    jump = {
+        float = true,
+    },
 })
 
 require("lsp.gopls")
@@ -71,6 +74,7 @@ require("lspconfig").tinymist.setup({
 --     on_attach = require("lsp.attach").on_attach,
 --     capabilities = require("lsp.attach").capabilities,
 -- })
+
 require("lspconfig").dartls.setup({
     on_attach = require("lsp.attach").on_attach,
     capabilities = require("lsp.attach").capabilities,
@@ -87,6 +91,7 @@ require("lspconfig").sourcekit.setup({
 -- - "gra" is mapped in Normal and Visual mode to |vim.lsp.buf.code_action()|
 -- - "grr" is mapped in Normal mode to |vim.lsp.buf.references()|
 -- - "gri" is mapped in Normal mode to |vim.lsp.buf.implementation()|
+
 -- Remove above keymaps
 vim.keymap.del("n", "grr")
 vim.keymap.del("n", "gri")

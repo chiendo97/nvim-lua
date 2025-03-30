@@ -16,14 +16,6 @@ M.on_attach = function(client, bufnr)
         vim.diagnostic.enable(not vim.diagnostic.is_enabled(buffnr_opts), buffnr_opts)
     end
 
-    local go_to_next_diagnostic = function()
-        vim.diagnostic.jump({ count = 1, float = true })
-    end
-
-    local go_to_prev_diagnostic = function()
-        vim.diagnostic.jump({ count = -1, float = true })
-    end
-
     vim.keymap.set("n", "gD", vim.lsp.buf.declaration, keymapOptions("Go to declaration"))
     vim.keymap.set("n", "gd", vim.lsp.buf.definition, keymapOptions("Go to definition"))
     vim.keymap.set("n", "gr", vim.lsp.buf.references, keymapOptions("Go to references"))
@@ -31,8 +23,6 @@ M.on_attach = function(client, bufnr)
     vim.keymap.set("n", "gi", vim.lsp.buf.implementation, keymapOptions("Go to implementation"))
     vim.keymap.set("n", "gy", vim.lsp.buf.type_definition, keymapOptions("Go to type definition"))
     vim.keymap.set("n", "<leader>e", vim.lsp.buf.rename, keymapOptions("Rename symbol"))
-    vim.keymap.set("n", "[d", go_to_prev_diagnostic, keymapOptions("Go to previous diagnostic"))
-    vim.keymap.set("n", "]d", go_to_next_diagnostic, keymapOptions("Go to next diagnostic"))
     vim.keymap.set("n", "<leader>a", vim.lsp.buf.code_action, keymapOptions("Show code actions"))
     vim.keymap.set("n", "<leader>q", vim.diagnostic.setqflist, keymapOptions("Set quickfix list"))
     vim.keymap.set("n", "<leader>Q", toggle_diagnostic, keymapOptions("Toggle diagnostics"))

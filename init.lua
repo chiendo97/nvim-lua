@@ -92,11 +92,20 @@ vim.opt.formatoptions = vim.opt.formatoptions
 vim.o.splitbelow     = true      -- ':new' ':split' below current
 vim.o.splitright     = true      -- ':vnew' ':vsplit' right of current
 
-vim.o.foldenable     = true      -- enable folding
-vim.o.foldlevelstart = 10        -- open most folds by default
-vim.o.foldnestmax    = 10        -- 10 nested fold max
-vim.o.foldmethod     = "marker"  -- fold based on indent level
-vim.opt.foldopen     = vim.opt.foldopen - "search"
+-- vim.o.foldenable     = true      -- enable folding
+-- vim.o.foldlevelstart = 10        -- open most folds by default
+-- vim.o.foldnestmax    = 10        -- 10 nested fold max
+-- vim.o.foldmethod     = "marker"  -- fold based on indent level
+-- vim.opt.foldopen     = vim.opt.foldopen - "search"
+
+-- Nice and simple folding:
+vim.o.foldenable = true
+vim.o.foldlevel = 99
+vim.o.foldmethod = "expr"
+vim.o.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+vim.o.foldtext = ""
+vim.opt.foldcolumn = "0"
+vim.opt.fillchars:append({fold = " "})
 
 vim.o.undofile       = false     -- no undo file
 vim.o.hidden         = true      -- do not unload buffer when abandoned

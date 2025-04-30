@@ -41,11 +41,11 @@ end
 local agent_specs = {
     {
         provider = "openai",
-        model = "gpt-4o",
+        model = "gpt-4.1",
     },
     {
         provider = "openai",
-        model = "gpt-4o-mini",
+        model = "gpt-4.1-mini",
     },
     {
         provider = "openai",
@@ -121,7 +121,7 @@ local cfg = {
         Explain = function(gp, params)
             local template = "I have the following text from {{filename}}:\n\n"
                 .. "```{{filetype}}\n{{selection}}\n```\n\n"
-                .. "Please respond by explaining the code above."
+                .. "Please respond by explaining the code above, with the following user's command as `{{command}}`."
             local agent = gp.get_chat_agent()
             gp.Prompt(params, gp.Target.popup, agent, template)
         end,

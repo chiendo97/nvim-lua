@@ -30,6 +30,10 @@ M.on_attach = function(client, bufnr)
     if client.server_capabilities.inlayHintProvider then
         vim.lsp.inlay_hint.enable(true)
     end
+
+    if client:supports_method("textDocument/documentColor") then
+        vim.lsp.document_color.enable(true)
+    end
 end
 
 local ok, blink_cmp = pcall(require, "blink.cmp")

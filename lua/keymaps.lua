@@ -52,8 +52,8 @@ vim.keymap.set(
 )
 
 -- To highlight currently selected word
--- vim.keymap.set("x", [[//]], [[y/\V<C-R>=escape(@",'/\')<cr><cr>]], { noremap = true, desc = "Highlight selected word" })
-vim.api.nvim_set_keymap("x", "/", '"vy/<C-r>v<cr>', { noremap = true, desc = "Search for visually selected text" })
+vim.keymap.set("x", [[/]], [[y/\V<C-R>=escape(@",'/\')<cr><cr>]], { noremap = true, desc = "Highlight selected word" })
+-- vim.keymap.set("x", "/", '"vy/<C-r>v<cr>', { noremap = true, desc = "Search for visually selected text" })
 
 -- Navigate between tabs
 vim.keymap.set("n", "gt", ":tabedit<cr>", { noremap = true, silent = true, desc = "Open new tab" })

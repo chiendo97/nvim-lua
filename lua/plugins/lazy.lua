@@ -393,6 +393,7 @@ require("lazy").setup({
         "echasnovski/mini.nvim",
         event = "VeryLazy",
         config = function()
+            require("mini.bracketed").setup()
             require("mini.statusline").setup()
             require("mini.surround").setup()
             require("mini.operators").setup({ replace = { prefix = "" } })
@@ -671,5 +672,14 @@ require("lazy").setup({
         build = function()
             vim.fn["mkdp#util#install"]()
         end,
+    },
+    {
+        "Kurren123/mssql.nvim",
+        opts = {},
+        -- optional. You also need to call set_keymaps (see below)
+        dependencies = { "folke/which-key.nvim" },
+    },
+    {
+        "b0o/schemastore.nvim",
     },
 })

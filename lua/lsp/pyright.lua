@@ -8,6 +8,11 @@ local function get_python_path()
         return path.join(vim.env.VIRTUAL_ENV, "bin", "python")
     end
 
+    local venv_python = path.join(vim.loop.cwd(), ".venv", "bin", "python")
+    if vim.loop.fs_stat(venv_python) then
+        return venv_python
+    end
+
     -- Fallback to system Python.
     return vim.fn.exepath("python3") or vim.fn.exepath("python") or "python"
 end

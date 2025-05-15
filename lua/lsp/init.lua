@@ -32,10 +32,22 @@ require("lsp.sumneko")
 require("lsp.tsserver")
 require("lsp.pyright")
 
--- require("lspconfig").yamlls.setup({
---     on_attach = require("lsp.attach").on_attach,
---     capabilities = require("lsp.attach").capabilities,
--- })
+require("lspconfig").yamlls.setup({
+    on_attach = require("lsp.attach").on_attach,
+    capabilities = require("lsp.attach").capabilities,
+    settings = {
+        yaml = {
+            schemaStore = {
+                -- You must disable built-in schemaStore support if you want to use
+                -- this plugin and its advanced options like `ignore`.
+                enable = false,
+                -- Avoid TypeError: Cannot read properties of undefined (reading 'length')
+                url = "",
+            },
+            schemas = require("schemastore").yaml.schemas(),
+        },
+    },
+})
 
 require("lspconfig").zls.setup({
     on_attach = require("lsp.attach").on_attach,
@@ -83,6 +95,17 @@ require("lspconfig").dartls.setup({
 require("lspconfig").sourcekit.setup({
     on_attach = require("lsp.attach").on_attach,
     capabilities = require("lsp.attach").capabilities,
+})
+
+require("lspconfig").jsonls.setup({
+    on_attach = require("lsp.attach").on_attach,
+    capabilities = require("lsp.attach").capabilities,
+    settings = {
+        json = {
+            schemas = require("schemastore").json.schemas(),
+            validate = { enable = true },
+        },
+    },
 })
 
 --                                           *grr* *gra* *grn* *gri* *i_CTRL-S*

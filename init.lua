@@ -1,5 +1,9 @@
+-- Enable synchronous parsing for Treesitter to ensure immediate syntax updates.
+vim.g._ts_force_sync_parsing = true
+
+-- Check if the 'winborder' option is available before setting it to 'rounded'
 if vim.fn.exists('&winborder') == 1 then
-  vim.o.winborder = "rounded"
+    vim.o.winborder = "rounded"
 end
 
 vim.o.mouse         = "a"   -- enable the mouse in all modes
@@ -106,6 +110,12 @@ vim.o.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 vim.o.foldtext = ""
 vim.opt.foldcolumn = "0"
 vim.opt.fillchars:append({fold = " "})
+
+vim.o.foldenable     = true      -- enable folding
+vim.o.foldlevelstart = 10        -- open most folds by default
+vim.o.foldnestmax    = 10        -- 10 nested fold max
+vim.o.foldmethod     = "marker"  -- fold based on indent level
+vim.opt.foldopen     = vim.opt.foldopen - "search"
 
 vim.o.undofile       = false     -- no undo file
 vim.o.hidden         = true      -- do not unload buffer when abandoned

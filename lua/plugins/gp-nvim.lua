@@ -48,12 +48,12 @@ local agent_specs = {
         model = "gpt-4.1-mini",
     },
     {
-        provider = "openai",
-        model = "o3-mini",
-    },
-    {
         provider = "anthropic",
         model = "claude-3-7-sonnet-20250219",
+    },
+    {
+        provider = "googleai",
+        model = "gemini-2.5-flash-preview-04-17",
     },
 }
 
@@ -78,6 +78,10 @@ local cfg = {
         anthropic = {
             endpoint = "https://api.anthropic.com/v1/messages",
             secret = os.getenv("ANTHROPIC_API_KEY"),
+        },
+        googleai = {
+            endpoint = "https://generativelanguage.googleapis.com/v1beta/models/{{model}}:streamGenerateContent?key={{secret}}",
+            secret = os.getenv("GEMINI_API_KEY"),
         },
     },
     agents = agents,

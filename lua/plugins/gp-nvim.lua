@@ -32,7 +32,10 @@ local function create_agent(spec, agent_type)
         name = name,
         chat = agent_type == "chat",
         command = agent_type == "command",
-        model = { model = spec.model },
+        model = {
+            model = spec.model,
+            max_tokens = 32768,
+        },
         system_prompt = agent_type == "chat" and chat_system_prompt or code_system_prompt,
     }
 end

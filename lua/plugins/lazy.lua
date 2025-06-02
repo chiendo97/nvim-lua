@@ -169,26 +169,6 @@ require("lazy").setup({
 
     {
         "robitx/gp.nvim",
-        cmd = {
-            "GpAppend",
-            "GpChatFinder",
-            "GpChatNew",
-            "GpChatPaste",
-            "GpChatToggle",
-            "GpContext",
-            "GpEnew",
-            "GpExplain",
-            "GpImplement",
-            "GpNew",
-            "GpNextAgent",
-            "GpPopup",
-            "GpPrepend",
-            "GpProofread",
-            "GpRewrite",
-            "GpStop",
-            "GpTabnew",
-            "GpVnew",
-        },
         init = function()
             require("plugins.gp-keymap")
         end,
@@ -260,7 +240,7 @@ require("lazy").setup({
     {
         "MeanderingProgrammer/render-markdown.nvim",
         opts = { code = { border = "thick" } },
-        ft = { "markdown" },
+        ft = { "markdown", "codecompanion" },
     },
     -- For `plugins.lua` users.
     {
@@ -674,12 +654,63 @@ require("lazy").setup({
         end,
     },
     {
-        "Kurren123/mssql.nvim",
-        opts = {},
-        -- optional. You also need to call set_keymaps (see below)
-        dependencies = { "folke/which-key.nvim" },
+        "b0o/schemastore.nvim",
     },
     {
-        "b0o/schemastore.nvim",
+        "olimorris/codecompanion.nvim",
+        opts = {
+            extensions = {
+                mcphub = {
+                    callback = "mcphub.extensions.codecompanion",
+                    opts = {
+                        make_vars = true,
+                        make_slash_commands = true,
+                        show_result_in_chat = true,
+                    },
+                },
+            },
+            strategies = {
+                chat = {
+                    adapter = "openai",
+                    keymaps = {
+                        close = {
+                            modes = { n = "q", i = "<C-q>" },
+                        },
+                    },
+                },
+                inline = {
+                    adapter = "openai",
+                },
+            },
+        },
+        dependencies = {
+            "nvim-lua/plenary.nvim",
+            "nvim-treesitter/nvim-treesitter",
+            "ravitemer/mcphub.nvim",
+        },
+    },
+    -- Using lazy.nvim
+    {
+        "chiendo97/chatml.nvim",
+        branch = "cle/mcp",
+        opts = {},
+        dependencies = {
+            {
+                -- (Optional) It is required for sending requests to LLM providers
+                "S1M0N38/ai.nvim",
+                version = ">=1.4.2",
+                opts = {
+                    -- (Required) Configure a provider. :help ai-setup or
+                    -- https://github.com/S1M0N38/ai.nvim/blob/main/doc/ai.txt
+                    base_url = "https://api.openai.com/v1",
+                    api_key = vim.fn.getenv("OPENAI_API_KEY"),
+                    copilot = false,
+                },
+            },
+        },
+    },
+    {
+        "ravitemer/mcphub.nvim",
+        opts = {},
     },
 })

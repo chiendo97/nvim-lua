@@ -1,11 +1,6 @@
 -- Enable synchronous parsing for Treesitter to ensure immediate syntax updates.
 vim.g._ts_force_sync_parsing = true
-
--- Check if the 'winborder' option is available before setting it to 'rounded'
-if vim.fn.exists("&winborder") == 1 then
-    vim.o.winborder = "rounded"
-end
-
+vim.o.winborder = "rounded"
 vim.o.mouse = "a" -- enable the mouse in all modes
 vim.o.exrc = false -- ignore '~/.exrc'
 vim.o.secure = true
@@ -204,5 +199,5 @@ require("statusline")
 require("tabline")
 require("keymaps")
 require("autocmd")
-require("plugins")
+require("lazy_config")
 require("lsp_config")

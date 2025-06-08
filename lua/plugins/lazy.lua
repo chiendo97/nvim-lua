@@ -20,6 +20,7 @@ require("lazy").setup({
     {
         "kyazdani42/nvim-tree.lua",
         cmd = "NvimTreeToggle",
+        enabled = false,
         init = function()
             vim.keymap.set("n", "<leader>c", "<cmd>NvimTreeToggle<cr>", { noremap = true })
         end,
@@ -31,9 +32,10 @@ require("lazy").setup({
 
     {
         "neovim/nvim-lspconfig",
+        enabled = false,
         -- event = "VeryLazy",
         config = function()
-            require("lsp")
+            require("lua.lsp_config")
         end,
     },
 
@@ -150,16 +152,16 @@ require("lazy").setup({
         opts = {},
     },
 
-    {
-        "garymjr/nvim-snippets",
-        event = "InsertEnter",
-        opts = {
-            create_cmp_source = false,
-            friendly_snippets = true,
-        },
-    },
+    -- {
+    --     "garymjr/nvim-snippets",
+    --     event = "InsertEnter",
+    --     opts = {
+    --         create_cmp_source = false,
+    --         friendly_snippets = true,
+    --     },
+    -- },
 
-    { "rafamadriz/friendly-snippets", lazy = true },
+    -- { "rafamadriz/friendly-snippets", lazy = true },
 
     {
         "folke/todo-comments.nvim",
@@ -169,39 +171,29 @@ require("lazy").setup({
 
     {
         "robitx/gp.nvim",
+        cmd = {
+            "GpChatNew",
+            "GpChatToggle",
+            "GpChatFinder",
+            "GpChatPaste",
+            "GpRewrite",
+            "GpAppend",
+            "GpPrepend",
+            "GpImplement",
+            "GpPopup",
+            "GpEnew",
+            "GpNew",
+            "GpVnew",
+            "GpTabnew",
+            "GpContext",
+            "GpStop",
+            "GpNextAgent",
+        },
         init = function()
             require("plugins.gp-keymap")
         end,
         config = function()
             require("plugins.gp-nvim")
-        end,
-    },
-    {
-        "comfysage/evergarden",
-        enabled = false,
-        priority = 1000, -- Colorscheme plugin is loaded first before any other plugins
-        config = function()
-            require("evergarden").setup({
-                -- transparent_background = true,
-                transparent_background = false,
-                -- variant = "medium", -- 'hard'|'medium'|'soft'
-                variant = "hard", -- 'hard'|'medium'|'soft'
-                -- variant = "soft", -- 'hard'|'medium'|'soft'
-                overrides = {}, -- add custom overrides
-            })
-            vim.cmd.colorscheme("evergarden")
-            local highlight_links = {
-                ["@org.headline.level1.org"] = "@markup.heading.1",
-                ["@org.headline.level2.org"] = "@markup.heading.2",
-                ["@org.headline.level3.org"] = "@markup.heading.3",
-                ["@org.headline.level4.org"] = "@markup.heading.4",
-                ["@org.headline.level5.org"] = "@markup.heading.5",
-                ["@org.headline.level6.org"] = "@markup.heading.6",
-            }
-
-            for from, to in pairs(highlight_links) do
-                vim.api.nvim_set_hl(0, from, { link = to })
-            end
         end,
     },
     {
@@ -242,20 +234,6 @@ require("lazy").setup({
         opts = { code = { border = "thick" } },
         ft = { "markdown", "codecompanion" },
     },
-    -- For `plugins.lua` users.
-    {
-        "OXY2DEV/markview.nvim",
-        enabled = false,
-        lazy = false,
-        config = function()
-            require("markview").setup({
-                markdown = {
-                    headings = require("markview.presets").headings.marker,
-                    list_items = {},
-                },
-            })
-        end,
-    },
     {
         "stevearc/conform.nvim",
         event = { "BufWritePre" },
@@ -289,7 +267,7 @@ require("lazy").setup({
     },
     {
         "sphamba/smear-cursor.nvim",
-        -- enabled = false,
+        enabled = false,
         opts = {
             use_floating_windows = false,
         },
@@ -306,6 +284,14 @@ require("lazy").setup({
                 end,
                 mode = { "n" },
                 desc = "Show notification history",
+            },
+            {
+                "<leader>c",
+                function()
+                    require("snacks").explorer()
+                end,
+                mode = { "n" },
+                desc = "Open snacks explorer",
             },
         },
         config = function()
@@ -495,6 +481,15 @@ require("lazy").setup({
                 end,
                 mode = { "n" },
                 desc = "Show spelling suggestions",
+            },
+            {
+                -- FzfLua Command History
+                "<leader>i",
+                function()
+                    require("fzf-lua").command_history()
+                end,
+                mode = { "n" },
+                desc = "Show command history",
             },
         },
         config = function()
@@ -712,5 +707,12 @@ require("lazy").setup({
     {
         "ravitemer/mcphub.nvim",
         opts = {},
+    },
+    {
+        "Koalhack/darcubox-nvim",
+        enabled = false,
+        config = function()
+            vim.cmd("colorscheme darcubox")
+        end,
     },
 })

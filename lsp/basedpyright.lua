@@ -1,14 +1,10 @@
-local nvim_lsp = require("lspconfig")
-local util = nvim_lsp.util
-local path = util.path
-
 local function get_python_path()
     -- Use activated virtualenv.
     if vim.env.VIRTUAL_ENV then
-        return path.join(vim.env.VIRTUAL_ENV, "bin", "python")
+        return vim.fn.expand(vim.env.VIRTUAL_ENV .. "/bin/python")
     end
 
-    local venv_python = path.join(vim.loop.cwd(), ".venv", "bin", "python")
+    local venv_python = vim.fn.expand(vim.loop.cwd() .. "/.venv/bin/python")
     if vim.loop.fs_stat(venv_python) then
         return venv_python
     end
@@ -17,13 +13,18 @@ local function get_python_path()
     return vim.fn.exepath("python3") or vim.fn.exepath("python") or "python"
 end
 
-nvim_lsp.basedpyright.setup({
-    on_attach = function(client, bufnr)
-        client.server_capabilities.document_formatting = false
-        client.server_capabilities.semanticTokensProvider = nil
-        require("lsp.attach").on_attach(client, bufnr)
-    end,
-    capabilities = require("lsp.attach").capabilities,
+return {
+    cmd = { "basedpyright-langserver", "--stdio" },
+    filetypes = { "python" },
+    root_markers = {
+        "pyproject.toml",
+        "setup.py",
+        "setup.cfg",
+        "requirements.txt",
+        "Pipfile",
+        "pyrightconfig.json",
+        ".git",
+    },
     settings = {
         basedpyright = {
             analysis = {
@@ -48,7 +49,6 @@ nvim_lsp.basedpyright.setup({
     before_init = function(_, config)
         local python_path = get_python_path()
         config.settings.python.pythonPath = python_path
-
         vim.notify(string.format("python path: %s", python_path))
     end,
-})
+}

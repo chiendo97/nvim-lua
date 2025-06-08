@@ -2,64 +2,64 @@
 vim.g._ts_force_sync_parsing = true
 
 -- Check if the 'winborder' option is available before setting it to 'rounded'
-if vim.fn.exists('&winborder') == 1 then
+if vim.fn.exists("&winborder") == 1 then
     vim.o.winborder = "rounded"
 end
 
-vim.o.mouse         = "a"   -- enable the mouse in all modes
-vim.o.exrc          = false -- ignore '~/.exrc'
-vim.o.secure        = true
-vim.o.modelines     = 1     -- read a modeline at EOF
-vim.o.errorbells    = false -- disable error bells (no beep/flash)
-vim.o.termguicolors = true  -- enable 24bit colors
+vim.o.mouse = "a" -- enable the mouse in all modes
+vim.o.exrc = false -- ignore '~/.exrc'
+vim.o.secure = true
+vim.o.modelines = 1 -- read a modeline at EOF
+vim.o.errorbells = false -- disable error bells (no beep/flash)
+vim.o.termguicolors = true -- enable 24bit colors
 
-vim.o.updatetime   = 250    -- decrease update time
-vim.o.autoread     = true   -- auto read file if changed outside of vim
-vim.o.fileformat   = "unix" -- <nl> for EOL
-vim.o.switchbuf    = "useopen"
-vim.o.encoding     = "utf-8"
+vim.o.updatetime = 250 -- decrease update time
+vim.o.autoread = true -- auto read file if changed outside of vim
+vim.o.fileformat = "unix" -- <nl> for EOL
+vim.o.switchbuf = "useopen"
+vim.o.encoding = "utf-8"
 vim.o.fileencoding = "utf-8"
-vim.o.backspace    = "indent,eol,start"
+vim.o.backspace = "indent,eol,start"
 
 -- recursive :find in current dir
 -- vim.cmd([[set path=.,,,$PWD/**]])
 
-vim.o.showtabline    = 2     -- always show tabline
-vim.o.showmode       = true  -- show current mode (insert, etc) under the cmdline
-vim.o.showcmd        = true  -- show current command under the cmd line
-vim.o.cmdheight      = 2     -- cmdline height
-vim.o.laststatus     = 3     -- always show status line (filename, etc)
-vim.o.scrolloff      = 3     -- min number of lines to keep between cursor and screen edge
-vim.o.sidescrolloff  = 5     -- min number of cols to keep between cursor and screen edge
-vim.o.textwidth      = 80    -- max inserted text width for paste operations
-vim.o.linespace      = 0     -- font spacing
-vim.o.ruler          = true  -- show line,col at the cursor pos
-vim.o.number         = true  -- show absolute line no. at the cursor pos
+vim.o.showtabline = 2 -- always show tabline
+vim.o.showmode = true -- show current mode (insert, etc) under the cmdline
+vim.o.showcmd = true -- show current command under the cmd line
+vim.o.cmdheight = 2 -- cmdline height
+vim.o.laststatus = 3 -- always show status line (filename, etc)
+vim.o.scrolloff = 3 -- min number of lines to keep between cursor and screen edge
+vim.o.sidescrolloff = 5 -- min number of cols to keep between cursor and screen edge
+vim.o.textwidth = 80 -- max inserted text width for paste operations
+vim.o.linespace = 0 -- font spacing
+vim.o.ruler = true -- show line,col at the cursor pos
+vim.o.number = true -- show absolute line no. at the cursor pos
 vim.o.relativenumber = false -- otherwise, show relative numbers in the ruler
-vim.o.cursorline     = true  -- Show a line where the current cursor is
-vim.wo.signcolumn    = "yes" -- Show sign column as first column
-vim.o.wrap           = false -- wrap long lines
-vim.o.breakindent    = true  -- start wrapped lines indented
-vim.o.linebreak      = true  -- do not break words on line wrap
+vim.o.cursorline = true -- Show a line where the current cursor is
+vim.wo.signcolumn = "yes" -- Show sign column as first column
+vim.o.wrap = false -- wrap long lines
+vim.o.breakindent = true -- start wrapped lines indented
+vim.o.linebreak = true -- do not break words on line wrap
 
 -- show menu even for one item do not auto select/insert
 vim.o.completeopt = "noinsert,menuone,noselect"
-vim.o.wildmenu    = true
-vim.o.wildmode    = "longest:full,full"
+vim.o.wildmenu = true
+vim.o.wildmode = "longest:full,full"
 vim.o.wildoptions = "pum" -- Show completion items using the pop-up-menu (pum)
-vim.o.pumblend    = 15    -- completion menu transparency
+vim.o.pumblend = 15 -- completion menu transparency
 
-vim.o.joinspaces  = true  -- insert spaces after '.?!' when joining lines
-vim.o.autoindent  = true  -- copy indent from current line on newline
-vim.o.smartindent = true  -- add <tab> depending on syntax (C/C++)
+vim.o.joinspaces = true -- insert spaces after '.?!' when joining lines
+vim.o.autoindent = true -- copy indent from current line on newline
+vim.o.smartindent = true -- add <tab> depending on syntax (C/C++)
 vim.o.startofline = false -- keep cursor column on navigation
 
-vim.o.tabstop     = 4     -- Tab indentation levels every two columns
-vim.o.softtabstop = 4     -- Tab indentation when mixing tabs & spaces
-vim.o.shiftwidth  = 4     -- Indent/outdent by two columns
-vim.o.shiftround  = true  -- Always indent/outdent to nearest tabstop
-vim.o.expandtab   = true  -- Convert all tabs that are typed into spaces
-vim.o.smarttab    = true  -- Use shiftwidths at left margin, tabstops everywhere else
+vim.o.tabstop = 4 -- Tab indentation levels every two columns
+vim.o.softtabstop = 4 -- Tab indentation when mixing tabs & spaces
+vim.o.shiftwidth = 4 -- Indent/outdent by two columns
+vim.o.shiftround = true -- Always indent/outdent to nearest tabstop
+vim.o.expandtab = true -- Convert all tabs that are typed into spaces
+vim.o.smarttab = true -- Use shiftwidths at left margin, tabstops everywhere else
 
 vim.opt.list = true
 vim.opt.listchars = {
@@ -93,8 +93,8 @@ vim.opt.formatoptions = vim.opt.formatoptions
     + "j" -- Auto-remove comments if possible.
     - "2" -- I'm not in gradeschool anymore
 
-vim.o.splitbelow     = true      -- ':new' ':split' below current
-vim.o.splitright     = true      -- ':vnew' ':vsplit' right of current
+vim.o.splitbelow = true -- ':new' ':split' below current
+vim.o.splitright = true -- ':vnew' ':vsplit' right of current
 
 -- vim.o.foldenable     = true      -- enable folding
 -- vim.o.foldlevelstart = 10        -- open most folds by default
@@ -109,31 +109,31 @@ vim.o.foldmethod = "expr"
 vim.o.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 vim.o.foldtext = ""
 vim.opt.foldcolumn = "0"
-vim.opt.fillchars:append({fold = " "})
+vim.opt.fillchars:append({ fold = " " })
 
-vim.o.foldenable     = true      -- enable folding
-vim.o.foldlevelstart = 10        -- open most folds by default
-vim.o.foldnestmax    = 10        -- 10 nested fold max
-vim.o.foldmethod     = "marker"  -- fold based on indent level
-vim.opt.foldopen     = vim.opt.foldopen - "search"
+vim.o.foldenable = true -- enable folding
+vim.o.foldlevelstart = 10 -- open most folds by default
+vim.o.foldnestmax = 10 -- 10 nested fold max
+vim.o.foldmethod = "marker" -- fold based on indent level
+vim.opt.foldopen = vim.opt.foldopen - "search"
 
-vim.o.undofile       = false     -- no undo file
-vim.o.hidden         = true      -- do not unload buffer when abandoned
-vim.o.autochdir      = false     -- do not change dir when opening a file
+vim.o.undofile = false -- no undo file
+vim.o.hidden = true -- do not unload buffer when abandoned
+vim.o.autochdir = false -- do not change dir when opening a file
 
-vim.o.magic          = false     -- do not use 'magic' chars in search patterns
-vim.o.hlsearch       = true      -- highlight all text matching current search pattern
-vim.o.incsearch      = true      -- show search matches as you type
-vim.o.ignorecase     = true      -- ignore case on search
-vim.o.smartcase      = true      -- case sensitive when search includes uppercase
-vim.o.showmatch      = true      -- highlight matching [{()}]
-vim.o.inccommand     = "split"   -- show search and replace in real time
-vim.o.autoread       = true      -- reread a file if it's changed outside of vim
-vim.o.wrapscan       = true      -- begin search from top of the file when nothng is found
+vim.o.magic = false -- do not use 'magic' chars in search patterns
+vim.o.hlsearch = true -- highlight all text matching current search pattern
+vim.o.incsearch = true -- show search matches as you type
+vim.o.ignorecase = true -- ignore case on search
+vim.o.smartcase = true -- case sensitive when search includes uppercase
+vim.o.showmatch = true -- highlight matching [{()}]
+vim.o.inccommand = "split" -- show search and replace in real time
+vim.o.autoread = true -- reread a file if it's changed outside of vim
+vim.o.wrapscan = true -- begin search from top of the file when nothng is found
 
-vim.o.backup         = false     -- no backup file
-vim.o.writebackup    = false     -- do not backup file before write
-vim.o.swapfile       = false     -- no swap file
+vim.o.backup = false -- no backup file
+vim.o.writebackup = false -- do not backup file before write
+vim.o.swapfile = false -- no swap file
 
 --[[
   ShDa (viminfo for vim): session data history
@@ -153,9 +153,9 @@ vim.o.swapfile       = false     -- no swap file
   :rshada   - read the shada file (:rviminfo for vim)
   :wshada   - write the shada file (:wrviminfo for vim)
 ]]
-vim.o.shada          = [[!,'100,<0,s100,h]]
+vim.o.shada = [[!,'100,<0,s100,h]]
 vim.o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize"
-vim.o.diffopt        = "internal,filler,algorithm:histogram,indent-heuristic"
+vim.o.diffopt = "internal,filler,algorithm:histogram,indent-heuristic"
 
 -- use ':grep' to send resulsts to quickfix
 -- use ':lgrep' to send resulsts to loclist
@@ -166,9 +166,9 @@ end
 
 -- Disable providers we do not care a about
 vim.g.loaded_python3_provider = 0
-vim.g.loaded_ruby_provider   = 0
-vim.g.loaded_perl_provider   = 0
-vim.g.loaded_node_provider   = 0
+vim.g.loaded_ruby_provider = 0
+vim.g.loaded_perl_provider = 0
+vim.g.loaded_node_provider = 0
 
 -- Disable some in built plugins completely
 local disabled_built_ins = {
@@ -205,3 +205,4 @@ require("tabline")
 require("keymaps")
 require("autocmd")
 require("plugins")
+require("lsp_config")

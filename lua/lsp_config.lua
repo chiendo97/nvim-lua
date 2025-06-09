@@ -1,21 +1,21 @@
 -- vim.lsp.set_log_level("debug")
 -- require("vim.lsp.log").set_format_func(vim.inspect)
 
-vim.api.nvim_create_autocmd("LspProgress", {
-    group = vim.api.nvim_create_augroup("lsp_progress", { clear = true }),
-    ---@param ev {data: {client_id: integer, params: lsp.ProgressParams}}
-    callback = function(ev)
-        local spinner = { "⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏" }
-        vim.notify(vim.lsp.status(), vim.log.levels.INFO, {
-            id = "lsp_progress",
-            title = "LSP Progress",
-            opts = function(notif)
-                notif.icon = ev.data.params.value.kind == "end" and " "
-                    or spinner[math.floor(vim.uv.hrtime() / (1e6 * 80)) % #spinner + 1]
-            end,
-        })
-    end,
-})
+-- vim.api.nvim_create_autocmd("LspProgress", {
+--     group = vim.api.nvim_create_augroup("lsp_progress", { clear = true }),
+--     ---@param ev {data: {client_id: integer, params: lsp.ProgressParams}}
+--     callback = function(ev)
+--         local spinner = { "⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏" }
+--         vim.notify(vim.lsp.status(), vim.log.levels.INFO, {
+--             id = "lsp_progress",
+--             title = "LSP Progress",
+--             opts = function(notif)
+--                 notif.icon = ev.data.params.value.kind == "end" and " "
+--                     or spinner[math.floor(vim.uv.hrtime() / (1e6 * 80)) % #spinner + 1]
+--             end,
+--         })
+--     end,
+-- })
 
 vim.diagnostic.config({
     float = {

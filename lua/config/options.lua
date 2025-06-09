@@ -32,6 +32,7 @@ vim.wo.signcolumn = "yes"
 vim.o.wrap = false
 vim.o.breakindent = true
 vim.o.linebreak = true
+vim.o.winborder = "rounded"
 
 -- Completion settings
 vim.o.completeopt = "noinsert,menuone,noselect"

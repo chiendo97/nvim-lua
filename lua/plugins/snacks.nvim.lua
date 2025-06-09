@@ -25,6 +25,7 @@ return {
             require("snacks").setup({
                 bigfile = { enabled = true },
                 notifier = { enabled = true },
+                scope = { enabled = true },
                 quickfile = { enabled = true },
                 styles = {
                     notification_history = {

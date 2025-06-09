@@ -26,7 +26,7 @@ return {
                     noremap = true,
                     silent = true,
                     nowait = true,
-                    desc = "GPT prompt " .. desc,
+                    desc = "GPT: " .. desc, -- Improved description prefix
                 }
             end
 
@@ -86,27 +86,32 @@ return {
             vim.keymap.set({ "n", "v", "x" }, "<C-g>s", "<cmd>GpStop<cr>", keymapOptions("Stop"))
             vim.keymap.set({ "n", "v", "x" }, "<C-g>n", "<cmd>GpNextAgent<cr>", keymapOptions("Next Agent"))
 
-            -- Function to delete all files in the specified directory
+            -- Improved delete function with error handling
             local function delete_all_chat_files()
                 local dir = vim.fn.expand("$HOME") .. "/.local/share/nvim/gp/chats"
-                local handle = io.popen("ls -1 " .. dir)
-                if handle then
-                    for file in handle:lines() do
-                        local success, err = os.remove(dir .. "/" .. file)
-                        if not success then
-                            print("Failed to delete " .. file .. ": " .. err)
-                        else
-                            print("Deleted: " .. file)
-                        end
-                    end
-                    handle:close()
-                else
-                    print("Failed to open directory")
+                if vim.fn.isdirectory(dir) == 0 then
+                    print("Chat directory does not exist: " .. dir)
+                    return
                 end
-                print("Operation completed")
+
+                local files = vim.fn.glob(dir .. "/*", false, true)
+                if #files == 0 then
+                    print("No chat files to delete")
+                    return
+                end
+
+                local deleted_count = 0
+                for _, file in ipairs(files) do
+                    local success = os.remove(file)
+                    if success then
+                        deleted_count = deleted_count + 1
+                    else
+                        print("Failed to delete: " .. vim.fn.fnamemodify(file, ":t"))
+                    end
+                end
+                print(string.format("Deleted %d chat files", deleted_count))
             end
 
-            -- Create the mapping
             vim.keymap.set("n", "<C-g>da", delete_all_chat_files, keymapOptions("Delete all chats"))
         end,
         config = function()

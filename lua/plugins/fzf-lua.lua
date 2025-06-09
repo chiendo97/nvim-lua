@@ -5,7 +5,6 @@ return {
         cmd = { "FzfLua" },
         keys = {
             {
-                -- FzfLua Find Files
                 "<leader>g",
                 function()
                     require("fzf-lua").files()
@@ -14,7 +13,6 @@ return {
                 desc = "Find files",
             },
             {
-                -- FzfLua Live Grep
                 "<leader>r",
                 function()
                     require("fzf-lua").live_grep()
@@ -23,16 +21,14 @@ return {
                 desc = "Live grep",
             },
             {
-                -- FzfLua Grep String (from visual selection)
                 "<leader>r",
                 function()
                     require("fzf-lua").grep_visual()
                 end,
                 mode = { "x" },
-                desc = "Grep string (visual)",
+                desc = "Grep selection",
             },
             {
-                -- FzfLua Grep Word Under Cursor
                 "<leader>R",
                 function()
                     require("fzf-lua").grep_cword()
@@ -41,16 +37,14 @@ return {
                 desc = "Grep word under cursor",
             },
             {
-                -- FzfLua Help Tags
                 "<leader>h",
                 function()
                     require("fzf-lua").helptags()
                 end,
                 mode = { "n" },
-                desc = "Show help tags",
+                desc = "Help tags",
             },
             {
-                -- FzfLua Old Files
                 "<leader>j",
                 function()
                     require("fzf-lua").oldfiles({
@@ -60,52 +54,47 @@ return {
                     })
                 end,
                 mode = { "n" },
-                desc = "Show old files",
+                desc = "Recent files",
             },
             {
-                -- FzfLua Keymaps
                 "<leader>m",
                 function()
                     require("fzf-lua").keymaps()
                 end,
                 mode = { "n" },
-                desc = "Show keymaps",
+                desc = "Keymaps",
             },
             {
-                -- FzfLua Resume Last Search
                 "<leader>n",
                 function()
                     require("fzf-lua").resume()
                 end,
                 mode = { "n" },
-                desc = "Resume last FzfLua command",
+                desc = "Resume last search",
             },
             {
-                -- FzfLua Built-in Commands
                 "<leader>b",
                 function()
                     require("fzf-lua").builtin()
                 end,
                 mode = { "n" },
-                desc = "Show built-in commands",
+                desc = "FzfLua commands",
             },
             {
-                -- FzfLua Spell Suggest
                 "<leader>s",
                 function()
                     require("fzf-lua").spell_suggest()
                 end,
                 mode = { "n" },
-                desc = "Show spelling suggestions",
+                desc = "Spell suggest",
             },
             {
-                -- FzfLua Command History
                 "<leader>i",
                 function()
                     require("fzf-lua").command_history()
                 end,
                 mode = { "n" },
-                desc = "Show command history",
+                desc = "Command history",
             },
         },
         config = function()

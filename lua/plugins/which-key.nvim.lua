@@ -4,21 +4,22 @@ return {
         enabled = true,
         event = "VeryLazy",
         opts = {
-            -- your configuration comes here
-            -- or leave it empty to use the default settings
-            -- refer to the configuration section below
             preset = "helix",
-            delay = 500,
+            delay = 300, -- Reduced from 500 for better responsiveness
             triggers = {
                 { "<auto>", mode = "nixsotc" },
-                -- { "<leader>", mode = { "n", "v" } },
             },
             defer = function(ctx)
-                if vim.list_contains({ "d", "y" }, ctx.operator) then
-                    return true
-                end
-                return vim.list_contains({ "<C-V>", "V" }, ctx.mode)
+                return vim.list_contains({ "d", "y" }, ctx.operator) or vim.list_contains({ "<C-V>", "V" }, ctx.mode)
             end,
+            spec = {
+                { "<leader>g", group = "FzfLua" },
+                { "<leader>r", group = "Grep" },
+                { "<leader>y", group = "Yank" },
+                { "<C-g>", group = "GPT" },
+                { "<C-g>g", group = "GPT Windows" },
+                { "g", group = "Go to" },
+            },
         },
         keys = {
             {

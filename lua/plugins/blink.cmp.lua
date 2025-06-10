@@ -114,9 +114,17 @@ return {
                         score_offset = 100,
                         async = true,
                     } or nil,
+                    lazydev = {
+                        name = "LazyDev",
+                        module = "lazydev.integrations.blink",
+                        -- make lazydev completions top priority (see `:h blink.cmp`)
+                        score_offset = 100,
+                    },
                 },
                 default = function(_)
                     local default = { "lsp", "path", "snippets", "buffer" }
+                    table.insert(default, "lazydev")
+
                     if vim.fn.executable("node") == 1 then
                         table.insert(default, "copilot")
                     end

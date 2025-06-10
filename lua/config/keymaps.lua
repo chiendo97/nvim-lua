@@ -23,12 +23,12 @@ vim.keymap.set("x", "<A-j>", ":m '>+1<cr>gv=gv", { noremap = true, silent = true
 vim.keymap.set("x", "<A-k>", ":m '<-2<cr>gv=gv", { noremap = true, silent = true, desc = "Move block up" })
 
 -- ^ - jump to the first non-blank character of the line
-vim.keymap.set("n", "H", "g^", { noremap = true, desc = "Jump to first non-blank" })
-vim.keymap.set("x", "H", "g^", { noremap = true, desc = "Jump to first non-blank" })
+-- vim.keymap.set("n", "H", "g^", { noremap = true, desc = "Jump to first non-blank" })
+-- vim.keymap.set("x", "H", "g^", { noremap = true, desc = "Jump to first non-blank" })
 
 -- g_ - jump to the end of the line
-vim.keymap.set("n", "L", "g$", { noremap = true, desc = "Jump to end of line" })
-vim.keymap.set("x", "L", "g_", { noremap = true, desc = "Jump to end of line" })
+-- vim.keymap.set("n", "L", "g$", { noremap = true, desc = "Jump to end of line" })
+-- vim.keymap.set("x", "L", "g_", { noremap = true, desc = "Jump to end of line" })
 
 -- Ctrl + c to turn off highlight and close quickfix windows and escape
 -- vim.keymap.set("n", "<C-C>", ":noh<cr>:ccl<cr><esc>", { noremap = true, silent = true })

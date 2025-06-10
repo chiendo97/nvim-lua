@@ -34,6 +34,7 @@ return {
                 typeCheckingMode = "all",
                 diagnosticSeverityOverrides = {
                     reportAny = false,
+                    reportMissingParameterType = false,
                     reportMissingTypeArgument = false,
                     reportMissingTypeStubs = false,
                     reportUnknownArgumentType = false,

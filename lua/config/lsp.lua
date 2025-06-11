@@ -50,6 +50,19 @@ vim.api.nvim_create_autocmd("LspAttach", {
             vim.diagnostic.enable(not vim.diagnostic.is_enabled(buffnr_opts), buffnr_opts)
         end
 
+        local diagnostic_qflist = function()
+            vim.diagnostic.setqflist({
+                open = true,
+                format = function(diagnostic)
+                    -- print(bufnr, vim.inspect(diagnostic))
+                    if diagnostic.bufnr ~= bufnr then
+                        return nil
+                    end
+                    return string.format("%s (%s)", diagnostic.message, diagnostic.source)
+                end,
+            })
+        end
+
         vim.keymap.set("n", "gD", vim.lsp.buf.declaration, keymapOptions("Go to declaration"))
         vim.keymap.set("n", "gd", vim.lsp.buf.definition, keymapOptions("Go to definition"))
         vim.keymap.set("n", "gr", vim.lsp.buf.references, keymapOptions("Go to references"))
@@ -58,7 +71,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
         vim.keymap.set("n", "gy", vim.lsp.buf.type_definition, keymapOptions("Go to type definition"))
         vim.keymap.set("n", "<leader>e", vim.lsp.buf.rename, keymapOptions("Rename symbol"))
         vim.keymap.set("n", "<leader>a", vim.lsp.buf.code_action, keymapOptions("Show code actions"))
-        vim.keymap.set("n", "<leader>q", vim.diagnostic.setqflist, keymapOptions("Set quickfix list"))
+        vim.keymap.set("n", "<leader>q", diagnostic_qflist, keymapOptions("Set quickfix list"))
         vim.keymap.set("n", "<leader>Q", toggle_diagnostic, keymapOptions("Toggle diagnostics"))
 
         -- Handle client-specific capabilities

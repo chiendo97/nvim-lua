@@ -1,8 +1,27 @@
 return {
     {
         "chiendo97/chatml.nvim",
+        dev = true,
         branch = "cle/mcp",
         opts = {},
+        keys = {
+            {
+                "<leader>lc",
+                function()
+                    require("chatml/chat").new_chat()
+                end,
+                mode = { "n" },
+                desc = "Create new chatml chat",
+            },
+            {
+                "<leader>lp",
+                function()
+                    require("chatml/chat").picker()
+                end,
+                mode = { "n" },
+                desc = "Picker chatml chat",
+            },
+        },
         dependencies = {
             {
                 -- (Optional) It is required for sending requests to LLM providers

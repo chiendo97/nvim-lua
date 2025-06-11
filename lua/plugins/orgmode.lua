@@ -18,12 +18,12 @@ return {
                 org_agenda_skip_scheduled_if_done = true,
                 org_agenda_skip_deadline_if_done = true,
                 org_todo_keywords = { "TODO(t)", "NEXT(n)", "|", "DONE(d)" },
-                win_split_mode = "tabnew",
+                win_split_mode = "auto",
                 mappings = {
                     org = {
                         org_todo = "ct",
                         org_todo_prev = "cT",
-                        org_return = false,
+                        org_return = {},
                     },
                 },
                 org_startup_folded = "overview",

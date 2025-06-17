@@ -22,7 +22,7 @@ vim.o.cmdheight = 2 -- Height of command line (number of lines)
 vim.o.laststatus = 3 -- Global statusline (3 = always show global)
 vim.o.scrolloff = 3 -- Keep 3 lines visible above/below cursor when scrolling
 vim.o.sidescrolloff = 5 -- Keep 5 columns visible left/right of cursor when scrolling
-vim.o.textwidth = 80 -- Maximum line width for text wrapping
+vim.o.textwidth = 120 -- Maximum line width for text wrapping
 vim.o.linespace = 0 -- Extra pixel lines between characters
 vim.o.ruler = true -- Show cursor position in status line
 vim.o.number = true -- Show line numbers

@@ -104,6 +104,8 @@ return {
                 },
                 ghost_text = {
                     enabled = true,
+                    show_with_menu = true,
+                    show_without_selection = true,
                 },
             },
             sources = {
@@ -113,7 +115,7 @@ return {
                         module = "blink-cmp-copilot",
                         score_offset = 100,
                         async = true,
-                    } or nil,
+                    } or {},
                     lazydev = {
                         name = "LazyDev",
                         module = "lazydev.integrations.blink",
@@ -121,7 +123,7 @@ return {
                         score_offset = 100,
                     },
                 },
-                default = function(_)
+                default = function()
                     local default = { "lsp", "path", "snippets", "buffer" }
                     table.insert(default, "lazydev")
 

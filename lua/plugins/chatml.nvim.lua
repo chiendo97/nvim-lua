@@ -25,7 +25,8 @@ return {
         dependencies = {
             {
                 -- (Optional) It is required for sending requests to LLM providers
-                "S1M0N38/ai.nvim",
+                "chiendo97/ai.nvim",
+                dev = true,
                 version = ">=1.4.2",
                 opts = {
                     -- (Required) Configure a provider. :help ai-setup or

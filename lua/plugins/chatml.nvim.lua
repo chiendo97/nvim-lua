@@ -21,6 +21,14 @@ return {
                 mode = { "n" },
                 desc = "Picker chatml chat",
             },
+            {
+                "<leader>lg",
+                function()
+                    require("chatml/chat").search()
+                end,
+                mode = { "n" },
+                desc = "Picker chatml chat",
+            },
         },
         dependencies = {
             {

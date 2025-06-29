@@ -40,6 +40,7 @@ return {
                     reportMissingTypeStubs = false,
                     reportUnannotatedClassAttribute = false,
                     reportUnknownArgumentType = false,
+                    reportUnknownLambdaType = false,
                     reportUnknownMemberType = false,
                     reportUnknownParameterType = false,
                     reportUnknownVariableType = false,

@@ -17,6 +17,7 @@
 --     end,
 -- })
 
+-- vim.diagnostic.config opts.jump.float
 vim.diagnostic.config({
     float = {
         format = function(diagnostic)

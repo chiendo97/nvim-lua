@@ -161,11 +161,11 @@ return {
             local agent_specs = {
                 {
                     provider = "openai",
-                    model = "gpt-4.1",
+                    model = "gpt-4.1-mini",
                 },
                 {
-                    provider = "openai",
-                    model = "gpt-4.1-mini",
+                    provider = "perplexity",
+                    model = "sonar",
                 },
                 {
                     provider = "anthropic",
@@ -190,6 +190,10 @@ return {
                     openai = {
                         endpoint = "https://api.openai.com/v1/chat/completions",
                         secret = os.getenv("OPENAI_API_KEY"),
+                    },
+                    perplexity = {
+                        endpoint = "https://api.perplexity.ai/chat/completions",
+                        secret = os.getenv("PERPLEXITY_API_KEY"),
                     },
                     ollama = {
                         disable = true,

@@ -70,9 +70,14 @@ return {
                 function()
                     -- Recent files with options
                     require("snacks.picker").smart({
-                        cwd_only = true,
-                        stat_file = true,
-                        include_current_session = true,
+                        multi = { "buffers", "recent" },
+                        format = "file", -- use `file` format for all sources
+                        matcher = {
+                            cwd_bonus = true, -- boost cwd matches
+                            frecency = true, -- use frecency boosting
+                            sort_empty = true, -- sort even when the filter is empty
+                        },
+                        transform = "unique_file",
                     })
                 end,
                 mode = { "n" },
@@ -132,6 +137,14 @@ return {
                 quickfile = { enabled = true },
                 picker = {
                     ui_select = true,
+                    win = {
+                        input = {
+                            keys = {
+                                ["C-c"] = { "cancel", mode = { "i", "n" } },
+                                ["<Esc>"] = { "close", mode = { "n", "i" } },
+                            },
+                        },
+                    },
                 },
                 styles = {
                     notification_history = {

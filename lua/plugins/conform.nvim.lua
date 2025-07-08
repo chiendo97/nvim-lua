@@ -28,6 +28,7 @@ return {
                     -- javascript = { "prettierd", "prettier", stop_after_first = true },
                     typescriptreact = { "eslint_d", "prettierd" },
                     typescript = { "eslint_d", "prettierd" },
+                    json = { "fixjson", "jq", stop_after_first = true },
                 },
                 -- Set default options
                 default_format_opts = {

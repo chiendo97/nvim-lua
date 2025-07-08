@@ -118,6 +118,11 @@ vim.g.loaded_ruby_provider = 0 -- Disable Ruby provider
 vim.g.loaded_perl_provider = 0 -- Disable Perl provider
 vim.g.loaded_node_provider = 0 -- Disable Node.js provider
 
+-- If running inside tmux, set clipboard to use tmux integration
+if vim.env.TMUX ~= nil then
+    vim.g.clipboard = "tmux"
+end
+
 -- Disable built-in plugins to improve startup time and reduce conflicts
 local disabled_built_ins = {
     "netrw", -- Built-in file explorer

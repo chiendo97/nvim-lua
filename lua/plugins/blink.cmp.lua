@@ -110,29 +110,28 @@ return {
             },
             sources = {
                 providers = {
-                    copilot = vim.fn.executable("node") == 1 and {
+                    copilot = {
                         name = "copilot",
                         module = "blink-cmp-copilot",
                         score_offset = 100,
                         async = true,
-                    } or {},
+                        enabled = vim.fn.executable("node") == 1,
+                    },
                     lazydev = {
                         name = "LazyDev",
                         module = "lazydev.integrations.blink",
                         -- make lazydev completions top priority (see `:h blink.cmp`)
                         score_offset = 100,
                     },
+                    path = {
+                        opts = {
+                            get_cwd = function()
+                                return vim.fn.getcwd()
+                            end,
+                        },
+                    },
                 },
-                default = function()
-                    local default = { "lsp", "path", "snippets", "buffer" }
-                    table.insert(default, "lazydev")
-
-                    if vim.fn.executable("node") == 1 then
-                        table.insert(default, "copilot")
-                    end
-
-                    return default
-                end,
+                default = { "lsp", "path", "snippets", "buffer", "lazydev", "copilot" },
             },
             appearance = {
                 use_nvim_cmp_as_default = false,

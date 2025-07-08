@@ -1,11 +1,14 @@
 return {
     {
         "nvim-orgmode/orgmode",
-        ft = { "org" },
+        dependencies = {
+            "nvim-orgmode/org-bullets.nvim",
+        },
+        event = "VeryLazy",
         config = function()
             -- Load custom tree-sitter grammar for org filetype
             require("orgmode").setup({
-                org_agenda_files = "/Users/chiendo97/Library/CloudStorage/Dropbox/org/*",
+                org_agenda_files = "/Users/chiendo97/Library/CloudStorage/Dropbox/org/*/**",
                 org_default_notes_file = "/Users/chiendo97/Library/CloudStorage/Dropbox/org/inbox.org",
                 -- org_hide_leading_stars = true,
                 -- org_ellipsis = "", -- hide marker used to indicate a folded headline.
@@ -28,6 +31,7 @@ return {
                 },
                 org_startup_folded = "overview",
             })
+            require("org-bullets").setup()
         end,
     },
 }

@@ -63,7 +63,7 @@ return {
             cmdline = {
                 enabled = true,
                 completion = {
-                    menu = { auto_show = true },
+                    menu = { auto_show = false },
                     ghost_text = { enabled = false },
                 },
                 keymap = {
@@ -97,6 +97,12 @@ return {
                         semantic_token_resolution = { enabled = false },
                     },
                 },
+                menu = {
+                    auto_show = true,
+                    draw = {
+                        columns = { { "label", "label_description", gap = 1 }, { "kind" } },
+                    },
+                },
                 documentation = {
                     auto_show = true,
                     auto_show_delay_ms = 0,
@@ -104,8 +110,8 @@ return {
                 },
                 ghost_text = {
                     enabled = true,
-                    show_with_menu = true,
-                    show_without_selection = true,
+                    show_with_menu = false,
+                    show_without_selection = false,
                 },
             },
             sources = {
@@ -113,15 +119,12 @@ return {
                     copilot = {
                         name = "copilot",
                         module = "blink-cmp-copilot",
-                        score_offset = 100,
                         async = true,
                         enabled = vim.fn.executable("node") == 1,
                     },
                     lazydev = {
                         name = "LazyDev",
                         module = "lazydev.integrations.blink",
-                        -- make lazydev completions top priority (see `:h blink.cmp`)
-                        score_offset = 100,
                     },
                     path = {
                         opts = {

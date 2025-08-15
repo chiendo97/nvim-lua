@@ -63,7 +63,7 @@ return {
             cmdline = {
                 enabled = true,
                 completion = {
-                    menu = { auto_show = false },
+                    menu = { auto_show = true },
                     ghost_text = { enabled = false },
                 },
                 keymap = {

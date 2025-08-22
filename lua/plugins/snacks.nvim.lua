@@ -78,6 +78,7 @@ return {
                             sort_empty = true, -- sort even when the filter is empty
                         },
                         transform = "unique_file",
+                        filter = { cwd = true },
                     })
                 end,
                 mode = { "n" },

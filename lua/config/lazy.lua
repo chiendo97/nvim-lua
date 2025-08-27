@@ -22,7 +22,7 @@ require("lazy").setup({
         { import = "plugins" },
     },
     -- automatically check for plugin updates
-    checker = { enabled = true },
+    checker = { enabled = false },
     ui = {
         -- a number <1 is a percentage., >1 is a fixed size
         size = { width = 0.8, height = 0.8 },

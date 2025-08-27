@@ -76,23 +76,13 @@ vim.api.nvim_create_autocmd("LspAttach", {
         vim.keymap.set("n", "<leader>Q", toggle_diagnostic, keymapOptions("Toggle diagnostics"))
 
         -- Handle client-specific capabilities
-        if client.name == "gopls" or client.name == "lua_ls" or client.name == "basedpyright" then
-            -- client.server_capabilities.document_formatting = false
-            client.server_capabilities.documentFormattingProvider = false
-        end
-
-        if client.name == "lua_ls" then
-            -- client.server_capabilities.document_formatting = false
+        local lsp_servers = { "gopls", "lua_ls", "basedpyright", "ruff" }
+        if vim.tbl_contains(lsp_servers, client.name) then
             client.server_capabilities.documentFormattingProvider = false
         end
 
         if client.name == "basedpyright" then
             client.server_capabilities.semanticTokensProvider = nil
-        end
-
-        if client.name == "ruff" then
-            client.server_capabilities.documentFormattingProvider = false
-            client.server_capabilities.hoverProvider = false
         end
 
         if client.server_capabilities.inlayHintProvider then
@@ -101,6 +91,21 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
         if client:supports_method("textDocument/documentColor") then
             vim.lsp.document_color.enable(true)
+        end
+
+        -- Enable LLM-based inline completion
+        if client:supports_method(vim.lsp.protocol.Methods.textDocument_inlineCompletion) then
+            vim.opt.completeopt = { "menu", "menuone", "noinsert", "fuzzy", "popup" }
+            vim.lsp.inline_completion.enable(true)
+            vim.keymap.set("i", "<CR>", function()
+                if not vim.lsp.inline_completion.get() then
+                    return "<CR>"
+                end
+            end, {
+                expr = true,
+                replace_keycodes = true,
+                desc = "Get the current inline completion",
+            })
         end
     end,
 })
@@ -117,19 +122,20 @@ vim.lsp.config("*", {
 
 -- Configure individual servers
 local servers = {
-    "gopls",
-    "lua_ls",
-    "ts_ls",
     "basedpyright",
+    "bashls",
+    "copilot",
+    "dartls",
+    "gopls",
+    "jsonls",
+    "lua_ls",
+    "ruff",
+    "rust_analyzer",
+    "sourcekit",
+    "tinymist",
+    "ts_ls",
     "yamlls",
     "zls",
-    "rust_analyzer",
-    "ruff",
-    "bashls",
-    "tinymist",
-    "dartls",
-    "sourcekit",
-    "jsonls",
 }
 
 for _, server in ipairs(servers) do

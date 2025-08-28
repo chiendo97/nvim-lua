@@ -5,36 +5,6 @@ return {
         dependencies = {
             {
                 "rafamadriz/friendly-snippets",
-                {
-                    "giuxtaposition/blink-cmp-copilot",
-                    enabled = vim.fn.executable("node") == 1,
-                    lazy = true,
-                    dependencies = {
-                        "zbirenbaum/copilot.lua",
-                        lazy = true,
-                        cmd = "Copilot",
-                        build = ":Copilot auth",
-                        config = function()
-                            require("copilot").setup({
-                                panel = {
-                                    enabled = false,
-                                },
-                                suggestion = {
-                                    enabled = false,
-                                },
-                                filetypes = {
-                                    yaml = true,
-                                    markdown = true,
-                                    help = true,
-                                    gitcommit = true,
-                                    svn = false,
-                                    cvs = false,
-                                    ["."] = false,
-                                },
-                            })
-                        end,
-                    },
-                },
             },
         },
 
@@ -124,12 +94,6 @@ return {
             },
             sources = {
                 providers = {
-                    copilot = {
-                        name = "copilot",
-                        module = "blink-cmp-copilot",
-                        async = true,
-                        enabled = vim.fn.executable("node") == 1,
-                    },
                     lazydev = {
                         name = "LazyDev",
                         module = "lazydev.integrations.blink",
@@ -142,7 +106,7 @@ return {
                         },
                     },
                 },
-                default = { "lsp", "path", "snippets", "buffer", "lazydev", "copilot" },
+                default = { "lsp", "path", "snippets", "buffer", "lazydev" },
             },
             appearance = {
                 use_nvim_cmp_as_default = false,

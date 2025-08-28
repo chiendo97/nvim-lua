@@ -57,7 +57,15 @@ return {
                 ["<C-Space>"] = { "show", "show_documentation", "hide_documentation" },
                 ["<C-f>"] = { "scroll_documentation_down", "fallback" },
                 ["<C-u>"] = { "scroll_documentation_up", "fallback" },
-                ["<Tab>"] = { "snippet_forward", "fallback" },
+                ["<Tab>"] = {
+                    "snippet_forward",
+                    function()
+                        if not vim.lsp.inline_completion.get() then
+                            return nil
+                        end
+                    end,
+                    "fallback",
+                },
                 ["<S-Tab>"] = { "snippet_backward", "fallback" },
             },
             cmdline = {

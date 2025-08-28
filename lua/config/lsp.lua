@@ -97,15 +97,15 @@ vim.api.nvim_create_autocmd("LspAttach", {
         if client:supports_method(vim.lsp.protocol.Methods.textDocument_inlineCompletion) then
             vim.opt.completeopt = { "menu", "menuone", "noinsert", "fuzzy", "popup" }
             vim.lsp.inline_completion.enable(true)
-            vim.keymap.set("i", "<CR>", function()
-                if not vim.lsp.inline_completion.get() then
-                    return "<CR>"
-                end
-            end, {
-                expr = true,
-                replace_keycodes = true,
-                desc = "Get the current inline completion",
-            })
+            -- vim.keymap.set("i", "<CR>", function()
+            --     if not vim.lsp.inline_completion.get() then
+            --         return "<CR>"
+            --     end
+            -- end, {
+            --     expr = true,
+            --     replace_keycodes = true,
+            --     desc = "Get the current inline completion",
+            -- })
         end
     end,
 })

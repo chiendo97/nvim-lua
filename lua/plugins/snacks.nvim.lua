@@ -149,11 +149,13 @@ return {
                 },
                 styles = {
                     notification_history = {
+                        relative = "editor",
                         wo = {
                             wrap = true,
                         },
                     },
                     notification = {
+                        relative = "editor",
                         wo = {
                             wrap = true,
                         },

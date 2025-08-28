@@ -22,6 +22,7 @@ return {
                     python = { "isort", "black" },
                     typst = { "typstfmt" },
                     bash = { "shfmt" },
+                    zsh = { "shfmt" },
                     go = { "gofumpt", "goimports", "golines" },
                     yaml = { "yamlfmt" },
                     ledger = { "hledger" },
@@ -29,6 +30,7 @@ return {
                     typescriptreact = { "eslint_d", "prettierd" },
                     typescript = { "eslint_d", "prettierd" },
                     json = { "fixjson", "jq", stop_after_first = true },
+                    markdown = { "mdformat" },
                 },
                 -- Set default options
                 default_format_opts = {

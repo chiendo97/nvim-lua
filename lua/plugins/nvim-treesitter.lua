@@ -76,14 +76,6 @@ return {
             map_moveobject("[]", function()
                 ts_move.goto_previous_end("@class.outer", "textobjects")
             end, "Previous class end")
-
-            map_moveobject("]d", function()
-                ts_move.goto_next("@conditional.outer", "textobjects")
-            end, "Next conditional")
-
-            map_moveobject("[d", function()
-                ts_move.goto_previous("@conditional.outer", "textobjects")
-            end, "Previous conditional")
         end,
         dependencies = {
             { "nvim-treesitter/nvim-treesitter-textobjects", branch = "main" },

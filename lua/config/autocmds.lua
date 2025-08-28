@@ -41,4 +41,21 @@ vim.api.nvim_create_autocmd("VimEnter", {
     callback = function()
         require("lazy").update({ show = false })
     end,
+    desc = "Update lazy plugins silently on VimEnter",
+})
+
+vim.api.nvim_create_autocmd("FileType", {
+    callback = function(args)
+        pcall(vim.treesitter.start, args.buf)
+    end,
+    group = my_augroup,
+    desc = "Start treesitter on FileType event",
+})
+
+vim.api.nvim_create_autocmd("VimEnter", {
+    callback = function()
+        vim.cmd("clearjumps")
+    end,
+    group = my_augroup,
+    desc = "Clear jump list on VimEnter",
 })

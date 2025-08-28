@@ -1,112 +1,92 @@
 return {
     {
         "nvim-treesitter/nvim-treesitter",
-        build = function()
-            require("nvim-treesitter.install").update({ with_sync = true })
-        end,
+        branch = "main",
         config = function()
-            require("nvim-treesitter.configs").setup({
-                -- A list of parser names, or "all"
-                ensure_installed = {
-                    "bash",
-                    "c",
-                    "dart",
-                    "go",
-                    "http",
-                    "javascript",
-                    "json",
-                    "json5",
-                    "jsonc",
-                    "ledger",
-                    "lua",
-                    "markdown",
-                    "markdown_inline",
-                    "python",
-                    "query",
-                    "vim",
-                    "vimdoc",
-                    "xml",
-                    "yaml",
-                },
-                ignore_install = { "org" },
+            -- You can use the capture groups defined in `textobjects.scm`
+            local ts_select = require("nvim-treesitter-textobjects.select")
+            local ts_move = require("nvim-treesitter-textobjects.move")
 
-                -- Install parsers synchronously (only applied to `ensure_installed`)
-                sync_install = false,
+            local function map_textobject(modes, key, capture, query_group, desc)
+                vim.keymap.set(modes, key, function()
+                    ts_select.select_textobject(capture, query_group or "textobjects")
+                end, { desc = desc })
+            end
 
-                -- Automatically install missing parsers when entering buffer
-                auto_install = false,
+            map_textobject({ "x", "o" }, "af", "@function.outer", nil, "Select outer function")
+            map_textobject({ "x", "o" }, "if", "@function.inner", nil, "Select inner function")
 
-                highlight = {
-                    enable = true,
-                    disable = { "org" }, -- Remove this to use TS highlighter for some of the highlights (Experimental)
-                    -- Required since TS highlighter doesn't support all syntax features (conceal)
-                    additional_vim_regex_highlighting = {
-                        "org",
-                    },
-                },
-                incremental_selection = {
-                    enable = false,
-                    keymaps = {
-                        init_selection = "",
-                        scope_incremental = "",
-                        node_incremental = "v",
-                        node_decremental = "V",
-                    },
-                },
-                indent = {
-                    enable = false,
-                },
-                textobjects = {
-                    select = {
-                        enable = false,
-                        lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
-                        keymaps = {
-                            ["af"] = "@function.outer",
-                            ["if"] = "@function.inner",
-                            ["ac"] = "@class.outer",
-                            ["ic"] = "@class.inner",
-                        },
-                    },
-                    move = {
-                        enable = false,
-                        set_jumps = true, -- whether to set jumps in the jumplist
-                        goto_next_start = {
-                            ["]m"] = "@function.outer",
-                            ["]]"] = "@class.outer",
-                        },
-                        goto_next_end = {
-                            ["]M"] = "@function.outer",
-                            ["]["] = "@class.outer",
-                        },
-                        goto_previous_start = {
-                            ["[m"] = "@function.outer",
-                            ["[["] = "@class.outer",
-                        },
-                        goto_previous_end = {
-                            ["[M"] = "@function.outer",
-                            ["[]"] = "@class.outer",
-                        },
-                    },
-                },
-                playground = {
-                    enable = false,
-                    disable = {},
-                    updatetime = 25, -- Debounced time for highlighting nodes in the playground from source code
-                    persist_queries = false, -- Whether the query persists across vim sessions
-                    keybindings = {
-                        toggle_query_editor = "o",
-                        toggle_hl_groups = "i",
-                        toggle_injected_languages = "t",
-                        toggle_anonymous_nodes = "a",
-                        toggle_language_display = "I",
-                        focus_language = "f",
-                        unfocus_language = "F",
-                        update = "R",
-                        goto_node = "<cr>",
-                        show_help = "?",
-                    },
+            map_textobject({ "x", "o" }, "ac", "@class.outer", nil, "Select outer class")
+            map_textobject({ "x", "o" }, "ic", "@class.inner", nil, "Select inner class")
+
+            map_textobject({ "x", "o" }, "as", "@local.scope", "locals", "Select local scope")
+
+            -- configuration
+            require("nvim-treesitter-textobjects").setup({
+                move = {
+                    -- whether to set jumps in the jumplist
+                    set_jumps = true,
                 },
             })
+
+            local function map_moveobject(key, fn, desc)
+                vim.keymap.set({ "n", "x", "o" }, key, fn, { silent = true, desc = desc })
+            end
+
+            map_moveobject("]m", function()
+                ts_move.goto_next_start("@function.outer", "textobjects")
+            end, "Next function start")
+
+            map_moveobject("]]", function()
+                ts_move.goto_next_start("@class.outer", "textobjects")
+            end, "Next class start")
+
+            map_moveobject("]o", function()
+                ts_move.goto_next_start({ "@loop.inner", "@loop.outer" }, "textobjects")
+            end, "Next loop start")
+
+            map_moveobject("]s", function()
+                ts_move.goto_next_start("@local.scope", "locals")
+            end, "Next local scope start")
+
+            map_moveobject("]z", function()
+                ts_move.goto_next_start("@fold", "folds")
+            end, "Next fold start")
+
+            map_moveobject("]M", function()
+                ts_move.goto_next_end("@function.outer", "textobjects")
+            end, "Next function end")
+
+            map_moveobject("][", function()
+                ts_move.goto_next_end("@class.outer", "textobjects")
+            end, "Next class end")
+
+            map_moveobject("[m", function()
+                ts_move.goto_previous_start("@function.outer", "textobjects")
+            end, "Previous function start")
+
+            map_moveobject("[[", function()
+                ts_move.goto_previous_start("@class.outer", "textobjects")
+            end, "Previous class start")
+
+            map_moveobject("[M", function()
+                ts_move.goto_previous_end("@function.outer", "textobjects")
+            end, "Previous function end")
+
+            map_moveobject("[]", function()
+                ts_move.goto_previous_end("@class.outer", "textobjects")
+            end, "Previous class end")
+
+            map_moveobject("]d", function()
+                ts_move.goto_next("@conditional.outer", "textobjects")
+            end, "Next conditional")
+
+            map_moveobject("[d", function()
+                ts_move.goto_previous("@conditional.outer", "textobjects")
+            end, "Previous conditional")
         end,
+        dependencies = {
+            { "nvim-treesitter/nvim-treesitter-textobjects", branch = "main" },
+        },
     },
 }

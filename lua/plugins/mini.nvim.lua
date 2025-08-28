@@ -1,8 +1,8 @@
 return {
     {
         "echasnovski/mini.nvim",
-        event = "VeryLazy",
         config = function()
+            -- Go forward/backward with square brackets
             require("mini.bracketed").setup()
             require("mini.statusline").setup({
                 -- Content of statusline as functions which return statusline string. See
@@ -40,8 +40,11 @@ return {
                 -- Whether to use icons by default
                 use_icons = true,
             })
+            -- Surround actions
             require("mini.surround").setup()
+            -- Text edit operators
             require("mini.operators").setup({ replace = { prefix = "" } })
+            -- Extend and create a/i textobjects
             require("mini.ai").setup({
                 custom_textobjects = {
                     -- Function definition (needs treesitter queries with these captures)

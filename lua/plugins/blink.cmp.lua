@@ -1,3 +1,5 @@
+local is_node_available = vim.fn.executable("node") == 1
+
 return {
     {
         "saghen/blink.cmp",
@@ -5,6 +7,36 @@ return {
         dependencies = {
             {
                 "rafamadriz/friendly-snippets",
+                {
+                    "giuxtaposition/blink-cmp-copilot",
+                    enabled = is_node_available,
+                    lazy = true,
+                    dependencies = {
+                        "zbirenbaum/copilot.lua",
+                        lazy = true,
+                        cmd = "Copilot",
+                        build = ":Copilot auth",
+                        config = function()
+                            require("copilot").setup({
+                                panel = {
+                                    enabled = false,
+                                },
+                                suggestion = {
+                                    enabled = false,
+                                },
+                                filetypes = {
+                                    yaml = true,
+                                    markdown = true,
+                                    help = true,
+                                    gitcommit = true,
+                                    svn = false,
+                                    cvs = false,
+                                    ["."] = false,
+                                },
+                            })
+                        end,
+                    },
+                },
             },
         },
 
@@ -27,15 +59,7 @@ return {
                 ["<C-Space>"] = { "show", "show_documentation", "hide_documentation" },
                 ["<C-f>"] = { "scroll_documentation_down", "fallback" },
                 ["<C-u>"] = { "scroll_documentation_up", "fallback" },
-                ["<Tab>"] = {
-                    "snippet_forward",
-                    function()
-                        if not vim.lsp.inline_completion.get() then
-                            return nil
-                        end
-                    end,
-                    "fallback",
-                },
+                ["<Tab>"] = { "snippet_forward", "fallback" },
                 ["<S-Tab>"] = { "snippet_backward", "fallback" },
             },
             cmdline = {
@@ -94,6 +118,12 @@ return {
             },
             sources = {
                 providers = {
+                    copilot = {
+                        name = "copilot",
+                        module = "blink-cmp-copilot",
+                        async = true,
+                        enabled = is_node_available,
+                    },
                     lazydev = {
                         name = "LazyDev",
                         module = "lazydev.integrations.blink",
@@ -106,7 +136,15 @@ return {
                         },
                     },
                 },
-                default = { "lsp", "path", "snippets", "buffer", "lazydev" },
+                default = function()
+                    local default_sources = { "lsp", "path", "snippets", "buffer", "lazydev" }
+
+                    if is_node_available then
+                        table.insert(default_sources, "copilot")
+                    end
+
+                    return default_sources
+                end,
             },
             appearance = {
                 use_nvim_cmp_as_default = false,

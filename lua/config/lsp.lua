@@ -124,7 +124,7 @@ vim.lsp.config("*", {
 local servers = {
     "basedpyright",
     "bashls",
-    "copilot",
+    -- "copilot",
     "dartls",
     "gopls",
     "jsonls",

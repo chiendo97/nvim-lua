@@ -69,15 +69,7 @@ return {
                 "<leader>j",
                 function()
                     -- Recent files with options
-                    require("snacks.picker").smart({
-                        multi = { "buffers", "recent" },
-                        format = "file", -- use `file` format for all sources
-                        matcher = {
-                            cwd_bonus = true, -- boost cwd matches
-                            frecency = true, -- use frecency boosting
-                            sort_empty = true, -- sort even when the filter is empty
-                        },
-                        transform = "unique_file",
+                    require("snacks.picker").recent({
                         filter = { cwd = true },
                     })
                 end,

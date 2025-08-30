@@ -2,43 +2,28 @@ local is_node_available = vim.fn.executable("node") == 1
 
 return {
     {
-        "saghen/blink.cmp",
-        -- optional: provides snippets for the snippet source
-        dependencies = {
-            {
-                "rafamadriz/friendly-snippets",
-                {
-                    "giuxtaposition/blink-cmp-copilot",
-                    enabled = is_node_available,
-                    lazy = true,
-                    dependencies = {
-                        "zbirenbaum/copilot.lua",
-                        lazy = true,
-                        cmd = "Copilot",
-                        build = ":Copilot auth",
-                        config = function()
-                            require("copilot").setup({
-                                panel = {
-                                    enabled = false,
-                                },
-                                suggestion = {
-                                    enabled = false,
-                                },
-                                filetypes = {
-                                    yaml = true,
-                                    markdown = true,
-                                    help = true,
-                                    gitcommit = true,
-                                    svn = false,
-                                    cvs = false,
-                                    ["."] = false,
-                                },
-                            })
-                        end,
-                    },
-                },
+        "zbirenbaum/copilot.lua",
+        cmd = "Copilot",
+        event = "InsertEnter",
+        enabled = is_node_available,
+        opts = {
+            suggestion = { enabled = false },
+            panel = { enabled = false },
+            filetypes = {
+                markdown = true,
+                help = true,
+                yaml = true,
+                gitcommit = true,
+                svn = false,
+                cvs = false,
+                ["."] = false,
             },
         },
+    },
+    {
+        "saghen/blink.cmp",
+        -- optional: provides snippets for the snippet source
+        dependencies = { "rafamadriz/friendly-snippets", "fang2hou/blink-copilot" },
 
         -- use a release tag to download pre-built binaries
         version = "*",
@@ -120,9 +105,9 @@ return {
                 providers = {
                     copilot = {
                         name = "copilot",
-                        module = "blink-cmp-copilot",
+                        module = "blink-copilot",
+                        score_offset = 100,
                         async = true,
-                        enabled = is_node_available,
                     },
                     lazydev = {
                         name = "LazyDev",

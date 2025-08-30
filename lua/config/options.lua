@@ -31,7 +31,7 @@ vim.o.cursorline = true -- Highlight current line
 vim.wo.signcolumn = "yes" -- Always show sign column (for git, diagnostics, etc.)
 vim.o.wrap = false -- Disable line wrapping
 vim.o.breakindent = true -- Indent wrapped lines to match line start
-vim.o.linebreak = true -- Break lines at word boundaries
+vim.o.linebreak = false -- Break lines at word boundaries
 vim.o.winborder = "rounded" -- Use rounded borders for floating windows
 
 -- Completion settings

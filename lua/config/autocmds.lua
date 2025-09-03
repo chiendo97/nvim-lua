@@ -18,6 +18,7 @@ vim.api.nvim_create_autocmd("BufReadPost", {
             line > 1
             and line <= vim.fn.line("$")
             and vim.bo.filetype ~= "commit"
+            and vim.bo.filetype ~= "help"
             and vim.fn.index({ "xxd", "gitrebase" }, vim.bo.filetype) == -1
         then
             vim.cmd('normal! g`"')
@@ -25,6 +26,7 @@ vim.api.nvim_create_autocmd("BufReadPost", {
     end,
     desc = "Jump to the last edited line in the buffer",
 })
+
 -- Highlight when yanking (copying) text
 --  Try it with `yap` in normal mode
 --  See `:help vim.highlight.on_yank()`

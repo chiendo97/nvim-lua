@@ -2,8 +2,6 @@ return {
     {
         "echasnovski/mini.nvim",
         config = function()
-            -- Go forward/backward with square brackets
-            require("mini.bracketed").setup()
             require("mini.statusline").setup({
                 -- Content of statusline as functions which return statusline string. See
                 -- `:h statusline` and code of default contents (used instead of `nil`).
@@ -42,8 +40,6 @@ return {
             })
             -- Surround actions
             require("mini.surround").setup()
-            -- Text edit operators
-            require("mini.operators").setup({ replace = { prefix = "" } })
             -- Extend and create a/i textobjects
             require("mini.ai").setup({
                 custom_textobjects = {

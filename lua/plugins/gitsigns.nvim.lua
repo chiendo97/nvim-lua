@@ -63,10 +63,6 @@ return {
                 end, { desc = "Set quickfix list with all hunks" })
                 map("n", "ghq", gitsigns.setqflist, { desc = "Set quickfix list with hunks" })
 
-                -- Toggles
-                map("n", "gtb", gitsigns.toggle_current_line_blame, { desc = "Toggle line blame" })
-                map("n", "gtw", gitsigns.toggle_word_diff, { desc = "Toggle word diff" })
-
                 -- Text object
                 map({ "o", "x" }, "ih", gitsigns.select_hunk, { desc = "Select inner hunk" })
             end,

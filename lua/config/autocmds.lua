@@ -19,6 +19,7 @@ vim.api.nvim_create_autocmd("BufReadPost", {
             and line <= vim.fn.line("$")
             and vim.bo.filetype ~= "commit"
             and vim.bo.filetype ~= "help"
+            and vim.bo.filetype ~= "snacks_picker_list"
             and vim.fn.index({ "xxd", "gitrebase" }, vim.bo.filetype) == -1
         then
             vim.cmd('normal! g`"')

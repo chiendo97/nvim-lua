@@ -3,7 +3,7 @@ local is_mcphub_available = vim.fn.executable("mcp-hub") == 1
 return {
     {
         "ravitemer/mcphub.nvim",
-        enable = is_mcphub_available,
+        enabled = is_mcphub_available,
         opts = {
             auto_approve = true, -- Auto approve mcp tool calls
         },

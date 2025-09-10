@@ -104,7 +104,7 @@ vim.o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize" -- Wha
 vim.o.diffopt = "internal,filler,algorithm:histogram,indent-heuristic" -- Diff algorithm and options
 
 -- Enable synchronous parsing for Treesitter to ensure immediate syntax updates.
-vim.g._ts_force_sync_parsing = false -- Don't force synchronous treesitter parsing (can cause performance issues)
+-- vim.g._ts_force_sync_parsing = false -- Don't force synchronous treesitter parsing (can cause performance issues)
 
 -- Grep settings - use ripgrep if available
 if vim.fn.executable("rg") == 1 then
@@ -121,6 +121,8 @@ vim.g.loaded_node_provider = 0 -- Disable Node.js provider
 -- If running inside tmux, set clipboard to use tmux integration
 if vim.env.TMUX ~= nil then
     vim.g.clipboard = "tmux"
+else
+    vim.g.clipboard = "osc52"
 end
 
 -- Disable built-in plugins to improve startup time and reduce conflicts

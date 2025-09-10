@@ -1,3 +1,5 @@
+---@diagnostic disable: param-type-mismatch
+
 local my_augroup = vim.api.nvim_create_augroup("MyAutoCmds", { clear = true })
 
 vim.api.nvim_create_autocmd("FileType", {
@@ -36,6 +38,10 @@ vim.api.nvim_create_autocmd("TextYankPost", {
     desc = "Highlight when yanking (copying) text",
     callback = function()
         vim.highlight.on_yank()
+        -- local copy_to_unnamedplus = require("vim.ui.clipboard.osc52").copy("+")
+        -- copy_to_unnamedplus(vim.v.event.regcontents)
+        -- local copy_to_unnamed = require("vim.ui.clipboard.osc52").copy("*")
+        -- copy_to_unnamed(vim.v.event.regcontents)
     end,
 })
 

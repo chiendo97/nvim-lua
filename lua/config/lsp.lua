@@ -124,7 +124,7 @@ local servers = {
     "sourcekit",
     "tinymist",
     "ts_ls",
-    "yamlls",
+    -- "yamlls",
     "zls",
 }
 

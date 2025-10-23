@@ -7,7 +7,7 @@ return {
             {
                 "<leader>t",
                 function()
-                    require("snacks").notifier.show_history()
+                    require("snacks.picker").notifications()
                 end,
                 mode = { "n" },
                 desc = "Show notification history",

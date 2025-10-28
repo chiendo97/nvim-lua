@@ -2,25 +2,6 @@ local is_node_available = vim.fn.executable("node") == 1
 
 return {
     {
-        "zbirenbaum/copilot.lua",
-        cmd = "Copilot",
-        event = "InsertEnter",
-        enabled = is_node_available,
-        opts = {
-            suggestion = { enabled = false },
-            panel = { enabled = false },
-            filetypes = {
-                markdown = true,
-                help = true,
-                yaml = true,
-                gitcommit = true,
-                svn = false,
-                cvs = false,
-                ["."] = false,
-            },
-        },
-    },
-    {
         "saghen/blink.cmp",
         -- optional: provides snippets for the snippet source
         dependencies = { "rafamadriz/friendly-snippets", "fang2hou/blink-copilot" },

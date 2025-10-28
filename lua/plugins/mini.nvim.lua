@@ -59,6 +59,7 @@ return {
                 -- idle time if user input is required.
                 silent = false,
             })
+            require("mini.icons").setup() -- use default config
         end,
     },
 }

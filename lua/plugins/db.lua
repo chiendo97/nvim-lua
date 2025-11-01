@@ -12,6 +12,7 @@ return {
     {
         "saxon1964/neovim-tips",
         version = "*", -- Only update on tagged releases
+        enabled = false,
         dependencies = {
             "MunifTanjim/nui.nvim",
             "MeanderingProgrammer/render-markdown.nvim", -- Clean rendering

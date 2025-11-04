@@ -116,7 +116,11 @@ return {
                 "<leader>i",
                 function()
                     -- Command history picker
-                    require("snacks.picker").command_history()
+                    require("snacks.picker").command_history({
+                        sort = function(a, b)
+                            return a.idx < b.idx
+                        end,
+                    })
                 end,
                 mode = { "n" },
                 desc = "Command history",

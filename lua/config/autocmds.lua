@@ -53,12 +53,24 @@ vim.api.nvim_create_autocmd("VimEnter", {
     desc = "Update lazy plugins silently on VimEnter",
 })
 
+-- Consolidated FileType autocmd for treesitter features
 vim.api.nvim_create_autocmd("FileType", {
-    callback = function(args)
-        pcall(vim.treesitter.start, args.buf)
+    pattern = "*",
+    callback = function()
+        local ft = vim.bo.filetype
+        local lang = vim.treesitter.language.get_lang(ft)
+
+        if not lang or not vim.treesitter.language.add(lang) then
+            return
+        end
+
+        vim.treesitter.start()
+
+        -- Set folding if available
+        if vim.treesitter.query.get(lang, "folds") then
+            vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+        end
     end,
-    group = my_augroup,
-    desc = "Start treesitter on FileType event",
 })
 
 vim.api.nvim_create_autocmd("VimEnter", {

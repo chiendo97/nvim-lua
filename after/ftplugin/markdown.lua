@@ -1,8 +1,5 @@
--- vim.opt.spell = true
-
-vim.opt_local.foldexpr = "v:lua.vim.treesitter.foldexpr()"
-vim.opt_local.foldlevel = 10
-vim.opt_local.foldmethod = "expr"
-vim.opt_local.foldenable = true
-vim.opt_local.foldminlines = 1
 vim.opt_local.wrap = false
+vim.opt_local.shiftwidth = 2
+vim.opt_local.tabstop = 2
+vim.opt_local.softtabstop = 2
+vim.opt_local.expandtab = false

@@ -31,19 +31,6 @@ return {
             },
         },
         dependencies = {
-            {
-                -- (Optional) It is required for sending requests to LLM providers
-                "chiendo97/ai.nvim",
-                dev = true,
-                version = ">=1.4.2",
-                opts = {
-                    -- (Required) Configure a provider. :help ai-setup or
-                    -- https://github.com/S1M0N38/ai.nvim/blob/main/doc/ai.txt
-                    base_url = "https://openrouter.ai/api/v1",
-                    api_key = vim.fn.getenv("OPENROUTER_API_KEY"),
-                    copilot = false,
-                },
-            },
             "ravitemer/mcphub.nvim",
         },
     },

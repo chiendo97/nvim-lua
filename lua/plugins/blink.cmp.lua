@@ -1,5 +1,3 @@
-local is_node_available = vim.fn.executable("node") == 1
-
 return {
     {
         "saghen/blink.cmp",
@@ -87,30 +85,25 @@ return {
                     copilot = {
                         name = "copilot",
                         module = "blink-copilot",
-                        score_offset = 100,
+                        score_offset = 50,
                         async = true,
                     },
                     lazydev = {
                         name = "LazyDev",
                         module = "lazydev.integrations.blink",
+                        async = true,
                     },
                     path = {
                         opts = {
                             get_cwd = function()
                                 return vim.fn.getcwd()
                             end,
+                            ignore_root_slash = true,
+                            show_hidden_files_by_default = true,
                         },
                     },
                 },
-                default = function()
-                    local default_sources = { "lsp", "path", "snippets", "buffer", "lazydev" }
-
-                    if is_node_available then
-                        table.insert(default_sources, "copilot")
-                    end
-
-                    return default_sources
-                end,
+                default = { "lsp", "path", "snippets", "buffer", "lazydev", "copilot" },
             },
             appearance = {
                 use_nvim_cmp_as_default = false,

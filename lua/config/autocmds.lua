@@ -1,6 +1,6 @@
 ---@diagnostic disable: param-type-mismatch
 
-local my_augroup = vim.api.nvim_create_augroup("MyAutoCmds", { clear = true })
+local my_augroup = vim.api.nvim_create_augroup("cle.autocmd", { clear = true })
 
 vim.api.nvim_create_autocmd("FileType", {
     group = my_augroup,
@@ -55,6 +55,7 @@ vim.api.nvim_create_autocmd("VimEnter", {
 
 -- Consolidated FileType autocmd for treesitter features
 vim.api.nvim_create_autocmd("FileType", {
+    group = my_augroup,
     pattern = "*",
     callback = function()
         local ft = vim.bo.filetype
@@ -74,9 +75,9 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 vim.api.nvim_create_autocmd("VimEnter", {
+    group = my_augroup,
     callback = function()
         vim.cmd("clearjumps")
     end,
-    group = my_augroup,
     desc = "Clear jump list on VimEnter",
 })

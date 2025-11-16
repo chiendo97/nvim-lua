@@ -75,28 +75,9 @@ api.nvim_create_autocmd("LspAttach", {
         keymap.set("n", "<leader>q", diagnostic_qflist, _opts("Set quickfix list"))
         keymap.set("n", "<leader>Q", toggle_diagnostic, _opts("Toggle diagnostics"))
 
-        -- Handle client-specific capabilities
-        local lsp_servers = { "gopls", "lua_ls", "basedpyright", "ruff" }
-        if vim.tbl_contains(lsp_servers, client.name) then
-            client.server_capabilities.documentFormattingProvider = false
-        end
-
-        if client.name == "basedpyright" then
-            client.server_capabilities.semanticTokensProvider = nil
-        end
-
         if client.server_capabilities.inlayHintProvider then
             lsp.inlay_hint.enable(true)
         end
-
-        -- if client:supports_method("textDocument/documentColor") then
-        --     lsp.document_color.enable(true)
-        -- end
-
-        -- Enable LLM-based inline completion
-        -- if client:supports_method(lsp.protocol.Methods.textDocument_inlineCompletion) then
-        --     lsp.inline_completion.enable(true)
-        -- end
     end,
 })
 

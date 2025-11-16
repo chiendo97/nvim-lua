@@ -37,7 +37,7 @@ return {
                     -- LSP formatting is used when no other formatters are available
                     -- lsp_format = "fallback",
                     -- LSP formatting is used when available and then other formatters
-                    lsp_format = "first",
+                    lsp_format = "fallback",
                 },
                 -- Customize formatters
                 formatters = {

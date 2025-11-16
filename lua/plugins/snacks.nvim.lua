@@ -130,7 +130,14 @@ return {
             require("snacks").setup({
                 bigfile = { enabled = true },
                 notifier = { enabled = true },
-                scope = { enabled = false },
+                indent = {
+                    enabled = true,
+                    char = "|",
+                    only_scope = true, -- only show indent guides of the scope
+                    only_current = true, -- only show indent guides in the current window
+                    animate = { enabled = false },
+                    scope = { enabled = false },
+                },
                 quickfile = { enabled = true },
                 picker = {
                     matcher = {

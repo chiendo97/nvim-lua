@@ -2,7 +2,18 @@ return {
     {
         "saghen/blink.cmp",
         -- optional: provides snippets for the snippet source
-        dependencies = { "rafamadriz/friendly-snippets", "fang2hou/blink-copilot" },
+        dependencies = {
+            "rafamadriz/friendly-snippets",
+            "fang2hou/blink-copilot",
+            {
+                "newtoallofthis123/blink-cmp-fuzzy-path",
+                opts = {
+                    filetypes = { "markdown", "json" },
+                    trigger_char = "@",
+                    max_results = 5,
+                },
+            },
+        },
 
         -- use a release tag to download pre-built binaries
         version = "*",
@@ -102,8 +113,13 @@ return {
                             show_hidden_files_by_default = true,
                         },
                     },
+                    ["fuzzy-path"] = {
+                        name = "Fuzzy Path",
+                        module = "blink-cmp-fuzzy-path",
+                        score_offset = 0,
+                    },
                 },
-                default = { "lsp", "path", "snippets", "buffer", "lazydev", "copilot" },
+                default = { "fuzzy-path", "lsp", "path", "snippets", "buffer", "lazydev", "copilot" },
             },
             appearance = {
                 use_nvim_cmp_as_default = false,

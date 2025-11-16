@@ -7,7 +7,7 @@ return {
             {
                 "<leader>t",
                 function()
-                    require("snacks.picker").notifications()
+                    require("snacks.picker").notifications({ win = { preview = { wo = { wrap = true } } } })
                 end,
                 mode = { "n" },
                 desc = "Show notification history",
@@ -130,38 +130,37 @@ return {
             require("snacks").setup({
                 bigfile = { enabled = true },
                 notifier = { enabled = true },
-                scope = { enabled = true },
+                scope = { enabled = false },
                 quickfile = { enabled = true },
-                matcher = {
-                    fuzzy = true, -- use fuzzy matching
-                    smartcase = true, -- use smartcase
-                    ignorecase = true, -- use ignorecase
-                    sort_empty = true, -- sort results when the search string is empty
-                    filename_bonus = true, -- give bonus for matching file names (last part of the path)
-                    file_pos = true, -- support patterns like `file:line:col` and `file:line`
-                    -- the bonusses below, possibly require string concatenation and path normalization,
-                    -- so this can have a performance impact for large lists and increase memory usage
-                    cwd_bonus = true, -- give bonus for matching files in the cwd
-                    frecency = true, -- frecency bonus
-                    history_bonus = true, -- give more weight to chronological order
-                },
                 picker = {
+                    matcher = {
+                        fuzzy = true, -- use fuzzy matching
+                        smartcase = true, -- use smartcase
+                        ignorecase = true, -- use ignorecase
+                        sort_empty = true, -- sort results when the search string is empty
+                        filename_bonus = true, -- give bonus for matching file names (last part of the path)
+                        file_pos = true, -- support patterns like `file:line:col` and `file:line`
+                        -- the bonusses below, possibly require string concatenation and path normalization,
+                        -- so this can have a performance impact for large lists and increase memory usage
+                        cwd_bonus = true, -- give bonus for matching files in the cwd
+                        frecency = true, -- frecency bonus
+                        history_bonus = true, -- give more weight to chronological order
+                    },
                     ui_select = true,
                     win = {
                         input = {
                             keys = {
                                 ["C-c"] = { "cancel", mode = { "i", "n" } },
                                 ["<Esc>"] = { "close", mode = { "n", "i" } },
+                                ["<c-u>"] = { "preview_scroll_up", mode = { "i", "n" } },
+                                ["<c-d>"] = { "preview_scroll_down", mode = { "i", "n" } },
                             },
                         },
                     },
                 },
                 styles = {
-                    notification_history = {
-                        relative = "editor",
-                        wo = {
-                            wrap = true,
-                        },
+                    help = {
+                        border = "rounded",
                     },
                     notification = {
                         relative = "editor",
@@ -172,6 +171,8 @@ return {
                 },
                 explorer = {
                     replace_netrw = true,
+                    git_status = false,
+                    diagnostics = false,
                 },
             })
 

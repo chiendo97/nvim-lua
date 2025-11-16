@@ -89,9 +89,9 @@ api.nvim_create_autocmd("LspAttach", {
             lsp.inlay_hint.enable(true)
         end
 
-        if client:supports_method("textDocument/documentColor") then
-            lsp.document_color.enable(true)
-        end
+        -- if client:supports_method("textDocument/documentColor") then
+        --     lsp.document_color.enable(true)
+        -- end
 
         -- Enable LLM-based inline completion
         -- if client:supports_method(lsp.protocol.Methods.textDocument_inlineCompletion) then

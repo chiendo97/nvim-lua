@@ -2,22 +2,23 @@ return {
     {
         "robitx/gp.nvim",
         cmd = {
-            "GpChatNew",
-            "GpChatToggle",
-            "GpChatFinder",
-            "GpChatPaste",
-            "GpRewrite",
             "GpAppend",
-            "GpPrepend",
-            "GpImplement",
-            "GpPopup",
-            "GpEnew",
-            "GpNew",
-            "GpVnew",
-            "GpTabnew",
+            "GpChatFinder",
+            "GpChatNew",
+            "GpChatPaste",
+            "GpChatToggle",
             "GpContext",
-            "GpStop",
+            "GpEnew",
+            "GpImplement",
+            "GpNew",
             "GpNextAgent",
+            "GpPopup",
+            "GpPrepend",
+            "GpProofread",
+            "GpRewrite",
+            "GpStop",
+            "GpTabnew",
+            "GpVnew",
         },
         init = function()
             -- Setup shortcuts here (see Usage > Shortcuts in the Documentation/Readme)
@@ -161,19 +162,11 @@ return {
             local agent_specs = {
                 {
                     provider = "openai",
-                    model = "gpt-4.1-mini",
+                    model = "openai/gpt-5-mini",
                 },
                 {
-                    provider = "perplexity",
-                    model = "sonar",
-                },
-                {
-                    provider = "anthropic",
-                    model = "claude-3-7-sonnet-20250219",
-                },
-                {
-                    provider = "googleai",
-                    model = "gemini-2.5-flash-preview-04-17",
+                    provider = "openai",
+                    model = "google/gemini-2.5-flash-lite",
                 },
             }
 
@@ -188,24 +181,8 @@ return {
             local cfg = {
                 providers = {
                     openai = {
-                        endpoint = "https://api.openai.com/v1/chat/completions",
+                        endpoint = os.getenv("OPENAI_BASE_URL") .. "/chat/completions",
                         secret = os.getenv("OPENAI_API_KEY"),
-                    },
-                    perplexity = {
-                        endpoint = "https://api.perplexity.ai/chat/completions",
-                        secret = os.getenv("PERPLEXITY_API_KEY"),
-                    },
-                    ollama = {
-                        disable = true,
-                        endpoint = "http://100.72.233.13:11434/v1/chat/completions",
-                    },
-                    anthropic = {
-                        endpoint = "https://api.anthropic.com/v1/messages",
-                        secret = os.getenv("ANTHROPIC_API_KEY"),
-                    },
-                    googleai = {
-                        endpoint = "https://generativelanguage.googleapis.com/v1beta/models/{{model}}:streamGenerateContent?key={{secret}}",
-                        secret = os.getenv("GEMINI_API_KEY"),
                     },
                 },
                 agents = agents,

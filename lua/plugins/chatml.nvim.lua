@@ -32,6 +32,7 @@ return {
         },
         dependencies = {
             "ravitemer/mcphub.nvim",
+            "j-hui/fidget.nvim",
         },
     },
 }

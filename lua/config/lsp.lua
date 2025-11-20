@@ -105,8 +105,8 @@ local lsp_servers = {
     "sourcekit",
     "tinymist",
     "ts_ls",
-    -- "yamlls",
     "zls",
+    -- "pyrefly",
 }
 
 for _, server in ipairs(lsp_servers) do

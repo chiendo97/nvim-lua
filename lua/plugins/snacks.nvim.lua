@@ -126,59 +126,65 @@ return {
                 desc = "Command history",
             },
         },
-        config = function()
-            require("snacks").setup({
-                bigfile = { enabled = true },
-                notifier = { enabled = true },
-                indent = {
-                    enabled = true,
-                    char = "|",
-                    only_scope = true, -- only show indent guides of the scope
-                    only_current = true, -- only show indent guides in the current window
-                    animate = { enabled = false },
-                    scope = { enabled = false },
-                },
-                quickfile = { enabled = true },
-                picker = {
-                    ui_select = true,
-                    win = {
-                        input = {
-                            keys = {
-                                ["C-c"] = { "cancel", mode = { "i", "n" } },
-                                ["<Esc>"] = { "close", mode = { "n", "i" } },
-                                ["<c-u>"] = { "preview_scroll_up", mode = { "i", "n" } },
-                                ["<c-d>"] = { "preview_scroll_down", mode = { "i", "n" } },
-                            },
+        opts = {
+            bigfile = { enabled = true },
+            notifier = { enabled = true },
+            indent = {
+                enabled = true,
+                char = "|",
+                only_scope = true, -- only show indent guides of the scope
+                only_current = true, -- only show indent guides in the current window
+                animate = { enabled = false },
+                scope = { enabled = false },
+            },
+            quickfile = { enabled = true },
+            picker = {
+                ui_select = true,
+                win = {
+                    input = {
+                        keys = {
+                            ["C-c"] = { "cancel", mode = { "i", "n" } },
+                            ["<Esc>"] = { "close", mode = { "n", "i" } },
+                            ["<c-u>"] = { "preview_scroll_up", mode = { "i", "n" } },
+                            ["<c-d>"] = { "preview_scroll_down", mode = { "i", "n" } },
                         },
                     },
                 },
-                styles = {
-                    help = {
-                        border = "rounded",
-                    },
-                    notification = {
-                        relative = "editor",
-                        wo = {
-                            wrap = true,
-                        },
+            },
+            styles = {
+                help = {
+                    border = "rounded",
+                },
+                notification = {
+                    relative = "editor",
+                    wo = {
+                        wrap = true,
                     },
                 },
-                explorer = {
-                    replace_netrw = true,
-                    git_status = false,
-                    diagnostics = false,
-                },
+            },
+            explorer = {
+                replace_netrw = true,
+                git_status = false,
+                diagnostics = false,
+            },
+        },
+        init = function()
+            vim.api.nvim_create_autocmd("User", {
+                pattern = "VeryLazy",
+                callback = function()
+                    -- Setup some globals for debugging (lazy-loaded)
+                    _G.dd = function(...)
+                        Snacks.debug.inspect(...)
+                    end
+                    _G.bt = function()
+                        Snacks.debug.backtrace()
+                    end
+
+                    vim._print = function(_, ...)
+                        dd(...)
+                    end
+                end,
             })
-
-            _G.dd = function(...)
-                require("snacks").debug.inspect(...)
-            end
-
-            _G.bt = function()
-                require("snacks").debug.backtrace()
-            end
-
-            vim.print = _G.dd
         end,
     },
 }

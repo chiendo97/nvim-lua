@@ -120,6 +120,7 @@ vim.keymap.set(
 
 -- Sort selected text
 vim.keymap.set("x", "<leader>s", ":sort<cr>", { noremap = true, desc = "Sort selected text" })
+vim.keymap.set("x", "<leader>j", ":!fixjson<cr>", { noremap = true, desc = "Sort selected text" })
 
 vim.keymap.set("x", "g/", "<C-\\><C-n>`</\\%V", { desc = "Search forward within visual selection" })
 vim.keymap.set("x", "g?", "<C-\\><C-n>`>?\\%V", { desc = "Search backward within visual selection" })

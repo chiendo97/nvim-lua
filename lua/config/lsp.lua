@@ -78,6 +78,13 @@ api.nvim_create_autocmd("LspAttach", {
         if client.server_capabilities.inlayHintProvider then
             lsp.inlay_hint.enable(true)
         end
+
+        lsp.inline_completion.enable(true)
+        keymap.set("i", "<tab>", function()
+            if not vim.lsp.inline_completion.get() then
+                return "<Tab>"
+            end
+        end, { expr = true, desc = "Accept the current inline completion", buffer = bufnr })
     end,
 })
 

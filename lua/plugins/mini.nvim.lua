@@ -60,6 +60,12 @@ return {
                 silent = false,
             })
             require("mini.icons").setup() -- use default config
+            require("mini.completion").setup({
+                window = {
+                    info = { height = 25, width = 80, border = "single" },
+                    signature = { height = 25, width = 80, border = "single" },
+                },
+            }) -- use default config
         end,
     },
 }

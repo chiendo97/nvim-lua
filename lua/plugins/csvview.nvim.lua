@@ -1,7 +1,6 @@
 return {
     {
         "hat0uma/csvview.nvim",
-        enabled = false,
         ---@module "csvview"
         ---@type CsvView.Options
         opts = {
@@ -20,6 +19,7 @@ return {
                 jump_next_row = { "<Enter>", mode = { "n", "v" } },
                 jump_prev_row = { "<S-Enter>", mode = { "n", "v" } },
             },
+            header_lnum = 1,
         },
         cmd = { "CsvViewEnable", "CsvViewDisable", "CsvViewToggle" },
         ft = "csv",

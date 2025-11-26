@@ -81,3 +81,13 @@ vim.api.nvim_create_autocmd("VimEnter", {
     end,
     desc = "Clear jump list on VimEnter",
 })
+
+vim.api.nvim_create_autocmd("FileType", {
+    group = my_augroup,
+    pattern = "snacks_picker_input",
+    desc = "Disable mini.completion for snacks picker",
+    callback = function()
+        -- command = "lua vim.b.minicompletion_disable=true",
+        vim.b.minicompletion_disable = true
+    end,
+})

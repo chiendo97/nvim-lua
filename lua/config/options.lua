@@ -15,6 +15,8 @@ vim.o.pumborder = "rounded"
 vim.o.showmode = false -- Don't show mode in command line
 vim.o.laststatus = 3 -- Global statusline (3 = always show global)
 vim.o.cmdheight = 2 -- Height of command line (number of lines)
+vim.o.wrap = false
+vim.wo.signcolumn = "yes" -- Always show sign column (for git, diagnostics, etc.)
 
 -- Completion settings
 vim.o.pumheight = 10

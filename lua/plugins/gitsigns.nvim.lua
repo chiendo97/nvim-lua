@@ -15,20 +15,12 @@ return {
                 end
 
                 -- Navigation
-                map("n", "]c", function()
-                    if vim.wo.diff then
-                        vim.cmd.normal({ "]c", bang = true })
-                    else
-                        gitsigns.nav_hunk("next")
-                    end
+                map("n", "]h", function()
+                    gitsigns.nav_hunk("next")
                 end, { desc = "Go to next Git hunk" })
 
-                map("n", "[c", function()
-                    if vim.wo.diff then
-                        vim.cmd.normal({ "[c", bang = true })
-                    else
-                        gitsigns.nav_hunk("prev")
-                    end
+                map("n", "[h", function()
+                    gitsigns.nav_hunk("prev")
                 end, { desc = "Go to previous Git hunk" })
 
                 -- Actions

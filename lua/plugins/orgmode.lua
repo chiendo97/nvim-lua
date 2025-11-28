@@ -8,7 +8,7 @@ return {
         config = function()
             -- Load custom tree-sitter grammar for org filetype
             require("orgmode").setup({
-                org_agenda_files = "/Users/chiendo97/Library/CloudStorage/Dropbox/org/*/**",
+                org_agenda_files = "/Users/chiendo97/Library/CloudStorage/Dropbox/org/**/*",
                 org_default_notes_file = "/Users/chiendo97/Library/CloudStorage/Dropbox/org/inbox.org",
                 -- org_hide_leading_stars = true,
                 -- org_ellipsis = "", -- hide marker used to indicate a folded headline.
@@ -21,7 +21,7 @@ return {
                 org_agenda_skip_scheduled_if_done = true,
                 org_agenda_skip_deadline_if_done = true,
                 org_todo_keywords = { "TODO(t)", "NEXT(n)", "|", "DONE(d)" },
-                win_split_mode = "auto",
+                win_split_mode = "float",
                 mappings = {
                     org = {
                         org_todo = "ct",

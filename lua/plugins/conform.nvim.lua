@@ -30,7 +30,7 @@ return {
                     typescriptreact = { "eslint_d", "prettierd" },
                     typescript = { "eslint_d", "prettierd" },
                     json = { "fixjson", "jq", stop_after_first = true },
-                    markdown = { "mdformat" },
+                    markdown = { "rumdl" },
                 },
                 -- Set default options
                 default_format_opts = {
@@ -41,6 +41,11 @@ return {
                 },
                 -- Customize formatters
                 formatters = {
+                    rumdl = {
+                        command = "rumdl",
+                        args = { "fmt", "-", "-s" },
+                        stdin = true,
+                    },
                     shfmt = {
                         prepend_args = { "-i", "2" },
                     },

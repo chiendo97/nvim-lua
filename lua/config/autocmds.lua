@@ -38,10 +38,6 @@ vim.api.nvim_create_autocmd("TextYankPost", {
     desc = "Highlight when yanking (copying) text",
     callback = function()
         vim.highlight.on_yank()
-        -- local copy_to_unnamedplus = require("vim.ui.clipboard.osc52").copy("+")
-        -- copy_to_unnamedplus(vim.v.event.regcontents)
-        -- local copy_to_unnamed = require("vim.ui.clipboard.osc52").copy("*")
-        -- copy_to_unnamed(vim.v.event.regcontents)
     end,
 })
 
@@ -70,6 +66,7 @@ vim.api.nvim_create_autocmd("FileType", {
         -- Set folding if available
         if vim.treesitter.query.get(lang, "folds") then
             vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+            vim.wo.foldmethod = "expr"
         end
     end,
 })
@@ -80,14 +77,4 @@ vim.api.nvim_create_autocmd("VimEnter", {
         vim.cmd("clearjumps")
     end,
     desc = "Clear jump list on VimEnter",
-})
-
-vim.api.nvim_create_autocmd("FileType", {
-    group = my_augroup,
-    pattern = "snacks_picker_input",
-    desc = "Disable mini.completion for snacks picker",
-    callback = function()
-        -- command = "lua vim.b.minicompletion_disable=true",
-        vim.b.minicompletion_disable = true
-    end,
 })

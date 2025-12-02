@@ -115,6 +115,7 @@ local lsp_servers = {
     "gopls",
     "jsonls",
     "lua_ls",
+    "markdown_oxide",
     "ruff",
     "rust_analyzer",
     "sourcekit",

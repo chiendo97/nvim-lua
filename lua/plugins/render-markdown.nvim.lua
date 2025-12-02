@@ -5,7 +5,6 @@ return {
             code = {
                 border = "none",
             },
-            completions = { lsp = { enabled = true } },
             pipe_table = { style = "normal" },
         },
         ft = { "markdown", "codecompanion" },

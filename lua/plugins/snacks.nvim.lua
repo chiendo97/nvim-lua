@@ -12,14 +12,14 @@ return {
                 mode = { "n" },
                 desc = "Show notification history",
             },
-            {
-                "<leader>c",
-                function()
-                    require("snacks").explorer()
-                end,
-                mode = { "n" },
-                desc = "Open snacks explorer",
-            },
+            -- {
+            --     "<leader>c",
+            --     function()
+            --         require("snacks").explorer()
+            --     end,
+            --     mode = { "n" },
+            --     desc = "Open snacks explorer",
+            -- },
             {
                 "<leader>g",
                 function()

@@ -17,13 +17,14 @@ vim.o.laststatus = 3 -- Global statusline (3 = always show global)
 vim.o.cmdheight = 2 -- Height of command line (number of lines)
 vim.o.wrap = false
 vim.wo.signcolumn = "yes" -- Always show sign column (for git, diagnostics, etc.)
+vim.o.showmatch = true -- Always show matching brackets
 
 -- Completion settings
 vim.o.pumheight = 10
-vim.o.completeopt = "menuone,noselect,fuzzy,nosort"
+vim.o.completeopt = "menuone,noselect,nosort"
 vim.o.wildmenu = true
 vim.o.wildmode = "longest:full,full"
-vim.o.wildoptions = "pum"
+vim.o.wildoptions = "pum,fuzzy"
 
 -- Indentation settings
 vim.o.tabstop = 2

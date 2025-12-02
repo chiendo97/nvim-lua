@@ -90,8 +90,8 @@ return {
             MiniSnippets.start_lsp_server()
 
             vim.api.nvim_create_autocmd("FileType", {
-                group = vim.api.nvim_create_augroup("user_mini", {}),
-                pattern = "snacks_picker_input",
+                group = vim.api.nvim_create_augroup("user_mini", { clear = true }),
+                pattern = { "snacks_picker_input", "snacks_input" },
                 desc = "Disable mini.completion for snacks picker",
                 callback = function()
                     -- command = "lua vim.b.minicompletion_disable=true",

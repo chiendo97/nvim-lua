@@ -120,7 +120,8 @@ local lsp_servers = {
     "rust_analyzer",
     "sourcekit",
     "tinymist",
-    "ts_ls",
+    -- "ts_ls",
+    "tsgo",
     "zls",
     -- "pyrefly",
 }

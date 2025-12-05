@@ -43,7 +43,7 @@ return {
                 formatters = {
                     rumdl = {
                         command = "rumdl",
-                        args = { "fmt", "-", "-s" },
+                        args = { "fmt", "-", "-s", "-d", "MD025" },
                         stdin = true,
                     },
                     shfmt = {

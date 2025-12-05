@@ -8,11 +8,27 @@ return {
         "A7Lavinraj/fyler.nvim",
         branch = "stable", -- Use stable branch for production
         lazy = false, -- Necessary for `default_explorer` to work properly
-        opts = {},
+        opts = {
+            views = {
+                finder = {
+                    close_on_select = false,
+                    confirm_simple = true,
+                    git_status = { enabled = false },
+                    mappings_opts = {
+                        desc = "Fyler",
+                    },
+                    win = { win_opts = { cursorline = false } },
+                },
+            },
+        },
         keys = {
             {
                 "<leader>c",
-                "<cmd>Fyler kind=split_left_most<cr>",
+                function()
+                    require("fyler").toggle({
+                        kind = "split_left_most",
+                    })
+                end,
                 desc = "Open Fyler",
                 mode = { "n" },
             },

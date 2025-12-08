@@ -14,10 +14,14 @@ return {
                     close_on_select = false,
                     confirm_simple = true,
                     git_status = { enabled = false },
+                    mappings = {
+                        ["<C-v>"] = "SelectVSplit",
+                        ["<C-s>"] = "SelectSplit",
+                    },
                     mappings_opts = {
                         desc = "Fyler",
                     },
-                    win = { win_opts = { cursorline = false } },
+                    win = { win_opts = { cursorline = true } },
                 },
             },
         },

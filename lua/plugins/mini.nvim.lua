@@ -61,18 +61,11 @@ return {
                 silent = false,
             })
             require("mini.icons").setup() -- use default config
-            require("mini.completion").setup({
-                window = {
-                    info = { height = 25, width = 80, border = "single" },
-                    signature = { height = 25, width = 80, border = "single" },
-                },
-            })
-
-            local gen_loader = require("mini.snippets").gen_loader
+            require("mini.completion").setup({})
 
             require("mini.snippets").setup({
                 snippets = {
-                    gen_loader.from_lang(),
+                    require("mini.snippets").gen_loader.from_lang(),
                 },
                 -- Module mappings. Use `''` (empty string) to disable one.
                 mappings = {
@@ -93,11 +86,13 @@ return {
                 group = vim.api.nvim_create_augroup("user_mini", { clear = true }),
                 pattern = { "snacks_picker_input", "snacks_input" },
                 desc = "Disable mini.completion for snacks picker",
+                -- command = "lua vim.b.minicompletion_disable=true",
                 callback = function()
-                    -- command = "lua vim.b.minicompletion_disable=true",
                     vim.b.minicompletion_disable = true
                 end,
             })
+
+            require("mini.cmdline").setup({})
         end,
     },
 }

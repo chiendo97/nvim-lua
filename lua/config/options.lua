@@ -11,7 +11,9 @@ vim.o.number = true
 vim.o.cursorline = true
 vim.wo.signcolumn = "yes"
 vim.o.winborder = "rounded"
-vim.o.pumborder = "rounded"
+if vim.fn.has("nvim-0.12") == 1 then
+    vim.o.pumborder = "rounded"
+end
 vim.o.showmode = false -- Don't show mode in command line
 vim.o.laststatus = 3 -- Global statusline (3 = always show global)
 vim.o.cmdheight = 2 -- Height of command line (number of lines)
@@ -23,7 +25,7 @@ vim.o.showmatch = true -- Always show matching brackets
 vim.o.pumheight = 10
 vim.o.completeopt = "menuone,noselect,nosort"
 vim.o.wildmenu = true
-vim.o.wildmode = "longest:full,full"
+vim.o.wildmode = "noselect,full"
 vim.o.wildoptions = "pum,fuzzy"
 
 -- Indentation settings
@@ -60,7 +62,7 @@ vim.o.hlsearch = true
 vim.o.incsearch = true
 vim.o.ignorecase = true
 vim.o.smartcase = true
-vim.o.inccommand = "split"
+vim.o.inccommand = "nosplit"
 
 -- Grep settings
 if vim.fn.executable("rg") == 1 then

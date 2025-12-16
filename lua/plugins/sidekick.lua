@@ -3,9 +3,7 @@ return {
         "folke/sidekick.nvim",
         opts = {
             -- add any options here
-            cli = {
-                nes = { enabled = false },
-            },
+            nes = { enabled = false },
             copilot = {
                 status = { enabled = false },
             },

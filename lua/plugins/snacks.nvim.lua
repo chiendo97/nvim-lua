@@ -172,11 +172,11 @@ return {
                     },
                 },
             },
-            explorer = {
-                replace_netrw = true,
-                git_status = false,
-                diagnostics = false,
-            },
+            -- explorer = {
+            --     replace_netrw = true,
+            --     git_status = false,
+            --     diagnostics = false,
+            -- },
         },
     },
 }

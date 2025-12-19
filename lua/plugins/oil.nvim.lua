@@ -2,10 +2,12 @@ return {
     {
         "stevearc/oil.nvim",
         cmd = "Oil",
+        enabled = false,
         opts = {},
     },
     {
         "A7Lavinraj/fyler.nvim",
+        enabled = false,
         branch = "stable", -- Use stable branch for production
         lazy = false, -- Necessary for `default_explorer` to work properly
         opts = {

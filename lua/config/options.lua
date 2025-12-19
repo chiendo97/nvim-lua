@@ -3,6 +3,7 @@ vim.g.mapleader = " " -- Use `<Space>` as a leader key
 vim.o.mouse = "a" -- Enable mouse
 vim.o.mousescroll = "ver:25,hor:6" -- Customize mouse scroll
 vim.o.switchbuf = "usetab" -- Use already opened buffers when switching
+vim.o.exrc = true -- Enable local vimrc files
 
 -- UI settings
 vim.o.showtabline = 2 -- Always show tab line

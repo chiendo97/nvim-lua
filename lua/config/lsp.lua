@@ -124,6 +124,7 @@ local lsp_servers = {
     "tsgo",
     "zls",
     -- "pyrefly",
+    -- "ty",
 }
 
 for _, server in ipairs(lsp_servers) do

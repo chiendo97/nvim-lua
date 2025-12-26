@@ -1,7 +1,7 @@
 return {
     {
         "echasnovski/mini.nvim",
-        dependencies = { "friendly-snippets" },
+        dependencies = { "rafamadriz/friendly-snippets" },
         config = function()
             require("mini.statusline").setup({
                 -- Content of statusline as functions which return statusline string. See

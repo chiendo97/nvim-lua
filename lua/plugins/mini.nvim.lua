@@ -43,17 +43,13 @@ return {
             require("mini.surround").setup()
             -- Extend and create a/i textobjects
             require("mini.ai").setup({
-                custom_textobjects = {
-                    -- Function definition (needs treesitter queries with these captures)
-                    F = require("mini.ai").gen_spec.treesitter({ a = "@function.outer", i = "@function.inner" }),
-                },
                 -- Number of lines within which textobject is searched
-                n_lines = 200,
+                n_lines = 50,
 
                 -- How to search for object (first inside current line, then inside
                 -- neighborhood). One of 'cover', 'cover_or_next', 'cover_or_prev',
                 -- 'cover_or_nearest', 'next', 'prev', 'nearest'.
-                search_method = "cover_or_next",
+                search_method = "cover_or_nearest",
 
                 -- Whether to disable showing non-error feedback
                 -- This also affects (purely informational) helper messages shown after

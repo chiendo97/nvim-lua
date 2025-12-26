@@ -7,6 +7,6 @@ return {
             },
             pipe_table = { style = "normal" },
         },
-        ft = { "markdown", "codecompanion" },
+        ft = { "markdown", "codecompanion", "AgenticChat" },
     },
 }

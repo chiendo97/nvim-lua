@@ -78,3 +78,33 @@ vim.api.nvim_create_autocmd("VimEnter", {
     end,
     desc = "Clear jump list on VimEnter",
 })
+
+vim.api.nvim_create_user_command("T", function()
+    vim.cmd(":sp term://zsh")
+    vim.cmd("startinsert")
+end, {})
+
+vim.api.nvim_create_user_command("VT", function()
+    vim.cmd(":vsp term://zsh")
+    vim.cmd("startinsert")
+end, {})
+
+vim.api.nvim_create_user_command("R", function(opts)
+    -- Expand % and # BEFORE opening new buffer
+    local current = vim.fn.expand("%:p")
+    local alt = vim.fn.expand("#:p")
+    local cmd = opts.args:gsub("%%:p", current):gsub("%%", current):gsub("#", alt)
+    vim.cmd("new")
+    vim.bo.buftype = "nofile"
+    vim.bo.bufhidden = "hide"
+    vim.bo.swapfile = false
+    vim.b.no_auto_close = true
+    vim.fn.termopen(cmd, {
+        on_stdout = function()
+            vim.schedule(function()
+                vim.cmd("normal! G")
+            end)
+        end,
+    })
+    vim.api.nvim_buf_set_keymap(0, "n", "q", ":q!<CR>", { noremap = true, silent = true })
+end, { nargs = "+", complete = "shellcmd" })

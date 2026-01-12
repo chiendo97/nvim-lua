@@ -1,6 +1,7 @@
 return {
     {
         "nvim-orgmode/orgmode",
+        enabled = false,
         dependencies = {
             "nvim-orgmode/org-bullets.nvim",
         },

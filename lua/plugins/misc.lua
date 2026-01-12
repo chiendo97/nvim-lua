@@ -1,5 +1,25 @@
 return {
     {
+        "juniorsundar/cling.nvim",
+        cmd = { "Cling" },
+        config = function()
+            require("cling").setup({
+                wrappers = {
+                    {
+                        binary = "docker",
+                        command = "Docker",
+                        help_cmd = "--help",
+                    },
+                    {
+                        binary = "eza",
+                        command = "Eza",
+                        completion_file = "https://raw.githubusercontent.com/eza-community/eza/main/completions/bash/eza",
+                    },
+                },
+            })
+        end,
+    },
+    {
         "carlos-algms/agentic.nvim",
         event = "VeryLazy",
         opts = {
